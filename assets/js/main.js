@@ -9,19 +9,131 @@ AOS.init({
     once: true,
 });
 
-VANTA.HALO({
-    el: "#vanta-bg",
-    mouseControls: true,
-    touchControls: true,
-    gyroControls: false,
-    minHeight: 200.00,
-    minWidth: 200.00,
-    baseColor: 0x111111,
-    backgroundColor: 0x0a0f1b,
-    amplitudeFactor: 2.00,
-    xOffset: 0.20,
-    yOffset: 0.10,
-    size: 1.50
+class CalmParticles {
+    constructor() {
+        this.canvas = document.getElementById('particles-canvas');
+        this.ctx = this.canvas.getContext('2d');
+        this.particles = [];
+        this.particleCount = 30;
+
+        this.init();
+        this.animate();
+    }
+
+    init() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+
+        for (let i = 0; i < this.particleCount; i++) {
+            this.particles.push({
+                x: Math.random() * this.canvas.width,
+                y: Math.random() * this.canvas.height,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                size: Math.random() * 2 + 1,
+                opacity: Math.random() * 0.5 + 0.1,
+                color: Math.random() > 0.5 ? '#00ffff' : '#8b5cf6'
+            });
+        }
+    }
+
+    draw() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        this.particles.forEach((particle, index) => {
+            this.ctx.save();
+            this.ctx.globalAlpha = particle.opacity;
+            this.ctx.fillStyle = particle.color;
+            this.ctx.shadowColor = particle.color;
+            this.ctx.shadowBlur = 10;
+
+            this.ctx.beginPath();
+            this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+            this.ctx.fill();
+            this.ctx.restore();
+
+            particle.x += particle.vx;
+            particle.y += particle.vy;
+
+            if (particle.x < 0 || particle.x > this.canvas.width) particle.vx *= -1;
+            if (particle.y < 0 || particle.y > this.canvas.height) particle.vy *= -1;
+
+            particle.opacity += (Math.random() - 0.5) * 0.01;
+            particle.opacity = Math.max(0.1, Math.min(0.6, particle.opacity));
+        });
+    }
+
+    animate() {
+        this.draw();
+        requestAnimationFrame(() => this.animate());
+    }
+
+    resize() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const calmBg = document.createElement('div');
+    calmBg.id = 'calm-bg';
+
+    const canvas = document.createElement('canvas');
+    canvas.id = 'particles-canvas';
+
+    const grid = document.createElement('div');
+    grid.className = 'subtle-grid';
+
+    calmBg.appendChild(grid);
+    calmBg.appendChild(canvas);
+
+    document.body.insertBefore(calmBg, document.body.firstChild);
+
+    const particles = new CalmParticles();
+
+    window.addEventListener('resize', () => {
+        particles.resize();
+    });
+
+    const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const mobileMenuOverlay = document.getElementById("mobileMenuOverlay");
+    const closeMobileMenu = document.getElementById("closeMobileMenu");
+
+    function openMobileMenu() {
+        console.log("Opening mobile menu");
+        mobileMenu.classList.add("active");
+        mobileMenuOverlay.classList.add("active");
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenuFunc() {
+        console.log("Closing mobile menu");
+        mobileMenu.classList.remove("active");
+        mobileMenuOverlay.classList.remove("active");
+        document.body.style.overflow = 'auto';
+    }
+
+    if (mobileMenuBtn) {
+        console.log("Mobile menu button found");
+        mobileMenuBtn.addEventListener("click", openMobileMenu);
+    } else {
+        console.log("Mobile menu button NOT found");
+    }
+
+    if (closeMobileMenu) {
+        closeMobileMenu.addEventListener("click", closeMobileMenuFunc);
+    }
+
+    if (mobileMenuOverlay) {
+        mobileMenuOverlay.addEventListener("click", closeMobileMenuFunc);
+    }
+
+    if (mobileMenu) {
+        mobileMenu.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", closeMobileMenuFunc);
+        });
+    }
 });
 
 const typed = new Typed("#typed", {
@@ -148,26 +260,7 @@ $('#terminal').terminal({
     height: 400
 });
 
-const mobileMenuBtn = document.getElementById("mobileMenuBtn");
-const mobileMenu = document.getElementById("mobileMenu");
-const closeMobileMenu = document.getElementById("closeMobileMenu");
 
-mobileMenuBtn.addEventListener("click", () => {
-    mobileMenu.classList.add("active");
-    document.body.style.overflow = 'hidden';
-});
-
-closeMobileMenu.addEventListener("click", () => {
-    mobileMenu.classList.remove("active");
-    document.body.style.overflow = 'auto';
-});
-
-mobileMenu.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-        mobileMenu.classList.remove("active");
-        document.body.style.overflow = 'auto';
-    });
-});
 
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
@@ -234,9 +327,9 @@ const createRadarChart = (canvasId, labels, data, color) => {
     });
 };
 
-createRadarChart('frontendChart', ['React', 'Angular', 'JavaScript', 'TypeScript', 'CSS'], [90, 85, 95, 90, 92], '#3b82f6');
-createRadarChart('backendChart', ['Node.js', 'PHP', 'Python', 'Express.js', 'FastAPI'], [92, 90, 88, 90, 85], '#10b981');
-createRadarChart('cloudChart', ['Azure', 'AWS', 'GCP', 'AI/ML', 'Docker'], [90, 80, 75, 88, 85], '#8b5cf6');
+createRadarChart('frontendChart', ['React', 'Angular', 'JavaScript', 'TypeScript', 'CSS'], [90, 80, 95, 85, 92], '#3b82f6');
+createRadarChart('backendChart', ['Express.js', 'PHP', 'Python', 'Node.js', 'FastAPI'], [92, 90, 85, 90, 80], '#10b981');
+createRadarChart('cloudChart', ['CPanel/WHM', 'AWS', 'GCP', 'AI/ML', 'Azure'], [80, 82, 84, 75, 80], '#8b5cf6');
 
 window.addEventListener("scroll", () => {
     const navbar = document.getElementById("navbar");
