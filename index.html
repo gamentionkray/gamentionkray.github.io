@@ -1,580 +1,334 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Krishna Thorat - Web Developer</title>
+    <title>Krishna Thorat | Neobrutal Portfolio</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/animejs@4.0.2/lib/anime.iife.min.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap"
-        rel="stylesheet" />
-
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/jquery.terminal@2.44.1/css/jquery.terminal.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/jquery.terminal@2.44.1/js/jquery.terminal.min.js"></script>
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/themes/prism-okaidia.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/prism.min.js"></script>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/plugins/autoloader/prism-autoloader.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/motion@10.18.0/dist/motion.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5.0.0/index.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/powerglitch@2.0.0/dist/powerglitch.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 
 <body>
-    <div class="loader" id="loader">
-        <div class="loader-circle"></div>
+    <div id="loader" class="loader">
+        <div class="text-4xl font-black border-4 border-black p-4 bg-white shadow-[8px_8px_0_0_#000]">
+            LOADING SYSTEM...
+        </div>
     </div>
 
     <nav class="navbar-tech" id="navbar">
-        <div class="navbar-content">
-            <div class="logo-container">
-                <div class="logo-text">KRISHNA_THORAT</div>
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div class="logo-text">KRISHNA.DEV</div>
+
+            <div class="hidden md:flex gap-4">
+                <a href="#home" class="nav-link active" data-section="home">HOME</a>
+                <a href="#about" class="nav-link" data-section="about">ABOUT</a>
+                <a href="#experience" class="nav-link" data-section="experience">EXP</a>
+                <a href="#projects" class="nav-link" data-section="projects">WORK</a>
+                <a href="#contact" class="nav-link" data-section="contact">CONTACT</a>
             </div>
 
-            <div class="nav-menu" id="navMenu">
-                <a href="#home" class="nav-link active" data-section="home">[HOME]</a>
-                <a href="#about" class="nav-link" data-section="about">[ABOUT]</a>
-                <a href="#skills" class="nav-link" data-section="skills">[SKILLS]</a>
-                <a href="#projects" class="nav-link" data-section="projects">[PROJECTS]</a>
-                <a href="#experience" class="nav-link" data-section="experience">[EXPERIENCE]</a>
-                <a href="#contact" class="nav-link" data-section="contact">[CONTACT]</a>
-            </div>
-
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
+            <button id="mobileMenuBtn" class="md:hidden border-4 border-black p-2 bg-yellow-300 shadow-[4px_4px_0_0_#000]">
+                <i class="fas fa-bars text-xl"></i>
             </button>
-        </div>
-
-        <div id="mobileMenuOverlay" class="mobile-menu-overlay"></div>
-        <div id="mobileMenu" class="mobile-menu">
-            <button id="closeMobileMenu"
-                style="position: absolute; top: 16px; right: 16px; background: transparent; border: 1px solid #00ffff; color: #00ffff; padding: 8px 12px; border-radius: 4px; cursor: pointer;">
-                <i class="fas fa-times text-lg"></i>
-            </button>
-            <div style="margin-top: 60px;">
-                <a href="#home"
-                    style="display: block; color: #ffffff; padding: 12px 0; text-decoration: none; text-align: center; border-bottom: 1px solid rgba(0,255,255,0.2); margin-bottom: 8px;">>
-                    HOME</a>
-                <a href="#about"
-                    style="display: block; color: #ffffff; padding: 12px 0; text-decoration: none; text-align: center; border-bottom: 1px solid rgba(0,255,255,0.2); margin-bottom: 8px;">>
-                    ABOUT</a>
-                <a href="#skills"
-                    style="display: block; color: #ffffff; padding: 12px 0; text-decoration: none; text-align: center; border-bottom: 1px solid rgba(0,255,255,0.2); margin-bottom: 8px;">>
-                    SKILLS</a>
-                <a href="#projects"
-                    style="display: block; color: #ffffff; padding: 12px 0; text-decoration: none; text-align: center; border-bottom: 1px solid rgba(0,255,255,0.2); margin-bottom: 8px;">>
-                    PROJECTS</a>
-                <a href="#experience"
-                    style="display: block; color: #ffffff; padding: 12px 0; text-decoration: none; text-align: center; border-bottom: 1px solid rgba(0,255,255,0.2); margin-bottom: 8px;">>
-                    EXPERIENCE</a>
-                <a href="#contact"
-                    style="display: block; color: #ffffff; padding: 12px 0; text-decoration: none; text-align: center; border-bottom: 1px solid rgba(0,255,255,0.2); margin-bottom: 8px;">>
-                    CONTACT</a>
-            </div>
         </div>
     </nav>
 
-    <section id="home" class="min-h-screen flex items-center justify-center relative px-6">
-        <div class="max-w-7xl mx-auto text-center z-10">
-            <h1 class="hero-title mb-4">
-                Hi, I'm <span class="gradient-text glitch-text" id="glitch-name">Krishna Thorat</span>
-            </h1>
-            <h2 class="text-2xl md:text-4xl mb-6 matrix-text">
-                <span id="typed"></span>
-            </h2>
-            <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8">
-                Driven Web Developer with extensive experience in full stack development and AI/ML solutions
-            </p>
-            <div class="flex gap-4 justify-center flex-wrap">
-                <button class="cyber-button" onclick="location.href='#projects'">
-                    View Projects
-                </button>
-                <a href="#contact"
-                    class="px-8 py-3 border-2 border-blue-500 rounded-lg hover:bg-blue-500 transition font-semibold">
-                    Get In Touch
-                </a>
-            </div>
+    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-full h-screen z-[2000] flex flex-col justify-center items-center gap-8">
+        <button id="closeMobileMenu" class="absolute top-6 right-6 border-4 border-black bg-white p-2 shadow-[4px_4px_0_0_#000]">
+            <i class="fas fa-times text-2xl"></i>
+        </button>
+        <a href="#home" class="text-4xl font-black border-b-4 border-black hover:bg-white px-4">HOME</a>
+        <a href="#about" class="text-4xl font-black border-b-4 border-black hover:bg-white px-4">ABOUT</a>
+        <a href="#projects" class="text-4xl font-black border-b-4 border-black hover:bg-white px-4">WORK</a>
+        <a href="#contact" class="text-4xl font-black border-b-4 border-black hover:bg-white px-4">CONTACT</a>
+    </div>
 
-            <div class="flex gap-6 justify-center mt-12">
-                <a href="https://github.com/gamentionkray" class="text-2xl hover:text-blue-400 transition floating">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/krishnathorat"
-                    class="text-2xl hover:text-blue-400 transition floating" style="animation-delay: 0.2s">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="mailto:krishnathorat007@gmail.com" class="text-2xl hover:text-blue-400 transition floating"
-                    style="animation-delay: 0.4s">
-                    <i class="fas fa-envelope"></i>
-                </a>
-            </div>
-
-            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-                <i class="fas fa-chevron-down text-2xl pulse"></i>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="py-20 px-6">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16" data-aos="fade-up">
-                About <span class="gradient-text">Me</span>
-            </h2>
-
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div data-aos="fade-right">
-                    <div class="terminal-window">
-                        <div class="terminal-header">
-                            <div class="terminal-dots">
-                                <div class="terminal-dot bg-red-500"></div>
-                                <div class="terminal-dot bg-yellow-500"></div>
-                                <div class="terminal-dot bg-green-500"></div>
-                            </div>
-                            <div class="terminal-title">krishna@portfolio:~</div>
-                        </div>
-                        <div id="terminal"></div>
-                    </div>
+    <section id="home" class="min-h-screen flex items-center pt-24 pb-12 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            
+            <div class="order-2 md:order-1">
+                <div class="inline-block bg-black text-white font-mono font-bold px-3 py-1 mb-4 transform -rotate-2">
+                    WEB DEVELOPER & AI ENGINEER
                 </div>
+                <h1 class="text-6xl md:text-8xl font-black mb-6 leading-[0.9]">
+                    HELLO,<br>I'M <span class="bg-[#a3e635] px-2">KRISHNA</span>
+                </h1>
+                <div class="text-xl md:text-2xl font-mono font-bold border-l-4 border-black pl-6 mb-8 bg-white py-4 shadow-[8px_8px_0_0_#a78bfa]">
+                    <span id="typed"></span>
+                </div>
+                <p class="text-lg font-bold mb-8 max-w-lg">
+                    Building scalable applications with PHP, Node.js, React, and Agentic AI systems.
+                </p>
+                <div class="flex gap-4 flex-wrap">
+                    <a href="#projects" class="neo-btn">View Projects</a>
+                    <a href="resume.pdf" target="_blank" class="neo-btn" style="background: var(--neo-blue);">
+                        <i class="fas fa-file-alt mr-2"></i> Resume
+                    </a>
+                </div>
+                
+                <div class="flex gap-4 mt-12">
+                    <a href="https://github.com/gamentionkray" class="w-14 h-14 flex items-center justify-center border-4 border-black bg-white hover:bg-gray-200 shadow-[4px_4px_0_0_#000] text-2xl transition-transform hover:translate-y-1">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/krishnathorat" class="w-14 h-14 flex items-center justify-center border-4 border-black bg-[#0077b5] text-white hover:bg-[#006396] shadow-[4px_4px_0_0_#000] text-2xl transition-transform hover:translate-y-1">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="mailto:krishnathorat007@gmail.com" class="w-14 h-14 flex items-center justify-center border-4 border-black bg-[#ea4335] text-white hover:bg-[#d33426] shadow-[4px_4px_0_0_#000] text-2xl transition-transform hover:translate-y-1">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
 
-                <div data-aos="fade-left">
-                    <p class="text-lg mb-6">
-                        I'm a passionate Web Developer with extensive experience in building scalable web applications
-                        and implementing cutting-edge AI/ML solutions. My journey started with a B.Sc. in Computer
-                        Science
-                        and continued with a Master's in Computer Applications from VIT Pune.
-                    </p>
-                    <p class="text-lg mb-6">
-                        Currently working at Ergobite Tech Solutions, I specialize in developing innovative platforms
-                        involving Generative AI, multi-agent systems, and cloud architecture. I love tackling complex
-                        problems and turning ideas into reality through code.
-                    </p>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="skill-card">
-                            <h4 class="font-semibold mb-2 text-blue-400">Experience</h4>
-                            <p class="text-2xl font-bold gradient-text">5+ Years</p>
-                        </div>
-                        <div class="skill-card">
-                            <h4 class="font-semibold mb-2 text-blue-400">Projects</h4>
-                            <p class="text-2xl font-bold gradient-text">15+</p>
-                        </div>
+            <div class="order-1 md:order-2 flex justify-center md:justify-end">
+                <div class="hero-image-container">
+                    <img src="assets/img/krishna-thorat.jpg" alt="Krishna Thorat" class="hero-img">
+                    <div class="font-mono font-bold text-center mt-2 border-t-2 border-black pt-2">
+                        KRISHNA THORAT
+                    </div>
+                    <div class="absolute -top-6 -right-6 bg-yellow-400 w-16 h-16 rounded-full border-4 border-black flex items-center justify-center font-black text-xl shadow-[4px_4px_0_0_#000] z-10">
+                        HI!
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="skills" class="py-20 px-6">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16" data-aos="fade-up">
-                Technical <span class="gradient-text">Skills</span>
-            </h2>
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <div class="marquee-item">★ IBM CLOUD ESSENTIALS</div>
+            <div class="marquee-item">★ GENERATIVE AI LANDSCAPE</div>
+            <div class="marquee-item">★ ANGULAR SPA</div>
+            <div class="marquee-item">★ REACT COMPLETE GUIDE</div>
+            <div class="marquee-item">★ FULL STACK DEVELOPMENT</div>
+            <div class="marquee-item">★ M.C.A VISHWAKARMA INSTITUTE</div>
+            <div class="marquee-item">★ IBM CLOUD ESSENTIALS</div>
+            <div class="marquee-item">★ GENERATIVE AI LANDSCAPE</div>
+            <div class="marquee-item">★ ANGULAR SPA</div>
+        </div>
+    </div>
 
+    <section id="about" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="section-title">MY <span class="bg-[#ff6b6b] px-2 border-2 border-black">ARSENAL</span></h2>
+            
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="skill-card" data-aos="fade-up" data-aos-delay="100">
-                    <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
-                        <i class="fas fa-laptop-code text-blue-500"></i>
-                        Frontend
-                    </h3>
-                    <canvas id="frontendChart"></canvas>
-                </div>
-
-                <div class="skill-card" data-aos="fade-up" data-aos-delay="200">
-                    <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
-                        <i class="fas fa-server text-green-500"></i>
-                        Backend
-                    </h3>
-                    <canvas id="backendChart"></canvas>
-                </div>
-
-                <div class="skill-card" data-aos="fade-up" data-aos-delay="300">
-                    <h3 class="text-2xl font-bold mb-6 flex items-center gap-3">
-                        <i class="fas fa-cloud text-purple-500"></i>
-                        Cloud & AI
-                    </h3>
-                    <canvas id="cloudChart"></canvas>
-                </div>
-            </div>
-
-            <div class="mt-16 text-center" data-aos="fade-up">
-                <h3 class="text-2xl font-bold mb-8">Tech Stack</h3>
-                <div class="flex flex-wrap justify-center gap-8">
-                    <i class="fab fa-react text-5xl hover:text-blue-400 transition hover-scale" title="React"></i>
-                    <i class="fab fa-angular text-5xl hover:text-red-500 transition hover-scale" title="Angular"></i>
-                    <i class="fab fa-node-js text-5xl hover:text-green-500 transition hover-scale" title="Node.js"></i>
-                    <i class="fab fa-python text-5xl hover:text-blue-500 transition hover-scale" title="Python"></i>
-                    <i class="fab fa-php text-5xl hover:text-purple-500 transition hover-scale" title="PHP"></i>
-                    <i class="fab fa-aws text-5xl hover:text-orange-500 transition hover-scale" title="AWS"></i>
-                    <i class="fab fa-docker text-5xl hover:text-blue-600 transition hover-scale" title="Docker"></i>
-                    <i class="fab fa-git-alt text-5xl hover:text-red-600 transition hover-scale" title="Git"></i>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="py-20 px-6">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16" data-aos="fade-up">
-                Featured <span class="gradient-text">Projects</span>
-            </h2>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
-                <div class="project-card p-6 rounded-lg" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="mb-4">
-                        <i class="fas fa-brain text-4xl text-blue-500"></i>
+                <div class="neo-card" data-aos="fade-up">
+                    <h3 class="text-2xl border-b-4 border-black pb-2 mb-4">CORE STACK</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="neo-badge bg-yellow-200">PHP</span>
+                        <span class="neo-badge bg-yellow-200">Node.js</span>
+                        <span class="neo-badge bg-yellow-200">Python</span>
+                        <span class="neo-badge bg-yellow-200">TypeScript</span>
+                        <span class="neo-badge bg-yellow-200">Java</span>
                     </div>
-                    <h3 class="text-2xl font-bold mb-3">HireSense AI Platform</h3>
-                    <p class="mb-4">
-                        AI-powered career guidance platform with multi-agent orchestration using Pydantic AI and Google
-                        Gemini 2.0. Features intelligent resume analysis, career planning, and real-time WebSocket
-                        progress tracking.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="badge badge-primary">Python</span>
-                        <span class="badge badge-primary">FastAPI</span>
-                        <span class="badge badge-primary">Pydantic AI</span>
-                        <span class="badge badge-primary">React</span>
-                        <span class="badge badge-primary">WebSockets</span>
-                    </div>
-                    <div class="flex gap-4">
-                        <a href="https://hire.rest" target="_blank" class="hover:text-blue-300">
-                            <i class="fas fa-external-link-alt"></i> Live Demo
-                        </a>
+                    <div class="mt-6 border-2 border-black p-2 bg-gray-100">
+                        <canvas id="frontendChart"></canvas>
                     </div>
                 </div>
 
-                <div class="project-card p-6 rounded-lg" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="mb-4">
-                        <i class="fas fa-database text-4xl text-green-500"></i>
+                <div class="neo-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-2xl border-b-4 border-black pb-2 mb-4">FRAMEWORKS</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="neo-badge bg-green-200">React</span>
+                        <span class="neo-badge bg-green-200">Angular</span>
+                        <span class="neo-badge bg-green-200">FastAPI</span>
+                        <span class="neo-badge bg-green-200">Express.js</span>
                     </div>
-                    <h3 class="text-2xl font-bold mb-3">Infovault & Agentic AI Platform</h3>
-                    <p class="mb-4">
-                        Intelligent knowledge management platform processing unstructured data from videos and emails
-                        using Azure Blob Storage, vector embeddings, and RAG search engine.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="badge badge-success">Python</span>
-                        <span class="badge badge-success">LangChain</span>
-                        <span class="badge badge-success">RAG</span>
-                        <span class="badge badge-success">Azure OpenAI</span>
-                        <span class="badge badge-success">React</span>
+                    <div class="mt-6 border-2 border-black p-2 bg-gray-100">
+                        <canvas id="backendChart"></canvas>
                     </div>
                 </div>
 
-                <div class="project-card p-6 rounded-lg" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="mb-4">
-                        <i class="fas fa-exchange-alt text-4xl text-purple-500"></i>
+                <div class="neo-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-2xl border-b-4 border-black pb-2 mb-4">CLOUD & AI</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="neo-badge bg-purple-200">Azure</span>
+                        <span class="neo-badge bg-purple-200">AWS</span>
+                        <span class="neo-badge bg-purple-200">GCP</span>
+                        <span class="neo-badge bg-purple-200">Gen AI</span>
+                        <span class="neo-badge bg-purple-200">RAG</span>
                     </div>
-                    <h3 class="text-2xl font-bold mb-3">Intellify Migration Wizard</h3>
-                    <p class="mb-4">
-                        Data analytics platform for transferring SSIS packages and Power BI models between MSSQL,
-                        Teradata, and Postgres workspaces with PySpark job execution management.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="badge badge-secondary">Python</span>
-                        <span class="badge badge-secondary">PySpark</span>
-                        <span class="badge badge-secondary">React</span>
-                        <span class="badge badge-secondary">Power BI</span>
-                        <span class="badge badge-secondary">Azure</span>
-                    </div>
-                </div>
-
-                <div class="project-card p-6 rounded-lg" data-aos="zoom-in" data-aos-delay="400">
-                    <div class="mb-4">
-                        <i class="fas fa-car text-4xl text-orange-500"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-3">In-Parking Alert System</h3>
-                    <p class="mb-4">
-                        Real-time parking monitoring system with automated alerts, featuring customizable notification
-                        engine using Azure Functions and PostgreSQL for data processing.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="badge badge-primary">Python</span>
-                        <span class="badge badge-primary">PostgreSQL</span>
-                        <span class="badge badge-primary">React</span>
-                        <span class="badge badge-primary">Azure Functions</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center mt-12">
-                <button class="cyber-button" onclick="window.open('https://github.com/gamentionkray', '_blank')">
-                    View All Projects <i class="fas fa-arrow-right ml-2"></i>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <section id="experience" class="py-20 px-6">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16" data-aos="fade-up">
-                Work <span class="gradient-text">Experience</span>
-            </h2>
-
-            <div class="relative">
-                <div class="timeline-line hidden md:block"></div>
-
-                <div class="space-y-12">
-                    <div class="flex flex-col md:flex-row gap-8 items-center" data-aos="fade-right">
-                        <div class="md:w-1/2 text-right">
-                            <h3 class="text-2xl font-bold">Software Developer</h3>
-                            <p class="text-blue-400 font-semibold">Ergobite Tech Solutions Pvt Ltd.</p>
-                            <p class="text-sm">Dec 2024 - Present</p>
-                        </div>
-                        <div
-                            class="hidden md:block w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full z-10">
-                        </div>
-                        <div class="md:w-1/2">
-                            <div class="skill-card">
-                                <ul class="space-y-2">
-                                    <li>• Developed features for "Intellify Migration Wizard" with Teradata and Postgres
-                                        support</li>
-                                    <li>• Engineered "In-Parking" alerting system with Azure App Functions</li>
-                                    <li>• Led "Infovault" multi-agent AI platform using Langchain and Azure OpenAI</li>
-                                    <li>• Deployed applications on Microsoft Azure with CI/CD pipelines</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col md:flex-row-reverse gap-8 items-center" data-aos="fade-left">
-                        <div class="md:w-1/2 text-left md:text-left">
-                            <h3 class="text-2xl font-bold">Senior Web Developer</h3>
-                            <p class="text-blue-400 font-semibold">Internship Studio</p>
-                            <p class="text-sm">Jul 2024 - Dec 2024</p>
-                        </div>
-                        <div
-                            class="hidden md:block w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full z-10">
-                        </div>
-                        <div class="md:w-1/2">
-                            <div class="skill-card">
-                                <ul class="space-y-2">
-                                    <li>• Spearheaded development of comprehensive hiring portal</li>
-                                    <li>• Architected solutions using GCP (Vertex AI, Cloud Vision) and AWS (Lambda, S3,
-                                        EC2)</li>
-                                    <li>• Built full-stack applications using React, Node.js, PHP, and Flask</li>
-                                    <li>• Integrated WebSocket for real-time notifications and chat</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col md:flex-row gap-8 items-center" data-aos="fade-right">
-                        <div class="md:w-1/2 text-right">
-                            <h3 class="text-2xl font-bold">System Engineer</h3>
-                            <p class="text-blue-400 font-semibold">Infosys Ltd.</p>
-                            <p class="text-sm">Aug 2022 - Jul 2024</p>
-                        </div>
-                        <div
-                            class="hidden md:block w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full z-10">
-                        </div>
-                        <div class="md:w-1/2">
-                            <div class="skill-card">
-                                <ul class="space-y-2">
-                                    <li>• Developed dynamic web applications using Angular, Node.js, and PostgreSQL</li>
-                                    <li>• Implemented WCAG standards and integrated WebSockets and WebRTC</li>
-                                    <li>• Spearheaded Salesforce integration utilizing cortex framework</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col md:flex-row-reverse gap-8 items-center" data-aos="fade-left">
-                        <div class="md:w-1/2 text-left md:text-left">
-                            <h3 class="text-2xl font-bold">Web Developer</h3>
-                            <p class="text-blue-400 font-semibold">Internship Studio</p>
-                            <p class="text-sm">Sep 2020 - Aug 2022</p>
-                        </div>
-                        <div
-                            class="hidden md:block w-4 h-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full z-10">
-                        </div>
-                        <div class="md:w-1/2">
-                            <div class="skill-card">
-                                <ul class="space-y-2">
-                                    <li>• Led company website development using PHP, MySQL, and React</li>
-                                    <li>• Managed migration from WordPress to modern React and PHP stack</li>
-                                    <li>• Integrated Razorpay, Instamojo, and PhonePe payment gateways</li>
-                                </ul>
-                            </div>
-                        </div>
+                    <div class="mt-6 border-2 border-black p-2 bg-gray-100">
+                        <canvas id="cloudChart"></canvas>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="py-20 px-6">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16" data-aos="fade-up">
-                Get In <span class="gradient-text">Touch</span>
-            </h2>
+    <section id="experience" class="py-24 px-6 bg-[#e0f2fe] border-t-4 border-b-4 border-black">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="section-title">WORK <span class="bg-white px-2 border-2 border-black">HISTORY</span></h2>
 
-            <div class="grid md:grid-cols-2 gap-12">
-                <div data-aos="fade-right">
-                    <h3 class="text-2xl font-bold mb-6">Let's Connect</h3>
-                    <p class="mb-8">
-                        I'm always open to discussing new opportunities, innovative projects, or just having a chat
-                        about technology. Feel free to reach out!
-                    </p>
-
-                    <div class="space-y-4">
-                        <a href="mailto:krishnathorat007@gmail.com"
-                            class="flex items-center gap-4 hover:text-blue-400 transition">
-                            <i class="fas fa-envelope text-2xl"></i>
-                            <span>krishnathorat007@gmail.com</span>
-                        </a>
-                        <a href="tel:+918550969625" class="flex items-center gap-4 hover:text-blue-400 transition">
-                            <i class="fas fa-phone text-2xl"></i>
-                            <span>+91 8550969625</span>
-                        </a>
-                        <div class="flex items-center gap-4">
-                            <i class="fas fa-map-marker-alt text-2xl"></i>
-                            <span>Pimple Nilakh, Pune - 411027</span>
-                        </div>
+            <div class="space-y-8">
+                <div class="neo-card relative" data-aos="fade-right">
+                    <div class="absolute -top-4 -left-4 bg-black text-white font-bold px-4 py-1 transform -rotate-2 border-2 border-white">
+                        DEC 2024 - PRESENT
                     </div>
-
-                    <div class="flex gap-4 mt-8">
-                        <a href="https://github.com/gamentionkray" class="btn btn-circle btn-outline">
-                            <i class="fab fa-github text-xl"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/krishnathorat" class="btn btn-circle btn-outline">
-                            <i class="fab fa-linkedin text-xl"></i>
-                        </a>
-                        <a href="mailto:krishnathorat007@gmail.com" class="btn btn-circle btn-outline">
-                            <i class="fas fa-envelope text-xl"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div data-aos="fade-left">
-                    <form id="contactForm" class="space-y-6">
-                        <div>
-                            <input type="text" name="name" placeholder="Your Name" class="input" required />
-                        </div>
-                        <div>
-                            <input type="email" name="email" placeholder="Your Email" class="input" required />
-                        </div>
-                        <div>
-                            <textarea name="message" placeholder="Your Message" rows="5" class="textarea"
-                                required></textarea>
-                        </div>
-                        <button type="submit" class="cyber-button w-full" id="submitBtn">
-                            <span id="submitText">Send Message</span>
-                            <i id="submitLoader" class="fas fa-spinner fa-spin hidden ml-2"></i>
-                        </button>
-                    </form>
-
-                    <div id="alertMessage" class="hidden mt-4 p-4 rounded-lg">
-                        <div id="alertContent" class="flex items-center gap-3">
-                            <i id="alertIcon"></i>
-                            <span id="alertText"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer-tech">
-        <div class="footer-content">
-            <div class="footer-grid">
-                <div class="footer-section">
-                    <h3>
-                        <i class="fas fa-code"></i>
-                        Navigation
-                    </h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#skills">Skills</a></li>
-                        <li><a href="#projects">Projects</a></li>
-                        <li><a href="#experience">Experience</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                    <h3 class="text-2xl font-black mt-2">SOFTWARE DEVELOPER</h3>
+                    <h4 class="text-lg font-mono text-gray-600 mb-4">Ergobite Tech Solutions (Client: Intellify)</h4>
+                    <ul class="list-disc pl-5 space-y-2 font-medium">
+                        <li>Developed features for "Intellify Migration Wizard" with Teradata/Postgres support.</li>
+                        <li>Engineered "In-Parking" alerting system with Azure Functions.</li>
+                        <li>Led "Infovault" multi-agent AI platform using Langchain & Azure OpenAI.</li>
                     </ul>
                 </div>
 
-                <div class="footer-section">
-                    <h3>
-                        <i class="fas fa-link"></i>
-                        Connect
-                    </h3>
-                    <ul class="footer-links">
-                        <li><a href="https://github.com/gamentionkray" target="_blank">GitHub</a></li>
-                        <li><a href="https://www.linkedin.com/in/krishnathorat" target="_blank">LinkedIn</a></li>
-                        <li><a href="mailto:krishnathorat007@gmail.com">Email</a></li>
-                        <li><a href="tel:+918550969625">Phone</a></li>
+                <div class="neo-card relative" data-aos="fade-left">
+                    <div class="absolute -top-4 -right-4 bg-black text-white font-bold px-4 py-1 transform rotate-2 border-2 border-white">
+                        JUL 2024 - DEC 2024
+                    </div>
+                    <h3 class="text-2xl font-black mt-2">SENIOR WEB DEVELOPER</h3>
+                    <h4 class="text-lg font-mono text-gray-600 mb-4">Internship Studio</h4>
+                    <ul class="list-disc pl-5 space-y-2 font-medium">
+                        <li>Spearheaded comprehensive hiring portal development.</li>
+                        <li>Architected solutions using GCP (Vertex AI) and AWS (Lambda, S3).</li>
+                        <li>Integrated WebSocket for real-time notifications.</li>
                     </ul>
-                    <div class="footer-social">
-                        <a href="https://github.com/gamentionkray" target="_blank" title="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/krishnathorat" target="_blank" title="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="mailto:krishnathorat007@gmail.com" title="Email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                    </div>
                 </div>
 
-                <div class="footer-section">
-                    <div class="footer-tech-info">
-                        <h3>
-                            <i class="fas fa-chart-line"></i>
-                            Tech Stats
-                        </h3>
-                        <div class="tech-stats">
-                            <div class="tech-stat">
-                                <div class="tech-stat-number">5+</div>
-                                <div class="tech-stat-label">Years Experience</div>
-                            </div>
-                            <div class="tech-stat">
-                                <div class="tech-stat-number">15+</div>
-                                <div class="tech-stat-label">Projects</div>
-                            </div>
-                            <div class="tech-stat">
-                                <div class="tech-stat-number">10+</div>
-                                <div class="tech-stat-label">Technologies</div>
-                            </div>
-                            <div class="tech-stat">
-                                <div class="tech-stat-number">3</div>
-                                <div class="tech-stat-label">Cloud Platforms</div>
-                            </div>
-                        </div>
-                        <div class="footer-terminal">
-                            <div class="terminal-line">System Status: Online</div>
-                            <div class="terminal-line">Last Deploy: 2025-06-15</div>
-                            <div class="terminal-line">Uptime: 99.9%</div>
-                        </div>
+                <div class="neo-card relative" data-aos="fade-right">
+                    <div class="absolute -top-4 -left-4 bg-black text-white font-bold px-4 py-1 transform -rotate-2 border-2 border-white">
+                        AUG 2022 - JUL 2024
                     </div>
+                    <h3 class="text-2xl font-black mt-2">SYSTEM ENGINEER</h3>
+                    <h4 class="text-lg font-mono text-gray-600 mb-4">Infosys Ltd.</h4>
+                    <ul class="list-disc pl-5 space-y-2 font-medium">
+                        <li>Developed dynamic web apps using Angular, Node.js, PostgreSQ.</li>
+                        <li>Spearheaded Salesforce integration utilizing cortex framework.</li>
+                    </ul>
                 </div>
-            </div>
 
-            <div class="footer-bottom">
-                <div class="footer-copyright">
-                    &copy; 2025 Krishna Thorat. All rights reserved.
+                <div class="neo-card relative" data-aos="fade-left">
+                    <div class="absolute -top-4 -right-4 bg-black text-white font-bold px-4 py-1 transform rotate-2 border-2 border-white">
+                        SEP 2021 - JAN 2022
+                    </div>
+                    <h3 class="text-2xl font-black mt-2">WEB DEVELOPER (LAMP)</h3>
+                    <h4 class="text-lg font-mono text-gray-600 mb-4">SpaceECE</h4>
+                    <ul class="list-disc pl-5 space-y-2 font-medium">
+                        <li>Developed and enhanced web-based application using the LAMP stack.</li>
+                    </ul>
                 </div>
             </div>
         </div>
+    </section>
+
+    <section id="projects" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="section-title">FEATURED <span class="bg-[#60a5fa] px-2 border-2 border-black">PROJECTS</span></h2>
+            
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="neo-card group">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-black text-white border-2 border-black rounded-none shadow-[4px_4px_0_0_#a3e635]">
+                            <i class="fas fa-brain text-2xl"></i>
+                        </div>
+                        <span class="font-mono font-bold">2024-Present</span>
+                    </div>
+                    <h3 class="text-3xl font-black mb-2 group-hover:text-[#60a5fa] transition-colors">HIRESENSE AI</h3>
+                    <p class="font-bold mb-4">AI-powered career guidance with multi-agent orchestration using Pydantic AI & Gemini 2.0.</p>
+                    <div class="mb-6 flex flex-wrap gap-2">
+                        <span class="neo-badge">Python</span>
+                        <span class="neo-badge">FastAPI</span>
+                        <span class="neo-badge">React</span>
+                    </div>
+                    <a href="https://hire.rest" target="_blank" class="neo-btn w-full text-center">
+                        VIEW LIVE <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <div class="neo-card group">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-black text-white border-2 border-black rounded-none shadow-[4px_4px_0_0_#ff6b6b]">
+                            <i class="fas fa-database text-2xl"></i>
+                        </div>
+                        <span class="font-mono font-bold">Internal Tool</span>
+                    </div>
+                    <h3 class="text-3xl font-black mb-2 group-hover:text-[#ff6b6b] transition-colors">INFOVAULT</h3>
+                    <p class="font-bold mb-4">Knowledge management platform processing unstructured data via RAG & Vector Embeddings.</p>
+                    <div class="mb-6 flex flex-wrap gap-2">
+                        <span class="neo-badge">LangChain</span>
+                        <span class="neo-badge">Azure OpenAI</span>
+                        <span class="neo-badge">RAG</span>
+                    </div>
+                    <button class="neo-btn w-full bg-gray-300 cursor-not-allowed" disabled>CONFIDENTIAL</button>
+                </div>
+
+                <div class="neo-card group">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-3 bg-black text-white border-2 border-black rounded-none shadow-[4px_4px_0_0_#a78bfa]">
+                            <i class="fas fa-exchange-alt text-2xl"></i>
+                        </div>
+                        <span class="font-mono font-bold">Enterprise</span>
+                    </div>
+                    <h3 class="text-3xl font-black mb-2 group-hover:text-[#a78bfa] transition-colors">INTELLIFY WIZARD</h3>
+                    <p class="font-bold mb-4">Analytics platform for transferring SSIS packages and Power BI models with PySpark.</p>
+                    <div class="mb-6 flex flex-wrap gap-2">
+                        <span class="neo-badge">PySpark</span>
+                        <span class="neo-badge">Azure</span>
+                        <span class="neo-badge">Power BI</span>
+                    </div>
+                    <button class="neo-btn w-full bg-gray-300 cursor-not-allowed" disabled>CONFIDENTIAL</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 px-6 bg-black text-white">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-6xl font-black mb-8 text-white">LET'S <span class="text-[#a3e635]">TALK</span></h2>
+            <p class="text-xl mb-12 font-mono">Got a project? Need an AI Engineer? Drop me a line.</p>
+
+            <div class="bg-white p-8 border-4 border-[#a3e635] shadow-[10px_10px_0_0_#a3e635] text-black text-left">
+                <form id="contactForm">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="font-black block mb-2">NAME</label>
+                            <input type="text" name="name" class="neo-input" placeholder="YOUR NAME" required>
+                        </div>
+                        <div>
+                            <label class="font-black block mb-2">EMAIL</label>
+                            <input type="email" name="email" class="neo-input" placeholder="YOUR@EMAIL.COM" required>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="font-black block mb-2">MESSAGE</label>
+                        <textarea name="message" rows="4" class="neo-input" placeholder="TELL ME ABOUT IT..." required></textarea>
+                    </div>
+                    <button type="submit" id="submitBtn" class="neo-btn w-full mt-4 text-xl">
+                        <span id="submitText">SEND TRANSMISSION</span>
+                    </button>
+                </form>
+                <div id="alertMessage" class="hidden mt-4 p-4 font-bold border-2 border-black text-center"></div>
+            </div>
+
+            <div class="mt-12 flex flex-col md:flex-row justify-center items-center gap-8 font-mono text-lg">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-phone text-[#a3e635]"></i> +91 8550969625
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-map-marker-alt text-[#a3e635]"></i> Pune, India
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#fffdf5] border-t-4 border-black py-8 text-center font-mono font-bold">
+        <p>&copy; 2025 KRISHNA THORAT. NO RIGHTS RESERVED. JUST CODE.</p>
     </footer>
 
     <script src="assets/js/main.js"></script>
 </body>
-
 </html>
