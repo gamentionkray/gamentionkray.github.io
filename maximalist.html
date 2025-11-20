@@ -3,227 +3,269 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KRISHNA THORAT | MAXIMALIST ENGINEER</title>
-    
+    <title>KRISHNA THORAT | POP ART PORTFOLIO</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Mixing Eclectic Fonts: Condensed Sans + High Contrast Serif + Tech Mono -->
-    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Anton&family=JetBrains+Mono:wght@400;800&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Bebas+Neue&family=Permanent+Marker&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
-                        'display': ['"Anton"', 'sans-serif'],
-                        'serif': ['"Abril Fatface"', 'serif'],
-                        'mono': ['"JetBrains Mono"', 'monospace'],
-                        'psyche': ['"Syne"', 'sans-serif'],
+                        'comic': ['"Bangers"', 'cursive'],
+                        'display': ['"Bebas Neue"', 'cursive'],
+                        'marker': ['"Permanent Marker"', 'cursive'],
+                        'body': ['"Roboto"', 'sans-serif'],
                     },
                     colors: {
-                        acid: {
-                            green: '#CCFF00',
-                            purple: '#B026FF',
-                            pink: '#FF0099',
-                            black: '#0a0a0a',
-                            blue: '#00F0FF',
-                            yellow: '#FFD600',
-                            white: '#F0F0F0'
+                        comic: {
+                            yellow: '#FFD700',
+                            red: '#FF3366',
+                            blue: '#3366FF',
+                            cyan: '#00FFFF',
+                            pink: '#FF66CC',
+                            green: '#00FF66',
+                            purple: '#9933FF',
+                            orange: '#FF9933',
                         }
                     },
-                    backgroundImage: {
-                        'noise': "url('https://grainy-gradients.vercel.app/noise.svg')",
-                        'grid': "radial-gradient(#444 1px, transparent 1px)",
-                        'checker': "repeating-linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%, #111), repeating-linear-gradient(45deg, #111 25%, transparent 25%, transparent 75%, #111 75%, #111)"
-                    },
-                    boxShadow: {
-                        'brutal': '8px 8px 0px 0px #000',
-                        'brutal-lg': '15px 15px 0px 0px #000',
-                        'brutal-reverse': '-8px 8px 0px 0px #000',
-                        'glow': '0 0 20px #CCFF00',
-                    },
-                    animation: {
-                        'marquee': 'marquee 15s linear infinite',
-                        'marquee-reverse': 'marqueeReverse 15s linear infinite',
-                        'spin-slow': 'spin 10s linear infinite',
-                        'jitter': 'jitter 0.3s infinite',
-                    },
-                    keyframes: {
-                        marquee: {
-                            '0%': { transform: 'translateX(0%)' },
-                            '100%': { transform: 'translateX(-100%)' },
-                        },
-                        marqueeReverse: {
-                            '0%': { transform: 'translateX(-100%)' },
-                            '100%': { transform: 'translateX(0%)' },
-                        },
-                        jitter: {
-                            '0%': { transform: 'translate(0,0)' },
-                            '25%': { transform: 'translate(1px,1px)' },
-                            '50%': { transform: 'translate(-1px,-1px)' },
-                            '75%': { transform: 'translate(1px,-1px)' },
-                            '100%': { transform: 'translate(0,0)' },
-                        }
-                    }
                 }
             }
         }
     </script>
 
     <style>
-        /* MAXIMALIST UTILITIES */
         body {
-            background-color: #0a0a0a;
-            color: #F0F0F0;
-            cursor: crosshair;
+            background: #fff;
+            color: #000;
         }
-        
+
+        /* Comic Book Border */
+        .comic-border {
+            border: 6px solid #000;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.3);
+        }
+
+        .comic-border-thick {
+            border: 8px solid #000;
+            box-shadow: 12px 12px 0px rgba(0,0,0,0.4);
+        }
+
+        /* Halftone Pattern Background */
+        .halftone-bg {
+            background-image: radial-gradient(circle, #000 1px, transparent 1px);
+            background-size: 8px 8px;
+            opacity: 0.1;
+        }
+
+        /* Speech Bubble */
+        .speech-bubble {
+            position: relative;
+            background: #fff;
+            border: 4px solid #000;
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        .speech-bubble:after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50px;
+            width: 0;
+            height: 0;
+            border: 20px solid transparent;
+            border-top-color: #000;
+            border-bottom: 0;
+            margin-left: -20px;
+        }
+
+        .speech-bubble:before {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50px;
+            width: 0;
+            height: 0;
+            border: 16px solid transparent;
+            border-top-color: #fff;
+            border-bottom: 0;
+            margin-left: -16px;
+        }
+
+        /* Thought Bubble */
+        .thought-bubble {
+            position: relative;
+            background: #fff;
+            border: 4px solid #000;
+            border-radius: 50%;
+            padding: 30px;
+        }
+
+        /* Comic Panel */
+        .comic-panel {
+            background: #fff;
+            border: 6px solid #000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Text Effects */
+        .text-outline {
+            text-shadow:
+                -3px -3px 0 #000,
+                3px -3px 0 #000,
+                -3px 3px 0 #000,
+                3px 3px 0 #000;
+        }
+
+        .text-3d {
+            text-shadow:
+                2px 2px 0 #000,
+                4px 4px 0 rgba(0,0,0,0.3);
+        }
+
+        /* Action Lines */
+        .action-lines {
+            background:
+                linear-gradient(45deg, transparent 48%, #000 48%, #000 52%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, #000 48%, #000 52%, transparent 52%);
+            background-size: 30px 30px;
+            opacity: 0.1;
+        }
+
+        /* Starburst */
+        .starburst {
+            background:
+                linear-gradient(0deg, transparent 40%, #000 40%, #000 60%, transparent 60%),
+                linear-gradient(60deg, transparent 40%, #000 40%, #000 60%, transparent 60%),
+                linear-gradient(120deg, transparent 40%, #000 40%, #000 60%, transparent 60%);
+        }
+
+        /* POW Badge */
+        .pow-badge {
+            clip-path: polygon(
+                30% 0%, 70% 0%,
+                100% 30%, 100% 70%,
+                70% 100%, 30% 100%,
+                0% 70%, 0% 30%
+            );
+        }
+
         /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 15px; }
-        ::-webkit-scrollbar-track { background: #CCFF00; border-left: 4px solid black; }
-        ::-webkit-scrollbar-thumb { background: #B026FF; border: 3px solid black; }
-        
-        .text-stroke {
-            -webkit-text-stroke: 2px black;
-            color: transparent;
-        }
-        .text-stroke-white {
-            -webkit-text-stroke: 1px rgba(255,255,255,0.5);
-            color: transparent;
-        }
-        
-        .blend-mode { mix-blend-mode: exclusion; }
-        
-        .bg-grid-pattern {
-            background-size: 20px 20px;
-            background-image: radial-gradient(circle, #333 1px, transparent 1px);
+        ::-webkit-scrollbar { width: 16px; }
+        ::-webkit-scrollbar-track { background: #FFD700; border: 3px solid #000; }
+        ::-webkit-scrollbar-thumb { background: #FF3366; border: 3px solid #000; }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
 
-        .checker-bg {
-            background-color: #CCFF00;
-            opacity: 0.8;
-            background-image:  linear-gradient(45deg, #000000 25%, transparent 25%, transparent 75%, #000000 75%, #000000), linear-gradient(45deg, #000000 25%, transparent 25%, transparent 75%, #000000 75%, #000000);
-            background-size: 20px 20px;
-            background-position: 0 0, 10px 10px;
+        .float-anim {
+            animation: float 3s ease-in-out infinite;
         }
 
-        /* Sticker Effect */
-        .sticker {
-            transform: rotate(var(--r, 0deg));
-            transition: transform 0.2s;
-        }
-        .sticker:hover {
-            transform: scale(1.1) rotate(0deg) !important;
-            z-index: 50;
+        @keyframes pulse-scale {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
-        /* Glitch Text Hover */
-        .glitch-hover:hover {
-            animation: jitter 0.2s infinite;
-            color: #CCFF00;
-            text-shadow: 4px 4px 0px #B026FF;
-        }
-
-        /* Image Treatment */
-        .duotone {
-            filter: contrast(120%) grayscale(100%) sepia(100%) hue-rotate(100deg) saturate(200%);
-        }
-        .duotone:hover {
-            filter: none;
+        .pulse-scale {
+            animation: pulse-scale 2s ease-in-out infinite;
         }
     </style>
 </head>
-<body class="overflow-x-hidden">
-
-    <!-- NOISE OVERLAY -->
-    <div class="fixed inset-0 z-[100] pointer-events-none opacity-20 bg-noise w-full h-full"></div>
+<body class="overflow-x-hidden bg-white">
 
     <!-- LOADER -->
-    <div id="loader" class="fixed inset-0 bg-acid-green z-[999] flex flex-col items-center justify-center border-[20px] border-black">
-        <h1 class="text-[15vw] font-display leading-none text-black">LOADING</h1>
-        <div class="w-full h-12 bg-black mt-4 overflow-hidden relative max-w-xl border-4 border-white">
-            <div class="h-full bg-acid-purple animate-[marquee_2s_linear_infinite]"></div>
+    <div id="loader" class="fixed inset-0 bg-comic-yellow z-[999] flex items-center justify-center border-[20px] border-black">
+        <div class="text-center">
+            <h1 class="text-9xl font-comic text-black text-outline mb-8">POW!</h1>
+            <div class="text-4xl font-display">LOADING AWESOMENESS...</div>
         </div>
     </div>
 
-    <!-- FLOATING NAV (Bottom Centered for maximalist quirk) -->
-    <nav class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-md">
-        <div class="bg-black border-4 border-acid-green shadow-brutal p-2 flex justify-between items-center rounded-full px-6">
-            <a href="#" class="font-display text-2xl text-acid-green hover:text-white uppercase">KT.DEV</a>
-            <div class="flex gap-4">
-                <a href="#projects" class="font-mono font-bold hover:text-acid-pink hover:underline decoration-wavy">WORK</a>
-                <a href="mailto:krishnathorat007@gmail.com" class="font-mono font-bold hover:text-acid-blue hover:underline decoration-wavy">CONTACT</a>
+    <!-- FLOATING NAV -->
+    <nav class="fixed top-8 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-4xl">
+        <div class="bg-comic-red comic-border-thick flex justify-between items-center px-8 py-4">
+            <a href="#" class="font-comic text-4xl text-white text-outline hover:scale-110 transition-transform">KT!</a>
+            <div class="flex gap-6 items-center">
+                <a href="#projects" class="font-display text-2xl text-white hover:text-comic-yellow transition-colors">PROJECTS</a>
+                <a href="#contact" class="font-display text-2xl text-white hover:text-comic-yellow transition-colors">CONTACT</a>
+                <div class="w-6 h-6 bg-comic-green border-2 border-black rounded-full animate-pulse"></div>
             </div>
-            <div class="w-4 h-4 bg-red-500 rounded-full animate-pulse border-2 border-white"></div>
         </div>
     </nav>
 
-    <!-- TOP BAR MARQUEE -->
-    <div class="fixed top-0 left-0 w-full bg-acid-pink border-b-4 border-black z-40 py-2 rotate-1 scale-105">
-        <div class="animate-marquee whitespace-nowrap font-mono font-black text-black text-sm">
-            /// OPEN TO WORK /// FULL STACK ENGINEER /// AI SPECIALIST /// PUNE BASED /// LET'S BUILD THE FUTURE ///
-            /// OPEN TO WORK /// FULL STACK ENGINEER /// AI SPECIALIST /// PUNE BASED /// LET'S BUILD THE FUTURE ///
-        </div>
-    </div>
+    <main class="pt-32 pb-20 px-4">
 
-    <main class="bg-grid-pattern min-h-screen pt-20 pb-32 px-4 relative">
-        
-        <!-- DECORATIVE ELEMENTS -->
-        <img src="https://cdn-icons-png.flaticon.com/512/748/748122.png" class="absolute top-32 right-10 w-24 h-24 animate-spin-slow mix-blend-difference opacity-50 pointer-events-none z-0 grayscale invert" alt="star">
-        <div class="absolute top-1/2 left-0 w-full h-96 bg-acid-purple blur-[150px] opacity-20 pointer-events-none"></div>
+        <!-- HERO SECTION - COMIC SPLASH PAGE -->
+        <section class="max-w-7xl mx-auto mb-32">
+            <div class="grid lg:grid-cols-2 gap-8 items-center">
 
-        <!-- HERO SECTION -->
-        <section class="max-w-[1600px] mx-auto mb-40 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 border-4 border-black bg-black shadow-brutal-lg">
-                
-                <!-- LEFT: TEXT CONTENT -->
-                <div class="lg:col-span-8 p-8 md:p-12 relative overflow-hidden border-b-4 lg:border-b-0 lg:border-r-4 border-black bg-neutral-900">
-                    <!-- BACKGROUND TEXT -->
-                    <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
-                        <h1 class="text-[20vw] font-display text-stroke leading-none">DEV</h1>
-                    </div>
+                <!-- LEFT: TEXT PANEL -->
+                <div class="comic-panel bg-gradient-to-br from-comic-yellow to-comic-orange p-12" data-aos="fade-right">
+                    <div class="halftone-bg absolute inset-0"></div>
+                    <div class="action-lines absolute inset-0"></div>
 
                     <div class="relative z-10">
-                        <div class="inline-block bg-acid-green text-black font-mono font-black px-4 py-2 border-2 border-black shadow-[4px_4px_0px_#fff] mb-6 transform -rotate-2">
-                            FULL STACK & AI ENGINEER
+                        <!-- BADGE -->
+                        <div class="inline-block bg-comic-red text-white font-comic text-xl px-6 py-2 border-4 border-black mb-6 transform -rotate-2">
+                            FULL STACK AI HERO!
                         </div>
-                        
-                        <h1 class="text-7xl sm:text-8xl md:text-[9rem] font-display uppercase leading-[0.85] mb-8 text-white mix-blend-normal">
-                            KRISHNA<br>
-                            <span class="text-acid-pink italic font-serif">THORAT</span>
+
+                        <!-- NAME -->
+                        <h1 class="font-comic text-7xl md:text-8xl lg:text-9xl text-white text-outline leading-none mb-6">
+                            KRISHNA<br>THORAT!
                         </h1>
 
-                        <p class="font-mono text-lg md:text-xl text-gray-300 max-w-2xl mb-10 leading-relaxed border-l-8 border-acid-blue pl-6 bg-white/5 p-4">
-                            I build <span class="bg-acid-yellow text-black px-1 font-bold">CHAOTICALLY GOOD</span> web apps and Agentic AI systems. 
-                            Stack: PHP, Node.js, React & Generative AI.
-                        </p>
+                        <!-- DESCRIPTION SPEECH BUBBLE -->
+                        <div class="speech-bubble mb-8">
+                            <p class="font-body text-xl font-bold text-black">
+                                I build <span class="bg-comic-yellow px-2 py-1 border-2 border-black font-black">POWERFUL</span> web apps and
+                                <span class="bg-comic-cyan px-2 py-1 border-2 border-black font-black">AI SYSTEMS</span>
+                                that make a difference!
+                            </p>
+                        </div>
 
+                        <!-- TECH STACK BADGES -->
+                        <div class="flex flex-wrap gap-3 mb-8">
+                            <span class="bg-comic-blue text-white font-display text-lg px-4 py-2 border-3 border-black">PHP</span>
+                            <span class="bg-comic-green text-black font-display text-lg px-4 py-2 border-3 border-black">NODE.JS</span>
+                            <span class="bg-comic-purple text-white font-display text-lg px-4 py-2 border-3 border-black">REACT</span>
+                            <span class="bg-comic-pink text-black font-display text-lg px-4 py-2 border-3 border-black">AI</span>
+                        </div>
+
+                        <!-- CTA BUTTONS -->
                         <div class="flex flex-wrap gap-4">
-                            <a href="#projects" class="bg-white text-black border-4 border-black px-8 py-4 font-display text-2xl hover:bg-acid-purple hover:text-white hover:shadow-none shadow-brutal transition-all uppercase">
-                                VIEW PROJECTS
+                            <a href="#projects" class="bg-black text-comic-yellow font-comic text-2xl px-8 py-4 border-4 border-black hover:bg-comic-yellow hover:text-black transition-all shadow-lg hover:shadow-xl">
+                                SEE WORK!
                             </a>
-                            <a href="resume.pdf" class="bg-transparent text-acid-green border-4 border-acid-green px-8 py-4 font-display text-2xl hover:bg-acid-green hover:text-black transition-all uppercase">
-                                RESUME <i class="fas fa-download ml-2"></i>
+                            <a href="mailto:krishnathorat007@gmail.com" class="bg-white text-black font-comic text-2xl px-8 py-4 border-4 border-black hover:bg-comic-red hover:text-white transition-all shadow-lg">
+                                HIRE ME!
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- RIGHT: IMAGE CUTOUT STYLE -->
-                <div class="lg:col-span-4 relative h-[500px] lg:h-auto bg-acid-yellow overflow-hidden group">
-                    <div class="absolute inset-0 checker-bg opacity-20"></div>
-                    <img src="assets/img/krishna-thorat.jpg" alt="Krishna Thorat" class="absolute inset-0 w-full h-full object-cover duotone transition-all duration-500 z-10">
-                    
-                    <!-- STICKERS ON IMAGE -->
-                    <div class="absolute top-4 right-4 bg-white text-black font-black font-display text-4xl border-4 border-black px-4 py-2 rotate-12 z-20 shadow-brutal">
-                        5+ YOE
+                <!-- RIGHT: IMAGE PANEL -->
+                <div class="comic-panel bg-comic-cyan h-[600px] relative group" data-aos="fade-left">
+                    <div class="halftone-bg absolute inset-0 z-10"></div>
+                    <img src="assets/img/krishna-thorat.jpg" alt="Krishna Thorat" class="w-full h-full object-cover grayscale contrast-125 brightness-110">
+
+                    <!-- POW BADGES -->
+                    <div class="absolute top-8 right-8 pow-badge bg-comic-red w-32 h-32 flex items-center justify-center z-20 pulse-scale">
+                        <span class="font-comic text-3xl text-white text-outline">5+ YRS</span>
                     </div>
-                    <div class="absolute bottom-8 left-8 bg-acid-blue text-black font-mono font-bold text-sm border-2 border-black px-3 py-1 -rotate-6 z-20">
+                    <div class="absolute bottom-8 left-8 bg-comic-yellow font-display text-2xl text-black px-6 py-3 border-4 border-black z-20">
                         📍 PUNE, INDIA
                     </div>
                 </div>
@@ -231,217 +273,273 @@
         </section>
 
         <!-- MARQUEE DIVIDER -->
-        <div class="w-full bg-acid-green border-y-4 border-black py-6 mb-32 -rotate-1 shadow-brutal overflow-hidden relative z-20">
-            <div class="animate-marquee-reverse flex gap-12 text-6xl font-display text-black uppercase">
-                <span>JAVASCRIPT</span> <span class="text-stroke">REACT</span> <span>NODE.JS</span> <span class="text-stroke">PYTHON</span> <span>GEN-AI</span> <span>LANGCHAIN</span> <span class="text-stroke">RAG</span> <span>AWS</span>
+        <div class="bg-black border-y-8 border-black py-6 mb-32 overflow-hidden">
+            <div class="whitespace-nowrap animate-marquee font-comic text-6xl text-comic-yellow flex gap-12">
+                <span>★ JAVASCRIPT ★</span>
+                <span>★ REACT ★</span>
+                <span>★ PYTHON ★</span>
+                <span>★ AI ★</span>
+                <span>★ LANGCHAIN ★</span>
+                <span>★ AWS ★</span>
+                <span>★ JAVASCRIPT ★</span>
+                <span>★ REACT ★</span>
             </div>
         </div>
 
-        <!-- SKILLS "STICKER BOMB" SECTION -->
-        <section class="max-w-7xl mx-auto mb-40">
-            <div class="flex flex-col md:flex-row items-end justify-between mb-16 border-b-8 border-white pb-4">
-                <h2 class="text-6xl md:text-9xl font-display text-white uppercase leading-none">
-                    THE <span class="text-acid-purple font-serif italic">ARSENAL</span>
-                </h2>
-                <div class="font-mono text-acid-green text-xl mb-4 animate-pulse">/// TECH STACK & TOOLS</div>
-            </div>
+        <!-- SKILLS SECTION - COMIC PANELS -->
+        <section class="max-w-7xl mx-auto mb-32">
+            <h2 class="font-comic text-8xl md:text-9xl text-center text-black text-3d mb-16" data-aos="zoom-in">
+                MY SUPERPOWERS!
+            </h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                
-                <!-- EDUCATION CARD -->
-                <div class="md:col-span-2 bg-neutral-900 border-4 border-white p-8 shadow-brutal hover:translate-x-2 hover:translate-y-2 hover:shadow-none transition-all relative overflow-hidden group">
-                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-acid-pink rounded-full mix-blend-multiply filter blur-xl group-hover:scale-150 transition-transform"></div>
-                    <i class="fas fa-graduation-cap text-6xl text-white mb-6 relative z-10"></i>
-                    <h3 class="text-3xl font-psyche font-bold text-white mb-2 relative z-10">Master of Computer Applications</h3>
-                    <p class="font-mono text-acid-green relative z-10">Vishwakarma Institute of Technology</p>
-                    <div class="absolute bottom-4 right-4 font-display text-4xl text-white/10">2020-22</div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- EDUCATION PANEL -->
+                <div class="comic-panel bg-gradient-to-br from-comic-purple to-comic-pink p-8" data-aos="flip-left">
+                    <div class="halftone-bg absolute inset-0"></div>
+                    <div class="relative z-10">
+                        <div class="w-20 h-20 bg-white border-4 border-black rounded-full flex items-center justify-center mb-6">
+                            <i class="fas fa-graduation-cap text-4xl text-comic-purple"></i>
+                        </div>
+                        <h3 class="font-display text-3xl text-white mb-3">MASTER OF CS!</h3>
+                        <p class="font-body text-white font-bold mb-2">Master of Computer Applications</p>
+                        <p class="font-body text-white">Vishwakarma Institute of Technology</p>
+                        <div class="inline-block bg-black text-comic-yellow font-display px-3 py-1 border-2 border-white mt-4">
+                            2020-2022
+                        </div>
+                    </div>
                 </div>
 
-                <!-- GITHUB CARD -->
-                <a href="https://github.com/gamentionkray" class="bg-acid-blue border-4 border-black p-8 shadow-brutal flex flex-col justify-center items-center group hover:bg-white transition-colors">
-                    <i class="fab fa-github text-7xl text-black group-hover:scale-125 transition-transform duration-300"></i>
-                    <span class="font-mono font-black text-black mt-4 text-lg border-2 border-black px-2 bg-white">@GAMENTIONKRAY</span>
+                <!-- GITHUB PANEL -->
+                <a href="https://github.com/gamentionkray" class="comic-panel bg-black p-8 flex flex-col items-center justify-center group hover:bg-comic-red transition-colors" data-aos="flip-left" data-aos-delay="100">
+                    <i class="fab fa-github text-9xl text-white group-hover:scale-125 transition-transform mb-6"></i>
+                    <span class="font-display text-3xl text-white border-4 border-white px-6 py-2 bg-comic-yellow text-black group-hover:bg-white">
+                        @GAMENTIONKRAY
+                    </span>
                 </a>
 
-                <!-- STACK CLOUD -->
-                <div class="lg:col-span-1 bg-acid-yellow border-4 border-black p-6 shadow-brutal relative">
-                    <div class="absolute -top-4 -left-4 bg-black text-white font-bold px-2 py-1 rotate-12 border-2 border-white">CORE</div>
-                    <div class="flex flex-wrap gap-2 content-center h-full">
-                        <span class="bg-white border-2 border-black px-3 py-1 font-bold text-black text-sm sticker" style="--r: -2deg">PHP</span>
-                        <span class="bg-white border-2 border-black px-3 py-1 font-bold text-black text-sm sticker" style="--r: 3deg">Node.js</span>
-                        <span class="bg-white border-2 border-black px-3 py-1 font-bold text-black text-sm sticker" style="--r: -5deg">React</span>
-                        <span class="bg-white border-2 border-black px-3 py-1 font-bold text-black text-sm sticker" style="--r: 4deg">Angular</span>
-                        <span class="bg-white border-2 border-black px-3 py-1 font-bold text-black text-sm sticker" style="--r: -1deg">Python</span>
-                        <span class="bg-white border-2 border-black px-3 py-1 font-bold text-black text-sm sticker" style="--r: 6deg">PostgreSQL</span>
-                    </div>
+                <!-- LOCATION PANEL -->
+                <div class="comic-panel bg-gradient-to-br from-comic-blue to-comic-cyan p-8 flex flex-col items-center justify-center" data-aos="flip-left" data-aos-delay="200">
+                    <div class="text-8xl mb-4">📍</div>
+                    <h3 class="font-comic text-4xl text-white text-outline">PUNE!</h3>
+                    <p class="font-display text-2xl text-black">INDIA</p>
                 </div>
 
-                <!-- AI STACK -->
-                <div class="md:col-span-4 bg-black border-4 border-acid-pink p-8 shadow-[8px_8px_0px_#FF0099]">
-                    <h3 class="text-4xl font-display text-acid-pink mb-6">AI ENGINEERING</h3>
-                    <div class="flex flex-wrap gap-4">
-                        <span class="text-2xl sm:text-4xl font-serif text-white hover:text-acid-green cursor-pointer transition-colors">Generative AI /</span>
-                        <span class="text-2xl sm:text-4xl font-serif text-white hover:text-acid-green cursor-pointer transition-colors">Agentic AI /</span>
-                        <span class="text-2xl sm:text-4xl font-serif text-white hover:text-acid-green cursor-pointer transition-colors">RAG /</span>
-                        <span class="text-2xl sm:text-4xl font-serif text-white hover:text-acid-green cursor-pointer transition-colors">LangChain /</span>
-                        <span class="text-2xl sm:text-4xl font-serif text-white hover:text-acid-green cursor-pointer transition-colors">Azure OpenAI</span>
+                <!-- TECH STACK PANEL -->
+                <div class="md:col-span-2 lg:col-span-3 comic-panel bg-gradient-to-r from-comic-yellow via-comic-orange to-comic-red p-8" data-aos="flip-up">
+                    <div class="halftone-bg absolute inset-0"></div>
+                    <div class="relative z-10">
+                        <h3 class="font-comic text-5xl text-white text-outline mb-8 text-center">TECH ARSENAL!</h3>
+                        <div class="flex flex-wrap justify-center gap-4">
+                            <span class="bg-white text-black font-display text-2xl px-6 py-3 border-4 border-black hover:bg-black hover:text-white transition-all cursor-pointer">PHP</span>
+                            <span class="bg-white text-black font-display text-2xl px-6 py-3 border-4 border-black hover:bg-black hover:text-white transition-all cursor-pointer">NODE.JS</span>
+                            <span class="bg-white text-black font-display text-2xl px-6 py-3 border-4 border-black hover:bg-black hover:text-white transition-all cursor-pointer">REACT</span>
+                            <span class="bg-white text-black font-display text-2xl px-6 py-3 border-4 border-black hover:bg-black hover:text-white transition-all cursor-pointer">ANGULAR</span>
+                            <span class="bg-white text-black font-display text-2xl px-6 py-3 border-4 border-black hover:bg-black hover:text-white transition-all cursor-pointer">PYTHON</span>
+                            <span class="bg-white text-black font-display text-2xl px-6 py-3 border-4 border-black hover:bg-black hover:text-white transition-all cursor-pointer">GEN AI</span>
+                            <span class="bg-white text-black font-display text-2xl px-6 py-3 border-4 border-black hover:bg-black hover:text-white transition-all cursor-pointer">LANGCHAIN</span>
+                            <span class="bg-white text-black font-display text-2xl px-6 py-3 border-4 border-black hover:bg-black hover:text-white transition-all cursor-pointer">AWS</span>
+                            <span class="bg-white text-black font-display text-2xl px-6 py-3 border-4 border-black hover:bg-black hover:text-white transition-all cursor-pointer">AZURE</span>
+                            <span class="bg-white text-black font-display text-2xl px-6 py-3 border-4 border-black hover:bg-black hover:text-white transition-all cursor-pointer">POSTGRESQL</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- XP LOG - JAGGED TIMELINE -->
-        <section class="max-w-6xl mx-auto mb-40">
-            <div class="bg-white text-black border-4 border-black p-4 inline-block mb-12 shadow-brutal transform -rotate-1">
-                <h2 class="text-5xl font-display uppercase">XP_LOG.exe</h2>
+        <!-- EXPERIENCE - TIMELINE PANELS -->
+        <section class="max-w-6xl mx-auto mb-32">
+            <div class="text-center mb-16">
+                <div class="inline-block bg-comic-red text-white font-comic text-6xl px-12 py-6 border-8 border-black shadow-xl" data-aos="zoom-in">
+                    HERO JOURNEY!
+                </div>
             </div>
 
-            <div class="relative border-l-8 border-dashed border-neutral-800 ml-4 md:ml-12 space-y-20">
-                
-                <!-- Job 1 -->
-                <div class="relative pl-8 md:pl-16" data-aos="fade-right">
-                    <div class="absolute -left-[20px] top-0 w-12 h-12 bg-acid-green border-4 border-black rounded-none rotate-45 flex items-center justify-center z-10">
-                        <i class="fas fa-code -rotate-45 text-black"></i>
-                    </div>
-                    <div class="bg-neutral-900 border-4 border-acid-green p-8 shadow-brutal hover:bg-neutral-800 transition-colors group">
-                        <div class="flex flex-col md:flex-row justify-between md:items-center mb-4 border-b-2 border-acid-green pb-4">
-                            <h3 class="text-3xl font-psyche font-bold text-white group-hover:text-acid-green">Software Developer</h3>
-                            <span class="font-mono text-acid-green bg-neutral-800 px-2 py-1 border border-acid-green">Dec 2024 - Present</span>
+            <div class="space-y-12">
+
+                <!-- JOB 1 -->
+                <div class="comic-panel bg-gradient-to-r from-comic-green to-comic-cyan p-8 md:p-12" data-aos="fade-up">
+                    <div class="halftone-bg absolute inset-0"></div>
+                    <div class="relative z-10">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                            <div>
+                                <div class="inline-block bg-comic-yellow text-black font-display text-sm px-4 py-1 border-2 border-black mb-3">
+                                    DEC 2024 - PRESENT
+                                </div>
+                                <h3 class="font-comic text-5xl text-black text-3d">SOFTWARE DEVELOPER!</h3>
+                                <h4 class="font-display text-3xl text-white mt-2">Ergabite Tech Solutions</h4>
+                            </div>
+                            <div class="pow-badge bg-comic-red w-24 h-24 flex items-center justify-center mt-4 md:mt-0">
+                                <span class="font-comic text-2xl text-white">NOW!</span>
+                            </div>
                         </div>
-                        <h4 class="text-xl font-serif italic text-gray-400 mb-4">Ergabite Tech Solutions</h4>
-                        <ul class="font-mono text-sm md:text-base text-gray-300 list-disc pl-5 space-y-2">
-                            <li><span class="bg-acid-green text-black px-1 mr-2">FEATURE</span>Intellify Migration Wizard (Teradata/Postgres)</li>
-                            <li><span class="bg-acid-blue text-black px-1 mr-2">SYSTEM</span>"In-Parking" alerting system via Azure Functions</li>
-                            <li><span class="bg-acid-pink text-black px-1 mr-2">AI</span>Led "Infovault" multi-agent AI platform</li>
+                        <ul class="font-body text-xl text-black space-y-3">
+                            <li class="flex items-start gap-3">
+                                <span class="bg-white px-3 py-1 border-2 border-black font-black text-sm flex-shrink-0">FEATURE</span>
+                                <span class="font-bold">Intellify Migration Wizard (Teradata/Postgres)</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="bg-white px-3 py-1 border-2 border-black font-black text-sm flex-shrink-0">SYSTEM</span>
+                                <span class="font-bold">"In-Parking" alerting via Azure Functions</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="bg-white px-3 py-1 border-2 border-black font-black text-sm flex-shrink-0">AI</span>
+                                <span class="font-bold">Led "Infovault" multi-agent AI platform</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- Job 2 -->
-                <div class="relative pl-8 md:pl-16" data-aos="fade-right">
-                    <div class="absolute -left-[20px] top-0 w-12 h-12 bg-acid-yellow border-4 border-black rounded-full flex items-center justify-center z-10">
-                        <i class="fas fa-laptop-code text-black"></i>
-                    </div>
-                    <div class="bg-neutral-900 border-4 border-acid-yellow p-8 shadow-brutal hover:bg-neutral-800 transition-colors group">
-                        <div class="flex flex-col md:flex-row justify-between md:items-center mb-4 border-b-2 border-acid-yellow pb-4">
-                            <h3 class="text-3xl font-psyche font-bold text-white group-hover:text-acid-yellow">Senior Web Developer</h3>
-                            <span class="font-mono text-acid-yellow bg-neutral-800 px-2 py-1 border border-acid-yellow">Jul 2024 - Dec 2024</span>
+                <!-- JOB 2 -->
+                <div class="comic-panel bg-gradient-to-r from-comic-yellow to-comic-orange p-8 md:p-12" data-aos="fade-up" data-aos-delay="100">
+                    <div class="halftone-bg absolute inset-0"></div>
+                    <div class="relative z-10">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                            <div>
+                                <div class="inline-block bg-black text-white font-display text-sm px-4 py-1 border-2 border-black mb-3">
+                                    JUL 2024 - DEC 2024
+                                </div>
+                                <h3 class="font-comic text-5xl text-black text-3d">SENIOR WEB DEVELOPER!</h3>
+                                <h4 class="font-display text-3xl text-white mt-2">Internship Studio</h4>
+                            </div>
                         </div>
-                        <h4 class="text-xl font-serif italic text-gray-400 mb-4">Internship Studio</h4>
-                        <ul class="font-mono text-sm md:text-base text-gray-300 list-disc pl-5 space-y-2">
-                            <li>Spearheaded hiring portal development</li>
-                            <li>Architected solutions on GCP (Vertex AI) and AWS</li>
-                            <li>Full-stack dev with React, Node.js, PHP, Flask</li>
+                        <ul class="font-body text-xl text-black space-y-3">
+                            <li class="flex items-start gap-3">
+                                <span class="text-3xl">→</span>
+                                <span class="font-bold">Spearheaded hiring portal development</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-3xl">→</span>
+                                <span class="font-bold">Architected solutions on GCP (Vertex AI) and AWS</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-3xl">→</span>
+                                <span class="font-bold">Full-stack dev: React, Node.js, PHP, Flask</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- Job 3 -->
-                <div class="relative pl-8 md:pl-16" data-aos="fade-right">
-                    <div class="absolute -left-[20px] top-0 w-12 h-12 bg-acid-blue border-4 border-black flex items-center justify-center z-10">
-                        <i class="fas fa-server text-black"></i>
-                    </div>
-                    <div class="bg-neutral-900 border-4 border-acid-blue p-8 shadow-brutal hover:bg-neutral-800 transition-colors group">
-                        <div class="flex flex-col md:flex-row justify-between md:items-center mb-4 border-b-2 border-acid-blue pb-4">
-                            <h3 class="text-3xl font-psyche font-bold text-white group-hover:text-acid-blue">System Engineer</h3>
-                            <span class="font-mono text-acid-blue bg-neutral-800 px-2 py-1 border border-acid-blue">Aug 2022 - Jul 2024</span>
+                <!-- JOB 3 -->
+                <div class="comic-panel bg-gradient-to-r from-comic-blue to-comic-purple p-8 md:p-12" data-aos="fade-up" data-aos-delay="200">
+                    <div class="halftone-bg absolute inset-0"></div>
+                    <div class="relative z-10">
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                            <div>
+                                <div class="inline-block bg-comic-cyan text-black font-display text-sm px-4 py-1 border-2 border-black mb-3">
+                                    AUG 2022 - JUL 2024
+                                </div>
+                                <h3 class="font-comic text-5xl text-white text-outline">SYSTEM ENGINEER!</h3>
+                                <h4 class="font-display text-3xl text-comic-yellow mt-2">Infosys Ltd.</h4>
+                            </div>
                         </div>
-                        <h4 class="text-xl font-serif italic text-gray-400 mb-4">Infosys Ltd.</h4>
-                        <ul class="font-mono text-sm md:text-base text-gray-300 list-disc pl-5 space-y-2">
-                            <li>Dynamic app development with Angular, Node.js</li>
-                            <li>WCAG standards & WebRTC integration</li>
-                            <li>Salesforce integration via Cortex</li>
+                        <ul class="font-body text-xl text-white space-y-3">
+                            <li class="flex items-start gap-3">
+                                <span class="text-3xl text-comic-yellow">★</span>
+                                <span class="font-bold">Dynamic app development with Angular, Node.js</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-3xl text-comic-yellow">★</span>
+                                <span class="font-bold">WCAG standards & WebRTC integration</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-3xl text-comic-yellow">★</span>
+                                <span class="font-bold">Salesforce integration via Cortex</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
-
             </div>
         </section>
 
-        <!-- PROJECTS - GIANT CARDS -->
-        <section id="projects" class="max-w-[1400px] mx-auto mb-40">
-            <h2 class="text-[10vw] font-display text-center text-stroke-white leading-none mb-12 opacity-50 hover:opacity-100 transition-opacity">SELECTED_WORKS</h2>
-            
-            <div class="grid md:grid-cols-2 gap-16">
-                
-                <!-- Project 1 -->
-                <article class="group relative" data-aos="zoom-in-up">
-                    <div class="absolute inset-0 bg-acid-purple translate-x-4 translate-y-4 border-4 border-black"></div>
-                    <div class="relative bg-neutral-900 border-4 border-black h-full flex flex-col hover:-translate-y-2 transition-transform duration-300">
-                        <div class="h-64 bg-acid-green overflow-hidden border-b-4 border-black relative">
-                            <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/az-subtle.png')]"></div>
-                            <div class="absolute bottom-0 left-0 p-4 bg-black text-acid-green font-mono font-bold border-t-4 border-r-4 border-black">
-                                AI / AGENTS
-                            </div>
-                            <i class="fas fa-brain text-9xl absolute -right-4 -bottom-4 text-black opacity-20 rotate-12 group-hover:rotate-0 transition-transform"></i>
+        <!-- PROJECTS - COMIC BOOK PANELS -->
+        <section id="projects" class="max-w-7xl mx-auto mb-32">
+            <h2 class="font-comic text-8xl md:text-9xl text-center text-black text-3d mb-16" data-aos="zoom-in">
+                EPIC PROJECTS!
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-12">
+
+                <!-- PROJECT 1 -->
+                <article class="comic-panel-thick group" data-aos="zoom-in-up">
+                    <div class="bg-gradient-to-br from-comic-pink to-comic-purple h-64 flex items-center justify-center relative overflow-hidden">
+                        <div class="halftone-bg absolute inset-0"></div>
+                        <i class="fas fa-brain text-9xl text-white opacity-50"></i>
+                        <div class="absolute top-4 right-4 pow-badge bg-comic-yellow w-20 h-20 flex items-center justify-center">
+                            <span class="font-comic text-sm text-black">NEW!</span>
                         </div>
-                        <div class="p-8 flex-grow">
-                            <h3 class="text-5xl font-display text-white mb-4 group-hover:text-acid-green uppercase">HireSense AI</h3>
-                            <p class="font-mono text-gray-400 mb-6 leading-relaxed">
-                                AI-powered career guidance platform with multi-agent orchestration using Pydantic AI and Gemini 2.0.
-                            </p>
-                            <div class="flex gap-2 flex-wrap">
-                                <span class="border-2 border-white text-white px-3 py-1 font-bold text-xs uppercase hover:bg-white hover:text-black">Pydantic AI</span>
-                                <span class="border-2 border-white text-white px-3 py-1 font-bold text-xs uppercase hover:bg-white hover:text-black">FastAPI</span>
-                                <span class="border-2 border-white text-white px-3 py-1 font-bold text-xs uppercase hover:bg-white hover:text-black">WebSockets</span>
-                            </div>
+                    </div>
+                    <div class="bg-white p-8">
+                        <div class="inline-block bg-comic-purple text-white font-display px-4 py-1 border-2 border-black mb-4">
+                            AI / AGENTS
                         </div>
+                        <h3 class="font-comic text-5xl text-black mb-4">HireSense AI!</h3>
+                        <p class="font-body text-lg text-gray-700 mb-6">
+                            AI-powered <strong>career guidance platform</strong> with multi-agent orchestration using Pydantic AI and Gemini 2.0.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-black text-white font-display px-3 py-1 border-2 border-black text-sm">PYDANTIC AI</span>
+                            <span class="bg-black text-white font-display px-3 py-1 border-2 border-black text-sm">FASTAPI</span>
+                            <span class="bg-black text-white font-display px-3 py-1 border-2 border-black text-sm">WEBSOCKETS</span>
+                        </div>
+                        <a href="#" class="inline-block bg-comic-red text-white font-comic text-2xl px-8 py-3 border-4 border-black hover:bg-black transition-all">
+                            VIEW! →
+                        </a>
                     </div>
                 </article>
 
-                <!-- Project 2 -->
-                <article class="group relative" data-aos="zoom-in-up" data-aos-delay="200">
-                    <div class="absolute inset-0 bg-acid-blue translate-x-4 translate-y-4 border-4 border-black"></div>
-                    <div class="relative bg-neutral-900 border-4 border-black h-full flex flex-col hover:-translate-y-2 transition-transform duration-300">
-                        <div class="h-64 bg-acid-pink overflow-hidden border-b-4 border-black relative">
-                            <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/az-subtle.png')]"></div>
-                            <div class="absolute bottom-0 left-0 p-4 bg-black text-acid-pink font-mono font-bold border-t-4 border-r-4 border-black">
-                                DATA / ANALYTICS
-                            </div>
-                            <i class="fas fa-database text-9xl absolute -right-4 -bottom-4 text-black opacity-20 rotate-12 group-hover:rotate-0 transition-transform"></i>
+                <!-- PROJECT 2 -->
+                <article class="comic-panel-thick group" data-aos="zoom-in-up" data-aos-delay="200">
+                    <div class="bg-gradient-to-br from-comic-blue to-comic-cyan h-64 flex items-center justify-center relative overflow-hidden">
+                        <div class="halftone-bg absolute inset-0"></div>
+                        <i class="fas fa-database text-9xl text-white opacity-50"></i>
+                    </div>
+                    <div class="bg-white p-8">
+                        <div class="inline-block bg-comic-blue text-white font-display px-4 py-1 border-2 border-black mb-4">
+                            DATA / ANALYTICS
                         </div>
-                        <div class="p-8 flex-grow">
-                            <h3 class="text-5xl font-display text-white mb-4 group-hover:text-acid-pink uppercase">Intellify Insights</h3>
-                            <p class="font-mono text-gray-400 mb-6 leading-relaxed">
-                                Data Analytics Platform. Transfer SSIS packages and Power BI models between MSSQL, Teradata, and Postgres.
-                            </p>
-                            <div class="flex gap-2 flex-wrap">
-                                <span class="border-2 border-white text-white px-3 py-1 font-bold text-xs uppercase hover:bg-white hover:text-black">PySpark</span>
-                                <span class="border-2 border-white text-white px-3 py-1 font-bold text-xs uppercase hover:bg-white hover:text-black">Azure</span>
-                                <span class="border-2 border-white text-white px-3 py-1 font-bold text-xs uppercase hover:bg-white hover:text-black">Power BI</span>
-                            </div>
+                        <h3 class="font-comic text-5xl text-black mb-4">Intellify Insights!</h3>
+                        <p class="font-body text-lg text-gray-700 mb-6">
+                            <strong>Data Analytics Platform.</strong> Transfer SSIS packages and Power BI models between MSSQL, Teradata, and Postgres.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-black text-white font-display px-3 py-1 border-2 border-black text-sm">PYSPARK</span>
+                            <span class="bg-black text-white font-display px-3 py-1 border-2 border-black text-sm">AZURE</span>
+                            <span class="bg-black text-white font-display px-3 py-1 border-2 border-black text-sm">POWER BI</span>
                         </div>
+                        <a href="#" class="inline-block bg-comic-blue text-white font-comic text-2xl px-8 py-3 border-4 border-black hover:bg-black transition-all">
+                            VIEW! →
+                        </a>
                     </div>
                 </article>
-
             </div>
         </section>
 
     </main>
 
-    <!-- GIANT FOOTER -->
-    <footer class="bg-acid-green border-t-8 border-black pt-20 pb-32 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-        
+    <!-- FOOTER - COMIC STYLE -->
+    <footer id="contact" class="bg-black border-t-8 border-black py-20 relative overflow-hidden">
+        <div class="action-lines absolute inset-0 opacity-20"></div>
+
         <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
-            <h2 class="text-[15vw] font-display font-black uppercase leading-[0.8] mb-12 text-black">
-                LET'S<br>BUILD
+            <h2 class="font-comic text-8xl md:text-9xl text-comic-yellow text-outline mb-12">
+                LET'S TEAM UP!
             </h2>
-            
-            <div class="flex justify-center gap-8 mb-12">
-                <a href="https://github.com/gamentionkray" class="w-24 h-24 bg-black text-white border-4 border-white flex items-center justify-center text-4xl hover:bg-white hover:text-black hover:border-black transition-all shadow-brutal">
+
+            <div class="flex flex-wrap justify-center gap-8 mb-12">
+                <a href="https://github.com/gamentionkray" class="w-32 h-32 bg-white text-black border-6 border-comic-yellow flex items-center justify-center text-5xl hover:bg-comic-yellow hover:scale-110 transition-all comic-border">
                     <i class="fab fa-github"></i>
                 </a>
-                <a href="https://linkedin.com/in/krishnathorat" class="w-24 h-24 bg-acid-blue text-black border-4 border-black flex items-center justify-center text-4xl hover:bg-black hover:text-acid-blue transition-all shadow-brutal">
+                <a href="https://linkedin.com/in/krishnathorat" class="w-32 h-32 bg-comic-blue text-white border-6 border-white flex items-center justify-center text-5xl hover:bg-white hover:text-comic-blue hover:scale-110 transition-all comic-border">
                     <i class="fab fa-linkedin"></i>
                 </a>
-                <a href="mailto:krishnathorat007@gmail.com" class="w-24 h-24 bg-acid-pink text-black border-4 border-black flex items-center justify-center text-4xl hover:bg-black hover:text-acid-pink transition-all shadow-brutal">
+                <a href="mailto:krishnathorat007@gmail.com" class="w-32 h-32 bg-comic-red text-white border-6 border-white flex items-center justify-center text-5xl hover:bg-white hover:text-comic-red hover:scale-110 transition-all comic-border">
                     <i class="fas fa-envelope"></i>
                 </a>
             </div>
 
-            <div class="inline-block bg-black text-white px-6 py-2 font-mono font-bold border-2 border-white transform rotate-3">
-                &copy; 2025 KRISHNA THORAT | PUNE, INDIA
+            <div class="inline-block bg-comic-yellow text-black font-display text-xl px-8 py-4 border-4 border-white">
+                © 2025 KRISHNA THORAT | PUNE, INDIA
             </div>
         </div>
     </footer>
@@ -449,8 +547,8 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({
-            duration: 600,
-            easing: 'ease-out-back',
+            duration: 800,
+            easing: 'ease-out-cubic',
             once: true
         });
 
@@ -458,10 +556,26 @@
         window.addEventListener('load', () => {
             const loader = document.getElementById('loader');
             setTimeout(() => {
-                loader.style.transform = 'translateY(-100%)';
-                loader.style.transition = 'transform 0.8s cubic-bezier(0.7, 0, 0.3, 1)';
-            }, 800);
+                loader.style.opacity = '0';
+                loader.style.transition = 'opacity 0.5s';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 500);
+            }, 1000);
         });
+
+        // Marquee animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes marquee {
+                0% { transform: translateX(0%); }
+                100% { transform: translateX(-50%); }
+            }
+            .animate-marquee {
+                animation: marquee 20s linear infinite;
+            }
+        `;
+        document.head.appendChild(style);
     </script>
     <script src="assets/js/template-switcher.js"></script>
 </body>
