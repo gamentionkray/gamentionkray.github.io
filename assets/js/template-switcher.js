@@ -13,7 +13,10 @@
         { name: 'Maximalist', file: 'maximalist.html', color: '#CCFF00', darkColor: '#B026FF' },
         { name: 'Skeuomorphic', file: 'skeuomorphic.html', color: '#3a7bd5', darkColor: '#2c3e50' },
         { name: 'Aero', file: 'aero.html', color: '#00d2ff', darkColor: '#3a7bd5' },
-        { name: 'Swiss', file: 'swiss.html', color: '#FF3000', darkColor: '#000000' }
+        { name: 'Swiss', file: 'swiss.html', color: '#FF3000', darkColor: '#000000' },
+        { name: 'Cyberpunk', file: 'cyberpunk.html', color: '#00ffff', darkColor: '#ff00ff' },
+        { name: 'Retro', file: 'retro.html', color: '#D2691E', darkColor: '#654321' },
+        { name: 'Terminal', file: 'terminal.html', color: '#00ff00', darkColor: '#000000' }
     ];
 
     // Detect current template from URL
@@ -563,6 +566,199 @@
                     justify-content: center;
                     color: white;
                 `
+            },
+            cyberpunk: {
+                button: `
+                    position: fixed;
+                    bottom: 30px;
+                    right: 30px;
+                    width: 70px;
+                    height: 70px;
+                    background: rgba(20, 20, 31, 0.8);
+                    backdrop-filter: blur(10px);
+                    border: 2px solid #00ffff;
+                    box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), inset 0 0 20px rgba(0, 255, 255, 0.1);
+                    cursor: pointer;
+                    z-index: 9998;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 28px;
+                    color: #00ffff;
+                    transition: all 0.3s;
+                    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+                    animation: cyberPulse 3s infinite;
+                `,
+                buttonHover: `
+                    border-color: #ff00ff;
+                    color: #ff00ff;
+                    box-shadow: 0 0 40px rgba(255, 0, 255, 0.6), inset 0 0 30px rgba(255, 0, 255, 0.2);
+                    transform: scale(1.1);
+                `,
+                modal: `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: rgba(20, 20, 31, 0.95);
+                    backdrop-filter: blur(20px);
+                    border: 2px solid #00ffff;
+                    box-shadow: 0 0 50px rgba(0, 255, 255, 0.4);
+                    padding: 50px;
+                    z-index: 9999;
+                    max-width: 550px;
+                    width: 90%;
+                    clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+                `,
+                overlay: `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(10, 10, 15, 0.9);
+                    backdrop-filter: blur(5px);
+                    z-index: 9998;
+                `,
+                title: `
+                    font-family: 'Orbitron', sans-serif;
+                    font-size: 36px;
+                    font-weight: 900;
+                    text-transform: uppercase;
+                    margin-bottom: 30px;
+                    color: #00ffff;
+                    letter-spacing: 0.15em;
+                    text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+                `,
+                templateButton: `
+                    display: block;
+                    width: 100%;
+                    padding: 16px 20px;
+                    margin-bottom: 12px;
+                    background: rgba(30, 30, 45, 0.6);
+                    border: 1px solid rgba(0, 255, 255, 0.3);
+                    font-family: 'Rajdhani', sans-serif;
+                    font-weight: 600;
+                    font-size: 16px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                    text-align: left;
+                    color: #e0e0ff;
+                    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+                `,
+                closeButton: `
+                    position: absolute;
+                    top: 20px;
+                    right: 20px;
+                    width: 36px;
+                    height: 36px;
+                    background: rgba(255, 0, 255, 0.2);
+                    border: 2px solid #ff00ff;
+                    box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+                    cursor: pointer;
+                    font-size: 24px;
+                    font-weight: bold;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #ff00ff;
+                    clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+                    transition: all 0.3s;
+                `
+            },
+            retro: {
+                button: `
+                    position: fixed;
+                    bottom: 30px;
+                    right: 30px;
+                    width: 65px;
+                    height: 65px;
+                    background: #D2691E;
+                    border: 3px solid #654321;
+                    border-radius: 50%;
+                    box-shadow: 4px 4px 0 rgba(0,0,0,0.2), inset 0 2px 0 rgba(255,255,255,0.3);
+                    cursor: pointer;
+                    z-index: 9998;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 28px;
+                    color: #F5F5DC;
+                    transition: all 0.3s;
+                    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+                `,
+                buttonHover: `
+                    transform: translateY(-3px);
+                    box-shadow: 6px 6px 0 rgba(0,0,0,0.25), inset 0 2px 0 rgba(255,255,255,0.4);
+                    background: #B7410E;
+                `,
+                modal: `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: linear-gradient(135deg, #F5F5DC 0%, #D2B48C 100%);
+                    border: 8px double #654321;
+                    box-shadow: inset 0 0 0 4px #F5F5DC, 0 8px 20px rgba(0,0,0,0.3);
+                    padding: 50px;
+                    z-index: 9999;
+                    max-width: 500px;
+                    width: 90%;
+                `,
+                overlay: `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(44, 36, 22, 0.85);
+                    z-index: 9998;
+                `,
+                title: `
+                    font-family: 'Playfair Display', serif;
+                    font-size: 38px;
+                    font-weight: 900;
+                    margin-bottom: 30px;
+                    color: #654321;
+                    text-align: center;
+                    text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+                `,
+                templateButton: `
+                    display: block;
+                    width: 100%;
+                    padding: 14px 20px;
+                    margin-bottom: 12px;
+                    background: #F5F5DC;
+                    border: 2px solid #654321;
+                    box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+                    font-family: 'Courier Prime', monospace;
+                    font-weight: 700;
+                    font-size: 15px;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                    text-align: left;
+                    color: #2C2416;
+                `,
+                closeButton: `
+                    position: absolute;
+                    top: 18px;
+                    right: 18px;
+                    width: 36px;
+                    height: 36px;
+                    background: #B7410E;
+                    border: 2px solid #654321;
+                    border-radius: 50%;
+                    box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+                    cursor: pointer;
+                    font-size: 20px;
+                    font-weight: bold;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #F5F5DC;
+                `
             }
         };
 
@@ -647,6 +843,16 @@
                 } else if (currentTemplate === 'swiss') {
                     btn.style.background = '#FF3000';
                     btn.style.color = '#ffffff';
+                } else if (currentTemplate === 'cyberpunk') {
+                    btn.style.background = 'rgba(0, 255, 255, 0.2)';
+                    btn.style.borderColor = '#00ffff';
+                    btn.style.color = '#00ffff';
+                    btn.style.boxShadow = '0 0 15px rgba(0, 255, 255, 0.4)';
+                } else if (currentTemplate === 'retro') {
+                    btn.style.background = '#D2691E';
+                    btn.style.color = '#F5F5DC';
+                    btn.style.borderColor = '#654321';
+                    btn.style.boxShadow = '3px 3px 0 rgba(0,0,0,0.2)';
                 }
             }
 
@@ -668,6 +874,15 @@
                 } else if (currentTemplate === 'swiss') {
                     btn.style.background = '#000000';
                     btn.style.color = '#ffffff';
+                } else if (currentTemplate === 'cyberpunk') {
+                    btn.style.background = 'rgba(0, 255, 255, 0.3)';
+                    btn.style.borderColor = '#00ffff';
+                    btn.style.boxShadow = '0 0 20px rgba(0, 255, 255, 0.6)';
+                    btn.style.transform = 'translateX(4px)';
+                } else if (currentTemplate === 'retro') {
+                    btn.style.background = '#D2B48C';
+                    btn.style.transform = 'translate(2px, 2px)';
+                    btn.style.boxShadow = '2px 2px 0 rgba(0,0,0,0.1)';
                 }
             });
 
@@ -689,6 +904,16 @@
                     } else if (currentTemplate === 'swiss') {
                         btn.style.background = '#FF3000';
                         btn.style.color = '#ffffff';
+                    } else if (currentTemplate === 'cyberpunk') {
+                        btn.style.background = 'rgba(0, 255, 255, 0.2)';
+                        btn.style.borderColor = '#00ffff';
+                        btn.style.color = '#00ffff';
+                        btn.style.boxShadow = '0 0 15px rgba(0, 255, 255, 0.4)';
+                    } else if (currentTemplate === 'retro') {
+                        btn.style.background = '#D2691E';
+                        btn.style.color = '#F5F5DC';
+                        btn.style.borderColor = '#654321';
+                        btn.style.boxShadow = '3px 3px 0 rgba(0,0,0,0.2)';
                     }
                 }
             });
@@ -717,6 +942,22 @@
                     50% { transform: translate(-1px, -1px); }
                     75% { transform: translate(1px, -1px); }
                     100% { transform: translate(0, 0); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Add animation styles for cyberpunk
+        if (currentTemplate === 'cyberpunk') {
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes cyberPulse {
+                    0%, 100% {
+                        box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), inset 0 0 20px rgba(0, 255, 255, 0.1);
+                    }
+                    50% {
+                        box-shadow: 0 0 40px rgba(0, 255, 255, 0.8), inset 0 0 30px rgba(0, 255, 255, 0.2);
+                    }
                 }
             `;
             document.head.appendChild(style);
