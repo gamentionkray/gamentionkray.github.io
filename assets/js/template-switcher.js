@@ -70,6 +70,8 @@
                     z-index: 9999;
                     max-width: 480px;
                     width: 90%;
+                    max-height: 85vh;
+                    overflow-y: auto;
                 `,
                 overlay: `
                     position: fixed;
@@ -154,6 +156,8 @@
                     z-index: 9999;
                     max-width: 500px;
                     width: 90%;
+                    max-height: 85vh;
+                    overflow-y: auto;
                 `,
                 overlay: `
                     position: fixed;
@@ -236,6 +240,8 @@
                     z-index: 9999;
                     max-width: 550px;
                     width: 90%;
+                    max-height: 85vh;
+                    overflow-y: auto;
                 `,
                 overlay: `
                     position: fixed;
@@ -329,6 +335,8 @@
                     z-index: 9999;
                     max-width: 500px;
                     width: 90%;
+                    max-height: 85vh;
+                    overflow-y: auto;
                 `,
                 overlay: `
                     position: fixed;
@@ -425,6 +433,8 @@
                     z-index: 9999;
                     max-width: 500px;
                     width: 90%;
+                    max-height: 85vh;
+                    overflow-y: auto;
                 `,
                 overlay: `
                     position: fixed;
@@ -512,6 +522,8 @@
                     z-index: 9999;
                     max-width: 500px;
                     width: 90%;
+                    max-height: 85vh;
+                    overflow-y: auto;
                 `,
                 overlay: `
                     position: fixed;
@@ -608,6 +620,8 @@
                     z-index: 9999;
                     max-width: 550px;
                     width: 90%;
+                    max-height: 85vh;
+                    overflow-y: auto;
                     clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
                 `,
                 overlay: `
@@ -706,6 +720,8 @@
                     z-index: 9999;
                     max-width: 500px;
                     width: 90%;
+                    max-height: 85vh;
+                    overflow-y: auto;
                 `,
                 overlay: `
                     position: fixed;
@@ -796,6 +812,8 @@
                     z-index: 9999;
                     max-width: 500px;
                     width: 90%;
+                    max-height: 85vh;
+                    overflow-y: auto;
                     box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
                 `,
                 overlay: `
@@ -1042,6 +1060,27 @@
         document.body.appendChild(overlay);
         document.body.appendChild(modal);
 
+        // Add custom scrollbar styles for modal
+        const scrollbarStyle = document.createElement('style');
+        scrollbarStyle.id = 'template-modal-scrollbar';
+        scrollbarStyle.textContent = `
+            #template-switcher-modal::-webkit-scrollbar {
+                width: 10px;
+            }
+            #template-switcher-modal::-webkit-scrollbar-track {
+                background: rgba(0, 0, 0, 0.1);
+                border-radius: 5px;
+            }
+            #template-switcher-modal::-webkit-scrollbar-thumb {
+                background: rgba(0, 0, 0, 0.3);
+                border-radius: 5px;
+            }
+            #template-switcher-modal::-webkit-scrollbar-thumb:hover {
+                background: rgba(0, 0, 0, 0.5);
+            }
+        `;
+        document.head.appendChild(scrollbarStyle);
+
         // Add animation styles for maximalist
         if (currentTemplate === 'maximalist') {
             const style = document.createElement('style');
@@ -1083,9 +1122,11 @@
     function closeModal() {
         const modal = document.getElementById('template-switcher-modal');
         const overlay = document.getElementById('template-switcher-overlay');
+        const scrollbarStyle = document.getElementById('template-modal-scrollbar');
 
         if (modal) modal.remove();
         if (overlay) overlay.remove();
+        if (scrollbarStyle) scrollbarStyle.remove();
     }
 
     // Navigate to template
