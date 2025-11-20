@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishna Thorat | Full Stack AI Engineer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"VT323"', 'monospace'],
+                        pixel: ['"Press Start 2P"', 'cursive'],
+                    },
+                    colors: {
+                        mc: {
+                            grass: '#5D8C34',
+                            dirt: '#704E34',
+                            stone: '#7E7E7E',
+                            darkstone: '#383838',
+                            diamond: '#3DEAF5',
+                            gold: '#F7D335',
+                            redstone: '#F01B1B',
+                            sky: '#A0D6FF',
+                            wood: '#8B5C33',
+                            obsidian: '#18122B',
+                            end: '#0E071B'
+                        }
+                    },
+                    boxShadow: {
+                        'voxel': '4px 4px 0px 0px rgba(0,0,0,0.5)',
+                        'voxel-sm': '2px 2px 0px 0px rgba(0,0,0,0.5)',
+                        'voxel-inset': 'inset 4px 4px 0px 0px rgba(0,0,0,0.3)',
+                        'item-slot': 'inset 2px 2px 0px #373737, inset -2px -2px 0px #fff',
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'dig': 'dig 0.5s ease-in-out',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Pixel Texture Backgrounds */
+        .bg-dirt-texture {
+            background-color: #704E34;
+            background-image: linear-gradient(45deg, #684730 25%, transparent 25%, transparent 75%, #684730 75%, #684730),
+                linear-gradient(45deg, #684730 25%, transparent 25%, transparent 75%, #684730 75%, #684730);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+        }
+
+        html.dark .bg-dirt-texture {
+            background-color: #18122B;
+            /* Obsidian/End Stone */
+            background-image: linear-gradient(45deg, #201835 25%, transparent 25%, transparent 75%, #201835 75%, #201835),
+                linear-gradient(45deg, #201835 25%, transparent 25%, transparent 75%, #201835 75%, #201835);
+        }
+
+        /* Minecraft UI Button */
+        .mc-btn {
+            position: relative;
+            border: 2px solid #000;
+            box-shadow: inset 2px 2px 0px rgba(255, 255, 255, 0.4), inset -2px -2px 0px rgba(0, 0, 0, 0.4), 4px 4px 0px #000;
+            image-rendering: pixelated;
+            transition: all 0.1s;
+        }
+
+        .mc-btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: inset 2px 2px 0px rgba(0, 0, 0, 0.4), inset -2px -2px 0px rgba(255, 255, 255, 0.4), 0px 0px 0px #000;
+        }
+
+        /* Text Stroke for Pixel Fonts */
+        .pixel-text-stroke {
+            text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+        }
+
+        /* Inventory Slot Styling */
+        .inv-slot {
+            background: #8B8B8B;
+            border: 2px solid #373737;
+            border-right-color: #FFF;
+            border-bottom-color: #FFF;
+            position: relative;
+        }
+
+        .inv-slot-inner {
+            background: #8B8B8B;
+            border: 2px solid #FFF;
+            border-right-color: #373737;
+            border-bottom-color: #373737;
+            height: 100%;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 16px;
+            background: #222;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #7E7E7E;
+            border: 2px solid #fff;
+            border-right-color: #373737;
+            border-bottom-color: #373737;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #A0A0A0;
+        }
+
+        .cursor-block {
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            border: 2px solid #000;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-mc-sky dark:bg-mc-end text-gray-900 dark:text-white font-sans min-h-screen selection:bg-mc-diamond selection:text-black overflow-x-hidden cursor-crosshair">
+
+    <div id="loader"
+        class="fixed inset-0 bg-mc-dirt z-[100] flex flex-col items-center justify-center transition-transform duration-700 ease-in-out pixel-antialiased">
+        <h1 class="text-4xl font-pixel text-white pixel-text-stroke mb-4 animate-bounce">Generating World...</h1>
+        <div class="w-64 h-6 bg-gray-800 border-4 border-black p-1">
+            <div class="h-full bg-mc-green bg-green-500 w-full animate-pulse"></div>
+        </div>
+    </div>
+
+    <nav
+        class="fixed top-0 w-full z-40 bg-mc-stone/90 dark:bg-mc-obsidian/90 border-b-4 border-black backdrop-blur-sm p-2">
+        <div class="max-w-7xl mx-auto flex justify-between items-center px-2">
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-8 h-8 bg-mc-diamond border-2 border-black group-hover:rotate-90 transition-transform">
+                </div>
+                <span class="text-xl font-pixel text-white pixel-text-stroke">KT.DEV</span>
+            </a>
+
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle"
+                    class="mc-btn w-10 h-10 bg-mc-stone text-white flex items-center justify-center">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="mailto:krishnathorat007@gmail.com"
+                    class="hidden md:block font-pixel text-xs text-white pixel-text-stroke hover:text-mc-gold transition-colors">
+                    &lt;STATUS: EMPLOYED&gt;
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-28 pb-20 px-4 sm:px-6 bg-dirt-texture min-h-screen">
+
+        <header class="max-w-7xl mx-auto mb-24 relative">
+            <div class="bg-gray-200/20 dark:bg-black/20 absolute inset-0 backdrop-blur-[2px] -z-10 rounded-lg"></div>
+
+            <div class="grid lg:grid-cols-12 gap-8 items-center p-6">
+                <div class="lg:col-span-8" data-aos="fade-right">
+                    <div
+                        class="inline-block bg-mc-darkstone text-white px-4 py-2 font-pixel text-xs mb-6 border-4 border-black shadow-voxel transform -rotate-1">
+                        Full Stack & AI Engineer
+                    </div>
+
+                    <h1
+                        class="text-4xl sm:text-5xl md:text-7xl font-pixel leading-tight mb-8 text-white pixel-text-stroke">
+                        Krishna <br>
+                        <span class="text-mc-diamond">Thorat</span>
+                    </h1>
+
+                    <div class="bg-mc-wood/90 border-4 border-black p-6 mb-10 shadow-voxel max-w-2xl">
+                        <p class="text-xl md:text-3xl text-white font-medium leading-relaxed drop-shadow-md">
+                            Building dynamic web applications and Agentic AI systems.
+                            <br><br>
+                            <span class="text-mc-gold">> Spec:</span> <span class="text-mc-diamond">PHP, Node.js,
+                                React</span> & <span class="text-mc-redstone">Generative AI</span>.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-6">
+                        <a href="#projects"
+                            class="mc-btn bg-mc-stone text-white px-6 py-4 font-pixel text-xs hover:bg-gray-500">
+                            View Projects
+                        </a>
+                        <a href="mailto:krishnathorat007@gmail.com"
+                            class="mc-btn bg-mc-grass text-white px-6 py-4 font-pixel text-xs hover:bg-green-600">
+                            Contact Me
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-4 relative hidden lg:block" data-aos="zoom-in" data-aos-delay="200">
+                    <div
+                        class="relative w-full aspect-square bg-mc-diamond border-4 border-black shadow-voxel animate-float">
+                        <div class="absolute inset-2 border-2 border-black/20"></div>
+                        <img src="assets/img/krishna-thorat.jpg" alt="Krishna Thorat"
+                            class="w-full h-full object-cover image-pixelated border-4 border-white/20">
+
+                        <div
+                            class="absolute -bottom-6 -right-6 bg-mc-gold border-4 border-black p-4 shadow-voxel z-10 transform rotate-3">
+                            <h3 class="text-2xl font-pixel text-black">LVL 5+</h3>
+                            <p class="font-sans text-lg font-bold">Experience</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div
+            class="w-full bg-mc-darkstone border-y-4 border-black overflow-hidden py-4 mb-24 -mx-4 sm:-mx-6 transform rotate-1 scale-105 shadow-voxel">
+            <div class="whitespace-nowrap flex gap-12 text-2xl font-pixel text-mc-diamond animate-marquee">
+                <span>JavaScript</span>
+                <span>React</span>
+                <span>Node.js</span>
+                <span>Python</span>
+                <span>Generative AI</span>
+                <span>Langchain</span>
+                <span>RAG Systems</span>
+                <span>AWS</span>
+                <span>Azure</span>
+                <span>PHP</span>
+                <span>PostgreSQL</span>
+                <span>JavaScript</span>
+                <span>React</span>
+                <span>Generative AI</span>
+            </div>
+        </div>
+
+        <style>
+            @keyframes marquee {
+                0% {
+                    transform: translateX(0);
+                }
+
+                100% {
+                    transform: translateX(-50%);
+                }
+            }
+
+            .animate-marquee {
+                animation: marquee 20s linear infinite;
+            }
+
+            .image-pixelated {
+                image-rendering: pixelated;
+            }
+        </style>
+
+        <section class="max-w-7xl mx-auto mb-32">
+            <h2 class="text-3xl md:text-4xl font-pixel text-white pixel-text-stroke mb-12 flex items-center gap-4">
+                <span class="w-8 h-8 bg-mc-redstone border-2 border-black block shadow-voxel-sm"></span> Inventory /
+                Skills
+            </h2>
+
+            <div class="bg-mc-stone p-2 border-4 border-black shadow-voxel rounded-sm">
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+                    <div class="md:col-span-2 inv-slot p-1" data-aos="fade-up">
+                        <div
+                            class="inv-slot-inner p-4 bg-gray-300 dark:bg-gray-700 flex flex-col justify-between h-full hover:bg-gray-200 transition-colors">
+                            <div class="flex justify-between items-start mb-2">
+                                <div
+                                    class="bg-mc-diamond text-black px-2 py-1 font-pixel text-[10px] border-2 border-black">
+                                    Enchanted Item</div>
+                                <i class="fas fa-graduation-cap text-4xl text-gray-500 opacity-50"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold font-pixel text-black dark:text-white text-sm mb-2">Master
+                                    of Comp. App.</h3>
+                                <p class="text-gray-700 dark:text-gray-300 text-xl">Vishwakarma Institute of Technology,
+                                    Pune</p>
+                                <p class="text-lg font-mono mt-1 text-mc-dirt dark:text-mc-gold">2020 - 2022</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="inv-slot p-1" data-aos="fade-up" data-aos-delay="100">
+                        <div
+                            class="inv-slot-inner bg-mc-obsidian p-4 flex flex-col justify-between relative overflow-hidden group">
+                            <div
+                                class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIi8+Cjwvc3ZnPg==')]">
+                            </div>
+                            <h3 class="font-pixel text-xs text-mc-diamond z-10">Spawn Point</h3>
+                            <p class="text-4xl font-bold text-white z-10 mt-auto">Pune,<br>India</p>
+                        </div>
+                    </div>
+
+                    <a href="https://github.com/gamentionkray" target="_blank" class="inv-slot p-1 group"
+                        data-aos="fade-up" data-aos-delay="200">
+                        <div
+                            class="inv-slot-inner bg-mc-darkstone p-4 flex flex-col justify-center items-center gap-4 group-hover:bg-mc-gold transition-colors cursor-pointer">
+                            <i class="fab fa-github text-5xl text-white group-hover:text-black transition-colors"></i>
+                            <span class="font-pixel text-xs text-white group-hover:text-black">@gamentionkray</span>
+                        </div>
+                    </a>
+
+                    <div class="inv-slot p-1 md:col-span-2 lg:col-span-2" data-aos="fade-up">
+                        <div class="inv-slot-inner bg-gray-300 dark:bg-gray-700 p-4">
+                            <h3
+                                class="font-pixel text-xs text-black dark:text-white mb-4 border-b-2 border-gray-500 inline-block pb-1">
+                                Core Stack</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="bg-white border-2 border-black px-2 py-1 font-bold font-mono text-lg shadow-voxel-sm">PHP</span>
+                                <span
+                                    class="bg-white border-2 border-black px-2 py-1 font-bold font-mono text-lg shadow-voxel-sm">Node.js</span>
+                                <span
+                                    class="bg-white border-2 border-black px-2 py-1 font-bold font-mono text-lg shadow-voxel-sm">React</span>
+                                <span
+                                    class="bg-white border-2 border-black px-2 py-1 font-bold font-mono text-lg shadow-voxel-sm">Angular</span>
+                                <span
+                                    class="bg-white border-2 border-black px-2 py-1 font-bold font-mono text-lg shadow-voxel-sm">Python</span>
+                                <span
+                                    class="bg-white border-2 border-black px-2 py-1 font-bold font-mono text-lg shadow-voxel-sm">MySQL</span>
+                                <span
+                                    class="bg-white border-2 border-black px-2 py-1 font-bold font-mono text-lg shadow-voxel-sm">PostgreSQL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="inv-slot p-1 md:col-span-2 lg:col-span-2" data-aos="fade-up" data-aos-delay="100">
+                        <div class="inv-slot-inner bg-mc-end p-4 border-2 border-mc-diamond">
+                            <h3
+                                class="font-pixel text-xs text-mc-diamond mb-4 border-b-2 border-mc-diamond inline-block pb-1">
+                                AI Engineering</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="bg-mc-diamond text-black border-2 border-black px-2 py-1 font-bold font-mono text-lg shadow-voxel-sm">Generative
+                                    AI</span>
+                                <span
+                                    class="bg-mc-diamond text-black border-2 border-black px-2 py-1 font-bold font-mono text-lg shadow-voxel-sm">Agentic
+                                    AI</span>
+                                <span
+                                    class="bg-mc-diamond text-black border-2 border-black px-2 py-1 font-bold font-mono text-lg shadow-voxel-sm">RAG</span>
+                                <span
+                                    class="bg-mc-diamond text-black border-2 border-black px-2 py-1 font-bold font-mono text-lg shadow-voxel-sm">LangChain</span>
+                                <span
+                                    class="bg-mc-diamond text-black border-2 border-black px-2 py-1 font-bold font-mono text-lg shadow-voxel-sm">Azure
+                                    OpenAI</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto mb-32">
+            <div class="grid md:grid-cols-12 gap-12">
+                <div class="md:col-span-4">
+                    <div class="sticky top-32 bg-mc-wood p-4 border-4 border-black shadow-voxel">
+                        <h2
+                            class="text-3xl font-pixel text-white pixel-text-stroke mb-6 leading-none text-center border-b-4 border-black pb-4">
+                            Quest <br> Log
+                        </h2>
+                        <p class="text-xl font-medium text-white font-mono mb-6 text-center">A record of completed
+                            objectives.</p>
+
+                        <a href="resume.pdf" download
+                            class="mc-btn w-full bg-mc-stone text-white px-6 py-3 font-pixel text-xs flex items-center justify-center gap-2 hover:bg-gray-500">
+                            <i class="fas fa-book"></i> Download Map
+                        </a>
+                    </div>
+                </div>
+
+                <div class="md:col-span-8 space-y-8 relative pl-8 md:pl-0">
+                    <div class="absolute left-0 md:left-[-24px] top-0 bottom-0 w-4 bg-mc-wood border-x-2 border-black">
+                    </div>
+
+                    <div class="relative" data-aos="fade-left">
+                        <div
+                            class="absolute -left-[44px] md:-left-[68px] top-6 w-8 h-8 bg-mc-diamond border-4 border-black z-10">
+                        </div>
+                        <div class="bg-gray-100 dark:bg-gray-800 border-4 border-black p-6 shadow-voxel relative">
+                            <div class="absolute -left-4 top-8 w-4 h-4 bg-black"></div> <!-- Connector -->
+                            <div
+                                class="flex flex-wrap justify-between items-baseline mb-4 border-b-2 border-dashed border-gray-400 pb-2">
+                                <h3 class="text-xl font-pixel text-black dark:text-white">Software Developer</h3>
+                                <span
+                                    class="bg-mc-gold text-black border-2 border-black px-2 py-1 text-xs font-pixel">Dec
+                                    2024 - Present</span>
+                            </div>
+                            <h4 class="text-xl font-bold mb-4 text-mc-grass dark:text-mc-diamond font-pixel text-xs">
+                                Ergabite Tech Solutions (Intellify Client)</h4>
+                            <ul class="space-y-2 list-none text-lg">
+                                <li class="flex items-start gap-2"><span class="text-mc-grass">></span> Developed
+                                    features for "Intellify Migration Wizard".</li>
+                                <li class="flex items-start gap-2"><span class="text-mc-grass">></span> Engineered
+                                    "In-Parking" alerting system (Azure).</li>
+                                <li class="flex items-start gap-2"><span class="text-mc-grass">></span> Led "Infovault"
+                                    multi-agent AI platform.</li>
+                                <li class="flex items-start gap-2"><span class="text-mc-grass">></span> CI/CD
+                                    implementation on Azure.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="relative" data-aos="fade-left">
+                        <div
+                            class="absolute -left-[44px] md:-left-[68px] top-6 w-8 h-8 bg-mc-gold border-4 border-black z-10">
+                        </div>
+                        <div class="bg-gray-100 dark:bg-gray-800 border-4 border-black p-6 shadow-voxel relative">
+                            <div class="absolute -left-4 top-8 w-4 h-4 bg-black"></div>
+                            <div
+                                class="flex flex-wrap justify-between items-baseline mb-4 border-b-2 border-dashed border-gray-400 pb-2">
+                                <h3 class="text-xl font-pixel text-black dark:text-white">Senior Web Developer</h3>
+                                <span
+                                    class="bg-mc-wood text-white border-2 border-black px-2 py-1 text-xs font-pixel">Jul
+                                    2024 - Dec 2024</span>
+                            </div>
+                            <h4 class="text-xl font-bold mb-4 text-mc-grass dark:text-mc-diamond font-pixel text-xs">
+                                Internship Studio</h4>
+                            <ul class="space-y-2 list-none text-lg">
+                                <li class="flex items-start gap-2"><span class="text-mc-grass">></span> Spearheaded
+                                    hiring portal development.</li>
+                                <li class="flex items-start gap-2"><span class="text-mc-grass">></span> Architected
+                                    solutions on GCP & AWS.</li>
+                                <li class="flex items-start gap-2"><span class="text-mc-grass">></span> Full-stack dev
+                                    with React, Node.js, PHP, Flask.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="relative" data-aos="fade-left">
+                        <div
+                            class="absolute -left-[44px] md:-left-[68px] top-6 w-8 h-8 bg-mc-redstone border-4 border-black z-10">
+                        </div>
+                        <div class="bg-gray-100 dark:bg-gray-800 border-4 border-black p-6 shadow-voxel relative">
+                            <div class="absolute -left-4 top-8 w-4 h-4 bg-black"></div>
+                            <div
+                                class="flex flex-wrap justify-between items-baseline mb-4 border-b-2 border-dashed border-gray-400 pb-2">
+                                <h3 class="text-xl font-pixel text-black dark:text-white">System Engineer</h3>
+                                <span
+                                    class="bg-mc-stone text-white border-2 border-black px-2 py-1 text-xs font-pixel">Aug
+                                    2022 - Jul 2024</span>
+                            </div>
+                            <h4 class="text-xl font-bold mb-4 text-mc-grass dark:text-mc-diamond font-pixel text-xs">
+                                Infosys Ltd.</h4>
+                            <ul class="space-y-2 list-none text-lg">
+                                <li class="flex items-start gap-2"><span class="text-mc-grass">></span> Dynamic app
+                                    development (Angular, Node, PG).</li>
+                                <li class="flex items-start gap-2"><span class="text-mc-grass">></span> WCAG standards &
+                                    WebSockets integration.</li>
+                                <li class="flex items-start gap-2"><span class="text-mc-grass">></span> Salesforce
+                                    integration via Cortex framework.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="max-w-7xl mx-auto mb-32">
+            <h2 class="text-3xl md:text-5xl font-pixel text-white pixel-text-stroke mb-16 text-center">
+                <span class="inline-block border-b-8 border-mc-diamond pb-2">Selected Works</span>
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-10">
+
+                <article class="group relative" data-aos="fade-up">
+                    <div class="absolute inset-0 bg-black transform translate-x-4 translate-y-4"></div>
+                    <div
+                        class="relative bg-gray-200 dark:bg-gray-800 border-4 border-black flex flex-col h-full hover:-translate-y-2 transition-transform duration-200">
+                        <div
+                            class="h-48 bg-mc-end flex items-center justify-center border-b-4 border-black overflow-hidden relative">
+                            <!-- Pixel Stars -->
+                            <div class="absolute w-1 h-1 bg-white top-4 left-10"></div>
+                            <div class="absolute w-2 h-2 bg-white top-12 right-20"></div>
+                            <i
+                                class="fas fa-brain text-6xl text-mc-diamond animate-pulse filter drop-shadow-[0_0_10px_rgba(61,234,245,0.8)]"></i>
+                        </div>
+                        <div class="p-6 flex-grow">
+                            <h3 class="text-xl font-pixel mb-2">HireSense AI</h3>
+                            <p
+                                class="text-sm font-mono mb-4 text-gray-600 dark:text-gray-400 bg-white dark:bg-black inline-block px-2 border border-gray-500">
+                                Dec 2024 - Present</p>
+                            <p class="mb-6 text-lg leading-tight">AI-powered career guidance platform with multi-agent
+                                orchestration using Pydantic AI and Gemini 2.0.</p>
+
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span
+                                    class="text-xs font-bold bg-mc-stone text-white px-2 py-1 border-2 border-black shadow-voxel-sm">Pydantic
+                                    AI</span>
+                                <span
+                                    class="text-xs font-bold bg-mc-stone text-white px-2 py-1 border-2 border-black shadow-voxel-sm">FastAPI</span>
+                                <span
+                                    class="text-xs font-bold bg-mc-stone text-white px-2 py-1 border-2 border-black shadow-voxel-sm">WebSockets</span>
+                            </div>
+                        </div>
+                        <div class="p-4 border-t-4 border-black bg-mc-dirt flex justify-between items-center">
+                            <span class="font-bold text-sm text-white font-pixel">16+ AI Agents</span>
+                            <a href="#"
+                                class="mc-btn bg-mc-gold text-black px-3 py-1 text-xs font-bold hover:bg-yellow-400">Open
+                                <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="group relative" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute inset-0 bg-black transform translate-x-4 translate-y-4"></div>
+                    <div
+                        class="relative bg-gray-200 dark:bg-gray-800 border-4 border-black flex flex-col h-full hover:-translate-y-2 transition-transform duration-200">
+                        <div
+                            class="h-48 bg-mc-sky flex items-center justify-center border-b-4 border-black overflow-hidden relative">
+                            <!-- Pixel Clouds -->
+                            <div class="absolute w-12 h-4 bg-white top-4 left-4 opacity-80"></div>
+                            <div class="absolute w-20 h-6 bg-white top-10 right-10 opacity-80"></div>
+                            <i class="fas fa-database text-6xl text-mc-stone filter drop-shadow-[4px_4px_0_#000]"></i>
+                        </div>
+                        <div class="p-6 flex-grow">
+                            <h3 class="text-xl font-pixel mb-2">Intellify Insights</h3>
+                            <p
+                                class="text-sm font-mono mb-4 text-gray-600 dark:text-gray-400 bg-white dark:bg-black inline-block px-2 border border-gray-500">
+                                Data Analytics Platform</p>
+                            <p class="mb-6 text-lg leading-tight">Transfer SSIS packages and Power BI models between
+                                MSSQL, Teradata, and Postgres with PySpark job management.</p>
+
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span
+                                    class="text-xs font-bold bg-mc-stone text-white px-2 py-1 border-2 border-black shadow-voxel-sm">PySpark</span>
+                                <span
+                                    class="text-xs font-bold bg-mc-stone text-white px-2 py-1 border-2 border-black shadow-voxel-sm">Azure</span>
+                                <span
+                                    class="text-xs font-bold bg-mc-stone text-white px-2 py-1 border-2 border-black shadow-voxel-sm">Power
+                                    BI</span>
+                            </div>
+                        </div>
+                        <div class="p-4 border-t-4 border-black bg-mc-dirt flex justify-between items-center">
+                            <span class="font-bold text-sm text-white font-pixel">CI/CD Pipeline</span>
+                            <a href="#"
+                                class="mc-btn bg-mc-gold text-black px-3 py-1 text-xs font-bold hover:bg-yellow-400">Open
+                                <i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-mc-obsidian text-white py-20 border-t-8 border-mc-diamond relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-4xl md:text-6xl font-pixel text-white pixel-text-stroke mb-12 leading-none">
+                Let's Build <br> <span class="text-mc-gold">Something</span>
+            </h2>
+
+            <div class="flex justify-center gap-8 mb-12">
+                <a href="https://github.com/gamentionkray"
+                    class="mc-btn w-16 h-16 bg-white text-black flex items-center justify-center text-2xl hover:bg-mc-diamond hover:-translate-y-2 transition-all">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/krishnathorat"
+                    class="mc-btn w-16 h-16 bg-white text-black flex items-center justify-center text-2xl hover:bg-mc-sky hover:-translate-y-2 transition-all">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:krishnathorat007@gmail.com"
+                    class="mc-btn w-16 h-16 bg-white text-black flex items-center justify-center text-2xl hover:bg-mc-redstone hover:-translate-y-2 transition-all">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+
+            <div
+                class="flex flex-col md:flex-row justify-between items-center border-t-2 border-gray-700 pt-8 text-lg font-mono text-gray-400">
+                <p>&copy; 2025 Krishna Thorat. Server: Pune, IN.</p>
+                <p>Crafted with <span class="text-mc-redstone">❤</span> & Voxels</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            offset: 50,
+            once: true
+        });
+
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.style.transform = 'translateY(-100%)';
+            }, 1000);
+        });
+
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const icon = themeToggleBtn.querySelector('i');
+
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.theme = 'dark';
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                localStorage.theme = 'light';
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+    </script>
+    <script src="assets/js/template-switcher.js"></script>
+</body>
+
+</html>

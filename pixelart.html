@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishna Thorat | Level 99 Dev</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'pixel': ['"Press Start 2P"', 'cursive'],
+                        'terminal': ['"VT323"', 'monospace'],
+                    },
+                    colors: {
+                        bit: {
+                            bg: '#202028',
+                            dark: '#0f0f14',
+                            light: '#dedeff',
+                            green: '#4aff4d',
+                            blue: '#59a1ff',
+                            red: '#ff4a4a',
+                            yellow: '#ffee00',
+                            purple: '#d44aff'
+                        }
+                    },
+                    boxShadow: {
+                        'pixel': '4px 4px 0px 0px rgba(0,0,0,0.5)',
+                        'pixel-sm': '2px 2px 0px 0px rgba(0,0,0,0.5)',
+                        'pixel-light': '4px 4px 0px 0px rgba(255,255,255,0.3)',
+                    },
+                    animation: {
+                        'blink': 'blink 1s steps(1, end) infinite',
+                        'scroll': 'scroll 15s linear infinite',
+                    },
+                    keyframes: {
+                        blink: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0' }
+                        },
+                        scroll: {
+                            '0%': { transform: 'translateX(100%)' },
+                            '100%': { transform: 'translateX(-100%)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewport="0 0 24 24" fill="black" stroke="white" stroke-width="2"><path d="M0,0 L0,18 L6,12 L12,24 L16,22 L10,10 L20,10 L0,0 Z" /></svg>'), auto;
+        }
+
+        body {
+            image-rendering: pixelated;
+        }
+
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.2));
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .crt-flicker {
+            animation: flicker 0.15s infinite;
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.02);
+            opacity: 0;
+            z-index: 9998;
+        }
+
+        @keyframes flicker {
+            0% {
+                opacity: 0.02;
+            }
+
+            5% {
+                opacity: 0.05;
+            }
+
+            10% {
+                opacity: 0.02;
+            }
+        }
+
+        .pixel-border {
+            box-shadow:
+                -4px 0 0 0 black,
+                4px 0 0 0 black,
+                0 -4px 0 0 black,
+                0 4px 0 0 black;
+            margin: 4px;
+        }
+
+        .pixel-btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: none;
+        }
+
+        ::-webkit-scrollbar {
+            width: 16px;
+            background: #0f0f14;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4aff4d;
+            border: 4px solid #0f0f14;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-[#5c94fc] dark:bg-bit-bg text-bit-dark dark:text-bit-light transition-colors duration-0 font-terminal leading-tight overflow-x-hidden">
+
+    <div class="scanlines"></div>
+    <div class="crt-flicker hidden dark:block"></div>
+
+    <nav
+        class="fixed top-0 w-full z-50 bg-[#000] text-white border-b-4 border-white p-2 font-pixel text-[10px] md:text-xs">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <span class="text-bit-yellow animate-blink">♥</span>
+                <a href="#" class="hover:text-bit-green uppercase">KT.exe</a>
+            </div>
+
+            <div class="flex items-center gap-4 md:gap-8">
+                <span class="hidden md:inline text-bit-blue">WORLD 1-1</span>
+                <span class="hidden md:inline">SCORE: 999999</span>
+
+                <button id="theme-toggle"
+                    class="w-8 h-8 bg-white text-black border-2 border-gray-400 hover:bg-bit-yellow flex items-center justify-center text-xs">
+                    <i class="fas fa-adjust"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-20 px-4 sm:px-6 max-w-7xl mx-auto">
+
+        <header class="mb-24 relative">
+            <div
+                class="bg-white dark:bg-bit-dark border-4 border-black dark:border-white p-2 md:p-4 shadow-pixel dark:shadow-none">
+                <div
+                    class="border-2 border-dashed border-gray-400 dark:border-gray-600 p-6 md:p-12 grid lg:grid-cols-12 gap-8 items-center">
+
+                    <div class="lg:col-span-8 space-y-6">
+                        <div
+                            class="inline-block bg-bit-blue text-white px-4 py-2 font-pixel text-[10px] uppercase tracking-widest mb-2 shadow-pixel-sm">
+                            Player Class: Full Stack / AI Mage
+                        </div>
+
+                        <h1
+                            class="text-5xl md:text-7xl lg:text-8xl font-pixel text-bit-dark dark:text-bit-green leading-tight uppercase mb-4 drop-shadow-md">
+                            Krishna<br>Thorat
+                        </h1>
+
+                        <div
+                            class="bg-gray-100 dark:bg-[#000] border-2 border-black p-4 font-terminal text-xl md:text-2xl text-gray-700 dark:text-bit-light">
+                            <span class="text-bit-red">></span> Building dynamic web apps & Agentic AI systems.<br>
+                            <span class="text-bit-red">></span> Equipped with: <span class="text-bit-blue">PHP</span>,
+                            <span class="text-bit-blue">Node.js</span>, <span class="text-bit-blue">React</span> & <span
+                                class="text-bit-purple">Gen-AI</span>.
+                            <span class="animate-blink inline-block w-3 h-6 bg-bit-green align-middle ml-1"></span>
+                        </div>
+
+                        <div class="flex flex-wrap gap-4 pt-4">
+                            <a href="#projects"
+                                class="pixel-btn bg-bit-red text-white border-4 border-black px-6 py-4 font-pixel text-xs shadow-pixel hover:bg-red-600 uppercase">
+                                Start Game
+                            </a>
+                            <a href="mailto:krishnathorat007@gmail.com"
+                                class="pixel-btn bg-bit-yellow text-black border-4 border-black px-6 py-4 font-pixel text-xs shadow-pixel hover:bg-yellow-400 uppercase">
+                                Contact
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-4 relative hidden lg:block">
+                        <div class="bg-[#000] p-2 border-4 border-white shadow-pixel">
+                            <div class="bg-bit-blue h-64 w-full relative overflow-hidden image-pixelated">
+                                <img src="assets/img/krishna-thorat.jpg" alt="Pixel Avatar"
+                                    class="w-full h-full object-cover grayscale contrast-125 brightness-90 opacity-80 hover:opacity-100 transition-opacity">
+                                <div
+                                    class="absolute bottom-0 left-0 w-full bg-black/80 text-white font-pixel text-[10px] p-2 text-center">
+                                    Lvl 5+ Engineer
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+        <div class="w-full bg-black border-y-4 border-white overflow-hidden py-3 mb-24 relative">
+            <div
+                class="absolute inset-0 bg-[url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NkQAKrVq36zwjjgzhhYWGMYAEYB8RmROaABADeOQ8CXl/xfgAAAABJRU5ErkJggg==')] opacity-20">
+            </div>
+            <div
+                class="whitespace-nowrap animate-scroll flex gap-12 text-xl font-pixel text-bit-green uppercase tracking-wider">
+                <span>JavaScript [OK]</span>
+                <span>React [OK]</span>
+                <span>Node.js [OK]</span>
+                <span>Python [OK]</span>
+                <span>Generative AI [OK]</span>
+                <span>Langchain [OK]</span>
+                <span>RAG Systems [OK]</span>
+                <span>AWS [OK]</span>
+                <span>Azure [OK]</span>
+                <span>PHP [OK]</span>
+                <span>PostgreSQL [OK]</span>
+            </div>
+        </div>
+
+        <section class="mb-32">
+            <div class="flex items-center gap-4 mb-12">
+                <div class="w-8 h-8 bg-bit-red border-4 border-black"></div>
+                <h2 class="text-2xl md:text-4xl font-pixel uppercase text-bit-dark dark:text-white">Inventory & Stats
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <div
+                    class="bg-[#ddd] dark:bg-[#2d2d2d] border-4 border-black dark:border-white p-4 shadow-pixel md:col-span-2 relative group">
+                    <div class="absolute top-2 right-2 text-4xl opacity-10 group-hover:opacity-30 transition-opacity">
+                        <i class="fas fa-scroll"></i>
+                    </div>
+                    <div
+                        class="text-[10px] font-pixel bg-bit-blue text-white inline-block px-2 py-1 mb-4 border-2 border-black">
+                        ACHIEVEMENT</div>
+                    <h3 class="text-xl font-pixel mb-2 leading-normal">Master of Computer Applications</h3>
+                    <p class="font-terminal text-xl text-gray-600 dark:text-gray-400">Vishwakarma Institute of
+                        Technology, Pune</p>
+                    <p class="text-xs font-pixel mt-4 text-bit-blue">2020 - 2022</p>
+                </div>
+
+                <div
+                    class="bg-bit-purple text-white border-4 border-black p-4 shadow-pixel flex flex-col justify-between">
+                    <h3 class="font-pixel text-[10px] uppercase opacity-80 mb-4">Base Location</h3>
+                    <div class="text-center py-4">
+                        <i class="fas fa-map-marker-alt text-4xl mb-2 animate-bounce"></i>
+                        <p class="text-3xl font-terminal uppercase">Pune,<br>India</p>
+                    </div>
+                </div>
+
+                <a href="https://github.com/gamentionkray" target="_blank"
+                    class="bg-black text-white border-4 border-gray-600 p-4 shadow-pixel flex flex-col justify-center items-center gap-4 hover:bg-gray-900 transition-colors">
+                    <i class="fab fa-github text-5xl"></i>
+                    <span class="font-pixel text-xs text-center break-all">@gamentionkray</span>
+                </a>
+
+                <div class="bg-bit-green border-4 border-black p-4 shadow-pixel md:col-span-2">
+                    <h3 class="font-pixel text-xs uppercase mb-4 border-b-4 border-black inline-block pb-1">Weapons</h3>
+                    <div class="flex flex-wrap gap-2 font-terminal text-lg">
+                        <span class="bg-black text-white px-2 py-1">PHP</span>
+                        <span class="bg-black text-white px-2 py-1">Node.js</span>
+                        <span class="bg-black text-white px-2 py-1">React</span>
+                        <span class="bg-black text-white px-2 py-1">Angular</span>
+                        <span class="bg-black text-white px-2 py-1">Python</span>
+                        <span class="bg-black text-white px-2 py-1">MySQL</span>
+                        <span class="bg-black text-white px-2 py-1">PostgreSQL</span>
+                    </div>
+                </div>
+
+                <div class="bg-bit-red border-4 border-black p-4 shadow-pixel md:col-span-2 text-white">
+                    <h3 class="font-pixel text-xs uppercase mb-4 border-b-4 border-white inline-block pb-1">Magic Skills
+                    </h3>
+                    <div class="flex flex-wrap gap-2 font-terminal text-lg">
+                        <span class="bg-white text-black px-2 py-1">Generative AI</span>
+                        <span class="bg-white text-black px-2 py-1">Agentic AI</span>
+                        <span class="bg-white text-black px-2 py-1">RAG</span>
+                        <span class="bg-white text-black px-2 py-1">LangChain</span>
+                        <span class="bg-white text-black px-2 py-1">Azure OpenAI</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-32">
+            <div class="grid md:grid-cols-12 gap-12">
+                <div class="md:col-span-4">
+                    <div
+                        class="sticky top-32 bg-white dark:bg-black border-4 border-black dark:border-white p-6 shadow-pixel">
+                        <h2 class="text-3xl font-pixel uppercase mb-6 leading-snug text-bit-dark dark:text-bit-yellow">
+                            Quest<br>Log
+                        </h2>
+                        <p class="text-sm font-terminal text-gray-600 dark:text-gray-300 mb-6">Chronological record of
+                            battles fought.</p>
+
+                        <a href="resume.pdf" download
+                            class="w-full block text-center bg-gray-200 dark:bg-gray-800 border-2 border-black dark:border-gray-500 px-4 py-3 font-pixel text-[10px] hover:bg-white hover:text-black transition-colors">
+                            [ SAVE DATA / RESUME ]
+                        </a>
+                    </div>
+                </div>
+
+                <div class="md:col-span-8 space-y-8">
+
+                    <div class="relative pl-8 border-l-4 border-dashed border-gray-400 dark:border-gray-700">
+                        <div class="absolute left-[-10px] top-6 w-4 h-4 bg-bit-red border-2 border-black"></div>
+                        <div
+                            class="bg-[#f0f0f0] dark:bg-[#111] border-2 border-black dark:border-gray-500 p-6 hover:bg-white dark:hover:bg-[#222] transition-colors">
+                            <div class="flex flex-wrap justify-between items-start mb-2">
+                                <h3 class="text-lg font-pixel text-bit-blue">Software Developer</h3>
+                                <span
+                                    class="bg-bit-red text-white px-2 py-1 font-terminal text-sm border border-black">Dec
+                                    2024 - Present</span>
+                            </div>
+                            <h4 class="font-bold mb-4 font-terminal text-xl uppercase">Ergabite Tech Solutions</h4>
+                            <ul
+                                class="list-square pl-5 space-y-2 font-terminal text-lg text-gray-700 dark:text-gray-300 marker:text-bit-red">
+                                <li>Dev: "Intellify Migration Wizard" (Teradata/Postgres).</li>
+                                <li>Eng: "In-Parking" alerting system (Azure Functions).</li>
+                                <li>Lead: "Infovault" multi-agent AI (Langchain/Azure).</li>
+                                <li>Skill: CI/CD implementation on Azure.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="relative pl-8 border-l-4 border-dashed border-gray-400 dark:border-gray-700">
+                        <div class="absolute left-[-10px] top-6 w-4 h-4 bg-bit-yellow border-2 border-black"></div>
+                        <div
+                            class="bg-[#f0f0f0] dark:bg-[#111] border-2 border-black dark:border-gray-500 p-6 hover:bg-white dark:hover:bg-[#222] transition-colors">
+                            <div class="flex flex-wrap justify-between items-start mb-2">
+                                <h3 class="text-lg font-pixel text-bit-blue">Senior Web Dev</h3>
+                                <span
+                                    class="bg-bit-yellow text-black px-2 py-1 font-terminal text-sm border border-black">Jul
+                                    2024 - Dec 2024</span>
+                            </div>
+                            <h4 class="font-bold mb-4 font-terminal text-xl uppercase">Internship Studio</h4>
+                            <ul
+                                class="list-square pl-5 space-y-2 font-terminal text-lg text-gray-700 dark:text-gray-300 marker:text-bit-yellow">
+                                <li>Quest: Spearheaded hiring portal development.</li>
+                                <li>Tech: GCP (Vertex AI) and AWS (Lambda).</li>
+                                <li>Role: Full-stack dev (React, Node, PHP, Flask).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="relative pl-8 border-l-4 border-dashed border-gray-400 dark:border-gray-700">
+                        <div class="absolute left-[-10px] top-6 w-4 h-4 bg-bit-blue border-2 border-black"></div>
+                        <div
+                            class="bg-[#f0f0f0] dark:bg-[#111] border-2 border-black dark:border-gray-500 p-6 hover:bg-white dark:hover:bg-[#222] transition-colors">
+                            <div class="flex flex-wrap justify-between items-start mb-2">
+                                <h3 class="text-lg font-pixel text-bit-blue">System Engineer</h3>
+                                <span
+                                    class="bg-bit-blue text-white px-2 py-1 font-terminal text-sm border border-black">Aug
+                                    2022 - Jul 2024</span>
+                            </div>
+                            <h4 class="font-bold mb-4 font-terminal text-xl uppercase">Infosys Ltd.</h4>
+                            <ul
+                                class="list-square pl-5 space-y-2 font-terminal text-lg text-gray-700 dark:text-gray-300 marker:text-bit-blue">
+                                <li>Build: Apps with Angular, Node.js, PostgreSQL.</li>
+                                <li>Compliance: WCAG standards, WebSockets, WebRTC.</li>
+                                <li>Integration: Salesforce via Cortex framework.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="mb-32">
+            <h2 class="text-2xl md:text-4xl font-pixel uppercase mb-16 text-center text-bit-dark dark:text-white">
+                <span class="text-bit-red">&lt;</span> Select Stage <span class="text-bit-red">&gt;</span>
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-10">
+
+                <article
+                    class="bg-black border-4 border-gray-500 p-1 shadow-pixel hover:scale-[1.02] transition-transform flex flex-col h-full">
+                    <div
+                        class="bg-bit-purple h-48 flex-shrink-0 flex items-center justify-center border-b-4 border-gray-500 relative overflow-hidden">
+                        <div
+                            class="absolute inset-0 opacity-20 bg-[repeating-linear-gradient(45deg,#000,#000_10px,transparent_10px,transparent_20px)]">
+                        </div>
+                        <i class="fas fa-brain text-6xl text-white animate-pulse"></i>
+                    </div>
+                    <div class="p-6 bg-[#222] text-white flex-1 flex flex-col">
+                        <h3 class="text-xl font-pixel mb-2 text-bit-yellow">HireSense AI</h3>
+                        <p class="text-xs font-pixel mb-4 text-gray-400">Dec 2024 - Present</p>
+                        <p class="mb-6 font-terminal text-lg text-gray-300 flex-1">AI-powered career guidance platform
+                            with multi-agent orchestration using Pydantic AI and Gemini 2.0.</p>
+
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="text-[10px] font-pixel text-black bg-bit-light px-2 py-1">Pydantic AI</span>
+                            <span class="text-[10px] font-pixel text-black bg-bit-light px-2 py-1">FastAPI</span>
+                            <span class="text-[10px] font-pixel text-black bg-bit-light px-2 py-1">WebSockets</span>
+                        </div>
+
+                        <div
+                            class="border-t-2 border-dashed border-gray-600 pt-4 flex justify-between items-center mt-auto">
+                            <span class="font-pixel text-[10px] text-bit-green">16+ AI Agents</span>
+                            <a href="#" class="text-white hover:text-bit-yellow font-pixel text-[10px]">PLAY ></a>
+                        </div>
+                    </div>
+                </article>
+
+                <article
+                    class="bg-black border-4 border-gray-500 p-1 shadow-pixel hover:scale-[1.02] transition-transform flex flex-col h-full">
+                    <div
+                        class="bg-bit-blue h-48 flex-shrink-0 flex items-center justify-center border-b-4 border-gray-500 relative overflow-hidden">
+                        <div
+                            class="absolute inset-0 opacity-20 bg-[repeating-linear-gradient(-45deg,#000,#000_10px,transparent_10px,transparent_20px)]">
+                        </div>
+                        <i class="fas fa-database text-6xl text-white"></i>
+                    </div>
+                    <div class="p-6 bg-[#222] text-white flex-1 flex flex-col">
+                        <h3 class="text-xl font-pixel mb-2 text-bit-yellow">Intellify Insights</h3>
+                        <p class="text-xs font-pixel mb-4 text-gray-400">Data Platform</p>
+                        <p class="mb-6 font-terminal text-lg text-gray-300 flex-1">Transfer SSIS packages and Power BI
+                            models between MSSQL, Teradata, and Postgres with PySpark.</p>
+
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="text-[10px] font-pixel text-black bg-bit-light px-2 py-1">PySpark</span>
+                            <span class="text-[10px] font-pixel text-black bg-bit-light px-2 py-1">Azure</span>
+                            <span class="text-[10px] font-pixel text-black bg-bit-light px-2 py-1">Power BI</span>
+                        </div>
+
+                        <div
+                            class="border-t-2 border-dashed border-gray-600 pt-4 flex justify-between items-center mt-auto">
+                            <span class="font-pixel text-[10px] text-bit-green">CI/CD Pipeline</span>
+                            <a href="#" class="text-white hover:text-bit-yellow font-pixel text-[10px]">PLAY ></a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-black text-white py-16 border-t-8 border-bit-blue relative text-center">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <h2 class="text-3xl md:text-6xl font-pixel uppercase mb-12 animate-pulse text-bit-green">
+                Game Over<br><span class="text-sm md:text-2xl text-white block mt-4">Continue?</span>
+            </h2>
+
+            <div class="flex justify-center gap-8 mb-12">
+                <a href="https://github.com/gamentionkray"
+                    class="w-12 h-12 bg-white text-black border-4 border-gray-400 flex items-center justify-center text-xl hover:bg-bit-purple hover:text-white shadow-pixel">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/krishnathorat"
+                    class="w-12 h-12 bg-white text-black border-4 border-gray-400 flex items-center justify-center text-xl hover:bg-bit-blue hover:text-white shadow-pixel">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:krishnathorat007@gmail.com"
+                    class="w-12 h-12 bg-white text-black border-4 border-gray-400 flex items-center justify-center text-xl hover:bg-bit-green hover:text-white shadow-pixel">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+
+            <div class="border-t-2 border-dashed border-gray-800 pt-8 text-[10px] font-pixel text-gray-500">
+                <p>&copy; 2025 Krishna Thorat. Pune, India.</p>
+                <p class="mt-2">CREDITS: 1 COIN</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const icon = themeToggleBtn.querySelector('i');
+
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.theme = 'dark';
+            } else {
+                localStorage.theme = 'light';
+            }
+        });
+    </script>
+    <script src="assets/js/template-switcher.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishna Thorat | The AI Alchemist</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Dancing+Script:wght@700&family=MedievalSharp&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Cormorant Garamond"', 'serif'],
+                        display: ['"Cinzel Decorative"', 'serif'],
+                        hand: ['"Dancing Script"', 'cursive'],
+                        medieval: ['"MedievalSharp"', 'cursive'],
+                    },
+                    colors: {
+                        story: {
+                            parchment: '#fdf6e3',
+                            darkParchment: '#eee4c9',
+                            ink: '#2c1810',
+                            gold: '#c5a028',
+                            forest: '#2d4f1e',
+                            crimson: '#8a1c1c',
+                            royal: '#4a0e4e',
+                            wood: '#1a120b',
+                            night: '#0f172a',
+                        }
+                    },
+                    backgroundImage: {
+                        'paper-texture': "url('https://www.transparenttextures.com/patterns/cream-paper.png')",
+                        'wood-texture': "url('https://www.transparenttextures.com/patterns/wood-pattern.png')",
+                    },
+                    boxShadow: {
+                        'sheet': '0 0 50px -10px rgba(0,0,0,0.5)',
+                        'inset': 'inset 0 0 30px rgba(139, 69, 19, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Environment */
+        body {
+            background-color: #1a120b;
+            background-image: url("https://www.transparenttextures.com/patterns/wood-pattern.png");
+        }
+
+        /* The Main Scroll/Sheet */
+        .character-sheet {
+            background-color: #fdf6e3;
+            background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.7), inset 0 0 100px rgba(44, 24, 16, 0.1);
+            position: relative;
+        }
+
+        /* Dark Mode Sheet */
+        html.dark body {
+            background-color: #050505;
+        }
+
+        html.dark .character-sheet {
+            background-color: #1e293b;
+            background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
+            color: #e2e8f0;
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.9), inset 0 0 100px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Decorative Divider */
+        .divider-ornament {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .divider-ornament::before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: radial-gradient(circle, #c5a028 0%, transparent 100%);
+            margin-bottom: -12px;
+        }
+
+        .divider-icon {
+            background: #fdf6e3;
+            padding: 0 1rem;
+            color: #c5a028;
+            font-size: 1.5rem;
+            position: relative;
+        }
+
+        html.dark .divider-icon {
+            background: #1e293b;
+        }
+
+        /* Stat Box Style */
+        .stat-box {
+            border: 2px solid #c5a028;
+            padding: 0.5rem;
+            position: relative;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .stat-box::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            border: 1px solid rgba(197, 160, 40, 0.3);
+        }
+
+        .stat-label {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fdf6e3;
+            padding: 0 10px;
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #2c1810;
+            white-space: nowrap;
+        }
+
+        html.dark .stat-label {
+            background: #1e293b;
+            color: #c5a028;
+        }
+
+        /* Inventory Slot */
+        .inventory-slot {
+            background: rgba(0, 0, 0, 0.05);
+            border: 1px solid #c5a028;
+            transition: all 0.3s;
+        }
+
+        .inventory-slot:hover {
+            background: rgba(197, 160, 40, 0.1);
+            transform: scale(1.05);
+        }
+
+        /* Custom Cursor */
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background: #c5a028;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #c5a028;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: 0.1s;
+        }
+    </style>
+</head>
+
+<body class="text-story-ink transition-colors duration-500 overflow-x-hidden">
+
+    <!-- Cursor -->
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
+
+    <!-- Main Layout: A Single Sheet on a Desk -->
+    <div class="min-h-screen py-8 md:py-12 px-4 flex justify-center items-start">
+
+        <!-- The Character Sheet -->
+        <main
+            class="character-sheet w-full max-w-5xl min-h-[90vh] mx-auto p-6 md:p-12 rounded-sm relative shadow-sheet">
+
+            <!-- Theme Toggle (Wax Seal) -->
+            <button id="theme-toggle"
+                class="absolute top-6 right-6 md:-right-4 md:top-12 w-12 h-12 bg-story-crimson rounded-full shadow-lg border-2 border-story-ink flex items-center justify-center text-story-parchment z-50 hover:scale-110 transition-transform"
+                title="Toggle Magic Mode">
+                <i class="fas fa-adjust"></i>
+            </button>
+
+            <!-- Header: Character Profile -->
+            <header class="grid md:grid-cols-12 gap-8 mb-12 border-b-2 border-story-ink/20 pb-12">
+                <!-- Avatar Section -->
+                <div class="md:col-span-4 flex flex-col items-center">
+                    <div
+                        class="w-48 h-48 md:w-56 md:h-56 rounded-full border-4 border-story-gold p-1 shadow-xl bg-story-ink relative group">
+                        <img src="assets/img/krishna-thorat.jpg" alt="Character Avatar"
+                            class="w-full h-full rounded-full object-cover sepia-[0.5] group-hover:sepia-0 transition-all duration-700">
+                        <div
+                            class="absolute -bottom-4 bg-story-gold text-story-ink font-display font-bold px-4 py-1 rounded shadow border border-story-ink text-sm">
+                            Lvl. 5 Engineer
+                        </div>
+                    </div>
+
+                    <!-- Social Links (Action Bar) -->
+                    <div class="flex gap-4 mt-6">
+                        <a href="https://github.com/gamentionkray"
+                            class="w-10 h-10 flex items-center justify-center border border-story-ink rounded bg-story-parchment hover:bg-story-gold transition-colors"><i
+                                class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/krishnathorat"
+                            class="w-10 h-10 flex items-center justify-center border border-story-ink rounded bg-story-parchment hover:bg-story-gold transition-colors"><i
+                                class="fab fa-linkedin"></i></a>
+                        <a href="mailto:krishnathorat007@gmail.com"
+                            class="w-10 h-10 flex items-center justify-center border border-story-ink rounded bg-story-parchment hover:bg-story-gold transition-colors"><i
+                                class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+
+                <!-- Stats & Bio Section -->
+                <div class="md:col-span-8 flex flex-col justify-center">
+                    <div class="mb-6 text-center md:text-left">
+                        <h1
+                            class="text-5xl md:text-7xl font-display font-bold text-story-ink dark:text-story-gold mb-2">
+                            Krishna Thorat</h1>
+                        <p class="text-2xl font-hand text-story-crimson">The Code Weaver</p>
+                    </div>
+
+                    <!-- Character Stats Grid -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 mt-4">
+                        <div class="stat-box text-center">
+                            <span class="stat-label">Class</span>
+                            <div class="font-medieval text-lg mt-2">Full Stack</div>
+                        </div>
+                        <div class="stat-box text-center">
+                            <span class="stat-label">Specialty</span>
+                            <div class="font-medieval text-lg mt-2">Agentic AI</div>
+                        </div>
+                        <div class="stat-box text-center">
+                            <span class="stat-label">Origin</span>
+                            <div class="font-medieval text-lg mt-2">Pune, IN</div>
+                        </div>
+                        <div class="stat-box text-center">
+                            <span class="stat-label">Mana</span>
+                            <div class="font-medieval text-lg mt-2">Coffee</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-story-ink/5 p-4 rounded border-l-4 border-story-gold italic font-serif text-lg">
+                        "Building dynamic web applications and weaving Agentic AI systems. Specializing in PHP, Node.js,
+                        React & the arcane arts of Generative AI."
+                    </div>
+
+                    <div class="mt-6 flex gap-4 justify-center md:justify-start">
+                        <a href="#projects"
+                            class="px-6 py-2 bg-story-ink text-story-gold font-display font-bold border border-story-gold hover:bg-story-crimson transition-colors shadow-lg">
+                            View Grimoire
+                        </a>
+                        <a href="resume.pdf"
+                            class="px-6 py-2 bg-transparent text-story-ink dark:text-story-parchment font-display font-bold border border-story-ink dark:border-story-parchment hover:bg-story-ink hover:text-story-gold transition-colors">
+                            Download Scroll
+                        </a>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Skills (Inventory) -->
+            <section class="mb-16">
+                <div class="divider-ornament">
+                    <span class="divider-icon"><i class="fas fa-dungeon"></i> Inventory & Skills</span>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Core Items -->
+                    <div class="border-2 border-story-ink/20 p-6 rounded bg-story-darkParchment/20">
+                        <h3
+                            class="font-display font-bold text-xl mb-4 flex items-center gap-2 text-story-forest dark:text-story-gold">
+                            <i class="fas fa-hammer"></i> Core Tools
+                        </h3>
+                        <div class="grid grid-cols-3 gap-3">
+                            <div
+                                class="inventory-slot p-2 text-center rounded flex flex-col items-center justify-center h-20">
+                                <i class="fab fa-php text-xl mb-1 opacity-70"></i>
+                                <span class="font-bold text-sm">PHP</span>
+                            </div>
+                            <div
+                                class="inventory-slot p-2 text-center rounded flex flex-col items-center justify-center h-20">
+                                <i class="fab fa-node text-xl mb-1 opacity-70"></i>
+                                <span class="font-bold text-sm">Node.js</span>
+                            </div>
+                            <div
+                                class="inventory-slot p-2 text-center rounded flex flex-col items-center justify-center h-20">
+                                <i class="fab fa-react text-xl mb-1 opacity-70"></i>
+                                <span class="font-bold text-sm">React</span>
+                            </div>
+                            <div
+                                class="inventory-slot p-2 text-center rounded flex flex-col items-center justify-center h-20">
+                                <i class="fab fa-angular text-xl mb-1 opacity-70"></i>
+                                <span class="font-bold text-sm">Angular</span>
+                            </div>
+                            <div
+                                class="inventory-slot p-2 text-center rounded flex flex-col items-center justify-center h-20">
+                                <i class="fab fa-python text-xl mb-1 opacity-70"></i>
+                                <span class="font-bold text-sm">Python</span>
+                            </div>
+                            <div
+                                class="inventory-slot p-2 text-center rounded flex flex-col items-center justify-center h-20">
+                                <i class="fas fa-database text-xl mb-1 opacity-70"></i>
+                                <span class="font-bold text-sm">SQL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Magic Items -->
+                    <div class="border-2 border-story-ink/20 p-6 rounded bg-story-darkParchment/20">
+                        <h3
+                            class="font-display font-bold text-xl mb-4 flex items-center gap-2 text-story-royal dark:text-story-gold">
+                            <i class="fas fa-hat-wizard"></i> Arcane Arts (AI)
+                        </h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="inventory-slot p-2 px-4 rounded flex items-center justify-between">
+                                <span class="font-bold text-sm">Generative AI</span>
+                                <i class="fas fa-star text-xs text-story-gold"></i>
+                            </div>
+                            <div class="inventory-slot p-2 px-4 rounded flex items-center justify-between">
+                                <span class="font-bold text-sm">Agentic AI</span>
+                                <i class="fas fa-star text-xs text-story-gold"></i>
+                            </div>
+                            <div class="inventory-slot p-2 px-4 rounded flex items-center justify-between">
+                                <span class="font-bold text-sm">RAG Systems</span>
+                                <i class="fas fa-star text-xs text-story-gold"></i>
+                            </div>
+                            <div class="inventory-slot p-2 px-4 rounded flex items-center justify-between">
+                                <span class="font-bold text-sm">LangChain</span>
+                                <i class="fas fa-star text-xs text-story-gold"></i>
+                            </div>
+                            <div class="inventory-slot p-2 px-4 rounded flex items-center justify-between">
+                                <span class="font-bold text-sm">Azure OpenAI</span>
+                                <i class="fas fa-star text-xs text-story-gold"></i>
+                            </div>
+                            <div class="inventory-slot p-2 px-4 rounded flex items-center justify-between">
+                                <span class="font-bold text-sm">AWS</span>
+                                <i class="fas fa-cloud text-xs text-story-gold"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Adventure Log (Experience) -->
+            <section class="mb-16">
+                <div class="divider-ornament">
+                    <span class="divider-icon"><i class="fas fa-scroll"></i> Adventure Log</span>
+                </div>
+
+                <div class="relative pl-8 border-l-2 border-dashed border-story-ink/30 space-y-12">
+
+                    <!-- Quest 1 -->
+                    <div class="relative">
+                        <div
+                            class="absolute -left-[41px] top-0 w-6 h-6 rounded-full bg-story-gold border-4 border-story-parchment shadow-md z-10">
+                        </div>
+                        <div
+                            class="bg-white/50 dark:bg-black/20 p-6 rounded border border-story-ink/10 hover:shadow-lg transition-shadow relative">
+                            <div
+                                class="absolute top-0 right-0 bg-story-crimson text-story-parchment text-xs font-bold px-2 py-1 rounded-bl">
+                                Current Quest</div>
+                            <h3 class="text-2xl font-display font-bold text-story-ink dark:text-story-gold">Software
+                                Developer</h3>
+                            <p class="font-medieval text-lg text-story-crimson mb-2">Ergabite Tech Solutions</p>
+                            <p class="text-sm font-serif italic mb-4 opacity-70">Dec 2024 - Present</p>
+
+                            <ul class="list-none space-y-2 font-serif text-lg">
+                                <li><i class="fas fa-check text-story-gold mr-2"></i> Forged "Intellify Migration
+                                    Wizard" for data transmutation.</li>
+                                <li><i class="fas fa-check text-story-gold mr-2"></i> Crafted "In-Parking" alerting
+                                    wards using Azure magic.</li>
+                                <li><i class="fas fa-check text-story-gold mr-2"></i> Summoned "Infovault" multi-agent
+                                    swarm.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Quest 2 -->
+                    <div class="relative">
+                        <div
+                            class="absolute -left-[41px] top-0 w-6 h-6 rounded-full bg-story-ink border-4 border-story-parchment shadow-md z-10">
+                        </div>
+                        <div
+                            class="bg-white/50 dark:bg-black/20 p-6 rounded border border-story-ink/10 hover:shadow-lg transition-shadow">
+                            <h3 class="text-2xl font-display font-bold text-story-ink dark:text-story-gold">Senior Web
+                                Developer</h3>
+                            <p class="font-medieval text-lg text-story-ink mb-2">Internship Studio</p>
+                            <p class="text-sm font-serif italic mb-4 opacity-70">Jul 2024 - Dec 2024</p>
+
+                            <ul class="list-none space-y-2 font-serif text-lg">
+                                <li><i class="fas fa-feather-alt text-story-ink/50 mr-2"></i> Constructed the Great
+                                    Hiring Portal.</li>
+                                <li><i class="fas fa-feather-alt text-story-ink/50 mr-2"></i> Architected cloud
+                                    foundations on GCP & AWS.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Quest 3 -->
+                    <div class="relative">
+                        <div
+                            class="absolute -left-[41px] top-0 w-6 h-6 rounded-full bg-story-ink border-4 border-story-parchment shadow-md z-10">
+                        </div>
+                        <div
+                            class="bg-white/50 dark:bg-black/20 p-6 rounded border border-story-ink/10 hover:shadow-lg transition-shadow">
+                            <h3 class="text-2xl font-display font-bold text-story-ink dark:text-story-gold">System
+                                Engineer</h3>
+                            <p class="font-medieval text-lg text-story-ink mb-2">Infosys Ltd.</p>
+                            <p class="text-sm font-serif italic mb-4 opacity-70">Aug 2022 - Jul 2024</p>
+
+                            <ul class="list-none space-y-2 font-serif text-lg">
+                                <li><i class="fas fa-feather-alt text-story-ink/50 mr-2"></i> Mastered the Angular
+                                    framework.</li>
+                                <li><i class="fas fa-feather-alt text-story-ink/50 mr-2"></i> Implemented WCAG
+                                    accessibility runes.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Grimoire (Projects) -->
+            <section id="projects" class="mb-12">
+                <div class="divider-ornament">
+                    <span class="divider-icon"><i class="fas fa-book-dead"></i> Known Spells (Projects)</span>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+
+                    <!-- Project 1 -->
+                    <div class="group relative border-4 border-double border-story-gold p-1 bg-story-wood shadow-lg">
+                        <div class="bg-story-parchment dark:bg-story-night p-6 h-full relative overflow-hidden">
+                            <div class="absolute top-0 right-0 p-2 opacity-10 text-6xl"><i class="fas fa-brain"></i>
+                            </div>
+
+                            <h3 class="text-2xl font-display font-bold mb-2 text-story-royal dark:text-story-gold">
+                                HireSense AI</h3>
+                            <p class="text-sm font-serif italic mb-4 border-b border-story-ink/20 pb-2">The Career
+                                Oracle</p>
+
+                            <p class="mb-6 font-serif">A platform that guides lost souls to their career destiny using
+                                multi-agent orchestration.</p>
+
+                            <div class="flex gap-2 mb-6">
+                                <span class="text-xs font-bold bg-story-royal text-white px-2 py-1">Pydantic</span>
+                                <span class="text-xs font-bold bg-story-royal text-white px-2 py-1">FastAPI</span>
+                            </div>
+
+                            <a href="#"
+                                class="block text-center py-2 border-2 border-story-ink text-story-ink hover:bg-story-ink hover:text-story-gold transition-colors font-bold uppercase text-sm">
+                                Cast Spell
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="group relative border-4 border-double border-story-gold p-1 bg-story-wood shadow-lg">
+                        <div class="bg-story-parchment dark:bg-story-night p-6 h-full relative overflow-hidden">
+                            <div class="absolute top-0 right-0 p-2 opacity-10 text-6xl"><i class="fas fa-database"></i>
+                            </div>
+
+                            <h3 class="text-2xl font-display font-bold mb-2 text-story-forest dark:text-story-gold">
+                                Intellify Insights</h3>
+                            <p class="text-sm font-serif italic mb-4 border-b border-story-ink/20 pb-2">The Data
+                                Transmuter</p>
+
+                            <p class="mb-6 font-serif">A powerful engine to transfer massive data artifacts between
+                                ancient databases.</p>
+
+                            <div class="flex gap-2 mb-6">
+                                <span class="text-xs font-bold bg-story-forest text-white px-2 py-1">PySpark</span>
+                                <span class="text-xs font-bold bg-story-forest text-white px-2 py-1">Azure</span>
+                            </div>
+
+                            <a href="#"
+                                class="block text-center py-2 border-2 border-story-ink text-story-ink hover:bg-story-ink hover:text-story-gold transition-colors font-bold uppercase text-sm">
+                                Cast Spell
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Footer Seal -->
+            <footer class="text-center pt-12 border-t-2 border-story-ink/10">
+                <div class="inline-block p-4 border-2 border-story-crimson rounded-full mb-4 opacity-80">
+                    <span class="font-display font-bold text-story-crimson text-xl">KT</span>
+                </div>
+                <p class="font-serif italic opacity-70">End of Scroll.</p>
+            </footer>
+
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        // Custom Cursor Logic
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            // Outline with slight delay
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        // Theme Toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const icon = themeToggleBtn.querySelector('i');
+
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.theme = 'dark';
+            } else {
+                localStorage.theme = 'light';
+            }
+        });
+    </script>
+    <script src="assets/js/template-switcher.js"></script>
+</body>
+
+</html>

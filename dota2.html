@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishna Thorat | Modern Profile</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600&family=Rajdhani:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Inter"', 'sans-serif'],
+                        dota: ['"Cinzel"', 'serif'],
+                        tech: ['"Rajdhani"', 'sans-serif'],
+                    },
+                    colors: {
+                        dota: {
+                            bg: '#000000',
+                            panel: '#1E2328',
+                            border: 'rgba(255, 255, 255, 0.08)',
+                            red: '#E83636',
+                            gold: '#C2A575',
+                            green: '#59833B',
+                        }
+                    },
+                    backgroundImage: {
+                        'play-gradient': 'linear-gradient(90deg, #3D5E32 0%, #66A24F 100%)',
+                        'play-gradient-hover': 'linear-gradient(90deg, #4D7238 0%, #85C75A 100%)',
+                        'glass': 'linear-gradient(180deg, rgba(30, 35, 40, 0.8) 0%, rgba(15, 17, 20, 0.9) 100%)',
+                    },
+                    boxShadow: {
+                        'glow-gold': '0 0 20px rgba(194, 165, 117, 0.15)',
+                        'glow-green': '0 0 25px rgba(89, 131, 59, 0.4)',
+                        'inner-border': 'inset 0 0 0 1px rgba(255, 255, 255, 0.1)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #000;
+            /* High res smoke background */
+            background-image: url('https://cdn.wallpapersafari.com/21/63/P9m4yM.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #ccc;
+            overflow-x: hidden;
+        }
+
+        /* Dark overlay to ensure text readability over the image */
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(10, 12, 16, 0.85) 0%, #000000 100%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Polished Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Glass Panel Logic */
+        .glass-panel {
+            background: rgba(20, 24, 28, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Play Button Shine */
+        .shine-effect {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transform: skewX(-20deg);
+            animation: shine 4s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -100%;
+            }
+
+            20% {
+                left: 200%;
+            }
+
+            100% {
+                left: 200%;
+            }
+        }
+
+        /* Text Shadow for DOTA headers */
+        .dota-text-shadow {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+
+<body class="h-screen w-screen flex flex-col font-sans text-gray-300">
+
+    <div class="bg-overlay"></div>
+
+    <!-- TOP NAVIGATION -->
+    <nav
+        class="h-20 flex items-center px-8 z-50 border-b border-white/5 bg-gradient-to-b from-[#15171A] to-transparent shrink-0">
+
+        <!-- Logo Area -->
+        <div class="flex items-center gap-4 mr-16">
+            <div
+                class="w-12 h-12 bg-gradient-to-b from-[#2c3036] to-[#1a1d21] shadow-inner-border flex items-center justify-center group cursor-pointer hover:shadow-glow-gold transition-all duration-300">
+                <div
+                    class="w-6 h-6 bg-dota-red rotate-45 border border-black group-hover:scale-110 transition-transform">
+                </div>
+            </div>
+            <div>
+                <h1 class="font-dota font-bold text-xl text-white tracking-widest leading-none">KRISHNA</h1>
+                <span class="text-[10px] font-bold text-gray-500 tracking-[0.2em] uppercase">Thorat</span>
+            </div>
+        </div>
+
+        <!-- Main Tabs -->
+        <div class="flex items-center h-full gap-8">
+            <a href="#" class="h-full flex items-center border-b-2 border-white/50 px-2">
+                <span class="font-dota font-bold text-lg text-white tracking-widest dota-text-shadow">DASHBOARD</span>
+            </a>
+            <a href="#heroes"
+                class="h-full flex items-center border-b-2 border-transparent hover:border-white/20 px-2 group transition-colors">
+                <span
+                    class="font-dota font-bold text-lg text-gray-500 group-hover:text-white tracking-widest transition-colors">HEROES</span>
+            </a>
+            <a href="#treasury"
+                class="h-full flex items-center border-b-2 border-transparent hover:border-white/20 px-2 group transition-colors">
+                <span
+                    class="font-dota font-bold text-lg text-gray-500 group-hover:text-white tracking-widest transition-colors">TREASURY</span>
+            </a>
+        </div>
+
+        <!-- Right Side: Simple Socials -->
+        <div class="ml-auto flex items-center gap-6">
+            <a href="https://github.com/gamentionkray" target="_blank"
+                class="text-gray-500 hover:text-white transition-colors">
+                <i class="fab fa-github text-xl"></i>
+            </a>
+            <a href="https://linkedin.com/in/krishnathorat" target="_blank"
+                class="text-gray-500 hover:text-white transition-colors">
+                <i class="fab fa-linkedin text-xl"></i>
+            </a>
+            <div class="w-[1px] h-8 bg-white/10"></div>
+            <div class="flex flex-col items-end">
+                <span class="text-[10px] font-bold text-dota-gold uppercase tracking-wider">Status</span>
+                <span class="text-sm font-bold text-white">Open for Work</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT SCROLL AREA -->
+    <main class="flex-1 overflow-y-auto px-8 py-8 custom-scroll relative z-10">
+        <div class="max-w-7xl mx-auto space-y-8 pb-32">
+
+            <!-- ROW 1: Profile & Current Quest -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+                <!-- Profile Card -->
+                <div class="lg:col-span-4 glass-panel relative group rounded-sm overflow-hidden p-6 flex flex-col items-center text-center"
+                    data-aos="fade-up">
+                    <div class="relative mb-4">
+                        <div class="w-32 h-32 bg-[#111] shadow-2xl relative z-10 border border-white/10">
+                            <img src="assets/img/krishna-thorat.jpg"
+                                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+                        </div>
+                        <!-- Level Badge -->
+                        <div
+                            class="absolute -bottom-3 -right-3 w-10 h-10 bg-gradient-to-b from-[#333] to-[#000] border border-dota-gold flex items-center justify-center rounded-full z-20 shadow-glow-gold">
+                            <span class="font-dota font-bold text-dota-gold">5+</span>
+                        </div>
+                    </div>
+
+                    <h2 class="font-dota font-bold text-2xl text-white tracking-wide mb-1">Krishna Thorat</h2>
+                    <p class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-6">Full Stack AI Engineer</p>
+
+                    <div class="w-full grid grid-cols-3 gap-2 border-t border-white/5 pt-4">
+                        <div>
+                            <div class="text-[10px] text-gray-500 uppercase font-bold">Wins</div>
+                            <div class="text-white font-tech text-lg font-bold">15+</div>
+                            <div class="text-[9px] text-gray-600">Projects</div>
+                        </div>
+                        <div class="border-l border-white/5">
+                            <div class="text-[10px] text-gray-500 uppercase font-bold">Commends</div>
+                            <div class="text-dota-green font-tech text-lg font-bold">100%</div>
+                            <div class="text-[9px] text-gray-600">Satisfaction</div>
+                        </div>
+                        <div class="border-l border-white/5">
+                            <div class="text-[10px] text-gray-500 uppercase font-bold">Versatility</div>
+                            <div class="text-dota-gold font-tech text-lg font-bold">9.8</div>
+                            <div class="text-[9px] text-gray-600">Tech Stack</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Current Quest (Job) -->
+                <div class="lg:col-span-8 glass-panel p-0 flex flex-col rounded-sm" data-aos="fade-up"
+                    data-aos-delay="100">
+                    <div class="bg-black/30 p-3 px-6 flex justify-between items-center border-b border-white/5">
+                        <h3 class="font-dota font-bold text-gray-400 text-sm tracking-widest uppercase">Current Quest
+                        </h3>
+                        <span
+                            class="text-[10px] font-bold text-green-400 uppercase bg-green-900/20 px-2 py-0.5 border border-green-500/30">Active</span>
+                    </div>
+
+                    <div class="p-8 flex flex-col md:flex-row items-start gap-8 h-full relative overflow-hidden">
+                        <!-- Abstract bg -->
+                        <div
+                            class="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-blue-900/10 to-transparent pointer-events-none">
+                        </div>
+
+                        <div
+                            class="shrink-0 w-16 h-16 bg-gradient-to-br from-[#222] to-[#111] border border-white/10 flex items-center justify-center shadow-lg">
+                            <i class="fas fa-code-branch text-2xl text-dota-gold"></i>
+                        </div>
+
+                        <div class="relative z-10">
+                            <h2 class="text-3xl font-dota font-bold text-white uppercase mb-2">Ergabite Tech Solutions
+                            </h2>
+                            <div class="text-sm text-dota-green font-bold uppercase tracking-wider mb-4">Software
+                                Developer</div>
+                            <p class="text-gray-400 leading-relaxed max-w-2xl mb-6">
+                                Currently leading the <strong>"Infovault"</strong> initiative, a multi-agent AI platform
+                                using Langchain.
+                                Engineering real-time alerting systems with Azure Functions and optimizing migration
+                                wizards for enterprise data.
+                            </p>
+
+                            <div class="flex gap-2">
+                                <span
+                                    class="px-2 py-1 bg-white/5 border border-white/10 text-[10px] font-bold text-gray-300 uppercase">Azure</span>
+                                <span
+                                    class="px-2 py-1 bg-white/5 border border-white/10 text-[10px] font-bold text-gray-300 uppercase">Python</span>
+                                <span
+                                    class="px-2 py-1 bg-white/5 border border-white/10 text-[10px] font-bold text-gray-300 uppercase">AI
+                                    Agents</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION: Signature Heroes (Tech Stack) -->
+            <div id="heroes" class="pt-8">
+                <div class="flex items-center gap-4 mb-6">
+                    <h3 class="font-dota font-bold text-xl text-white tracking-widest uppercase dota-text-shadow">
+                        Signature Heroes</h3>
+                    <div class="h-[1px] bg-white/10 flex-1"></div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- Card 1 -->
+                    <div
+                        class="glass-panel p-0 group hover:border-dota-gold transition-colors duration-300 cursor-default">
+                        <div class="h-32 bg-[#0c0e12] relative overflow-hidden border-b border-white/5">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#000] to-transparent opacity-80 z-10">
+                            </div>
+                            <i
+                                class="fab fa-react text-6xl text-blue-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-40 group-hover:opacity-80 group-hover:scale-110 transition-all duration-500"></i>
+                        </div>
+                        <div class="p-4">
+                            <h4
+                                class="font-dota font-bold text-white uppercase tracking-wide text-lg group-hover:text-dota-gold">
+                                React</h4>
+                            <p class="text-xs text-gray-500 uppercase font-bold mt-1">Intelligence • Support</p>
+                            <div class="w-full bg-gray-800 h-1 mt-3 rounded-full overflow-hidden">
+                                <div class="bg-blue-500 h-full w-[90%]"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div
+                        class="glass-panel p-0 group hover:border-dota-gold transition-colors duration-300 cursor-default">
+                        <div class="h-32 bg-[#0c0e12] relative overflow-hidden border-b border-white/5">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#000] to-transparent opacity-80 z-10">
+                            </div>
+                            <i
+                                class="fab fa-python text-6xl text-yellow-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-40 group-hover:opacity-80 group-hover:scale-110 transition-all duration-500"></i>
+                        </div>
+                        <div class="p-4">
+                            <h4
+                                class="font-dota font-bold text-white uppercase tracking-wide text-lg group-hover:text-dota-gold">
+                                Python</h4>
+                            <p class="text-xs text-gray-500 uppercase font-bold mt-1">Strength • Carry</p>
+                            <div class="w-full bg-gray-800 h-1 mt-3 rounded-full overflow-hidden">
+                                <div class="bg-yellow-500 h-full w-[85%]"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div
+                        class="glass-panel p-0 group hover:border-dota-gold transition-colors duration-300 cursor-default">
+                        <div class="h-32 bg-[#0c0e12] relative overflow-hidden border-b border-white/5">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#000] to-transparent opacity-80 z-10">
+                            </div>
+                            <i
+                                class="fas fa-server text-6xl text-green-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-40 group-hover:opacity-80 group-hover:scale-110 transition-all duration-500"></i>
+                        </div>
+                        <div class="p-4">
+                            <h4
+                                class="font-dota font-bold text-white uppercase tracking-wide text-lg group-hover:text-dota-gold">
+                                Node.js</h4>
+                            <p class="text-xs text-gray-500 uppercase font-bold mt-1">Agility • Pusher</p>
+                            <div class="w-full bg-gray-800 h-1 mt-3 rounded-full overflow-hidden">
+                                <div class="bg-green-500 h-full w-[88%]"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div
+                        class="glass-panel p-0 group hover:border-dota-gold transition-colors duration-300 cursor-default">
+                        <div class="h-32 bg-[#0c0e12] relative overflow-hidden border-b border-white/5">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#000] to-transparent opacity-80 z-10">
+                            </div>
+                            <i
+                                class="fas fa-brain text-6xl text-purple-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-40 group-hover:opacity-80 group-hover:scale-110 transition-all duration-500"></i>
+                        </div>
+                        <div class="p-4">
+                            <h4
+                                class="font-dota font-bold text-white uppercase tracking-wide text-lg group-hover:text-dota-gold">
+                                AI Agents</h4>
+                            <p class="text-xs text-gray-500 uppercase font-bold mt-1">Universal • Ganker</p>
+                            <div class="w-full bg-gray-800 h-1 mt-3 rounded-full overflow-hidden">
+                                <div class="bg-purple-500 h-full w-[80%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION: Treasury (Projects) -->
+            <div id="treasury" class="pt-8">
+                <div class="flex items-center gap-4 mb-6">
+                    <h3 class="font-dota font-bold text-xl text-white tracking-widest uppercase dota-text-shadow">
+                        Treasury</h3>
+                    <div class="h-[1px] bg-white/10 flex-1"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Project 1 -->
+                    <div class="glass-panel p-6 flex flex-col relative group hover:border-dota-gold/30 transition-all">
+                        <div class="flex justify-between items-start mb-4">
+                            <div
+                                class="text-dota-gold font-bold text-[10px] uppercase border border-dota-gold/30 px-2 py-1 tracking-wider">
+                                Legendary Item</div>
+                            <i class="fas fa-robot text-2xl text-gray-600 group-hover:text-white transition-colors"></i>
+                        </div>
+                        <h4
+                            class="font-dota font-bold text-2xl text-white mb-2 group-hover:text-dota-gold transition-colors">
+                            HireSense AI</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            AI-powered career guidance platform. Features <span class="text-white">Pydantic AI</span>
+                            orchestration, <span class="text-white">FastAPI</span> backend, and WebSocket integration
+                            for real-time agent responses.
+                        </p>
+                        <div class="mt-auto flex items-center gap-4 border-t border-white/5 pt-4">
+                            <a href="#"
+                                class="text-xs font-bold text-dota-green uppercase hover:underline tracking-wider">View
+                                Code</a>
+                            <a href="#"
+                                class="text-xs font-bold text-gray-500 uppercase hover:text-white tracking-wider">Live
+                                Demo</a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="glass-panel p-6 flex flex-col relative group hover:border-dota-gold/30 transition-all">
+                        <div class="flex justify-between items-start mb-4">
+                            <div
+                                class="text-dota-red font-bold text-[10px] uppercase border border-dota-red/30 px-2 py-1 tracking-wider">
+                                Arcana Item</div>
+                            <i
+                                class="fas fa-database text-2xl text-gray-600 group-hover:text-white transition-colors"></i>
+                        </div>
+                        <h4
+                            class="font-dota font-bold text-2xl text-white mb-2 group-hover:text-dota-red transition-colors">
+                            Intellify Insights</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                            Enterprise Data Analytics Platform. Automated <span class="text-white">PySpark</span> job
+                            management for transferring SSIS packages and Power BI models between <span
+                                class="text-white">Teradata</span> & <span class="text-white">Postgres</span>.
+                        </p>
+                        <div class="mt-auto flex items-center gap-4 border-t border-white/5 pt-4">
+                            <a href="#"
+                                class="text-xs font-bold text-dota-green uppercase hover:underline tracking-wider">View
+                                Code</a>
+                            <a href="#"
+                                class="text-xs font-bold text-gray-500 uppercase hover:text-white tracking-wider">Case
+                                Study</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FIXED BOTTOM BAR -->
+    <div
+        class="h-20 bg-gradient-to-t from-black via-[#0F1015] to-transparent fixed bottom-0 w-full z-50 pointer-events-none flex items-center justify-end px-8 pb-4">
+
+        <!-- PLAY BUTTON (Anchor) -->
+        <div class="pointer-events-auto relative group">
+            <a href="mailto:krishnathorat007@gmail.com"
+                class="block w-72 h-14 bg-play-gradient hover:bg-play-gradient-hover border border-black/50 shadow-glow-green flex items-center justify-between px-6 relative overflow-hidden transition-all transform group-hover:scale-[1.02]">
+                <div class="shine-effect"></div>
+
+                <div class="relative z-10 flex flex-col">
+                    <span
+                        class="font-dota font-black text-3xl text-white tracking-wider leading-none drop-shadow-md">HIRE
+                        ME</span>
+                    <span class="text-[10px] font-bold text-green-100 uppercase tracking-widest">Start Game</span>
+                </div>
+
+                <div class="relative z-10">
+                    <i class="fas fa-play text-2xl text-white/80 group-hover:text-white group-hover:animate-pulse"></i>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true
+        });
+    </script>
+    <script src="assets/js/template-switcher.js"></script>
+</body>
+
+</html>

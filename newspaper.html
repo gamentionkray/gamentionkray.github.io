@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Daily Dev | Krishna Thorat</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Oswald:wght@500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        body: ['"Lora"', 'serif'],
+                        sans: ['"Oswald"', 'sans-serif'],
+                    },
+                    colors: {
+                        paper: '#F4F1EA',
+                        ink: '#1a1a1a',
+                        inkLight: '#4a4a4a',
+                        accent: '#8B0000',
+                        line: '#dcd6cb'
+                    },
+                    backgroundImage: {
+                        'news-texture': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #eaddcf;
+        }
+
+        .paper-sheet {
+            background-color: #F4F1EA;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        .paper-sheet::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 4.5rem;
+            line-height: 0.8;
+            font-weight: 900;
+            margin-right: 0.5rem;
+            margin-top: 0.2rem;
+            color: #1a1a1a;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .print-image {
+            filter: grayscale(100%) contrast(110%) sepia(10%);
+            transition: filter 0.5s ease;
+        }
+
+        .print-image:hover {
+            filter: grayscale(0%) contrast(100%) sepia(0%);
+        }
+
+        .double-border-bottom {
+            border-bottom: 1px solid #1a1a1a;
+            box-shadow: 0 4px 0 0 #F4F1EA, 0 5px 0 0 #1a1a1a;
+        }
+
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #eaddcf;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #1a1a1a;
+        }
+
+        /* Marquee Animation */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 30s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+
+<body class="text-ink font-body antialiased selection:bg-accent selection:text-white py-4 md:py-8 px-2">
+
+    <div class="max-w-[1200px] mx-auto paper-sheet min-h-screen border border-gray-300 relative z-10 p-4 md:p-10">
+
+        <!-- MASTHEAD -->
+        <header class="border-b-[3px] border-ink pb-6 mb-8 text-center">
+            <div class="flex justify-between items-end border-b border-ink pb-1 mb-4 px-2">
+                <div class="text-xs font-sans uppercase tracking-widest text-inkLight">Vol. 01 — Issue 2025</div>
+                <div class="text-xs font-sans uppercase tracking-widest font-bold">Pune, MH, India</div>
+                <div class="text-xs font-sans uppercase tracking-widest text-inkLight">Price: $0.00</div>
+            </div>
+
+            <h1
+                class="font-serif text-6xl md:text-8xl lg:text-9xl font-black uppercase leading-none tracking-tighter scale-y-90 mb-4">
+                The Developer
+            </h1>
+
+            <div
+                class="flex flex-col md:flex-row justify-between items-center border-t border-b border-ink py-2 mt-2 gap-4 md:gap-0">
+                <nav class="flex gap-6 text-sm font-sans font-bold uppercase tracking-wider">
+                    <a href="#editorial" class="hover:text-accent transition-colors">Editorial</a>
+                    <a href="#arsenal" class="hover:text-accent transition-colors">Market Data</a>
+                    <a href="#projects" class="hover:text-accent transition-colors">Features</a>
+                    <a href="#log" class="hover:text-accent transition-colors">Timeline</a>
+                </nav>
+                <div class="flex items-center gap-2 text-sm font-serif italic">
+                    <span class="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
+                    Full Stack AI Engineer Available for Hire
+                </div>
+                <div class="flex gap-4 text-sm">
+                    <button id="theme-toggle" class="hover:text-accent transition-colors"><i
+                            class="fas fa-adjust"></i></button>
+                    <a href="mailto:krishnathorat007@gmail.com" class="hover:text-accent transition-colors"><i
+                            class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </header>
+
+        <!-- HERO SECTION -->
+        <main>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 border-b border-ink pb-12">
+
+                <!-- Main Article -->
+                <div class="lg:col-span-8 flex flex-col justify-between" data-aos="fade-up">
+                    <div class="mb-6">
+                        <h4 class="font-sans font-bold text-accent uppercase tracking-widest text-sm mb-2">Lead Story
+                        </h4>
+                        <h2 class="font-serif text-5xl md:text-6xl font-bold leading-none mb-6">
+                            Krishna Thorat Revolutionizes Web & AI Landscapes with Modern Stack.
+                        </h2>
+                        <div
+                            class="flex items-center gap-4 text-xs font-sans uppercase text-inkLight mb-8 border-y border-line py-2">
+                            <span>By The Editor</span>
+                            <span class="w-px h-3 bg-line"></span>
+                            <span>5 Min Read</span>
+                            <span class="w-px h-3 bg-line"></span>
+                            <span>Updated Today</span>
+                        </div>
+
+                        <div class="columns-1 md:columns-2 gap-8 font-body text-lg leading-relaxed text-justify">
+                            <p class="drop-cap mb-4">
+                                In a rapidly evolving digital ecosystem, Krishna Thorat has emerged as a pivotal figure
+                                in Full Stack and Agentic AI engineering. Specializing in PHP, Node.js, React, and
+                                Generative AI, Thorat constructs dynamic web applications that bridge the gap between
+                                complex backend logic and seamless user experiences.
+                            </p>
+                            <p class="mb-4">
+                                With over five years of industry experience, his work demonstrates a profound
+                                understanding of scalable architecture. "I don't just write code; I engineer solutions,"
+                                Thorat remarked in an exclusive interview. His recent focus involves integrating Large
+                                Language Models into practical business workflows.
+                            </p>
+                            <p class="mb-4">
+                                From building robust RAG systems to orchestrating complex cloud infrastructures on AWS
+                                and Azure, his portfolio suggests a developer who is as comfortable with infrastructure
+                                as he is with interface design.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 mt-4">
+                        <a href="#projects"
+                            class="bg-ink text-paper px-8 py-3 font-sans uppercase tracking-wider text-sm font-bold hover:bg-accent transition-colors">
+                            Read Full Report
+                        </a>
+                        <a href="resume.pdf" download
+                            class="border border-ink px-8 py-3 font-sans uppercase tracking-wider text-sm font-bold hover:bg-ink hover:text-paper transition-colors">
+                            Download CV
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Image -->
+                <div class="lg:col-span-4 border-l-0 lg:border-l border-line pl-0 lg:pl-8 flex flex-col"
+                    data-aos="fade-left">
+                    <figure class="mb-4">
+                        <div class="border border-ink p-1 bg-white">
+                            <img src="assets/img/krishna-thorat.jpg" alt="Krishna Thorat Portrait"
+                                class="w-full h-auto print-image grayscale contrast-125 block">
+                        </div>
+                        <figcaption class="text-xs font-sans text-inkLight mt-2 italic border-b border-line pb-2">
+                            Fig 1.1: K. Thorat, captured at his workstation in Pune.
+                        </figcaption>
+                    </figure>
+
+                    <div class="mt-auto bg-gray-100 p-4 border border-line">
+                        <h3 class="font-sans font-bold uppercase text-sm mb-2 border-b border-ink pb-1">At a Glance</h3>
+                        <ul class="text-sm font-serif leading-loose">
+                            <li class="flex justify-between"><span>Exp:</span> <b>5+ Years</b></li>
+                            <li class="flex justify-between"><span>Role:</span> <b>Full Stack AI Eng.</b></li>
+                            <li class="flex justify-between"><span>Focus:</span> <b>GenAI, React, Node</b></li>
+                            <li class="flex justify-between"><span>Location:</span> <b>Pune, India</b></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TICKER -->
+            <div class="border-y-[3px] border-double border-ink py-3 mb-16 bg-gray-50">
+                <div class="marquee-container font-sans uppercase font-bold tracking-widest text-sm">
+                    <div class="marquee-content">
+                        <span class="mx-4">JavaScript <i class="fas fa-caret-up text-accent"></i></span>
+                        <span class="mx-4">React <i class="fas fa-caret-up text-accent"></i></span>
+                        <span class="mx-4">Node.js <i class="fas fa-caret-up text-accent"></i></span>
+                        <span class="mx-4">Python <i class="fas fa-caret-up text-accent"></i></span>
+                        <span class="mx-4">Generative AI <i class="fas fa-caret-up text-accent"></i></span>
+                        <span class="mx-4">LangChain <i class="fas fa-caret-up text-accent"></i></span>
+                        <span class="mx-4">RAG Systems <i class="fas fa-caret-up text-accent"></i></span>
+                        <span class="mx-4">AWS <i class="fas fa-minus text-gray-400"></i></span>
+                        <span class="mx-4">Azure <i class="fas fa-caret-up text-accent"></i></span>
+                        <span class="mx-4">PHP <i class="fas fa-caret-up text-accent"></i></span>
+                        <span class="mx-4">PostgreSQL <i class="fas fa-caret-up text-accent"></i></span>
+                        <!-- Duplicate for loop -->
+                        <span class="mx-4 text-inkLight">|</span>
+                        <span class="mx-4">JavaScript <i class="fas fa-caret-up text-accent"></i></span>
+                        <span class="mx-4">React <i class="fas fa-caret-up text-accent"></i></span>
+                        <span class="mx-4">Node.js <i class="fas fa-caret-up text-accent"></i></span>
+                        <span class="mx-4">Python <i class="fas fa-caret-up text-accent"></i></span>
+                        <span class="mx-4">Generative AI <i class="fas fa-caret-up text-accent"></i></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ARSENAL / CLASSIFIEDS STYLE -->
+            <section id="arsenal" class="mb-20">
+                <h3 class="font-serif text-4xl font-bold mb-1 border-b border-ink inline-block pr-8">Market Data &
+                    Skills</h3>
+                <p class="font-sans text-xs uppercase tracking-widest text-inkLight mb-8">Classified Technical
+                    Proficiencies</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-px bg-ink border border-ink">
+                    <!-- Card 1 -->
+                    <div class="bg-paper p-6 hover:bg-white transition-colors" data-aos="fade-in">
+                        <div class="flex justify-between items-start mb-8">
+                            <i class="fas fa-graduation-cap text-2xl text-inkLight"></i>
+                            <span class="font-sans text-xs font-bold border border-ink px-1">EDU</span>
+                        </div>
+                        <h4 class="font-serif font-bold text-xl mb-1">Master of Computer Applications</h4>
+                        <p class="font-sans text-xs text-inkLight uppercase">VIT Pune, 2020-2022</p>
+                        <p class="mt-4 font-serif text-sm leading-relaxed">Specialized academic focus on advanced
+                            computing paradigms.</p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-paper p-6 hover:bg-white transition-colors" data-aos="fade-in" data-aos-delay="100">
+                        <div class="flex justify-between items-start mb-8">
+                            <i class="fas fa-map-marker-alt text-2xl text-inkLight"></i>
+                            <span class="font-sans text-xs font-bold border border-ink px-1">LOC</span>
+                        </div>
+                        <h4 class="font-serif font-bold text-xl mb-1">Pune, India</h4>
+                        <p class="font-sans text-xs text-inkLight uppercase">Base of Operations</p>
+                        <p class="mt-4 font-serif text-sm leading-relaxed">Operating globally remotely, anchored in
+                            India's tech hub.</p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-paper p-6 hover:bg-white transition-colors" data-aos="fade-in" data-aos-delay="200">
+                        <div class="flex justify-between items-start mb-8">
+                            <i class="fas fa-code text-2xl text-inkLight"></i>
+                            <span class="font-sans text-xs font-bold border border-ink px-1">DEV</span>
+                        </div>
+                        <h4 class="font-serif font-bold text-xl mb-2">Core Stack</h4>
+                        <ul class="font-sans text-xs font-bold uppercase grid grid-cols-2 gap-y-2">
+                            <li>• PHP</li>
+                            <li>• Node.js</li>
+                            <li>• React</li>
+                            <li>• Angular</li>
+                            <li>• Python</li>
+                            <li>• MySQL</li>
+                        </ul>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="bg-paper p-6 hover:bg-white transition-colors" data-aos="fade-in" data-aos-delay="300">
+                        <div class="flex justify-between items-start mb-8">
+                            <i class="fas fa-robot text-2xl text-inkLight"></i>
+                            <span class="font-sans text-xs font-bold border border-ink px-1">R&D</span>
+                        </div>
+                        <h4 class="font-serif font-bold text-xl mb-2">AI Engineering</h4>
+                        <ul class="font-sans text-xs font-bold uppercase grid grid-cols-1 gap-y-2">
+                            <li class="border-b border-gray-300 pb-1 flex justify-between"><span>Generative AI</span>
+                                <span>98%</span></li>
+                            <li class="border-b border-gray-300 pb-1 flex justify-between"><span>Agentic AI</span>
+                                <span>95%</span></li>
+                            <li class="border-b border-gray-300 pb-1 flex justify-between"><span>RAG</span>
+                                <span>92%</span></li>
+                            <li class="flex justify-between pt-1"><span>LangChain</span> <span>90%</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TIMELINE / COLUMN STYLE -->
+            <section id="log" class="mb-20">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-12">
+                    <div class="md:col-span-3 border-r border-line pr-8 text-right hidden md:block">
+                        <h2 class="font-serif text-5xl font-black leading-none mb-4">The<br>Archives</h2>
+                        <p class="font-serif italic text-sm text-inkLight">A chronological record of professional
+                            contributions.</p>
+                        <div class="mt-12">
+                            <i class="fas fa-history text-4xl text-gray-200"></i>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-9">
+                        <h2 class="font-serif text-4xl font-bold mb-8 md:hidden border-b border-ink">The Archives</h2>
+
+                        <!-- Item 1 -->
+                        <div class="flex flex-col md:flex-row gap-6 mb-10 border-b border-gray-300 pb-10"
+                            data-aos="fade-up">
+                            <div class="md:w-32 flex-shrink-0 pt-1">
+                                <span class="font-sans font-bold text-2xl block">2024</span>
+                                <span class="font-serif text-sm italic text-inkLight">Dec - Present</span>
+                            </div>
+                            <div class="flex-grow">
+                                <h4 class="font-serif text-2xl font-bold mb-1">Software Developer</h4>
+                                <p class="font-sans text-xs uppercase tracking-widest font-bold text-accent mb-4">
+                                    Ergabite Tech Solutions (Intellify Client)</p>
+                                <p class="font-body text-inkLight mb-4">Developed features for "Intellify Migration
+                                    Wizard" (Teradata/Postgres). Engineered "In-Parking" alerting system using Azure App
+                                    Functions. Led "Infovault" multi-agent AI platform using Langchain & Azure OpenAI.
+                                    CI/CD implementation on Azure.</p>
+                            </div>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="flex flex-col md:flex-row gap-6 mb-10 border-b border-gray-300 pb-10"
+                            data-aos="fade-up">
+                            <div class="md:w-32 flex-shrink-0 pt-1">
+                                <span class="font-sans font-bold text-2xl block">2024</span>
+                                <span class="font-serif text-sm italic text-inkLight">Jul - Dec</span>
+                            </div>
+                            <div class="flex-grow">
+                                <h4 class="font-serif text-2xl font-bold mb-1">Senior Web Developer</h4>
+                                <p class="font-sans text-xs uppercase tracking-widest font-bold text-accent mb-4">
+                                    Internship Studio</p>
+                                <p class="font-body text-inkLight mb-4">Spearheaded hiring portal development.
+                                    Architected solutions on GCP (Vertex AI) and AWS (Lambda). Full-stack dev with
+                                    React, Node.js, PHP, Flask.</p>
+                            </div>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="flex flex-col md:flex-row gap-6" data-aos="fade-up">
+                            <div class="md:w-32 flex-shrink-0 pt-1">
+                                <span class="font-sans font-bold text-2xl block">2022</span>
+                                <span class="font-serif text-sm italic text-inkLight">Aug '22 - Jul '24</span>
+                            </div>
+                            <div class="flex-grow">
+                                <h4 class="font-serif text-2xl font-bold mb-1">System Engineer</h4>
+                                <p class="font-sans text-xs uppercase tracking-widest font-bold text-accent mb-4">
+                                    Infosys Ltd.</p>
+                                <p class="font-body text-inkLight mb-4">Dynamic app development with Angular, Node.js,
+                                    PostgreSQL. WCAG standards, WebSockets, and WebRTC integration. Salesforce
+                                    integration via Cortex framework.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- PROJECTS / FEATURES STYLE -->
+            <section id="projects" class="mb-16">
+                <div class="border-t-[3px] border-ink pt-1 mb-8">
+                    <div class="border-t border-ink pt-8 flex justify-between items-end">
+                        <h2 class="font-serif text-5xl font-bold">Feature Stories</h2>
+                        <span class="font-sans text-xs font-bold uppercase border border-ink px-2 py-1">Selected
+                            Works</span>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-12">
+                    <!-- Project 1 -->
+                    <article class="flex flex-col" data-aos="fade-up">
+                        <div class="border border-ink p-1 mb-4 bg-white">
+                            <div class="h-64 bg-gray-200 relative overflow-hidden group">
+                                <div class="absolute inset-0 flex items-center justify-center bg-ink text-paper">
+                                    <i
+                                        class="fas fa-brain text-6xl opacity-50 group-hover:scale-110 transition-transform duration-500"></i>
+                                </div>
+                                <!-- Grain overlay for image placeholder -->
+                                <div
+                                    class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmIi8+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNjY2MiLz4KPC9zdmc+')]">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-baseline gap-4 mb-2 border-b border-line pb-2">
+                            <span class="font-sans font-bold text-xs bg-ink text-paper px-1">AI PLATFORM</span>
+                            <span class="font-serif italic text-sm text-inkLight">Dec 2024</span>
+                        </div>
+                        <h3
+                            class="font-serif text-3xl font-bold mb-3 hover:text-accent transition-colors cursor-pointer">
+                            HireSense AI</h3>
+                        <p class="font-body text-inkLight mb-4 text-justify line-clamp-3">
+                            AI-powered career guidance platform with multi-agent orchestration using Pydantic AI and
+                            Gemini 2.0. Revolutionizing how candidates approach job markets through intelligent
+                            analysis.
+                        </p>
+                        <div class="mt-auto">
+                            <div class="flex gap-2 mb-4 text-xs font-sans font-bold uppercase text-gray-500">
+                                <span>Pydantic AI</span> / <span>FastAPI</span> / <span>WebSockets</span>
+                            </div>
+                            <a href="#"
+                                class="font-serif font-bold italic underline decoration-accent underline-offset-4 hover:text-accent">Read
+                                full analysis &rarr;</a>
+                        </div>
+                    </article>
+
+                    <!-- Project 2 -->
+                    <article class="flex flex-col" data-aos="fade-up" data-aos-delay="100">
+                        <div class="border border-ink p-1 mb-4 bg-white">
+                            <div class="h-64 bg-gray-200 relative overflow-hidden group">
+                                <div class="absolute inset-0 flex items-center justify-center bg-gray-800 text-paper">
+                                    <i
+                                        class="fas fa-database text-6xl opacity-50 group-hover:scale-110 transition-transform duration-500"></i>
+                                </div>
+                                <div
+                                    class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmIi8+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNjY2MiLz4KPC9zdmc+')]">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-baseline gap-4 mb-2 border-b border-line pb-2">
+                            <span class="font-sans font-bold text-xs bg-ink text-paper px-1">ANALYTICS</span>
+                            <span class="font-serif italic text-sm text-inkLight">Data Systems</span>
+                        </div>
+                        <h3
+                            class="font-serif text-3xl font-bold mb-3 hover:text-accent transition-colors cursor-pointer">
+                            Intellify Insights</h3>
+                        <p class="font-body text-inkLight mb-4 text-justify line-clamp-3">
+                            A robust data analytics platform designed to transfer SSIS packages and Power BI models
+                            between MSSQL, Teradata, and Postgres. Features advanced PySpark job management.
+                        </p>
+                        <div class="mt-auto">
+                            <div class="flex gap-2 mb-4 text-xs font-sans font-bold uppercase text-gray-500">
+                                <span>PySpark</span> / <span>Azure</span> / <span>Power BI</span>
+                            </div>
+                            <a href="#"
+                                class="font-serif font-bold italic underline decoration-accent underline-offset-4 hover:text-accent">Read
+                                full analysis &rarr;</a>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="border-t-[3px] border-ink pt-12 pb-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 border-b border-line pb-12">
+                <div class="md:col-span-6">
+                    <h2 class="font-serif text-5xl md:text-7xl font-black uppercase leading-none mb-6">
+                        Let's<br>Work<br>Together</h2>
+                    <p class="font-body text-lg max-w-md">Open for commissions, collaborations, and technical
+                        consultation. Send a telegram or electronic mail.</p>
+                </div>
+                <div class="md:col-span-6 flex flex-col justify-center items-start md:items-end gap-6">
+                    <div
+                        class="border border-ink p-6 bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transform rotate-1 hover:rotate-0 transition-transform max-w-xs w-full text-center">
+                        <h4 class="font-sans font-bold uppercase mb-4 border-b border-line pb-2">Contact Card</h4>
+                        <div class="flex justify-center gap-6 text-2xl">
+                            <a href="https://github.com/gamentionkray" class="hover:text-accent"><i
+                                    class="fab fa-github"></i></a>
+                            <a href="https://linkedin.com/in/krishnathorat" class="hover:text-accent"><i
+                                    class="fab fa-linkedin"></i></a>
+                            <a href="mailto:krishnathorat007@gmail.com" class="hover:text-accent"><i
+                                    class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="flex flex-col md:flex-row justify-between items-center pt-6 font-sans text-xs uppercase tracking-widest text-inkLight">
+                <p>&copy; 2025 Krishna Thorat. All Rights Reserved.</p>
+                <p>Printed in Pune, India.</p>
+                <p>Design: Editorial Standard</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            offset: 50,
+            once: true,
+            easing: 'ease-in-out-cubic'
+        });
+
+        // Dark Mode Logic (Inverted for paper look)
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const body = document.body;
+        const sheet = document.querySelector('.paper-sheet');
+
+        themeToggleBtn.addEventListener('click', () => {
+            // Simple inversion for the "Negative" film look
+            body.classList.toggle('invert');
+            body.classList.toggle('bg-black');
+        });
+    </script>
+    <script src="assets/js/template-switcher.js"></script>
+</body>
+
+</html>

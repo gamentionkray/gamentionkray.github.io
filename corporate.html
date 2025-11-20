@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishna Thorat | Full Stack AI Engineer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Inter"', 'sans-serif'],
+                    },
+                    colors: {
+                        corp: {
+                            primary: '#2563EB',
+                            secondary: '#1E293B',
+                            slate: '#64748B',
+                            light: '#F8FAFC',
+                            dark: '#0F172A',
+                            border: '#E2E8F0'
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                        'card': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        html.dark ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        html.dark ::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        html.dark .glass-nav {
+            background: rgba(15, 23, 42, 0.9);
+            border-bottom: 1px solid #1e293b;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-corp-light dark:bg-corp-dark text-corp-secondary dark:text-slate-200 transition-colors duration-300 font-sans antialiased selection:bg-corp-primary selection:text-white">
+
+    <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="#" class="text-xl font-bold tracking-tight text-corp-dark dark:text-white group">
+                    KT<span class="text-corp-primary">.DEV</span>
+                </a>
+
+                <div class="flex items-center gap-6">
+                    <a href="#projects"
+                        class="hidden md:block text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-corp-primary dark:hover:text-white transition-colors">Projects</a>
+                    <a href="#experience"
+                        class="hidden md:block text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-corp-primary dark:hover:text-white transition-colors">Experience</a>
+
+                    <button id="theme-toggle"
+                        class="p-2 rounded-full text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+                        <i class="fas fa-moon"></i>
+                    </button>
+
+                    <a href="mailto:krishnathorat007@gmail.com"
+                        class="hidden md:inline-flex items-center justify-center px-5 py-2 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-corp-primary hover:bg-blue-700 transition-all">
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-20">
+
+        <section
+            class="relative overflow-hidden py-20 sm:py-32 bg-white dark:bg-corp-dark border-b border-corp-border dark:border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-12 gap-12 items-center">
+
+                    <div class="lg:col-span-7" data-aos="fade-up">
+                        <div
+                            class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 mb-6">
+                            <span class="flex h-2 w-2 rounded-full bg-blue-600 mr-2"></span>
+                            Full Stack & AI Engineer
+                        </div>
+
+                        <h1
+                            class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-corp-dark dark:text-white mb-6 leading-tight">
+                            Building scalable web apps & <br>
+                            <span class="text-corp-primary">Intelligent AI Systems</span>
+                        </h1>
+
+                        <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mb-10 leading-relaxed">
+                            I specialize in architecting dynamic web applications and Agentic AI systems.
+                            Expertise in <strong class="text-corp-secondary dark:text-white">PHP, Node.js,
+                                React</strong> & <strong class="text-corp-secondary dark:text-white">Generative
+                                AI</strong>.
+                        </p>
+
+                        <div class="flex flex-wrap gap-4">
+                            <a href="#projects"
+                                class="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-lg shadow-sm text-white bg-corp-primary hover:bg-blue-700 transition-all">
+                                View Projects
+                            </a>
+                            <a href="resume.pdf" download
+                                class="inline-flex items-center px-8 py-3 border border-corp-border dark:border-slate-700 text-base font-medium rounded-lg text-corp-secondary dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">
+                                <i class="fas fa-download mr-2"></i> Resume
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 relative lg:block hidden" data-aos="fade-left" data-aos-delay="200">
+                        <div
+                            class="relative rounded-2xl overflow-hidden shadow-card border border-corp-border dark:border-slate-700 bg-white dark:bg-slate-800 p-2">
+                            <img src="assets/img/krishna-thorat.jpg" alt="Krishna Thorat"
+                                class="rounded-xl w-full h-auto object-cover">
+                            <div
+                                class="absolute bottom-6 right-6 bg-white/90 dark:bg-slate-900/90 backdrop-blur px-4 py-2 rounded-lg shadow-lg border border-corp-border dark:border-slate-700">
+                                <p class="text-2xl font-bold text-corp-primary">5+</p>
+                                <p class="text-xs text-slate-500 font-medium uppercase tracking-wide">Years Exp.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="w-full bg-slate-50 dark:bg-[#0b1120] border-b border-corp-border dark:border-slate-800 py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <p class="text-center text-sm font-semibold text-slate-500 uppercase tracking-wider mb-8">Technical
+                    Proficiency</p>
+                <div
+                    class="flex flex-wrap justify-center gap-x-12 gap-y-8 opacity-75 grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="flex items-center gap-2 text-xl font-semibold text-slate-700 dark:text-slate-300"><i
+                            class="fab fa-js text-yellow-500"></i> JavaScript</div>
+                    <div class="flex items-center gap-2 text-xl font-semibold text-slate-700 dark:text-slate-300"><i
+                            class="fab fa-react text-blue-400"></i> React</div>
+                    <div class="flex items-center gap-2 text-xl font-semibold text-slate-700 dark:text-slate-300"><i
+                            class="fab fa-node text-green-500"></i> Node.js</div>
+                    <div class="flex items-center gap-2 text-xl font-semibold text-slate-700 dark:text-slate-300"><i
+                            class="fab fa-python text-blue-500"></i> Python</div>
+                    <div class="flex items-center gap-2 text-xl font-semibold text-slate-700 dark:text-slate-300"><i
+                            class="fas fa-brain text-purple-500"></i> Gen AI</div>
+                    <div class="flex items-center gap-2 text-xl font-semibold text-slate-700 dark:text-slate-300"><i
+                            class="fab fa-aws text-orange-500"></i> AWS</div>
+                    <div class="flex items-center gap-2 text-xl font-semibold text-slate-700 dark:text-slate-300"><i
+                            class="fab fa-php text-indigo-500"></i> PHP</div>
+                </div>
+            </div>
+        </div>
+
+        <section class="py-24 bg-white dark:bg-corp-dark">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-3xl font-bold text-corp-dark dark:text-white mb-4">Professional Overview</h2>
+                    <p class="text-slate-600 dark:text-slate-400">A snapshot of my academic background, location, and
+                        core technology stack.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+                    <div class="md:col-span-2 bg-white dark:bg-slate-800 rounded-xl p-8 shadow-soft border border-corp-border dark:border-slate-700 hover:shadow-card transition-all"
+                        data-aos="fade-up">
+                        <div class="flex items-start justify-between mb-6">
+                            <div>
+                                <span
+                                    class="inline-block px-3 py-1 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 text-xs font-semibold uppercase tracking-wide mb-2">Education</span>
+                                <h3 class="text-xl font-bold text-corp-dark dark:text-white">Master of Computer
+                                    Applications</h3>
+                                <p class="text-slate-600 dark:text-slate-400 mt-1">Vishwakarma Institute of Technology,
+                                    Pune</p>
+                            </div>
+                            <div
+                                class="w-12 h-12 bg-blue-50 dark:bg-slate-700 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-graduation-cap text-corp-primary text-xl"></i>
+                            </div>
+                        </div>
+                        <div class="flex items-center text-sm text-slate-500 dark:text-slate-500 font-mono">
+                            <i class="far fa-calendar-alt mr-2"></i> 2020 - 2022
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 dark:bg-slate-800 rounded-xl p-8 shadow-soft border border-corp-border dark:border-slate-700 hover:shadow-card transition-all"
+                        data-aos="fade-up" data-aos-delay="100">
+                        <div
+                            class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-map-marker-alt text-purple-600 dark:text-purple-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-1">Based In</h3>
+                        <p class="text-2xl font-bold text-corp-dark dark:text-white">Pune, India</p>
+                    </div>
+
+                    <a href="https://github.com/gamentionkray" target="_blank"
+                        class="group bg-slate-900 dark:bg-black rounded-xl p-8 shadow-soft flex flex-col items-center justify-center text-center transition-all hover:bg-slate-800"
+                        data-aos="fade-up" data-aos-delay="200">
+                        <i
+                            class="fab fa-github text-4xl text-white mb-3 group-hover:scale-110 transition-transform"></i>
+                        <span class="font-medium text-white">@gamentionkray</span>
+                        <span class="text-xs text-slate-400 mt-1 group-hover:text-white transition-colors">View
+                            Repositories</span>
+                    </a>
+
+                    <div class="md:col-span-2 lg:col-span-2 bg-white dark:bg-slate-800 rounded-xl p-8 shadow-soft border border-corp-border dark:border-slate-700"
+                        data-aos="fade-up">
+                        <h3
+                            class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wide mb-4 border-b border-slate-100 dark:border-slate-700 pb-2">
+                            Core Stack</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-3 py-1 rounded-md bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium">PHP</span>
+                            <span
+                                class="px-3 py-1 rounded-md bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium">Node.js</span>
+                            <span
+                                class="px-3 py-1 rounded-md bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium">React</span>
+                            <span
+                                class="px-3 py-1 rounded-md bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium">Angular</span>
+                            <span
+                                class="px-3 py-1 rounded-md bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium">Python</span>
+                            <span
+                                class="px-3 py-1 rounded-md bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium">MySQL</span>
+                            <span
+                                class="px-3 py-1 rounded-md bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm font-medium">PostgreSQL</span>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-2 lg:col-span-2 bg-blue-50 dark:bg-blue-900/10 rounded-xl p-8 shadow-soft border border-blue-100 dark:border-blue-900/30"
+                        data-aos="fade-up" data-aos-delay="100">
+                        <h3
+                            class="text-sm font-bold text-blue-900 dark:text-blue-100 uppercase tracking-wide mb-4 border-b border-blue-200 dark:border-blue-800/50 pb-2">
+                            AI Engineering</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-3 py-1 rounded-md bg-white dark:bg-blue-900/40 text-blue-800 dark:text-blue-200 border border-blue-200 dark:border-blue-800 text-sm font-medium">Generative
+                                AI</span>
+                            <span
+                                class="px-3 py-1 rounded-md bg-white dark:bg-blue-900/40 text-blue-800 dark:text-blue-200 border border-blue-200 dark:border-blue-800 text-sm font-medium">Agentic
+                                AI</span>
+                            <span
+                                class="px-3 py-1 rounded-md bg-white dark:bg-blue-900/40 text-blue-800 dark:text-blue-200 border border-blue-200 dark:border-blue-800 text-sm font-medium">RAG</span>
+                            <span
+                                class="px-3 py-1 rounded-md bg-white dark:bg-blue-900/40 text-blue-800 dark:text-blue-200 border border-blue-200 dark:border-blue-800 text-sm font-medium">LangChain</span>
+                            <span
+                                class="px-3 py-1 rounded-md bg-white dark:bg-blue-900/40 text-blue-800 dark:text-blue-200 border border-blue-200 dark:border-blue-800 text-sm font-medium">Azure
+                                OpenAI</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="py-24 bg-slate-50 dark:bg-[#0b1120]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-12 gap-12">
+                    <div class="md:col-span-4">
+                        <div class="sticky top-32">
+                            <h2 class="text-3xl font-bold text-corp-dark dark:text-white mb-4">Experience</h2>
+                            <p class="text-slate-600 dark:text-slate-400 mb-8">A chronological record of my professional
+                                contributions.</p>
+
+                            <a href="resume.pdf" download
+                                class="inline-flex items-center text-corp-primary font-semibold hover:text-blue-800 dark:hover:text-blue-400 transition-colors">
+                                Download Resume <i class="fas fa-arrow-down ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-8 relative">
+                        <div class="absolute left-8 top-0 bottom-0 w-px bg-slate-300 dark:bg-slate-700 md:left-8"></div>
+
+                        <div class="relative pl-24 mb-12" data-aos="fade-up">
+                            <div
+                                class="absolute left-[26px] top-1.5 w-4 h-4 rounded-full bg-blue-600 border-4 border-white dark:border-slate-900 z-10">
+                            </div>
+                            <div
+                                class="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-soft border border-corp-border dark:border-slate-700">
+                                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4">
+                                    <h3 class="text-xl font-bold text-corp-dark dark:text-white">Software Developer</h3>
+                                    <span
+                                        class="inline-block bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 px-3 py-1 rounded-full text-xs font-semibold mt-2 sm:mt-0">Dec
+                                        2024 - Present</span>
+                                </div>
+                                <h4 class="text-lg font-medium text-slate-700 dark:text-slate-300 mb-4">Ergabite Tech
+                                    Solutions (Intellify Client)</h4>
+                                <ul
+                                    class="space-y-2 text-slate-600 dark:text-slate-400 text-sm leading-relaxed list-disc list-inside">
+                                    <li>Developed features for "Intellify Migration Wizard" (Teradata/Postgres).</li>
+                                    <li>Engineered "In-Parking" alerting system using Azure App Functions.</li>
+                                    <li>Led "Infovault" multi-agent AI platform using Langchain & Azure OpenAI.</li>
+                                    <li>CI/CD implementation on Azure.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="relative pl-24 mb-12" data-aos="fade-up">
+                            <div
+                                class="absolute left-[26px] top-1.5 w-4 h-4 rounded-full bg-slate-400 border-4 border-white dark:border-slate-900 z-10">
+                            </div>
+                            <div
+                                class="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-soft border border-corp-border dark:border-slate-700">
+                                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4">
+                                    <h3 class="text-xl font-bold text-corp-dark dark:text-white">Senior Web Developer
+                                    </h3>
+                                    <span
+                                        class="inline-block bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-400 px-3 py-1 rounded-full text-xs font-semibold mt-2 sm:mt-0">Jul
+                                        2024 - Dec 2024</span>
+                                </div>
+                                <h4 class="text-lg font-medium text-slate-700 dark:text-slate-300 mb-4">Internship
+                                    Studio</h4>
+                                <ul
+                                    class="space-y-2 text-slate-600 dark:text-slate-400 text-sm leading-relaxed list-disc list-inside">
+                                    <li>Spearheaded hiring portal development.</li>
+                                    <li>Architected solutions on GCP (Vertex AI) and AWS (Lambda).</li>
+                                    <li>Full-stack dev with React, Node.js, PHP, Flask.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="relative pl-24" data-aos="fade-up">
+                            <div
+                                class="absolute left-[26px] top-1.5 w-4 h-4 rounded-full bg-slate-400 border-4 border-white dark:border-slate-900 z-10">
+                            </div>
+                            <div
+                                class="bg-white dark:bg-slate-800 rounded-lg p-6 shadow-soft border border-corp-border dark:border-slate-700">
+                                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4">
+                                    <h3 class="text-xl font-bold text-corp-dark dark:text-white">System Engineer</h3>
+                                    <span
+                                        class="inline-block bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-400 px-3 py-1 rounded-full text-xs font-semibold mt-2 sm:mt-0">Aug
+                                        2022 - Jul 2024</span>
+                                </div>
+                                <h4 class="text-lg font-medium text-slate-700 dark:text-slate-300 mb-4">Infosys Ltd.
+                                </h4>
+                                <ul
+                                    class="space-y-2 text-slate-600 dark:text-slate-400 text-sm leading-relaxed list-disc list-inside">
+                                    <li>Dynamic app development with Angular, Node.js, PostgreSQL.</li>
+                                    <li>WCAG standards, WebSockets, and WebRTC integration.</li>
+                                    <li>Salesforce integration via Cortex framework.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects"
+            class="py-24 bg-white dark:bg-corp-dark border-t border-corp-border dark:border-slate-800">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-corp-dark dark:text-white mb-4">Featured Projects</h2>
+                    <p class="text-slate-600 dark:text-slate-400">Selected works showcasing capabilities in AI and Data
+                        Engineering.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+
+                    <article
+                        class="flex flex-col bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-soft border border-corp-border dark:border-slate-700 hover:shadow-card transition-shadow duration-300"
+                        data-aos="fade-up">
+                        <div
+                            class="h-48 bg-gradient-to-r from-purple-600 to-indigo-600 flex items-center justify-center">
+                            <i class="fas fa-brain text-5xl text-white/90"></i>
+                        </div>
+                        <div class="p-8 flex-grow flex flex-col">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-xl font-bold text-corp-dark dark:text-white">HireSense AI</h3>
+                                <span class="text-xs font-mono text-slate-400">Dec 2024 - Present</span>
+                            </div>
+                            <p class="text-slate-600 dark:text-slate-400 mb-6 text-sm leading-relaxed flex-grow">
+                                AI-powered career guidance platform with multi-agent orchestration using Pydantic AI and
+                                Gemini 2.0.</p>
+
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span
+                                    class="px-2 py-1 text-xs font-medium rounded bg-purple-50 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300">Pydantic
+                                    AI</span>
+                                <span
+                                    class="px-2 py-1 text-xs font-medium rounded bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-300">FastAPI</span>
+                                <span
+                                    class="px-2 py-1 text-xs font-medium rounded bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-300">WebSockets</span>
+                            </div>
+
+                            <div
+                                class="pt-6 border-t border-corp-border dark:border-slate-700 flex justify-between items-center">
+                                <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">16+ AI
+                                    Agents</span>
+                                <a href="#" class="text-sm font-medium text-corp-primary hover:underline">Details <i
+                                        class="fas fa-arrow-right ml-1 text-xs"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article
+                        class="flex flex-col bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-soft border border-corp-border dark:border-slate-700 hover:shadow-card transition-shadow duration-300"
+                        data-aos="fade-up" data-aos-delay="100">
+                        <div class="h-48 bg-gradient-to-r from-blue-600 to-cyan-600 flex items-center justify-center">
+                            <i class="fas fa-database text-5xl text-white/90"></i>
+                        </div>
+                        <div class="p-8 flex-grow flex flex-col">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-xl font-bold text-corp-dark dark:text-white">Intellify Insights</h3>
+                                <span class="text-xs font-mono text-slate-400">Data Platform</span>
+                            </div>
+                            <p class="text-slate-600 dark:text-slate-400 mb-6 text-sm leading-relaxed flex-grow">
+                                Transfer SSIS packages and Power BI models between MSSQL, Teradata, and Postgres with
+                                PySpark job management.</p>
+
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span
+                                    class="px-2 py-1 text-xs font-medium rounded bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">PySpark</span>
+                                <span
+                                    class="px-2 py-1 text-xs font-medium rounded bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-300">Azure</span>
+                                <span
+                                    class="px-2 py-1 text-xs font-medium rounded bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-300">Power
+                                    BI</span>
+                            </div>
+
+                            <div
+                                class="pt-6 border-t border-corp-border dark:border-slate-700 flex justify-between items-center">
+                                <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">CI/CD
+                                    Pipeline</span>
+                                <a href="#" class="text-sm font-medium text-corp-primary hover:underline">Details <i
+                                        class="fas fa-arrow-right ml-1 text-xs"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-corp-secondary dark:bg-black text-white py-12 border-t border-slate-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-8 items-center mb-12">
+                <div class="text-center md:text-left">
+                    <h2 class="text-2xl font-bold mb-2">Let's collaborate on your next project</h2>
+                    <p class="text-slate-400">Available for freelance opportunities and consulting.</p>
+                </div>
+                <div class="flex justify-center md:justify-end gap-4">
+                    <a href="https://github.com/gamentionkray"
+                        class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center hover:bg-white hover:text-corp-secondary transition-all">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/krishnathorat"
+                        class="w-10 h-10 rounded-full bg-blue-700 flex items-center justify-center hover:bg-white hover:text-blue-700 transition-all">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="mailto:krishnathorat007@gmail.com"
+                        class="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center hover:bg-white hover:text-green-600 transition-all">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div
+                class="border-t border-slate-700 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500">
+                <p>&copy; 2025 Krishna Thorat. All rights reserved.</p>
+                <p class="mt-2 md:mt-0">Designed in Pune, India.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS with softer transitions
+        AOS.init({
+            duration: 800,
+            offset: 30,
+            once: true,
+            easing: 'ease-out-cubic'
+        });
+
+        // Dark Mode Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const icon = themeToggleBtn.querySelector('i');
+
+        // Check local storage
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.theme = 'dark';
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                localStorage.theme = 'light';
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+    </script>
+    <script src="assets/js/template-switcher.js"></script>
+</body>
+
+</html>

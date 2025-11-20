@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishna Thorat | Full Stack AI Engineer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        mono: ['"Space Mono"', 'monospace'],
+                        display: ['"Syne"', 'sans-serif'],
+                    },
+                    colors: {
+                        paper: '#F3F1E7',
+                        riso: {
+                            black: '#1A1A1A',
+                            blue: '#0052CC', // Bright Riso Blue
+                            pink: '#FF48B0', // Fluorescent Pink
+                            yellow: '#FFE800',
+                            teal: '#007865',
+                            red: '#FF3333'
+                        }
+                    },
+                    backgroundImage: {
+                        'halftone': 'radial-gradient(circle, #0052CC 2px, transparent 2.5px)',
+                        'halftone-pink': 'radial-gradient(circle, #FF48B0 2px, transparent 2.5px)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F3F1E7;
+            color: #1A1A1A;
+        }
+
+        /* Grain Texture Overlay */
+        .iso-grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.15;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            mix-blend-mode: multiply;
+        }
+
+        /* Ink Bleed / Multiply Effects */
+        .multiply {
+            mix-blend-mode: multiply;
+        }
+
+        .screen {
+            mix-blend-mode: screen;
+        }
+
+        /* Registration Error (Misalignment) Animation */
+        .registration-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(2px, -2px);
+            }
+        }
+
+        /* Dithered Image Effect */
+        .riso-img-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .riso-img-container img {
+            filter: grayscale(100%) contrast(150%) brightness(110%);
+            mix-blend-mode: multiply;
+        }
+
+        .riso-img-overlay {
+            position: absolute;
+            inset: 0;
+            background-color: #FF48B0;
+            /* Pink Tint */
+            mix-blend-mode: lighten;
+            opacity: 0.6;
+        }
+
+        /* Selection */
+        ::selection {
+            background: #FFE800;
+            color: #0052CC;
+        }
+
+        /* Halftone Pattern Class */
+        .bg-dots-sm {
+            background-size: 8px 8px;
+        }
+
+        .rotate-slight {
+            transform: rotate(-1deg);
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-riso-yellow selection:text-riso-blue overflow-x-hidden">
+
+    <div class="iso-grain"></div>
+
+    <div id="loader"
+        class="fixed inset-0 bg-riso-blue z-[100] flex items-center justify-center transition-transform duration-1000 ease-in-out">
+        <div class="relative">
+            <h1 class="text-6xl font-display font-bold text-riso-yellow mix-blend-screen animate-pulse">PRINTING...</h1>
+            <h1
+                class="text-6xl font-display font-bold text-riso-pink absolute top-1 left-1 mix-blend-screen opacity-70">
+                PRINTING...</h1>
+        </div>
+    </div>
+
+    <nav class="fixed top-0 w-full z-40 px-6 py-6 mix-blend-multiply pointer-events-none">
+        <div class="max-w-7xl mx-auto flex justify-between items-center pointer-events-auto">
+            <a href="#"
+                class="text-3xl font-display font-bold text-riso-blue hover:text-riso-pink transition-colors relative group">
+                KT<span class="text-riso-yellow">.</span>DEV
+                <span
+                    class="absolute -top-[2px] -left-[2px] text-riso-pink -z-10 opacity-0 group-hover:opacity-100 transition-opacity">KT.DEV</span>
+            </a>
+
+            <div class="flex items-center gap-6">
+                <a href="mailto:krishnathorat007@gmail.com"
+                    class="font-mono text-sm font-bold uppercase text-riso-black border-b-2 border-riso-pink hover:bg-riso-yellow transition-colors px-2 py-1">
+                    Currently Employed
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-20 px-4 sm:px-6 relative">
+
+        <header class="max-w-7xl mx-auto mb-32 relative">
+            <!-- Abstract Background Shapes -->
+            <div
+                class="absolute top-0 right-0 w-64 h-64 bg-riso-yellow rounded-full mix-blend-multiply opacity-60 filter blur-3xl -z-10">
+            </div>
+            <div
+                class="absolute bottom-0 left-20 w-96 h-96 bg-riso-pink rounded-full mix-blend-multiply opacity-40 filter blur-3xl -z-10">
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-12 items-start">
+
+                <div class="lg:col-span-8 z-10" data-aos="fade-up">
+                    <div
+                        class="font-mono text-riso-blue text-xs uppercase tracking-widest mb-4 border-l-2 border-riso-pink pl-3">
+                        Full Stack & AI Engineer
+                    </div>
+
+                    <div class="relative mb-10">
+                        <h1
+                            class="text-7xl sm:text-8xl md:text-9xl font-display font-bold text-riso-black leading-[0.85] tracking-tight mix-blend-multiply relative z-10">
+                            Krishna <br>
+                            Thorat
+                        </h1>
+                        <!-- Registration Error Echo -->
+                        <h1
+                            class="text-7xl sm:text-8xl md:text-9xl font-display font-bold text-riso-blue absolute top-[4px] left-[4px] leading-[0.85] tracking-tight mix-blend-multiply opacity-50 -z-0 pointer-events-none registration-float">
+                            Krishna <br>
+                            Thorat
+                        </h1>
+                        <h1
+                            class="text-7xl sm:text-8xl md:text-9xl font-display font-bold text-riso-pink absolute -top-[4px] -left-[2px] leading-[0.85] tracking-tight mix-blend-multiply opacity-40 -z-0 pointer-events-none">
+                            Krishna <br>
+                            Thorat
+                        </h1>
+                    </div>
+
+                    <p
+                        class="text-xl md:text-2xl font-serif italic text-riso-black max-w-2xl mb-12 leading-relaxed relative">
+                        <span class="absolute -left-6 top-0 text-6xl text-riso-yellow opacity-50 font-display">“</span>
+                        Building dynamic web applications and Agentic AI systems. Specializing in <span
+                            class="font-bold text-riso-blue decoration-wavy underline decoration-riso-pink">PHP,
+                            Node.js, React</span> & <span class="bg-riso-yellow px-1 mix-blend-multiply">Generative
+                            AI</span>.
+                    </p>
+
+                    <div class="flex flex-wrap gap-6 font-mono">
+                        <a href="#projects" class="relative group inline-block">
+                            <span
+                                class="absolute inset-0 bg-riso-blue translate-x-1 translate-y-1 transition-transform group-hover:translate-x-2 group-hover:translate-y-2 rounded-sm"></span>
+                            <span
+                                class="relative block border border-riso-blue bg-paper px-8 py-4 text-riso-blue font-bold uppercase text-sm group-hover:-translate-y-1 transition-transform">
+                                View Projects
+                            </span>
+                        </a>
+                        <a href="mailto:krishnathorat007@gmail.com" class="relative group inline-block">
+                            <span
+                                class="absolute inset-0 bg-riso-pink translate-x-1 translate-y-1 transition-transform group-hover:translate-x-2 group-hover:translate-y-2 rounded-sm"></span>
+                            <span
+                                class="relative block border border-riso-pink bg-paper px-8 py-4 text-riso-pink font-bold uppercase text-sm group-hover:-translate-y-1 transition-transform">
+                                Contact Me
+                            </span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-4 relative hidden lg:block mt-12" data-aos="fade-left" data-aos-delay="200">
+                    <div class="relative rotate-slight">
+                        <div class="absolute inset-0 bg-riso-blue translate-x-3 translate-y-3 mix-blend-multiply"></div>
+                        <div
+                            class="aspect-[4/5] bg-paper border-2 border-riso-black p-2 relative z-10 riso-img-container">
+                            <img src="assets/img/krishna-thorat.jpg" alt="Krishna Thorat"
+                                class="w-full h-full object-cover">
+                            <div class="riso-img-overlay"></div>
+
+                            <!-- Halftone Pattern Overlay -->
+                            <div
+                                class="absolute inset-0 bg-halftone bg-dots-sm opacity-20 pointer-events-none mix-blend-overlay">
+                            </div>
+                        </div>
+
+                        <!-- Sticker Element -->
+                        <div
+                            class="absolute -bottom-6 -right-6 bg-riso-yellow text-riso-black w-24 h-24 rounded-full flex flex-col items-center justify-center text-center p-2 shadow-lg transform rotate-12 z-20 mix-blend-multiply">
+                            <span class="font-display font-bold text-3xl block leading-none">5+</span>
+                            <span class="font-mono text-[10px] uppercase font-bold">Years Exp.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Ticker Tape Style -->
+        <div
+            class="w-full overflow-hidden mb-32 py-4 transform -rotate-1 bg-riso-black text-paper border-y-4 border-dashed border-riso-white mix-blend-multiply">
+            <div class="whitespace-nowrap animate-marquee flex gap-12 font-mono text-lg uppercase tracking-widest">
+                <span>JavaScript + React</span>
+                <span class="text-riso-pink">///</span>
+                <span>Node.js + Python</span>
+                <span class="text-riso-yellow">///</span>
+                <span>Generative AI</span>
+                <span class="text-riso-blue">///</span>
+                <span>Langchain + RAG</span>
+                <span class="text-riso-pink">///</span>
+                <span>AWS + Azure</span>
+                <span class="text-riso-yellow">///</span>
+                <span>PHP + PostgreSQL</span>
+                <span class="text-riso-blue">///</span>
+                <span>JavaScript + React</span>
+                <span class="text-riso-pink">///</span>
+                <span>Generative AI</span>
+            </div>
+        </div>
+
+        <section class="max-w-7xl mx-auto mb-32">
+            <div class="flex items-end gap-4 mb-16 border-b-2 border-riso-black pb-4">
+                <h2 class="text-5xl md:text-7xl font-display font-bold text-riso-black uppercase leading-none">
+                    The <span class="text-transparent" style="-webkit-text-stroke: 2px #FF48B0;">Arsenal</span>
+                </h2>
+                <span class="font-mono text-xs mb-2 ml-auto">REF: SKILLS_SET_2025</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+
+                <!-- Card Style: Index Card -->
+                <div class="bg-white p-6 shadow-[8px_8px_0_rgba(0,82,204,0.2)] border border-gray-200 md:col-span-2 relative overflow-hidden group"
+                    data-aos="fade-up">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-riso-blue to-riso-pink"></div>
+                    <div class="flex justify-between items-start mb-6">
+                        <div
+                            class="font-mono text-xs font-bold text-riso-blue border border-riso-blue px-2 py-1 rounded-full">
+                            EDUCATION_ID: MASTER</div>
+                        <i
+                            class="fas fa-graduation-cap text-3xl text-gray-200 group-hover:text-riso-yellow transition-colors"></i>
+                    </div>
+                    <h3
+                        class="text-3xl font-display font-bold mb-2 text-riso-black group-hover:text-riso-blue transition-colors">
+                        Master of Computer Applications</h3>
+                    <p class="font-serif italic text-lg text-gray-600">Vishwakarma Institute of Technology, Pune</p>
+                    <p class="font-mono text-sm mt-4 text-riso-pink">2020 - 2022</p>
+                </div>
+
+                <!-- Card Style: Stamp -->
+                <div class="bg-riso-pink p-6 shadow-[8px_8px_0_#1A1A1A] flex flex-col justify-between relative overflow-hidden text-white mix-blend-multiply"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute inset-0 bg-halftone-pink bg-dots-sm opacity-20"></div>
+                    <h3 class="font-mono text-xs uppercase tracking-widest border-b border-white/30 pb-2 mb-4">Location
+                        Data</h3>
+                    <p class="text-4xl font-display font-bold leading-none transform -rotate-2">Pune,<br>India</p>
+                    <i class="fas fa-map-marker-alt text-8xl absolute -bottom-6 -right-6 text-white opacity-20"></i>
+                </div>
+
+                <!-- Card Style: Minimal -->
+                <a href="https://github.com/gamentionkray" target="_blank"
+                    class="bg-riso-yellow p-6 border-2 border-riso-black flex flex-col justify-center items-center gap-4 hover:bg-white hover:text-riso-blue transition-colors group"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <i class="fab fa-github text-6xl group-hover:scale-110 transition-transform mix-blend-multiply"></i>
+                    <span class="font-mono font-bold text-lg border-b-2 border-black pb-1">@gamentionkray</span>
+                </a>
+
+                <div class="p-6 border-2 border-dashed border-riso-teal md:col-span-2 bg-white/50" data-aos="fade-up">
+                    <h3 class="font-display font-bold text-xl text-riso-teal mb-6 uppercase tracking-wide">Core Stack
+                    </h3>
+                    <div class="flex flex-wrap gap-x-4 gap-y-2 font-mono text-sm">
+                        <span class="relative inline-block px-1 group cursor-default">
+                            <span
+                                class="absolute inset-0 bg-riso-teal opacity-20 group-hover:opacity-100 transition-opacity transform -skew-x-12"></span>
+                            <span class="relative z-10 group-hover:text-white">PHP</span>
+                        </span>
+                        <span class="relative inline-block px-1 group cursor-default">
+                            <span
+                                class="absolute inset-0 bg-riso-teal opacity-20 group-hover:opacity-100 transition-opacity transform -skew-x-12"></span>
+                            <span class="relative z-10 group-hover:text-white">Node.js</span>
+                        </span>
+                        <span class="relative inline-block px-1 group cursor-default">
+                            <span
+                                class="absolute inset-0 bg-riso-teal opacity-20 group-hover:opacity-100 transition-opacity transform -skew-x-12"></span>
+                            <span class="relative z-10 group-hover:text-white">React</span>
+                        </span>
+                        <span class="relative inline-block px-1 group cursor-default">
+                            <span
+                                class="absolute inset-0 bg-riso-teal opacity-20 group-hover:opacity-100 transition-opacity transform -skew-x-12"></span>
+                            <span class="relative z-10 group-hover:text-white">Angular</span>
+                        </span>
+                        <span class="relative inline-block px-1 group cursor-default">
+                            <span
+                                class="absolute inset-0 bg-riso-teal opacity-20 group-hover:opacity-100 transition-opacity transform -skew-x-12"></span>
+                            <span class="relative z-10 group-hover:text-white">Python</span>
+                        </span>
+                        <span class="relative inline-block px-1 group cursor-default">
+                            <span
+                                class="absolute inset-0 bg-riso-teal opacity-20 group-hover:opacity-100 transition-opacity transform -skew-x-12"></span>
+                            <span class="relative z-10 group-hover:text-white">MySQL</span>
+                        </span>
+                        <span class="relative inline-block px-1 group cursor-default">
+                            <span
+                                class="absolute inset-0 bg-riso-teal opacity-20 group-hover:opacity-100 transition-opacity transform -skew-x-12"></span>
+                            <span class="relative z-10 group-hover:text-white">PostgreSQL</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="p-6 bg-riso-black text-paper md:col-span-2 relative overflow-hidden" data-aos="fade-up"
+                    data-aos-delay="100">
+                    <div class="absolute inset-0 bg-halftone bg-dots-sm opacity-10"></div>
+                    <h3
+                        class="font-display font-bold text-xl text-riso-pink mb-6 uppercase tracking-wide mix-blend-screen">
+                        AI Engineering</h3>
+                    <div class="flex flex-wrap gap-3 font-mono text-sm">
+                        <span
+                            class="border border-riso-pink px-2 py-1 text-riso-pink hover:bg-riso-pink hover:text-black transition-colors">Generative
+                            AI</span>
+                        <span
+                            class="border border-riso-pink px-2 py-1 text-riso-pink hover:bg-riso-pink hover:text-black transition-colors">Agentic
+                            AI</span>
+                        <span
+                            class="border border-riso-pink px-2 py-1 text-riso-pink hover:bg-riso-pink hover:text-black transition-colors">RAG</span>
+                        <span
+                            class="border border-riso-pink px-2 py-1 text-riso-pink hover:bg-riso-pink hover:text-black transition-colors">LangChain</span>
+                        <span
+                            class="border border-riso-pink px-2 py-1 text-riso-pink hover:bg-riso-pink hover:text-black transition-colors">Azure
+                            OpenAI</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto mb-32">
+            <div class="grid md:grid-cols-12 gap-12">
+                <div class="md:col-span-4">
+                    <div class="sticky top-32">
+                        <h2
+                            class="text-6xl font-display font-bold uppercase mb-2 leading-none text-riso-blue mix-blend-multiply">
+                            XP <br> Log
+                        </h2>
+                        <div class="h-2 w-24 bg-riso-pink mb-6 mix-blend-multiply"></div>
+                        <p class="text-lg font-serif italic text-gray-600">A chronological record of my contributions to
+                            the tech industry.</p>
+
+                        <a href="resume.pdf" download
+                            class="mt-8 inline-flex items-center gap-2 font-mono text-sm font-bold border-2 border-riso-black px-6 py-3 hover:bg-riso-black hover:text-white transition-all shadow-[4px_4px_0_#000]">
+                            <i class="fas fa-download"></i> Download Resume
+                        </a>
+                    </div>
+                </div>
+
+                <div class="md:col-span-8 space-y-8">
+
+                    <!-- Experience Item 1 -->
+                    <div class="relative group" data-aos="fade-up">
+                        <div
+                            class="absolute -inset-1 bg-riso-pink opacity-0 group-hover:opacity-100 transition-opacity blur-sm mix-blend-multiply">
+                        </div>
+                        <div class="relative bg-paper border-l-4 border-riso-blue p-8 hover:bg-white transition-colors">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-baseline mb-2">
+                                <h3 class="text-2xl font-display font-bold">Software Developer</h3>
+                                <span class="font-mono text-xs bg-riso-blue text-white px-2 py-1">Dec 2024 -
+                                    Present</span>
+                            </div>
+                            <h4 class="text-lg font-serif italic mb-4 text-gray-500">Ergabite Tech Solutions (Intellify
+                                Client)</h4>
+                            <ul class="list-none font-mono text-sm space-y-2 text-gray-700">
+                                <li class="flex items-start gap-2"><span class="text-riso-pink mt-1">>></span> Developed
+                                    features for "Intellify Migration Wizard" (Teradata/Postgres).</li>
+                                <li class="flex items-start gap-2"><span class="text-riso-pink mt-1">>></span>
+                                    Engineered "In-Parking" alerting system using Azure App Functions.</li>
+                                <li class="flex items-start gap-2"><span class="text-riso-pink mt-1">>></span> Led
+                                    "Infovault" multi-agent AI platform using Langchain & Azure OpenAI.</li>
+                                <li class="flex items-start gap-2"><span class="text-riso-pink mt-1">>></span> CI/CD
+                                    implementation on Azure.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Experience Item 2 -->
+                    <div class="relative group" data-aos="fade-up">
+                        <div
+                            class="absolute -inset-1 bg-riso-yellow opacity-0 group-hover:opacity-100 transition-opacity blur-sm mix-blend-multiply">
+                        </div>
+                        <div
+                            class="relative bg-paper border-l-4 border-riso-yellow p-8 hover:bg-white transition-colors">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-baseline mb-2">
+                                <h3 class="text-2xl font-display font-bold">Senior Web Developer</h3>
+                                <span class="font-mono text-xs bg-riso-yellow text-black px-2 py-1">Jul 2024 - Dec
+                                    2024</span>
+                            </div>
+                            <h4 class="text-lg font-serif italic mb-4 text-gray-500">Internship Studio</h4>
+                            <ul class="list-none font-mono text-sm space-y-2 text-gray-700">
+                                <li class="flex items-start gap-2"><span class="text-riso-blue mt-1">>></span>
+                                    Spearheaded hiring portal development.</li>
+                                <li class="flex items-start gap-2"><span class="text-riso-blue mt-1">>></span>
+                                    Architected solutions on GCP (Vertex AI) and AWS (Lambda).</li>
+                                <li class="flex items-start gap-2"><span class="text-riso-blue mt-1">>></span>
+                                    Full-stack dev with React, Node.js, PHP, Flask.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Experience Item 3 -->
+                    <div class="relative group" data-aos="fade-up">
+                        <div
+                            class="absolute -inset-1 bg-riso-black opacity-0 group-hover:opacity-100 transition-opacity blur-sm mix-blend-multiply">
+                        </div>
+                        <div
+                            class="relative bg-paper border-l-4 border-riso-black p-8 hover:bg-white transition-colors">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-baseline mb-2">
+                                <h3 class="text-2xl font-display font-bold">System Engineer</h3>
+                                <span class="font-mono text-xs bg-riso-black text-white px-2 py-1">Aug 2022 - Jul
+                                    2024</span>
+                            </div>
+                            <h4 class="text-lg font-serif italic mb-4 text-gray-500">Infosys Ltd.</h4>
+                            <ul class="list-none font-mono text-sm space-y-2 text-gray-700">
+                                <li class="flex items-start gap-2"><span class="text-riso-pink mt-1">>></span> Dynamic
+                                    app development with Angular, Node.js, PostgreSQL.</li>
+                                <li class="flex items-start gap-2"><span class="text-riso-pink mt-1">>></span> WCAG
+                                    standards, WebSockets, and WebRTC integration.</li>
+                                <li class="flex items-start gap-2"><span class="text-riso-pink mt-1">>></span>
+                                    Salesforce integration via Cortex framework.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="max-w-7xl mx-auto mb-32">
+            <div class="text-center mb-16 relative">
+                <h2 class="text-6xl md:text-8xl font-display font-bold uppercase text-riso-black mix-blend-multiply">
+                    Selected Works</h2>
+                <div
+                    class="absolute top-1/2 left-0 w-full h-1 bg-riso-yellow -z-10 mix-blend-multiply transform -skew-y-2">
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+
+                <!-- Project 1 -->
+                <article class="bg-white p-4 pb-8 relative group" data-aos="fade-up">
+                    <!-- Tape effect -->
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-32 h-8 bg-yellow-100 opacity-80 rotate-2 shadow-sm z-10"
+                        style="background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, #ffffff 10px, #ffffff 20px);">
+                    </div>
+
+                    <div class="border border-gray-300 h-full shadow-lg transition-transform group-hover:-rotate-1">
+                        <div class="h-64 bg-riso-pink overflow-hidden relative border-b border-black">
+                            <!-- Duotone effect simulation -->
+                            <div class="absolute inset-0 bg-halftone bg-dots-sm opacity-30"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i class="fas fa-brain text-9xl text-white mix-blend-screen opacity-80"></i>
+                            </div>
+                            <div
+                                class="absolute bottom-0 left-0 w-full bg-white p-2 font-mono text-xs font-bold border-t border-black">
+                                FILE: PROJECT_01 // AI_ORCHESTRATION
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-4xl font-display font-bold mb-2 text-riso-blue mix-blend-multiply">HireSense
+                                AI</h3>
+                            <p class="font-mono text-xs text-gray-400 mb-6">Dec 2024 - Present</p>
+                            <p class="font-serif text-lg leading-relaxed mb-8">AI-powered career guidance platform with
+                                multi-agent orchestration using Pydantic AI and Gemini 2.0.</p>
+
+                            <div class="flex flex-wrap gap-2 mb-8">
+                                <span class="text-xs font-bold font-mono bg-gray-100 text-gray-600 px-2 py-1">Pydantic
+                                    AI</span>
+                                <span
+                                    class="text-xs font-bold font-mono bg-gray-100 text-gray-600 px-2 py-1">FastAPI</span>
+                                <span
+                                    class="text-xs font-bold font-mono bg-gray-100 text-gray-600 px-2 py-1">WebSockets</span>
+                            </div>
+
+                            <div
+                                class="flex items-center justify-between border-t-2 border-dashed border-gray-300 pt-4">
+                                <span class="font-bold font-mono text-sm text-riso-pink">16+ AI Agents</span>
+                                <a href="#"
+                                    class="font-display font-bold text-xl hover:text-riso-blue underline decoration-2 underline-offset-4">View
+                                    Case Study</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="bg-white p-4 pb-8 relative group" data-aos="fade-up" data-aos-delay="100">
+                    <!-- Tape effect -->
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-32 h-8 bg-yellow-100 opacity-80 -rotate-1 shadow-sm z-10"
+                        style="background-image: repeating-linear-gradient(-45deg, transparent, transparent 10px, #ffffff 10px, #ffffff 20px);">
+                    </div>
+
+                    <div class="border border-gray-300 h-full shadow-lg transition-transform group-hover:rotate-1">
+                        <div class="h-64 bg-riso-blue overflow-hidden relative border-b border-black">
+                            <!-- Duotone effect simulation -->
+                            <div class="absolute inset-0 bg-halftone bg-dots-sm opacity-30"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i class="fas fa-database text-9xl text-white mix-blend-screen opacity-80"></i>
+                            </div>
+                            <div
+                                class="absolute bottom-0 left-0 w-full bg-white p-2 font-mono text-xs font-bold border-t border-black">
+                                FILE: PROJECT_02 // DATA_PIPELINE
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-4xl font-display font-bold mb-2 text-riso-pink mix-blend-multiply">Intellify
+                                Insights</h3>
+                            <p class="font-mono text-xs text-gray-400 mb-6">Data Analytics Platform</p>
+                            <p class="font-serif text-lg leading-relaxed mb-8">Transfer SSIS packages and Power BI
+                                models between MSSQL, Teradata, and Postgres with PySpark job management.</p>
+
+                            <div class="flex flex-wrap gap-2 mb-8">
+                                <span
+                                    class="text-xs font-bold font-mono bg-gray-100 text-gray-600 px-2 py-1">PySpark</span>
+                                <span
+                                    class="text-xs font-bold font-mono bg-gray-100 text-gray-600 px-2 py-1">Azure</span>
+                                <span class="text-xs font-bold font-mono bg-gray-100 text-gray-600 px-2 py-1">Power
+                                    BI</span>
+                            </div>
+
+                            <div
+                                class="flex items-center justify-between border-t-2 border-dashed border-gray-300 pt-4">
+                                <span class="font-bold font-mono text-sm text-riso-pink">CI/CD Pipeline</span>
+                                <a href="#"
+                                    class="font-display font-bold text-xl hover:text-riso-blue underline decoration-2 underline-offset-4">View
+                                    Case Study</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-riso-black text-paper py-24 relative overflow-hidden">
+        <!-- Background pattern -->
+        <div class="absolute inset-0 opacity-10"
+            style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 20px 20px;"></div>
+
+        <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+            <div class="inline-block border-2 border-paper px-4 py-1 rounded-full font-mono text-xs mb-8 animate-pulse">
+                STATUS: AVAILABLE FOR HIRE</div>
+
+            <h2
+                class="text-5xl md:text-8xl font-display font-bold uppercase mb-12 leading-none mix-blend-screen text-riso-yellow">
+                Let's Work <br> <span class="text-riso-pink italic font-serif lowercase">Together</span>
+            </h2>
+
+            <div class="flex justify-center gap-8 mb-16">
+                <a href="https://github.com/gamentionkray"
+                    class="text-4xl hover:text-riso-pink hover:-translate-y-2 transition-transform">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/krishnathorat"
+                    class="text-4xl hover:text-riso-blue hover:-translate-y-2 transition-transform">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:krishnathorat007@gmail.com"
+                    class="text-4xl hover:text-riso-yellow hover:-translate-y-2 transition-transform">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+
+            <div
+                class="flex flex-col md:flex-row justify-between items-center border-t border-gray-700 pt-8 font-mono text-xs text-gray-400 uppercase tracking-widest">
+                <p>&copy; 2025 Krishna Thorat. Pune, India.</p>
+                <p class="mt-4 md:mt-0">Printed in HTML & CSS</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            offset: 50,
+            once: true,
+            easing: 'ease-out-cubic'
+        });
+
+        // Loader Logic
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.style.transform = 'translateY(-100%)';
+            }, 1000); // Slight delay for effect
+        });
+    </script>
+    <script src="assets/js/template-switcher.js"></script>
+</body>
+
+</html>

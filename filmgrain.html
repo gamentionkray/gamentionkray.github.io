@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishna Thorat | Full Stack AI Engineer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Courier+Prime:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        mono: ['"Courier Prime"', 'monospace'],
+                    },
+                    colors: {
+                        film: {
+                            black: '#050505',
+                            dark: '#0f0f0f',
+                            gray: '#1a1a1a',
+                            white: '#e0e0e0',
+                            grain: '#8c8c8c',
+                            red: '#ff3333',
+                        }
+                    },
+                    animation: {
+                        'film-grain': 'grain 8s steps(10) infinite',
+                        'flicker': 'flicker 3s infinite',
+                        'scroll': 'scroll 30s linear infinite',
+                    },
+                    keyframes: {
+                        grain: {
+                            '0%, 100%': { transform: 'translate(0, 0)' },
+                            '10%': { transform: 'translate(-5%, -10%)' },
+                            '20%': { transform: 'translate(-15%, 5%)' },
+                            '30%': { transform: 'translate(7%, -25%)' },
+                            '40%': { transform: 'translate(-5%, 25%)' },
+                            '50%': { transform: 'translate(-15%, 10%)' },
+                            '60%': { transform: 'translate(15%, 0%)' },
+                            '70%': { transform: 'translate(0%, 15%)' },
+                            '80%': { transform: 'translate(3%, 35%)' },
+                            '90%': { transform: 'translate(-10%, 10%)' },
+                        },
+                        flicker: {
+                            '0%': { opacity: '0.97' },
+                            '5%': { opacity: '0.8' },
+                            '10%': { opacity: '0.9' },
+                            '15%': { opacity: '1' },
+                            '50%': { opacity: '0.98' },
+                            '100%': { opacity: '0.97' },
+                        },
+                        scroll: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --cursor-size: 20px;
+        }
+
+        body {
+            background-color: #050505;
+            color: #e0e0e0;
+            cursor: none;
+            overflow-x: hidden;
+        }
+
+        /* Film Grain Overlay */
+        .grain-overlay {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: 9998;
+            animation: grain 6s steps(10) infinite;
+        }
+
+        /* Vignette */
+        .vignette {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-shadow: 0 0 150px rgba(0, 0, 0, 0.9) inset;
+            pointer-events: none;
+            z-index: 9997;
+        }
+
+        /* Custom Cursor */
+        .cursor-crosshair {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 10000;
+            mix-blend-mode: difference;
+            transition: width 0.2s, height 0.2s;
+        }
+
+        .cursor-center {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background-color: white;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 10000;
+        }
+
+        .hover-trigger:hover~.cursor-crosshair,
+        a:hover~.cursor-crosshair,
+        button:hover~.cursor-crosshair {
+            width: 60px;
+            height: 60px;
+            border-color: #ff3333;
+            background-color: rgba(255, 51, 51, 0.1);
+        }
+
+        /* Typography Effects */
+        .text-glow {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .chromatic-text {
+            position: relative;
+        }
+
+        .chromatic-text::before,
+        .chromatic-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.5;
+        }
+
+        .chromatic-text::before {
+            left: 2px;
+            text-shadow: -1px 0 red;
+            clip-path: inset(0 0 0 0);
+            animation: glitch-anim-1 4s infinite linear alternate-reverse;
+        }
+
+        .chromatic-text::after {
+            left: -2px;
+            text-shadow: -1px 0 blue;
+            clip-path: inset(0 0 0 0);
+            animation: glitch-anim-2 4s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim-1 {
+            0% {
+                clip-path: inset(20% 0 80% 0);
+            }
+
+            20% {
+                clip-path: inset(60% 0 10% 0);
+            }
+
+            40% {
+                clip-path: inset(40% 0 50% 0);
+            }
+
+            60% {
+                clip-path: inset(80% 0 5% 0);
+            }
+
+            80% {
+                clip-path: inset(10% 0 70% 0);
+            }
+
+            100% {
+                clip-path: inset(30% 0 20% 0);
+            }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% {
+                clip-path: inset(10% 0 60% 0);
+            }
+
+            20% {
+                clip-path: inset(30% 0 20% 0);
+            }
+
+            40% {
+                clip-path: inset(70% 0 10% 0);
+            }
+
+            60% {
+                clip-path: inset(20% 0 50% 0);
+            }
+
+            80% {
+                clip-path: inset(60% 0 30% 0);
+            }
+
+            100% {
+                clip-path: inset(5% 0 80% 0);
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Layout Lines */
+        .grid-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background:
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 100px 100px;
+        }
+
+        .img-analog {
+            filter: grayscale(100%) contrast(1.2) brightness(0.9);
+            transition: filter 0.5s ease;
+        }
+
+        .img-analog:hover {
+            filter: grayscale(0%) contrast(1) brightness(1);
+        }
+    </style>
+</head>
+
+<body class="font-mono text-film-white selection:bg-film-red selection:text-white antialiased">
+
+    <div class="grain-overlay"></div>
+    <div class="vignette"></div>
+    <div class="grid-lines"></div>
+
+    <div class="cursor-crosshair hidden md:block"></div>
+    <div class="cursor-center hidden md:block"></div>
+
+    <div id="loader"
+        class="fixed inset-0 bg-film-black z-[100] flex flex-col items-center justify-center transition-opacity duration-1000 ease-in-out">
+        <div class="text-6xl md:text-9xl font-serif italic text-film-white animate-pulse">Loading...</div>
+        <div class="mt-4 text-xs font-mono tracking-widest text-film-grain">INITIALIZING REEL 001</div>
+    </div>
+
+    <nav class="fixed top-0 w-full z-50 px-6 py-6 mix-blend-difference">
+        <div class="max-w-7xl mx-auto flex justify-between items-end border-b border-white/10 pb-4">
+            <div class="flex flex-col">
+                <span class="text-xs text-film-grain tracking-widest mb-1">REF_NO: 2025-KT</span>
+                <a href="#"
+                    class="text-xl md:text-2xl font-serif italic tracking-wider hover:text-film-red transition-colors">
+                    KT.DEV
+                </a>
+            </div>
+
+            <div class="flex items-center gap-8">
+                <a href="mailto:krishnathorat007@gmail.com"
+                    class="hidden md:block text-xs uppercase tracking-[0.2em] hover:line-through decoration-film-red">
+                    <span class="inline-block w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+                    Online Signal
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-40 pb-20 px-6 relative z-10">
+
+        <header class="max-w-7xl mx-auto mb-32">
+            <div class="grid lg:grid-cols-12 gap-12 items-center border-l border-white/10 pl-0 lg:pl-8">
+
+                <div class="lg:col-span-8" data-aos="fade-up" data-aos-duration="1500">
+                    <div class="font-mono text-xs text-film-red tracking-widest mb-4">
+                        [ ROLE: FULL STACK & AI ENGINEER ]
+                    </div>
+
+                    <h1 class="text-6xl sm:text-8xl md:text-9xl font-serif leading-[0.85] mb-10 text-glow">
+                        <span class="chromatic-text inline-block" data-text="Krishna">Krishna</span> <br>
+                        <span class="italic text-film-grain chromatic-text inline-block"
+                            data-text="Thorat">Thorat</span>
+                    </h1>
+
+                    <p
+                        class="text-lg md:text-xl font-mono text-film-white/70 max-w-xl mb-12 leading-relaxed pl-6 border-l border-film-red">
+                        Building dynamic web applications and Agentic AI systems. Specializing in PHP, Node.js, React &
+                        Generative AI.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-6">
+                        <a href="#projects"
+                            class="group relative overflow-hidden px-8 py-3 border border-white/30 hover:border-film-white transition-colors">
+                            <span
+                                class="relative z-10 text-sm uppercase tracking-widest group-hover:text-film-black transition-colors">View
+                                Works</span>
+                            <div
+                                class="absolute inset-0 bg-film-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300">
+                            </div>
+                        </a>
+                        <a href="mailto:krishnathorat007@gmail.com"
+                            class="group flex items-center gap-2 text-sm uppercase tracking-widest text-film-white/50 hover:text-film-red transition-colors">
+                            <span>Transpile Message</span>
+                            <i
+                                class="fas fa-arrow-right transform -rotate-45 group-hover:rotate-0 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-4 relative hidden lg:block" data-aos="fade-left" data-aos-duration="2000">
+                    <div
+                        class="relative border p-2 border-white/10 bg-film-dark transform rotate-1 hover:rotate-0 transition-transform duration-700">
+                        <div class="aspect-[4/5] relative overflow-hidden">
+                            <img src="assets/img/krishna-thorat.jpg" alt="Krishna Thorat"
+                                class="img-analog w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 opacity-50">
+                            </div>
+                        </div>
+                        <div class="pt-4 flex justify-between items-end font-mono text-xs text-film-grain">
+                            <span>EXP_YEARS: 05+</span>
+                            <span>LOC: PUNE_IN</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="w-full border-y border-white/10 overflow-hidden py-3 mb-32 bg-film-black relative">
+            <div class="absolute inset-0 bg-film-white/5 pointer-events-none"></div>
+            <div class="flex animate-scroll whitespace-nowrap">
+                <div class="flex gap-16 text-4xl font-serif italic text-film-white/40 px-8">
+                    <span>JavaScript</span> <span>+</span>
+                    <span>React</span> <span>+</span>
+                    <span>Node.js</span> <span>+</span>
+                    <span>Python</span> <span>+</span>
+                    <span>Generative AI</span> <span>+</span>
+                    <span>Langchain</span> <span>+</span>
+                    <span>RAG Systems</span> <span>+</span>
+                    <span>AWS</span> <span>+</span>
+                    <span>Azure</span> <span>+</span>
+                    <span>PHP</span> <span>+</span>
+                    <span>PostgreSQL</span>
+                </div>
+                <div class="flex gap-16 text-4xl font-serif italic text-film-white/40 px-8">
+                    <span>JavaScript</span> <span>+</span>
+                    <span>React</span> <span>+</span>
+                    <span>Node.js</span> <span>+</span>
+                    <span>Python</span> <span>+</span>
+                    <span>Generative AI</span> <span>+</span>
+                    <span>Langchain</span> <span>+</span>
+                    <span>RAG Systems</span> <span>+</span>
+                    <span>AWS</span> <span>+</span>
+                    <span>Azure</span> <span>+</span>
+                    <span>PHP</span> <span>+</span>
+                    <span>PostgreSQL</span>
+                </div>
+            </div>
+        </div>
+
+        <section class="max-w-7xl mx-auto mb-32">
+            <div class="flex items-center gap-4 mb-16">
+                <span class="w-12 h-[1px] bg-film-red"></span>
+                <h2 class="text-3xl md:text-4xl font-serif italic text-white">The Arsenal</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-px bg-white/20 border border-white/20">
+
+                <div
+                    class="bg-film-black p-8 md:col-span-2 relative group hover:bg-film-dark transition-colors duration-500">
+                    <div class="absolute top-4 right-4 text-film-white/20 text-4xl font-serif italic">01</div>
+                    <div class="flex justify-between items-start mb-8">
+                        <div class="text-xs font-mono border border-white/30 px-2 py-1 text-film-white/70">EDUCATION
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-serif mb-2">Master of Computer Applications</h3>
+                    <p class="text-film-white/50 font-mono text-sm mb-4">Vishwakarma Institute of Technology, Pune</p>
+                    <p class="text-xs font-mono text-film-red">2020 — 2022</p>
+                </div>
+
+                <div
+                    class="bg-film-black p-8 flex flex-col justify-between group hover:bg-film-dark transition-colors duration-500 relative overflow-hidden">
+                    <div class="absolute top-4 right-4 text-film-white/20 text-4xl font-serif italic">02</div>
+                    <i class="fas fa-map-marker-alt text-6xl text-film-white/5 absolute -bottom-4 -right-4"></i>
+                    <h3 class="font-mono text-xs tracking-widest text-film-white/50">BASE_COORD</h3>
+                    <p class="text-xl font-serif mt-4">Pune, India</p>
+                </div>
+
+                <a href="https://github.com/gamentionkray" target="_blank"
+                    class="bg-film-black p-8 flex flex-col justify-center items-center gap-4 group hover:bg-film-white hover:text-black transition-colors duration-300">
+                    <i class="fab fa-github text-4xl"></i>
+                    <span class="font-mono text-sm">@gamentionkray</span>
+                </a>
+
+                <div
+                    class="bg-film-black p-8 md:col-span-2 lg:col-span-2 relative hover:bg-film-dark transition-colors duration-500">
+                    <div class="absolute top-4 right-4 text-film-white/20 text-4xl font-serif italic">03</div>
+                    <h3 class="font-serif text-xl mb-6 italic text-film-white/80">Core Stack</h3>
+                    <div class="flex flex-wrap gap-x-6 gap-y-2 font-mono text-sm text-film-white/60">
+                        <span>PHP</span>
+                        <span>Node.js</span>
+                        <span>React</span>
+                        <span>Angular</span>
+                        <span>Python</span>
+                        <span>MySQL</span>
+                        <span>PostgreSQL</span>
+                    </div>
+                </div>
+
+                <div
+                    class="bg-film-black p-8 md:col-span-2 lg:col-span-2 relative hover:bg-film-dark transition-colors duration-500">
+                    <div class="absolute top-4 right-4 text-film-white/20 text-4xl font-serif italic">04</div>
+                    <h3 class="font-serif text-xl mb-6 italic text-film-white/80">AI Engineering</h3>
+                    <div class="flex flex-wrap gap-x-6 gap-y-2 font-mono text-sm text-film-white/60">
+                        <span>Generative AI</span>
+                        <span>Agentic AI</span>
+                        <span>RAG</span>
+                        <span>LangChain</span>
+                        <span>Azure OpenAI</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto mb-32">
+            <div class="grid md:grid-cols-12 gap-12">
+                <div class="md:col-span-4">
+                    <div class="sticky top-32">
+                        <h2 class="text-5xl font-serif italic mb-4">XP Log</h2>
+                        <p class="text-sm font-mono text-film-white/50 mb-8">CHRONOLOGICAL_DATA_RECORD</p>
+
+                        <a href="resume.pdf" download
+                            class="inline-flex items-center gap-3 text-sm font-mono uppercase tracking-widest hover:text-film-red transition-colors group">
+                            <i class="fas fa-download group-hover:animate-bounce"></i>
+                            <span class="border-b border-white/30 pb-1">Download Resume</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="md:col-span-8 relative border-l border-white/10 pl-8 md:pl-12 space-y-16">
+                    <div class="relative" data-aos="fade-up">
+                        <div
+                            class="absolute -left-[37px] md:-left-[53px] top-2 w-2 h-2 bg-film-black border border-film-white rounded-full">
+                        </div>
+                        <div class="mb-2 flex items-baseline gap-4">
+                            <span class="text-film-red font-mono text-xs">Dec 2024 — Present</span>
+                            <h3 class="text-2xl font-serif">Software Developer</h3>
+                        </div>
+                        <h4 class="text-sm font-mono text-film-white/60 mb-4 uppercase tracking-wide">Ergabite Tech
+                            Solutions (Intellify Client)</h4>
+                        <p class="text-film-white/70 font-serif text-lg leading-relaxed">
+                            Developed features for "Intellify Migration Wizard" (Teradata/Postgres). Engineered
+                            "In-Parking" alerting system using Azure App Functions. Led "Infovault" multi-agent AI
+                            platform using Langchain & Azure OpenAI. CI/CD implementation on Azure.
+                        </p>
+                    </div>
+
+                    <div class="relative" data-aos="fade-up">
+                        <div
+                            class="absolute -left-[37px] md:-left-[53px] top-2 w-2 h-2 bg-film-black border border-film-white/50 rounded-full">
+                        </div>
+                        <div class="mb-2 flex items-baseline gap-4">
+                            <span class="text-film-white/50 font-mono text-xs">Jul 2024 — Dec 2024</span>
+                            <h3 class="text-2xl font-serif">Senior Web Developer</h3>
+                        </div>
+                        <h4 class="text-sm font-mono text-film-white/60 mb-4 uppercase tracking-wide">Internship Studio
+                        </h4>
+                        <p class="text-film-white/70 font-serif text-lg leading-relaxed">
+                            Spearheaded hiring portal development. Architected solutions on GCP (Vertex AI) and AWS
+                            (Lambda). Full-stack dev with React, Node.js, PHP, Flask.
+                        </p>
+                    </div>
+
+                    <div class="relative" data-aos="fade-up">
+                        <div
+                            class="absolute -left-[37px] md:-left-[53px] top-2 w-2 h-2 bg-film-black border border-film-white/50 rounded-full">
+                        </div>
+                        <div class="mb-2 flex items-baseline gap-4">
+                            <span class="text-film-white/50 font-mono text-xs">Aug 2022 — Jul 2024</span>
+                            <h3 class="text-2xl font-serif">System Engineer</h3>
+                        </div>
+                        <h4 class="text-sm font-mono text-film-white/60 mb-4 uppercase tracking-wide">Infosys Ltd.</h4>
+                        <p class="text-film-white/70 font-serif text-lg leading-relaxed">
+                            Dynamic app development with Angular, Node.js, PostgreSQL. WCAG standards, WebSockets, and
+                            WebRTC integration. Salesforce integration via Cortex framework.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="max-w-7xl mx-auto mb-32">
+            <div class="flex items-center justify-center mb-20">
+                <h2 class="text-4xl md:text-6xl font-serif italic text-center relative inline-block">
+                    <span class="absolute -left-8 top-0 text-xs font-mono not-italic text-film-white/30">FIG. 01</span>
+                    Selected Works
+                    <span class="absolute -right-8 bottom-0 text-xs font-mono not-italic text-film-white/30">FIG.
+                        02</span>
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-16">
+
+                <article class="group cursor-none" data-aos="fade-up">
+                    <div class="relative aspect-[4/3] bg-film-gray overflow-hidden border border-white/10 mb-6">
+                        <div class="absolute inset-0 bg-film-black flex items-center justify-center">
+                            <i
+                                class="fas fa-brain text-6xl text-film-white/20 group-hover:text-film-white/80 transition-colors duration-700"></i>
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/aged-paper.png')] opacity-20 mix-blend-overlay">
+                        </div>
+                        <div class="absolute bottom-4 right-4 font-mono text-xs text-film-white/50 bg-black/50 px-2">
+                            IMG_004.JPG</div>
+                    </div>
+                    <div class="border-t border-white/20 pt-4 flex justify-between items-start">
+                        <div>
+                            <h3 class="text-2xl font-serif mb-1 group-hover:text-film-red transition-colors">HireSense
+                                AI</h3>
+                            <p class="text-film-white/60 font-mono text-xs mb-3">AI-powered career guidance</p>
+                            <div class="flex gap-3 text-xs font-mono text-film-white/40">
+                                <span>Pydantic AI</span> / <span>FastAPI</span> / <span>WebSockets</span>
+                            </div>
+                        </div>
+                        <span class="text-xs font-mono border border-white/20 px-2 py-1 rounded-full">Dec 2024</span>
+                    </div>
+                </article>
+
+                <article class="group cursor-none" data-aos="fade-up" data-aos-delay="100">
+                    <div class="relative aspect-[4/3] bg-film-gray overflow-hidden border border-white/10 mb-6">
+                        <div class="absolute inset-0 bg-film-black flex items-center justify-center">
+                            <i
+                                class="fas fa-database text-6xl text-film-white/20 group-hover:text-film-white/80 transition-colors duration-700"></i>
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/aged-paper.png')] opacity-20 mix-blend-overlay">
+                        </div>
+                        <div class="absolute bottom-4 right-4 font-mono text-xs text-film-white/50 bg-black/50 px-2">
+                            IMG_005.JPG</div>
+                    </div>
+                    <div class="border-t border-white/20 pt-4 flex justify-between items-start">
+                        <div>
+                            <h3 class="text-2xl font-serif mb-1 group-hover:text-film-red transition-colors">Intellify
+                                Insights</h3>
+                            <p class="text-film-white/60 font-mono text-xs mb-3">Data Analytics Platform</p>
+                            <div class="flex gap-3 text-xs font-mono text-film-white/40">
+                                <span>PySpark</span> / <span>Azure</span> / <span>Power BI</span>
+                            </div>
+                        </div>
+                        <span class="text-xs font-mono border border-white/20 px-2 py-1 rounded-full">Pipeline</span>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-film-black text-film-white pt-20 pb-10 border-t border-white/10 relative overflow-hidden z-10">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20">
+                <h2 class="text-5xl md:text-8xl font-serif italic leading-none mb-8 md:mb-0 opacity-80">
+                    Let's <br> Develop
+                </h2>
+
+                <div class="flex gap-8">
+                    <a href="https://github.com/gamentionkray"
+                        class="text-sm font-mono uppercase tracking-widest hover:text-film-red transition-colors">[
+                        Github ]</a>
+                    <a href="https://linkedin.com/in/krishnathorat"
+                        class="text-sm font-mono uppercase tracking-widest hover:text-film-red transition-colors">[
+                        Linkedin ]</a>
+                    <a href="mailto:krishnathorat007@gmail.com"
+                        class="text-sm font-mono uppercase tracking-widest hover:text-film-red transition-colors">[
+                        Email ]</a>
+                </div>
+            </div>
+
+            <div
+                class="flex flex-col md:flex-row justify-between items-center border-t border-white/5 pt-8 text-xs font-mono text-film-white/30">
+                <p>&copy; 2025 Krishna Thorat. Pune, India. // LAT: 18.5204° N</p>
+                <p>Analog Design System v1.0</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            offset: 20,
+            once: true,
+            easing: 'ease-out-cubic'
+        });
+
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 1000);
+            }, 1500);
+        });
+
+        const cursorCrosshair = document.querySelector('.cursor-crosshair');
+        const cursorCenter = document.querySelector('.cursor-center');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            cursorCenter.style.left = `${posX}px`;
+            cursorCenter.style.top = `${posY}px`;
+
+            // Slight delay for the crosshair for a loose feel
+            setTimeout(() => {
+                cursorCrosshair.style.left = `${posX}px`;
+                cursorCrosshair.style.top = `${posY}px`;
+            }, 50);
+        });
+    </script>
+    <script src="assets/js/template-switcher.js"></script>
+</body>
+
+</html>

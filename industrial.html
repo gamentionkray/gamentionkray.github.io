@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishna Thorat | Full Stack AI Engineer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Rajdhani:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                        tech: ['"Rajdhani"', 'sans-serif'],
+                    },
+                    colors: {
+                        ind: {
+                            bg: '#0a0a0a',
+                            panel: '#141414',
+                            border: '#333333',
+                            text: '#e5e5e5',
+                            muted: '#888888',
+                            orange: '#FF4D00',
+                            cyan: '#00F0FF',
+                            yellow: '#FFD700'
+                        }
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #222 1px, transparent 1px), linear-gradient(to bottom, #222 1px, transparent 1px)",
+                        'grid-pattern-light': "linear-gradient(to right, #e5e5e5 1px, transparent 1px), linear-gradient(to bottom, #e5e5e5 1px, transparent 1px)",
+                    },
+                    backgroundSize: {
+                        'grid-sm': '20px 20px',
+                    },
+                    animation: {
+                        'scanline': 'scanline 8s linear infinite',
+                        'blink': 'blink 1s step-end infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #e5e5e5;
+        }
+
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(50, 50, 50, 0.3) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(50, 50, 50, 0.3) 1px, transparent 1px);
+        }
+
+        html.dark .bg-grid {
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        }
+
+        .corner-brackets {
+            position: relative;
+        }
+
+        .corner-brackets::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 10px;
+            border-top: 2px solid #FF4D00;
+            border-left: 2px solid #FF4D00;
+            pointer-events: none;
+        }
+
+        .corner-brackets::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 10px;
+            height: 10px;
+            border-bottom: 2px solid #FF4D00;
+            border-right: 2px solid #FF4D00;
+            pointer-events: none;
+        }
+
+        .clip-45 {
+            clip-path: polygon(10px 0, 100% 0,
+                    100% calc(100% - 10px), calc(100% - 10px) 100%,
+                    0 100%, 0 10px);
+        }
+
+        @keyframes scanline {
+            0% {
+                transform: translateY(-100%);
+            }
+
+            100% {
+                transform: translateY(100%);
+            }
+        }
+
+        .scanline-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.1) 51%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .cursor-blink {
+            animation: blink 1s infinite;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF4D00;
+        }
+    </style>
+</head>
+
+<body class="font-mono bg-ind-bg text-ind-text selection:bg-ind-orange selection:text-black overflow-x-hidden">
+
+    <div class="scanline-overlay pointer-events-none"></div>
+
+    <div class="fixed inset-0 z-[-1] bg-grid opacity-50"></div>
+
+    <div id="loader"
+        class="fixed inset-0 bg-ind-bg z-[100] flex flex-col items-center justify-center border border-ind-border transition-transform duration-700 ease-in-out">
+        <div class="flex flex-col items-center gap-4">
+            <div class="w-16 h-16 border-2 border-ind-orange border-t-transparent rounded-full animate-spin"></div>
+            <h1 class="text-2xl font-tech font-bold tracking-[0.2em] uppercase text-ind-orange">Initializing System...
+            </h1>
+            <p class="text-xs text-ind-muted">LOADING ASSETS // V.2.0.25</p>
+        </div>
+    </div>
+
+    <nav class="fixed top-0 w-full z-40 bg-ind-bg/90 backdrop-blur-sm border-b border-ind-border">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-3 h-3 bg-ind-orange animate-pulse"></div>
+                <a href="#" class="text-xl font-tech font-bold tracking-widest hover:text-ind-orange transition-colors">
+                    KT.DEV <span class="text-xs text-ind-muted align-top">SYS</span>
+                </a>
+            </div>
+
+            <div class="flex items-center gap-6">
+                <button id="theme-toggle"
+                    class="w-8 h-8 border border-ind-border flex items-center justify-center hover:bg-ind-orange hover:text-black hover:border-ind-orange transition-all">
+                    <i class="fas fa-terminal text-xs"></i>
+                </button>
+                <a href="mailto:krishnathorat007@gmail.com"
+                    class="hidden md:flex items-center gap-2 text-xs font-bold uppercase tracking-widest border border-ind-border px-4 py-2 hover:bg-ind-text hover:text-black transition-colors">
+                    <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                    Status: Employed
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-20 px-4 sm:px-6">
+
+        <header class="max-w-7xl mx-auto mb-24 relative">
+            <div
+                class="absolute -top-10 -left-10 text-[10rem] font-tech font-bold text-ind-border opacity-10 select-none pointer-events-none">
+                01</div>
+
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+
+                <div class="lg:col-span-7" data-aos="fade-right">
+                    <div class="flex items-center gap-2 mb-6 text-ind-cyan text-xs tracking-[0.2em] uppercase">
+                        <i class="fas fa-code-branch"></i>
+                        <span>Unit: Full Stack & AI Engineer</span>
+                    </div>
+
+                    <h1
+                        class="text-5xl sm:text-7xl md:text-8xl font-tech font-bold uppercase leading-[0.9] mb-8 text-white">
+                        Krishna <br>
+                        <span class="text-ind-border"
+                            style="-webkit-text-stroke: 1px #e5e5e5; color: transparent;">Thorat</span>
+                    </h1>
+
+                    <div class="border-l-2 border-ind-orange pl-6 mb-10">
+                        <p class="text-lg md:text-xl text-ind-muted font-light leading-relaxed">
+                            <span class="text-ind-orange">>></span> Building dynamic web applications and Agentic AI
+                            systems. Specializing in <span class="text-white border-b border-ind-muted">PHP, Node.js,
+                                React</span> & <span class="text-white border-b border-ind-muted">Generative AI</span>.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#projects"
+                            class="clip-45 bg-ind-text text-black px-8 py-4 font-bold text-sm tracking-widest hover:bg-ind-orange transition-colors uppercase flex items-center gap-2">
+                            <i class="fas fa-folder-open"></i> Access Projects
+                        </a>
+                        <a href="mailto:krishnathorat007@gmail.com"
+                            class="clip-45 bg-transparent border border-ind-text text-ind-text px-8 py-4 font-bold text-sm tracking-widest hover:bg-ind-text hover:text-black transition-colors uppercase flex items-center gap-2">
+                            <i class="fas fa-satellite-dish"></i> Contact Link
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 relative" data-aos="fade-left">
+                    <div class="border border-ind-border p-2 bg-ind-panel/50 relative group">
+
+                        <div
+                            class="absolute top-0 left-0 w-full h-full pointer-events-none border border-ind-cyan/30 z-10">
+                        </div>
+                        <div
+                            class="absolute top-4 right-4 z-20 flex flex-col items-end text-xs text-ind-cyan font-mono">
+                            <span>IMG_ID: KT_01</span>
+                            <span>RES: 4000x4000</span>
+                        </div>
+
+                        <div class="aspect-square grayscale contrast-125 relative overflow-hidden">
+                            <img src="assets/img/krishna-thorat.jpg" alt="Krishna Thorat"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                            <div
+                                class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjMDAwIiBmaWxsLW9wYWNpdHk9IjAuMyIvPgo8L3N2Zz4=')]">
+                            </div>
+                        </div>
+
+                        <div
+                            class="absolute -bottom-6 -right-6 bg-ind-bg border border-ind-border p-4 flex items-center gap-4 z-30 shadow-xl">
+                            <div class="text-right">
+                                <h3 class="text-4xl font-tech font-bold text-white">05+</h3>
+                                <p class="text-xs text-ind-muted uppercase tracking-wider">Years Experience</p>
+                            </div>
+                            <div class="w-10 h-10 bg-ind-orange flex items-center justify-center text-black font-bold">
+                                <i class="fas fa-level-up-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="w-full bg-ind-panel border-y border-ind-border overflow-hidden py-3 mb-24 relative">
+            <div
+                class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz48L3N2Zz4=')]">
+            </div>
+            <div
+                class="whitespace-nowrap animate-[marquee_20s_linear_infinite] flex gap-12 text-sm font-mono uppercase tracking-[0.3em] text-ind-muted items-center">
+                <span><span class="text-ind-orange">///</span> JavaScript</span>
+                <span><span class="text-ind-cyan">::</span> React</span>
+                <span><span class="text-ind-orange">///</span> Node.js</span>
+                <span><span class="text-ind-cyan">::</span> Python</span>
+                <span><span class="text-ind-orange">///</span> Generative AI</span>
+                <span><span class="text-ind-cyan">::</span> Langchain</span>
+                <span><span class="text-ind-orange">///</span> RAG Systems</span>
+                <span><span class="text-ind-cyan">::</span> AWS</span>
+                <span><span class="text-ind-orange">///</span> Azure</span>
+                <span><span class="text-ind-cyan">::</span> PHP</span>
+                <span><span class="text-ind-orange">///</span> PostgreSQL</span>
+            </div>
+        </div>
+
+        <section class="max-w-7xl mx-auto mb-32">
+            <div class="flex items-center gap-4 mb-12 border-b border-ind-border pb-4">
+                <h2 class="text-3xl md:text-5xl font-tech font-bold uppercase text-white">
+                    <span class="text-ind-orange">02.</span> Technical Arsenal
+                </h2>
+                <div class="flex-1 h-px bg-ind-border border-t border-dashed border-ind-muted/30"></div>
+                <span class="text-xs font-mono text-ind-muted hidden md:block">SYS_CONFIG_LOADED</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+                <div class="bg-ind-panel border border-ind-border p-6 relative md:col-span-2 corner-brackets hover:bg-ind-border/20 transition-colors group"
+                    data-aos="fade-up">
+                    <div class="absolute top-2 right-2 text-[10px] text-ind-muted">EDU_LOG</div>
+                    <div class="flex justify-between items-start mb-6">
+                        <div
+                            class="border border-ind-cyan text-ind-cyan px-2 py-1 text-xs font-mono uppercase tracking-wider bg-ind-cyan/10">
+                            Master's Degree</div>
+                        <i
+                            class="fas fa-graduation-cap text-3xl text-ind-border group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold font-tech uppercase text-white mb-1">Master of Computer Applications
+                    </h3>
+                    <p class="text-ind-muted text-sm mb-2">Vishwakarma Institute of Technology, Pune</p>
+                    <p class="text-xs font-mono text-ind-orange">2020 - 2022 // COMPLETED</p>
+                </div>
+
+                <div class="bg-ind-panel border border-ind-border p-6 relative flex flex-col justify-between group overflow-hidden hover:border-ind-orange transition-colors"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute top-0 right-0 p-2">
+                        <i class="fas fa-crosshairs text-ind-border"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-mono text-xs text-ind-muted uppercase mb-2">Operating Base</h3>
+                        <p class="text-3xl font-tech font-bold text-white">Pune, IND</p>
+                    </div>
+                    <div class="w-full h-1 bg-ind-border mt-4 overflow-hidden">
+                        <div class="h-full bg-ind-orange w-1/2 animate-[scanline_2s_linear_infinite]"
+                            style="transform: translateX(-100%) scaleX(1);"></div>
+                    </div>
+                </div>
+
+                <a href="https://github.com/gamentionkray" target="_blank"
+                    class="bg-ind-panel border border-ind-border p-6 flex flex-col justify-center items-center gap-4 hover:bg-white hover:text-black transition-all duration-300 group"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <i class="fab fa-github text-5xl"></i>
+                    <span class="font-mono text-sm font-bold">@gamentionkray</span>
+                    <span class="text-[10px] uppercase tracking-widest group-hover:text-black/60">View Repository</span>
+                </a>
+
+                <div class="bg-ind-bg border border-ind-border p-6 md:col-span-2 lg:col-span-2" data-aos="fade-up">
+                    <h3 class="font-mono text-xs text-ind-orange uppercase mb-4 flex items-center gap-2">
+                        <i class="fas fa-microchip"></i> Core Stack
+                    </h3>
+                    <div class="flex flex-wrap gap-2 font-mono text-xs">
+                        <span
+                            class="bg-ind-panel border border-ind-border px-3 py-1.5 hover:border-white transition-colors cursor-default">PHP</span>
+                        <span
+                            class="bg-ind-panel border border-ind-border px-3 py-1.5 hover:border-white transition-colors cursor-default">Node.js</span>
+                        <span
+                            class="bg-ind-panel border border-ind-border px-3 py-1.5 hover:border-white transition-colors cursor-default">React</span>
+                        <span
+                            class="bg-ind-panel border border-ind-border px-3 py-1.5 hover:border-white transition-colors cursor-default">Angular</span>
+                        <span
+                            class="bg-ind-panel border border-ind-border px-3 py-1.5 hover:border-white transition-colors cursor-default">Python</span>
+                        <span
+                            class="bg-ind-panel border border-ind-border px-3 py-1.5 hover:border-white transition-colors cursor-default">MySQL</span>
+                        <span
+                            class="bg-ind-panel border border-ind-border px-3 py-1.5 hover:border-white transition-colors cursor-default">PostgreSQL</span>
+                    </div>
+                </div>
+
+                <div class="bg-ind-panel border border-ind-border p-6 md:col-span-2 lg:col-span-2" data-aos="fade-up"
+                    data-aos-delay="100">
+                    <h3 class="font-mono text-xs text-ind-cyan uppercase mb-4 flex items-center gap-2">
+                        <i class="fas fa-brain"></i> AI Engineering
+                    </h3>
+                    <div class="flex flex-wrap gap-2 font-mono text-xs">
+                        <span class="bg-ind-cyan/10 text-ind-cyan border border-ind-cyan px-3 py-1.5">Generative
+                            AI</span>
+                        <span class="bg-ind-cyan/10 text-ind-cyan border border-ind-cyan px-3 py-1.5">Agentic AI</span>
+                        <span class="bg-ind-cyan/10 text-ind-cyan border border-ind-cyan px-3 py-1.5">RAG</span>
+                        <span class="bg-ind-cyan/10 text-ind-cyan border border-ind-cyan px-3 py-1.5">LangChain</span>
+                        <span class="bg-ind-cyan/10 text-ind-cyan border border-ind-cyan px-3 py-1.5">Azure
+                            OpenAI</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto mb-32">
+            <div class="grid md:grid-cols-12 gap-12">
+                <div class="md:col-span-4">
+                    <div class="sticky top-32">
+                        <div
+                            class="text-[8rem] leading-none font-tech font-bold text-ind-panel absolute -top-20 -left-10 -z-10">
+                            03</div>
+                        <h2 class="text-4xl font-tech font-bold uppercase mb-4 text-white">
+                            XP_LOG <span class="animate-blink text-ind-orange">_</span>
+                        </h2>
+                        <p class="text-sm font-mono text-ind-muted mb-8 border-l border-ind-muted pl-4">
+                            Chronological record of industrial contributions and system upgrades.
+                        </p>
+
+                        <a href="resume.pdf" download
+                            class="w-full bg-ind-bg border border-ind-text text-ind-text hover:bg-ind-text hover:text-black px-6 py-3 font-mono text-sm font-bold transition-all flex items-center justify-between group">
+                            <span>DOWNLOAD_RESUME.PDF</span>
+                            <i class="fas fa-download group-hover:translate-y-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="md:col-span-8 space-y-0 relative border-l border-ind-border ml-3 md:ml-0 pl-8 md:pl-0">
+
+                    <div class="relative md:pl-12 pb-12 group" data-aos="fade-left">
+                        <div class="hidden md:block absolute left-0 top-0 w-full h-px bg-ind-border -z-10 mt-8"></div>
+                        <div
+                            class="absolute -left-[5px] md:left-0 top-8 w-2 h-2 bg-ind-bg border border-ind-orange rotate-45 z-10">
+                        </div>
+
+                        <div
+                            class="bg-ind-panel border border-ind-border p-6 hover:border-ind-orange transition-colors relative">
+                            <div
+                                class="absolute top-0 right-0 px-2 py-1 bg-ind-orange text-black text-[10px] font-bold font-mono">
+                                CURRENT</div>
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-baseline mb-4">
+                                <h3 class="text-xl font-tech font-bold text-white">Software Developer</h3>
+                                <span class="font-mono text-xs text-ind-orange">Dec 2024 - Present</span>
+                            </div>
+                            <h4 class="text-sm font-bold font-mono text-ind-muted mb-4 uppercase tracking-wider">
+                                Ergabite Tech Solutions <span class="text-ind-cyan">(Intellify Client)</span></h4>
+                            <ul class="space-y-2 list-none text-sm text-ind-text font-mono">
+                                <li class="flex gap-2"><span class="text-ind-muted">></span> Developed features for
+                                    "Intellify Migration Wizard" (Teradata/Postgres).</li>
+                                <li class="flex gap-2"><span class="text-ind-muted">></span> Engineered "In-Parking"
+                                    alerting system using Azure App Functions.</li>
+                                <li class="flex gap-2"><span class="text-ind-muted">></span> Led "Infovault" multi-agent
+                                    AI platform using Langchain & Azure OpenAI.</li>
+                                <li class="flex gap-2"><span class="text-ind-muted">></span> CI/CD implementation on
+                                    Azure.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="relative md:pl-12 pb-12 group" data-aos="fade-left">
+                        <div class="hidden md:block absolute left-0 top-0 w-full h-px bg-ind-border -z-10 mt-8"></div>
+                        <div
+                            class="absolute -left-[5px] md:left-0 top-8 w-2 h-2 bg-ind-bg border border-ind-text rotate-45 z-10">
+                        </div>
+
+                        <div class="bg-ind-panel border border-ind-border p-6 hover:border-ind-text transition-colors">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-baseline mb-4">
+                                <h3 class="text-xl font-tech font-bold text-white">Senior Web Developer</h3>
+                                <span class="font-mono text-xs text-ind-muted">Jul 2024 - Dec 2024</span>
+                            </div>
+                            <h4 class="text-sm font-bold font-mono text-ind-muted mb-4 uppercase tracking-wider">
+                                Internship Studio</h4>
+                            <ul class="space-y-2 list-none text-sm text-ind-text font-mono">
+                                <li class="flex gap-2"><span class="text-ind-muted">></span> Spearheaded hiring portal
+                                    development.</li>
+                                <li class="flex gap-2"><span class="text-ind-muted">></span> Architected solutions on
+                                    GCP (Vertex AI) and AWS (Lambda).</li>
+                                <li class="flex gap-2"><span class="text-ind-muted">></span> Full-stack dev with React,
+                                    Node.js, PHP, Flask.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="relative md:pl-12 pb-12 group" data-aos="fade-left">
+                        <div class="hidden md:block absolute left-0 top-0 w-full h-px bg-ind-border -z-10 mt-8"></div>
+                        <div
+                            class="absolute -left-[5px] md:left-0 top-8 w-2 h-2 bg-ind-bg border border-ind-text rotate-45 z-10">
+                        </div>
+
+                        <div class="bg-ind-panel border border-ind-border p-6 hover:border-ind-text transition-colors">
+                            <div class="flex flex-col md:flex-row md:justify-between md:items-baseline mb-4">
+                                <h3 class="text-xl font-tech font-bold text-white">System Engineer</h3>
+                                <span class="font-mono text-xs text-ind-muted">Aug 2022 - Jul 2024</span>
+                            </div>
+                            <h4 class="text-sm font-bold font-mono text-ind-muted mb-4 uppercase tracking-wider">Infosys
+                                Ltd.</h4>
+                            <ul class="space-y-2 list-none text-sm text-ind-text font-mono">
+                                <li class="flex gap-2"><span class="text-ind-muted">></span> Dynamic app development
+                                    with Angular, Node.js, PostgreSQL.</li>
+                                <li class="flex gap-2"><span class="text-ind-muted">></span> WCAG standards, WebSockets,
+                                    and WebRTC integration.</li>
+                                <li class="flex gap-2"><span class="text-ind-muted">></span> Salesforce integration via
+                                    Cortex framework.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="max-w-7xl mx-auto mb-32">
+            <div class="flex items-center justify-between gap-4 mb-12 border-b border-ind-border pb-4">
+                <h2 class="text-3xl md:text-5xl font-tech font-bold uppercase text-white">
+                    <span class="text-ind-orange">04.</span> Selected Works
+                </h2>
+                <div class="flex gap-1">
+                    <div class="w-2 h-2 bg-ind-text"></div>
+                    <div class="w-2 h-2 bg-ind-muted"></div>
+                    <div class="w-2 h-2 bg-ind-border"></div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+
+                <article
+                    class="group bg-ind-bg border border-ind-border hover:border-ind-orange transition-colors duration-300 flex flex-col h-full"
+                    data-aos="fade-up">
+                    <div class="h-48 bg-ind-panel relative overflow-hidden border-b border-ind-border">
+                        <div
+                            class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cGF0aCBkPSJNOCAwVjhMOCA4VjB6IiBzdHJva2U9IiMzMzMiIHN0cm9rZS13aWR0aD0iMSIvPjwvc3ZnPg==')] opacity-20">
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i
+                                class="fas fa-brain text-6xl text-ind-text group-hover:text-ind-orange transition-colors duration-500"></i>
+                        </div>
+                        <div
+                            class="absolute bottom-2 right-2 text-[10px] font-mono bg-black text-ind-orange px-2 border border-ind-orange">
+                            AI_MOD_01</div>
+                    </div>
+                    <div class="p-6 flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3
+                                class="text-2xl font-tech font-bold text-white group-hover:text-ind-orange transition-colors">
+                                HireSense AI</h3>
+                            <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                        </div>
+                        <p class="text-xs font-mono text-ind-muted mb-4">Dec 2024 - Present</p>
+                        <p class="text-sm text-ind-text mb-6 font-mono leading-relaxed">AI-powered career guidance
+                            platform with multi-agent orchestration using Pydantic AI and Gemini 2.0.</p>
+
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span
+                                class="text-[10px] font-bold font-mono bg-ind-panel text-ind-text px-2 py-1 border border-ind-border">Pydantic
+                                AI</span>
+                            <span
+                                class="text-[10px] font-bold font-mono bg-ind-panel text-ind-text px-2 py-1 border border-ind-border">FastAPI</span>
+                            <span
+                                class="text-[10px] font-bold font-mono bg-ind-panel text-ind-text px-2 py-1 border border-ind-border">WebSockets</span>
+                        </div>
+                    </div>
+                    <div class="p-4 border-t border-ind-border bg-ind-panel/30 flex justify-between items-center">
+                        <span class="font-mono text-xs text-ind-cyan"><i class="fas fa-microchip mr-2"></i>16+ AI
+                            Agents</span>
+                        <a href="#"
+                            class="text-xs font-bold font-mono hover:text-white uppercase tracking-wider">Details <span
+                                class="text-ind-orange">>></span></a>
+                    </div>
+                </article>
+
+                <article
+                    class="group bg-ind-bg border border-ind-border hover:border-ind-cyan transition-colors duration-300 flex flex-col h-full"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div class="h-48 bg-ind-panel relative overflow-hidden border-b border-ind-border">
+                        <div
+                            class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxwYXRoIGQ9Ik0xMCAwTDEwIDIwTTAgMTBMMjAgMTAiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIwLjUiLz48L3N2Zz4=')] opacity-20">
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i
+                                class="fas fa-database text-6xl text-ind-text group-hover:text-ind-cyan transition-colors duration-500"></i>
+                        </div>
+                        <div
+                            class="absolute bottom-2 right-2 text-[10px] font-mono bg-black text-ind-cyan px-2 border border-ind-cyan">
+                            DATA_SYS_02</div>
+                    </div>
+                    <div class="p-6 flex-grow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3
+                                class="text-2xl font-tech font-bold text-white group-hover:text-ind-cyan transition-colors">
+                                Intellify Insights</h3>
+                            <div class="w-2 h-2 bg-ind-border rounded-full"></div>
+                        </div>
+                        <p class="text-xs font-mono text-ind-muted mb-4">Data Analytics Platform</p>
+                        <p class="text-sm text-ind-text mb-6 font-mono leading-relaxed">Transfer SSIS packages and Power
+                            BI models between MSSQL, Teradata, and Postgres with PySpark job management.</p>
+
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span
+                                class="text-[10px] font-bold font-mono bg-ind-panel text-ind-text px-2 py-1 border border-ind-border">PySpark</span>
+                            <span
+                                class="text-[10px] font-bold font-mono bg-ind-panel text-ind-text px-2 py-1 border border-ind-border">Azure</span>
+                            <span
+                                class="text-[10px] font-bold font-mono bg-ind-panel text-ind-text px-2 py-1 border border-ind-border">Power
+                                BI</span>
+                        </div>
+                    </div>
+                    <div class="p-4 border-t border-ind-border bg-ind-panel/30 flex justify-between items-center">
+                        <span class="font-mono text-xs text-ind-cyan"><i class="fas fa-sync-alt mr-2"></i>CI/CD
+                            Pipeline</span>
+                        <a href="#"
+                            class="text-xs font-bold font-mono hover:text-white uppercase tracking-wider">Details <span
+                                class="text-ind-cyan">>></span></a>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-ind-panel text-white py-16 border-t border-ind-border relative overflow-hidden">
+
+        <div
+            class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-ind-orange via-ind-cyan to-ind-orange opacity-50">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div>
+                    <h2 class="text-5xl md:text-7xl font-tech font-bold uppercase leading-none mb-4">
+                        System <br> <span class="text-transparent stroke-text"
+                            style="-webkit-text-stroke: 2px #e5e5e5;">Offline?</span>
+                    </h2>
+                    <p class="font-mono text-ind-muted">Initiate communication protocol below.</p>
+                </div>
+                <div class="mt-8 md:mt-0 text-right">
+                    <a href="mailto:krishnathorat007@gmail.com"
+                        class="text-2xl font-tech font-bold hover:text-ind-orange transition-colors">krishnathorat007@gmail.com</a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-3 md:flex gap-4 mb-12">
+                <a href="https://github.com/gamentionkray"
+                    class="w-16 h-16 bg-ind-bg border border-ind-border flex items-center justify-center text-2xl hover:bg-ind-text hover:text-black transition-all group">
+                    <i class="fab fa-github group-hover:scale-110 transition-transform"></i>
+                </a>
+                <a href="https://linkedin.com/in/krishnathorat"
+                    class="w-16 h-16 bg-ind-bg border border-ind-border flex items-center justify-center text-2xl hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all group">
+                    <i class="fab fa-linkedin group-hover:scale-110 transition-transform"></i>
+                </a>
+                <a href="mailto:krishnathorat007@gmail.com"
+                    class="w-16 h-16 bg-ind-bg border border-ind-border flex items-center justify-center text-2xl hover:bg-ind-orange hover:text-black hover:border-ind-orange transition-all group">
+                    <i class="fas fa-envelope group-hover:scale-110 transition-transform"></i>
+                </a>
+            </div>
+
+            <div
+                class="border-t border-ind-border pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-mono text-ind-muted uppercase tracking-wider">
+                <p>&copy; 2025 Krishna Thorat. Pune, India. // ALL SYSTEMS NOMINAL</p>
+                <p>Design: Industrial / Tech</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 600,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 50
+        });
+
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.style.transform = 'translateY(-100%)';
+            }, 1000);
+        });
+
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const icon = themeToggleBtn.querySelector('i');
+
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.theme = 'dark';
+            } else {
+                localStorage.theme = 'light';
+            }
+        });
+    </script>
+    <script src="assets/js/template-switcher.js"></script>
+</body>
+
+</html>

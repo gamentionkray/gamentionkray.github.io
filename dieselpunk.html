@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishna Thorat | Operator Terminal</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Rye&family=Share+Tech+Mono&family=Courier+Prime:wght@400;700&family=Special+Elite&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Courier Prime"', 'monospace'],
+                        display: ['"Rye"', 'serif'],
+                        tech: ['"Share Tech Mono"', 'monospace'],
+                        deco: ['"Cinzel"', 'serif'],
+                        typewriter: ['"Special Elite"', 'cursive'],
+                    },
+                    colors: {
+                        diesel: {
+                            black: '#0f0f0f',
+                            dark: '#1a1a1a',
+                            oil: '#262626',
+                            rust: '#8b4513',
+                            gold: '#daa520',
+                            brass: '#b8860b',
+                            steel: '#778899',
+                            chrome: '#c0c0c0',
+                            amber: '#ffbf00',
+                            alert: '#e74c3c',
+                            blueprint: '#003366',
+                            paper: '#d2b48c'
+                        }
+                    },
+                    backgroundImage: {
+                        'metal': "url('https://www.transparenttextures.com/patterns/dark-leather.png')",
+                        'blueprint-grid': "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
+                    },
+                    boxShadow: {
+                        'bezel': 'inset 0 0 20px 5px rgba(0,0,0,0.9), 0 0 0 10px #262626, 0 0 0 12px #1a1a1a',
+                        'screen-glow': '0 0 15px rgba(255, 191, 0, 0.1), inset 0 0 30px rgba(0,0,0,0.7)',
+                        'btn-raised': 'inset 1px 1px 0 rgba(255,255,255,0.2), inset -1px -1px 0 rgba(0,0,0,0.5), 2px 2px 0 #000',
+                        'btn-pressed': 'inset 2px 2px 5px rgba(0,0,0,0.8), inset -1px -1px 0 rgba(255,255,255,0.1)',
+                    },
+                    animation: {
+                        'scanline': 'scanline 6s linear infinite',
+                        'noise': 'noise 0.2s infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        scanline: {
+                            '0%': { transform: 'translateY(-100%)' },
+                            '100%': { transform: 'translateY(100%)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050505;
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%231a1a1a' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+            color: #c0c0c0;
+        }
+
+        /* The Terminal Casing */
+        .terminal-casing {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            position: relative;
+            border: 8px solid #333;
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+        }
+
+        @media (min-width: 1024px) {
+            .terminal-casing {
+                margin: 20px auto;
+                border-width: 16px;
+            }
+        }
+
+        /* CRT Screen Effects */
+        .screen-surface {
+            position: relative;
+            background: #111;
+            overflow: hidden;
+            box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.9);
+            min-height: 100vh;
+        }
+
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.2));
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        .screen-glare {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.02) 0%, rgba(0, 0, 0, 0.4) 100%);
+            pointer-events: none;
+            z-index: 51;
+        }
+
+        /* Industrial UI Elements */
+        .screw-head {
+            width: 12px;
+            height: 12px;
+            background: #555;
+            border-radius: 50%;
+            box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.3), 1px 1px 2px rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .screw-head::after {
+            content: '';
+            width: 8px;
+            height: 2px;
+            background: #222;
+            transform: rotate(45deg);
+        }
+
+        .toggle-switch {
+            appearance: none;
+            width: 40px;
+            height: 20px;
+            background: #333;
+            border-radius: 20px;
+            position: relative;
+            cursor: pointer;
+            box-shadow: inset 0 0 5px #000;
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 16px;
+            height: 16px;
+            background: #555;
+            border-radius: 50%;
+            transition: 0.3s;
+            box-shadow: 1px 1px 2px #000;
+        }
+
+        .toggle-switch:checked {
+            background: #8b4513;
+        }
+
+        .toggle-switch:checked::after {
+            transform: translateX(20px);
+            background: #daa520;
+        }
+
+        /* Blueprint Style */
+        .blueprint {
+            background-color: #002b36;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Paper Style */
+        .paper-texture {
+            background-color: #d2b48c;
+            background-image: url("https://www.transparenttextures.com/patterns/paper.png");
+            color: #1a1a1a;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            transform: rotate(-1deg);
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+            background: #0f0f0f;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #555;
+            border: 2px solid #0f0f0f;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8b4513;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col items-center justify-center">
+
+    <!-- The Machine -->
+    <div class="terminal-casing w-full h-full">
+
+        <!-- Physical Bezel Screws -->
+        <div class="absolute top-2 left-2 z-50">
+            <div class="screw-head"></div>
+        </div>
+        <div class="absolute top-2 right-2 z-50">
+            <div class="screw-head"></div>
+        </div>
+        <div class="absolute bottom-2 left-2 z-50">
+            <div class="screw-head"></div>
+        </div>
+        <div class="absolute bottom-2 right-2 z-50">
+            <div class="screw-head"></div>
+        </div>
+
+        <!-- Control Deck (Nav) -->
+        <header
+            class="bg-diesel-dark border-b-4 border-diesel-oil p-4 flex flex-wrap justify-between items-center relative z-40 shadow-md">
+            <!-- Hazard Stripe Decoration -->
+            <div
+                class="absolute top-0 left-0 w-full h-1 bg-[repeating-linear-gradient(45deg,#daa520,#daa520_10px,#1a1a1a_10px,#1a1a1a_20px)] opacity-50">
+            </div>
+
+            <div class="flex items-center gap-4 mt-2">
+                <div class="w-3 h-3 rounded-full bg-red-500 animate-pulse shadow-[0_0_10px_#f00]"></div>
+                <h1 class="font-tech text-2xl text-diesel-chrome tracking-widest uppercase">
+                    Sys.Term <span class="text-diesel-gold">v2.5</span>
+                </h1>
+            </div>
+
+            <nav class="flex items-center gap-4 mt-2">
+                <a href="#profile"
+                    class="font-tech text-xs uppercase tracking-wider text-diesel-steel hover:text-diesel-gold transition-colors border-r border-diesel-oil pr-4">
+                    [01] Bio
+                </a>
+                <a href="#arsenal"
+                    class="font-tech text-xs uppercase tracking-wider text-diesel-steel hover:text-diesel-gold transition-colors border-r border-diesel-oil pr-4">
+                    [02] Arsenal
+                </a>
+                <a href="#projects"
+                    class="font-tech text-xs uppercase tracking-wider text-diesel-steel hover:text-diesel-gold transition-colors border-r border-diesel-oil pr-4">
+                    [03] Ops
+                </a>
+                <div class="flex items-center gap-2 pl-2 bg-black/30 p-1 rounded border border-diesel-oil shadow-inset">
+                    <i class="fas fa-sun text-xs text-diesel-steel"></i>
+                    <input type="checkbox" class="toggle-switch" id="theme-toggle">
+                </div>
+            </nav>
+        </header>
+
+        <!-- The Screen Surface -->
+        <main class="screen-surface relative">
+            <div class="scanlines"></div>
+            <div class="screen-glare"></div>
+
+            <!-- Content Container -->
+            <div class="max-w-6xl mx-auto p-6 md:p-12 relative z-10">
+
+                <!-- Hero: Personnel Dossier -->
+                <section id="profile" class="mb-24 pt-8" data-aos="fade-down">
+                    <div class="flex flex-col lg:flex-row gap-8 items-start">
+
+                        <!-- Photo Card -->
+                        <div class="lg:w-1/3 paper-texture p-4 relative transform rotate-1">
+                            <div
+                                class="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-8 bg-gray-300/50 transform rotate-1 z-10 backdrop-blur-sm border border-gray-400">
+                            </div> <!-- Tape -->
+
+                            <div
+                                class="border-4 border-white shadow-inner bg-gray-200 aspect-[3/4] relative overflow-hidden mb-4 grayscale contrast-125 filter sepia-[.3]">
+                                <img src="assets/img/krishna-thorat.jpg"
+                                    onerror="this.src='https://ui-avatars.com/api/?name=KT&background=333&color=ccc&size=512'"
+                                    class="w-full h-full object-cover" alt="Operative Photo">
+                                <div
+                                    class="absolute bottom-2 right-2 border-2 border-diesel-alert text-diesel-alert font-black font-display text-xl px-2 uppercase transform -rotate-12 opacity-80">
+                                    Classified
+                                </div>
+                            </div>
+
+                            <div class="font-typewriter text-black text-sm leading-tight">
+                                <p><strong>NAME:</strong> Krishna Thorat</p>
+                                <p><strong>RANK:</strong> Full Stack Engineer</p>
+                                <p><strong>CLEARANCE:</strong> Level 5 (AI)</p>
+                                <p><strong>LOC:</strong> Pune, Sector 7</p>
+                            </div>
+                        </div>
+
+                        <!-- Terminal Output -->
+                        <div class="lg:w-2/3 bg-black/60 border border-diesel-steel p-6 shadow-screen-glow relative">
+                            <div class="absolute top-0 left-0 w-2 h-full bg-diesel-gold/50"></div>
+                            <h2 class="font-display text-4xl md:text-6xl text-diesel-gold mb-6 text-shadow-sm">
+                                Operator <span class="text-white">Profile</span>
+                            </h2>
+
+                            <div class="font-sans text-diesel-chrome space-y-4 text-lg">
+                                <p>> Initializing bio-metric scan...</p>
+                                <p>> <span class="text-diesel-rust">Subject specializes in constructing dynamic web
+                                        mechanisms and Agentic AI systems.</span></p>
+                                <p>> Core Competencies detected: <span
+                                        class="text-diesel-amber bg-diesel-oil px-1">PHP</span>, <span
+                                        class="text-diesel-amber bg-diesel-oil px-1">Node.js</span>, <span
+                                        class="text-diesel-amber bg-diesel-oil px-1">React</span>.</p>
+                                <p>> Latest directive: Integrating Generative AI protocols into legacy systems.</p>
+                                <p class="animate-pulse mt-4">_ Ready for assignment.</p>
+                            </div>
+
+                            <div class="mt-8 flex gap-4">
+                                <a href="#projects"
+                                    class="bg-diesel-rust text-black font-bold font-tech px-6 py-3 shadow-btn-raised hover:shadow-btn-pressed hover:translate-y-[1px] transition-all uppercase">
+                                    View Missions
+                                </a>
+                                <a href="mailto:krishnathorat007@gmail.com"
+                                    class="bg-diesel-steel text-black font-bold font-tech px-6 py-3 shadow-btn-raised hover:shadow-btn-pressed hover:translate-y-[1px] transition-all uppercase">
+                                    Contact HQ
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Arsenal: Fuse Box Layout -->
+                <section id="arsenal" class="mb-24">
+                    <div class="bg-diesel-oil border-4 border-diesel-dark p-2 rounded-lg shadow-2xl">
+                        <div class="bg-[#151515] border-2 border-diesel-steel p-6 relative">
+                            <!-- Plate Label -->
+                            <div
+                                class="absolute -top-5 left-6 bg-diesel-brass text-black font-display font-bold px-4 py-1 border-2 border-black shadow-md transform -rotate-1">
+                                SYSTEM ARSENAL
+                            </div>
+                            <div class="absolute top-2 right-2 flex gap-1">
+                                <div class="screw-head"></div>
+                                <div class="screw-head"></div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+                                <!-- Panel A -->
+                                <div>
+                                    <h3 class="font-tech text-diesel-steel border-b border-diesel-steel/30 mb-4 pb-1">
+                                        /// WEB_PROTOCOLS ///</h3>
+                                    <div class="grid grid-cols-3 gap-4">
+                                        <!-- Fuse Item -->
+                                        <div class="flex flex-col items-center group">
+                                            <div
+                                                class="w-12 h-20 bg-glass-gradient border border-gray-600 rounded-full relative overflow-hidden shadow-inner bg-black/50 group-hover:shadow-[0_0_15px_#daa520] transition-shadow">
+                                                <div
+                                                    class="absolute bottom-0 w-full h-[80%] bg-gradient-to-t from-diesel-gold to-transparent opacity-50">
+                                                </div>
+                                                <div
+                                                    class="absolute top-2 left-1/2 -translate-x-1/2 w-1 h-16 bg-diesel-chrome opacity-30">
+                                                </div> <!-- Filament -->
+                                            </div>
+                                            <span
+                                                class="font-tech text-xs mt-2 text-diesel-chrome group-hover:text-diesel-gold">React</span>
+                                        </div>
+                                        <div class="flex flex-col items-center group">
+                                            <div
+                                                class="w-12 h-20 bg-black/50 border border-gray-600 rounded-full relative overflow-hidden shadow-inner group-hover:shadow-[0_0_15px_#daa520] transition-shadow">
+                                                <div
+                                                    class="absolute bottom-0 w-full h-[90%] bg-gradient-to-t from-diesel-gold to-transparent opacity-50">
+                                                </div>
+                                                <div
+                                                    class="absolute top-2 left-1/2 -translate-x-1/2 w-1 h-16 bg-diesel-chrome opacity-30">
+                                                </div>
+                                            </div>
+                                            <span
+                                                class="font-tech text-xs mt-2 text-diesel-chrome group-hover:text-diesel-gold">Node.js</span>
+                                        </div>
+                                        <div class="flex flex-col items-center group">
+                                            <div
+                                                class="w-12 h-20 bg-black/50 border border-gray-600 rounded-full relative overflow-hidden shadow-inner group-hover:shadow-[0_0_15px_#daa520] transition-shadow">
+                                                <div
+                                                    class="absolute bottom-0 w-full h-[75%] bg-gradient-to-t from-diesel-gold to-transparent opacity-50">
+                                                </div>
+                                                <div
+                                                    class="absolute top-2 left-1/2 -translate-x-1/2 w-1 h-16 bg-diesel-chrome opacity-30">
+                                                </div>
+                                            </div>
+                                            <span
+                                                class="font-tech text-xs mt-2 text-diesel-chrome group-hover:text-diesel-gold">PHP</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Panel B -->
+                                <div>
+                                    <h3 class="font-tech text-diesel-steel border-b border-diesel-steel/30 mb-4 pb-1">
+                                        /// AI_CORES ///</h3>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div
+                                            class="bg-diesel-dark border border-diesel-rust p-3 flex items-center gap-3 relative overflow-hidden group hover:bg-diesel-oil transition-colors cursor-crosshair">
+                                            <i
+                                                class="fas fa-microchip text-diesel-rust text-2xl group-hover:animate-pulse"></i>
+                                            <div>
+                                                <div class="font-bold text-sm text-diesel-chrome">Generative AI</div>
+                                                <div class="text-[10px] font-tech text-diesel-steel">STATUS: ACTIVE
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="absolute -right-2 -bottom-2 text-4xl text-diesel-rust opacity-10 icon-bg">
+                                                <i class="fas fa-brain"></i>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="bg-diesel-dark border border-diesel-rust p-3 flex items-center gap-3 relative overflow-hidden group hover:bg-diesel-oil transition-colors cursor-crosshair">
+                                            <i
+                                                class="fas fa-robot text-diesel-rust text-2xl group-hover:animate-pulse"></i>
+                                            <div>
+                                                <div class="font-bold text-sm text-diesel-chrome">Agents</div>
+                                                <div class="text-[10px] font-tech text-diesel-steel">STATUS: ONLINE
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="bg-diesel-dark border border-diesel-rust p-3 flex items-center gap-3 relative overflow-hidden group hover:bg-diesel-oil transition-colors cursor-crosshair col-span-2">
+                                            <i
+                                                class="fas fa-project-diagram text-diesel-rust text-2xl group-hover:animate-pulse"></i>
+                                            <div>
+                                                <div class="font-bold text-sm text-diesel-chrome">RAG Systems &
+                                                    LangChain</div>
+                                                <div class="text-[10px] font-tech text-diesel-steel">CAPACITY: MAX</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Ops: Blueprints -->
+                <section id="projects" class="mb-24">
+                    <h2 class="font-display text-3xl text-diesel-chrome mb-8 flex items-center gap-4">
+                        <span
+                            class="w-8 h-8 border-2 border-diesel-chrome flex items-center justify-center text-sm">03</span>
+                        Active Operations
+                        <span class="h-[1px] flex-grow bg-diesel-chrome opacity-30"></span>
+                    </h2>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Blueprint Card 1 -->
+                        <article class="blueprint p-1 border-4 border-white shadow-lg relative group"
+                            data-aos="fade-up">
+                            <div class="absolute -top-3 -left-3 w-8 h-8 border-t-4 border-l-4 border-white z-10"></div>
+                            <div class="absolute -bottom-3 -right-3 w-8 h-8 border-b-4 border-r-4 border-white z-10">
+                            </div>
+
+                            <div class="p-6 h-full flex flex-col relative overflow-hidden">
+                                <!-- Grid overlay inside card -->
+                                <div class="absolute inset-0 opacity-20"
+                                    style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 10px 10px;">
+                                </div>
+
+                                <div class="flex justify-between items-start mb-4 z-10">
+                                    <h3 class="font-tech text-2xl font-bold text-white uppercase tracking-wider">
+                                        HireSense AI</h3>
+                                    <i
+                                        class="fas fa-cogs text-white/50 text-2xl group-hover:rotate-90 transition-transform duration-700"></i>
+                                </div>
+
+                                <div
+                                    class="border border-white/30 p-4 mb-4 bg-diesel-blueprint/50 backdrop-blur-sm z-10 flex-grow">
+                                    <p class="font-sans text-sm text-blue-100 leading-relaxed">
+                                        Platform for career vector analysis. Orchestrates multi-agent swarms using
+                                        Pydantic AI & Gemini 2.0.
+                                    </p>
+                                </div>
+
+                                <div class="flex gap-2 mb-4 z-10">
+                                    <span
+                                        class="text-[10px] uppercase font-bold bg-white text-diesel-blueprint px-2 py-1">FastAPI</span>
+                                    <span
+                                        class="text-[10px] uppercase font-bold bg-white text-diesel-blueprint px-2 py-1">WebSockets</span>
+                                </div>
+
+                                <div class="z-10 border-t border-white/30 pt-4 flex justify-between items-center">
+                                    <span class="font-tech text-xs text-white/70">REF: HS-2024</span>
+                                    <a href="#"
+                                        class="text-white hover:text-diesel-gold font-bold text-sm uppercase flex items-center gap-2">
+                                        Inspect <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Blueprint Card 2 -->
+                        <article class="blueprint p-1 border-4 border-white shadow-lg relative group" data-aos="fade-up"
+                            data-aos-delay="100">
+                            <div class="absolute -top-3 -left-3 w-8 h-8 border-t-4 border-l-4 border-white z-10"></div>
+                            <div class="absolute -bottom-3 -right-3 w-8 h-8 border-b-4 border-r-4 border-white z-10">
+                            </div>
+
+                            <div class="p-6 h-full flex flex-col relative overflow-hidden">
+                                <div class="absolute inset-0 opacity-20"
+                                    style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 10px 10px;">
+                                </div>
+
+                                <div class="flex justify-between items-start mb-4 z-10">
+                                    <h3 class="font-tech text-2xl font-bold text-white uppercase tracking-wider">
+                                        Intellify Insights</h3>
+                                    <i
+                                        class="fas fa-chart-network text-white/50 text-2xl group-hover:scale-110 transition-transform"></i>
+                                </div>
+
+                                <div
+                                    class="border border-white/30 p-4 mb-4 bg-diesel-blueprint/50 backdrop-blur-sm z-10 flex-grow">
+                                    <p class="font-sans text-sm text-blue-100 leading-relaxed">
+                                        Data transmission pipeline. ETL processes for SSIS, Teradata, and Postgres via
+                                        PySpark.
+                                    </p>
+                                </div>
+
+                                <div class="flex gap-2 mb-4 z-10">
+                                    <span
+                                        class="text-[10px] uppercase font-bold bg-white text-diesel-blueprint px-2 py-1">Azure</span>
+                                    <span
+                                        class="text-[10px] uppercase font-bold bg-white text-diesel-blueprint px-2 py-1">PowerBI</span>
+                                </div>
+
+                                <div class="z-10 border-t border-white/30 pt-4 flex justify-between items-center">
+                                    <span class="font-tech text-xs text-white/70">REF: II-DATA</span>
+                                    <a href="#"
+                                        class="text-white hover:text-diesel-gold font-bold text-sm uppercase flex items-center gap-2">
+                                        Inspect <i class="fas fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- Service Log (Experience) -->
+                <section class="bg-diesel-black border-t-4 border-diesel-oil pt-12 pb-8 px-4 md:px-8 relative">
+                    <div
+                        class="absolute -top-6 left-1/2 -translate-x-1/2 bg-diesel-rust text-white font-display px-6 py-2 border-2 border-black shadow-lg uppercase tracking-widest">
+                        Transmission Log
+                    </div>
+
+                    <div class="space-y-8 font-sans text-sm text-diesel-chrome">
+                        <!-- Log Entry -->
+                        <div class="flex gap-4 items-start group" data-aos="fade-right">
+                            <div class="font-tech text-diesel-gold whitespace-nowrap pt-1">[ 12-2024 ]</div>
+                            <div
+                                class="border-l-2 border-diesel-steel/30 pl-4 pb-4 group-hover:border-diesel-rust transition-colors">
+                                <h4 class="text-white font-bold text-lg">Software Developer</h4>
+                                <div class="text-diesel-steel text-xs mb-2">LOC: Ergabite Tech Solutions</div>
+                                <p>Deployed "In-Parking" alert systems. Optimized CI/CD pipelines on Azure sector.</p>
+                            </div>
+                        </div>
+
+                        <!-- Log Entry -->
+                        <div class="flex gap-4 items-start group" data-aos="fade-right" data-aos-delay="50">
+                            <div class="font-tech text-diesel-gold whitespace-nowrap pt-1">[ 07-2024 ]</div>
+                            <div
+                                class="border-l-2 border-diesel-steel/30 pl-4 pb-4 group-hover:border-diesel-rust transition-colors">
+                                <h4 class="text-white font-bold text-lg">Senior Web Developer</h4>
+                                <div class="text-diesel-steel text-xs mb-2">LOC: Internship Studio</div>
+                                <p>Architected hiring portal utilizing GCP and AWS Lambda functions.</p>
+                            </div>
+                        </div>
+
+                        <!-- Log Entry -->
+                        <div class="flex gap-4 items-start group" data-aos="fade-right" data-aos-delay="100">
+                            <div class="font-tech text-diesel-steel whitespace-nowrap pt-1">[ 08-2022 ]</div>
+                            <div
+                                class="border-l-2 border-diesel-steel/30 pl-4 pb-4 group-hover:border-diesel-rust transition-colors">
+                                <h4 class="text-white font-bold text-lg">System Engineer</h4>
+                                <div class="text-diesel-steel text-xs mb-2">LOC: Infosys Ltd.</div>
+                                <p>Maintained Angular/Node.js frameworks. Integrated Salesforce Cortex.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 text-center">
+                        <a href="resume.pdf" download
+                            class="inline-block border-2 border-dashed border-diesel-steel text-diesel-steel hover:text-white hover:border-white px-6 py-2 font-tech uppercase text-xs transition-all">
+                            <i class="fas fa-download mr-2"></i> Download Full Log
+                        </a>
+                    </div>
+                </section>
+
+            </div> <!-- End Content Container -->
+        </main>
+
+        <!-- Footer -->
+        <footer
+            class="bg-diesel-dark border-t-4 border-diesel-oil p-6 text-center font-tech text-xs text-diesel-steel relative z-40">
+            <div class="flex justify-center gap-6 mb-4">
+                <a href="#" class="hover:text-diesel-gold text-lg"><i class="fab fa-github"></i></a>
+                <a href="#" class="hover:text-diesel-gold text-lg"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="hover:text-diesel-gold text-lg"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p>TERMINAL SESSION ACTIVE. ID: KT-2025.</p>
+            <p class="opacity-50 mt-1">Made with <i class="fas fa-cog fa-spin"></i> in Pune, India.</p>
+        </footer>
+
+    </div> <!-- End Machine -->
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            offset: 50,
+            once: true,
+        });
+
+        const toggle = document.getElementById('theme-toggle');
+        toggle.addEventListener('change', () => {
+            document.body.classList.toggle('sepia');
+            document.body.classList.toggle('brightness-125');
+        });
+    </script>
+    <script src="assets/js/template-switcher.js"></script>
+</body>
+
+</html>

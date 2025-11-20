@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishna Thorat | AI Engineer</title>
+
+    <!-- Fonts: Manrope (Modern Sans) & Playfair Display (Editorial Serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Manrope"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        nordic: {
+                            ice: '#F0F9FF',        // Very light blue/white
+                            snow: '#FFFFFF',
+                            charcoal: '#0F172A',   // Slate 900
+                            forest: '#064E3B',     // Emerald 900
+                            pine: '#10B981',       // Emerald 500
+                            aurora: '#38BDF8',     // Sky 400
+                            night: '#020617',      // Slate 950
+                            glass: 'rgba(255, 255, 255, 0.7)'
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Smooth Scroll & Selection */
+        ::selection {
+            background: #0F172A;
+            color: #fff;
+        }
+
+        html.dark ::selection {
+            background: #38BDF8;
+            color: #000;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 4px;
+        }
+
+        html.dark ::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+
+        /* Frosted Glass Utility */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        html.dark .glass-panel {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Aurora Gradients */
+        .aurora-bg {
+            background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.15), transparent 50%),
+                radial-gradient(circle at 100% 0%, rgba(16, 185, 129, 0.1), transparent 40%);
+        }
+
+        html.dark .aurora-bg {
+            background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.08), transparent 60%),
+                radial-gradient(circle at 100% 0%, rgba(16, 185, 129, 0.08), transparent 50%);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-nordic-ice dark:bg-nordic-night text-nordic-charcoal dark:text-slate-100 transition-colors duration-500 relative overflow-x-hidden">
+
+    <!-- Animated Background Blobs -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div
+            class="absolute top-0 left-1/4 w-96 h-96 bg-nordic-aurora/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob">
+        </div>
+        <div
+            class="absolute top-0 right-1/4 w-96 h-96 bg-nordic-pine/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000">
+        </div>
+        <div
+            class="absolute -bottom-32 left-1/3 w-96 h-96 bg-purple-300/20 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000">
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
+        <div class="glass-panel rounded-full px-6 py-3 flex items-center gap-8 shadow-lg shadow-black/5">
+            <a href="#" class="font-bold text-lg tracking-tight hover:text-nordic-pine transition-colors">KT.</a>
+
+            <div class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600 dark:text-slate-300">
+                <a href="#about" class="hover:text-nordic-charcoal dark:hover:text-white transition-colors">About</a>
+                <a href="#projects" class="hover:text-nordic-charcoal dark:hover:text-white transition-colors">Works</a>
+                <a href="#experience"
+                    class="hover:text-nordic-charcoal dark:hover:text-white transition-colors">Experience</a>
+            </div>
+
+            <div class="flex items-center gap-3 border-l border-slate-200 dark:border-slate-700 pl-4">
+                <button id="theme-toggle"
+                    class="text-slate-500 hover:text-nordic-charcoal dark:text-slate-400 dark:hover:text-white transition-colors">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="mailto:krishnathorat007@gmail.com"
+                    class="bg-nordic-charcoal text-white dark:bg-white dark:text-nordic-charcoal rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider hover:scale-105 transition-transform">
+                    Connect
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="relative z-10 pt-40 px-6 max-w-7xl mx-auto">
+
+        <!-- Hero Section: Editorial Style -->
+        <header class="grid lg:grid-cols-12 gap-12 items-center mb-32">
+            <div class="lg:col-span-7" data-aos="fade-right" data-aos-duration="1000">
+                <p class="text-nordic-pine font-bold tracking-widest text-xs uppercase mb-6 flex items-center gap-2">
+                    <span class="w-8 h-[1px] bg-nordic-pine"></span> Based in Pune, India
+                </p>
+
+                <h1
+                    class="text-6xl sm:text-7xl md:text-8xl font-extrabold tracking-tighter leading-[0.9] mb-8 text-nordic-charcoal dark:text-white">
+                    Logic meets <br>
+                    <span
+                        class="font-serif italic font-light text-nordic-pine dark:text-nordic-aurora">Intuition.</span>
+                </h1>
+
+                <p class="text-xl text-slate-600 dark:text-slate-400 max-w-lg leading-relaxed mb-10 font-light">
+                    I am <strong class="text-nordic-charcoal dark:text-white font-semibold">Krishna Thorat</strong>, a
+                    Full Stack AI Engineer. I build intelligent systems that feel natural, using the precision of code
+                    and the fluidity of AI.
+                </p>
+
+                <div class="flex items-center gap-6">
+                    <a href="#projects"
+                        class="group flex items-center gap-3 border-b border-nordic-charcoal dark:border-white pb-1 text-nordic-charcoal dark:text-white font-medium text-lg">
+                        See Selected Works
+                        <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+
+                    <div class="flex gap-4 text-xl text-slate-400">
+                        <a href="#" class="hover:text-nordic-charcoal dark:hover:text-white transition-colors"><i
+                                class="fab fa-github"></i></a>
+                        <a href="#" class="hover:text-nordic-charcoal dark:hover:text-white transition-colors"><i
+                                class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 relative" data-aos="fade-left" data-aos-duration="1200">
+                <!-- Abstract floating visual -->
+                <div class="relative w-full aspect-[4/5]">
+                    <div
+                        class="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl rotate-3 transition-transform duration-700 hover:rotate-0">
+                        <img src="assets/img/krishna-thorat.jpg" alt="Krishna Thorat"
+                            class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                        <!-- Overlay Gradient -->
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-nordic-charcoal/60 to-transparent mix-blend-multiply">
+                        </div>
+                    </div>
+                    <!-- Decorative Element -->
+                    <div class="absolute -bottom-6 -left-6 glass-panel p-4 rounded-xl animate-float">
+                        <span class="block text-3xl font-bold text-nordic-charcoal dark:text-white">5+</span>
+                        <span class="text-xs uppercase tracking-widest text-slate-500">Years Exp.</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Tech Strip -->
+        <div class="mb-32 border-y border-slate-200 dark:border-slate-800 py-8 flex flex-wrap justify-center gap-8 md:gap-16 opacity-60 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
+            data-aos="fade-up">
+            <i class="fab fa-react text-4xl" title="React"></i>
+            <i class="fab fa-node text-4xl" title="Node.js"></i>
+            <i class="fab fa-python text-4xl" title="Python"></i>
+            <i class="fab fa-aws text-4xl" title="AWS"></i>
+            <i class="fas fa-database text-4xl" title="PostgreSQL"></i>
+            <i class="fas fa-brain text-4xl" title="Generative AI"></i>
+        </div>
+
+        <!-- Bento Grid Section: About & Skills -->
+        <section id="about" class="mb-32">
+            <div class="flex items-end justify-between mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-nordic-charcoal dark:text-white">
+                    The <span class="font-serif italic font-light text-slate-400">Arsenal</span>
+                </h2>
+                <p class="hidden md:block text-slate-500 text-right text-sm max-w-xs">
+                    A curated blend of foundational coding skills and cutting-edge AI capabilities.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 grid-rows-[auto_auto]">
+
+                <!-- Card 1: Main Intro -->
+                <div class="md:col-span-2 glass-panel rounded-2xl p-8 flex flex-col justify-between min-h-[280px]"
+                    data-aos="fade-up">
+                    <div>
+                        <i class="fas fa-code-branch text-3xl text-nordic-pine mb-4"></i>
+                        <h3 class="text-2xl font-bold mb-2">Full Stack Engineering</h3>
+                        <p class="text-slate-600 dark:text-slate-300 font-light leading-relaxed">
+                            I don't just write code; I architect scalable solutions. My expertise spans from PHP
+                            backends to dynamic React frontends, ensuring seamless user experiences.
+                        </p>
+                    </div>
+                    <div class="flex gap-2 mt-6">
+                        <span
+                            class="px-3 py-1 bg-white dark:bg-slate-800 rounded-md text-xs font-bold uppercase tracking-wider shadow-sm">React</span>
+                        <span
+                            class="px-3 py-1 bg-white dark:bg-slate-800 rounded-md text-xs font-bold uppercase tracking-wider shadow-sm">Node.js</span>
+                        <span
+                            class="px-3 py-1 bg-white dark:bg-slate-800 rounded-md text-xs font-bold uppercase tracking-wider shadow-sm">Postgres</span>
+                    </div>
+                </div>
+
+                <!-- Card 2: AI Focus -->
+                <div class="md:col-span-2 bg-nordic-charcoal dark:bg-slate-800 text-white rounded-2xl p-8 flex flex-col justify-between min-h-[280px] relative overflow-hidden group"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div
+                        class="absolute top-0 right-0 w-64 h-64 bg-nordic-pine/20 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2">
+                    </div>
+
+                    <div class="relative z-10">
+                        <i class="fas fa-microchip text-3xl text-nordic-aurora mb-4"></i>
+                        <h3 class="text-2xl font-bold mb-2">AI & Agents</h3>
+                        <p class="text-slate-300 font-light leading-relaxed">
+                            Pioneering the next wave of software with Agentic AI, RAG systems, and LLM integration
+                            utilizing LangChain and Azure OpenAI.
+                        </p>
+                    </div>
+                    <div class="relative z-10 flex gap-2 mt-6">
+                        <span
+                            class="px-3 py-1 bg-white/10 rounded-md text-xs font-bold uppercase tracking-wider border border-white/10">GenAI</span>
+                        <span
+                            class="px-3 py-1 bg-white/10 rounded-md text-xs font-bold uppercase tracking-wider border border-white/10">LangChain</span>
+                        <span
+                            class="px-3 py-1 bg-white/10 rounded-md text-xs font-bold uppercase tracking-wider border border-white/10">RAG</span>
+                    </div>
+                </div>
+
+                <!-- Card 3: Education (Small) -->
+                <div class="md:col-span-1 glass-panel rounded-2xl p-6 flex flex-col justify-center items-center text-center hover:border-nordic-pine transition-colors cursor-default"
+                    data-aos="fade-up">
+                    <h4 class="text-4xl font-serif italic font-bold text-nordic-charcoal dark:text-white mb-1">MCA</h4>
+                    <p class="text-xs font-bold uppercase tracking-widest text-slate-500">Master's Degree</p>
+                    <p class="text-xs text-slate-400 mt-1">Vishwakarma Institute</p>
+                </div>
+
+                <!-- Card 4: Location (Small) -->
+                <div class="md:col-span-1 glass-panel rounded-2xl p-6 flex flex-col justify-center items-center text-center hover:border-nordic-pine transition-colors cursor-default"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-location-arrow text-2xl text-nordic-pine mb-2"></i>
+                    <p class="text-sm font-bold text-nordic-charcoal dark:text-white">Pune, IN</p>
+                    <p class="text-xs text-slate-400 mt-1">Open to Remote</p>
+                </div>
+
+                <!-- Card 5: Resume (Wide) -->
+                <a href="resume.pdf" download
+                    class="md:col-span-2 bg-nordic-pine hover:bg-emerald-600 text-white rounded-2xl p-6 flex items-center justify-between group transition-colors"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div>
+                        <p class="font-bold text-lg">Download Full Resume</p>
+                        <p class="text-emerald-100 text-sm font-light">PDF Format • Updated 2025</p>
+                    </div>
+                    <div
+                        class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fas fa-download"></i>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="mb-32">
+            <div
+                class="flex flex-col md:flex-row md:items-end justify-between mb-16 border-b border-slate-200 dark:border-slate-800 pb-6">
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-nordic-charcoal dark:text-white">
+                    Selected Works
+                </h2>
+                <a href="#"
+                    class="hidden md:flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-nordic-pine hover:text-nordic-charcoal dark:hover:text-white transition-colors">
+                    View Github <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Project 1 -->
+            <article class="group grid md:grid-cols-12 gap-8 mb-20 items-center" data-aos="fade-up">
+                <div class="md:col-span-7 order-2 md:order-1">
+                    <div
+                        class="glass-panel rounded-3xl overflow-hidden aspect-video relative shadow-xl group-hover:shadow-2xl transition-all duration-500">
+                        <!-- Mockup / Placeholder -->
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center">
+                            <i
+                                class="fas fa-robot text-8xl text-slate-300 dark:text-slate-700 group-hover:text-nordic-pine transition-colors duration-500"></i>
+                        </div>
+                        <!-- Overlay Info on Hover -->
+                        <div
+                            class="absolute inset-0 bg-nordic-charcoal/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span
+                                class="px-6 py-3 border border-white text-white font-bold uppercase tracking-widest">View
+                                Case Study</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:col-span-5 order-1 md:order-2">
+                    <span class="text-nordic-pine font-bold text-xs uppercase tracking-widest mb-2 block">Featured
+                        Project</span>
+                    <h3 class="text-3xl font-bold text-nordic-charcoal dark:text-white mb-4">HireSense AI</h3>
+                    <p class="text-slate-600 dark:text-slate-300 font-light leading-relaxed mb-6">
+                        An intelligent career guidance platform. I engineered a multi-agent system using
+                        <strong>Pydantic AI</strong> and <strong>Gemini 2.0</strong> to analyze user profiles and market
+                        trends, delivering hyper-personalized advice via WebSockets.
+                    </p>
+                    <div class="flex flex-wrap gap-3 text-sm font-medium text-slate-500 dark:text-slate-400">
+                        <span>FastAPI</span> • <span>WebSockets</span> • <span>GenAI Agents</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Project 2 -->
+            <article class="group grid md:grid-cols-12 gap-8 items-center" data-aos="fade-up">
+                <div class="md:col-span-5">
+                    <span class="text-nordic-pine font-bold text-xs uppercase tracking-widest mb-2 block">Enterprise
+                        Solution</span>
+                    <h3 class="text-3xl font-bold text-nordic-charcoal dark:text-white mb-4">Intellify Insights</h3>
+                    <p class="text-slate-600 dark:text-slate-300 font-light leading-relaxed mb-6">
+                        A robust data migration and analytics suite. Built to handle massive datasets, orchestrating
+                        transfers between SSIS, Power BI, MSSQL, and Teradata using <strong>PySpark</strong> pipelines
+                        on Azure.
+                    </p>
+                    <div class="flex flex-wrap gap-3 text-sm font-medium text-slate-500 dark:text-slate-400">
+                        <span>Azure</span> • <span>PySpark</span> • <span>Power BI</span>
+                    </div>
+                </div>
+                <div class="md:col-span-7">
+                    <div
+                        class="glass-panel rounded-3xl overflow-hidden aspect-video relative shadow-xl group-hover:shadow-2xl transition-all duration-500">
+                        <!-- Mockup / Placeholder -->
+                        <div
+                            class="absolute inset-0 bg-gradient-to-bl from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center">
+                            <i
+                                class="fas fa-chart-network text-8xl text-slate-300 dark:text-slate-700 group-hover:text-nordic-aurora transition-colors duration-500"></i>
+                        </div>
+                        <!-- Overlay Info on Hover -->
+                        <div
+                            class="absolute inset-0 bg-nordic-charcoal/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <span
+                                class="px-6 py-3 border border-white text-white font-bold uppercase tracking-widest">View
+                                Case Study</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- Experience Timeline (Minimal) -->
+        <section id="experience" class="mb-32 max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold tracking-tight text-nordic-charcoal dark:text-white">The Journey</h2>
+            </div>
+
+            <div
+                class="space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-300 before:to-transparent">
+
+                <!-- Job 1 -->
+                <div
+                    class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                    <div
+                        class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-300 group-hover:bg-nordic-pine transition-colors shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+                        <i class="fas fa-briefcase text-xs text-white"></i>
+                    </div>
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-panel p-6 rounded-xl shadow-sm">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="font-bold text-lg text-nordic-charcoal dark:text-white">Software Developer</h3>
+                            <span
+                                class="text-xs font-bold text-nordic-pine bg-emerald-50 dark:bg-emerald-900/30 px-2 py-1 rounded">Present</span>
+                        </div>
+                        <p class="text-sm font-medium text-slate-500 mb-2">Ergabite Tech Solutions</p>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                            Leading the "Infovault" AI initiative and developing real-time alerting systems on Azure.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Job 2 -->
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                    <div
+                        class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-300 group-hover:bg-nordic-charcoal transition-colors shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+                        <i class="fas fa-code text-xs text-white"></i>
+                    </div>
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-panel p-6 rounded-xl shadow-sm">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="font-bold text-lg text-nordic-charcoal dark:text-white">Senior Web Developer</h3>
+                            <span
+                                class="text-xs font-bold text-slate-500 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">2024</span>
+                        </div>
+                        <p class="text-sm font-medium text-slate-500 mb-2">Internship Studio</p>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                            Architected hiring portals using GCP Vertex AI and AWS Lambda for scalable serverless
+                            backends.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Job 3 -->
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                    <div
+                        class="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-300 group-hover:bg-nordic-charcoal transition-colors shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+                        <i class="fas fa-layer-group text-xs text-white"></i>
+                    </div>
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] glass-panel p-6 rounded-xl shadow-sm">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="font-bold text-lg text-nordic-charcoal dark:text-white">System Engineer</h3>
+                            <span
+                                class="text-xs font-bold text-slate-500 bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">2022-2024</span>
+                        </div>
+                        <p class="text-sm font-medium text-slate-500 mb-2">Infosys Ltd.</p>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                            Developed WCAG-compliant Angular applications and integrated real-time communication
+                            modules.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Minimal Footer -->
+    <footer class="py-20 border-t border-slate-200 dark:border-slate-800 relative overflow-hidden">
+        <!-- Background Gradient -->
+        <div
+            class="absolute inset-0 bg-gradient-to-b from-transparent to-slate-50 dark:to-slate-900/50 pointer-events-none">
+        </div>
+
+        <div class="max-w-3xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-4xl md:text-6xl font-serif italic font-bold text-nordic-charcoal dark:text-white mb-8">
+                Let's create <br> the future.
+            </h2>
+            <p class="text-slate-500 mb-10">Available for freelance projects and open to full-time opportunities.</p>
+
+            <div class="flex justify-center gap-8 mb-16">
+                <a href="mailto:krishnathorat007@gmail.com"
+                    class="text-2xl text-nordic-charcoal dark:text-white hover:text-nordic-pine transition-colors transform hover:-translate-y-1">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://linkedin.com/in/krishnathorat"
+                    class="text-2xl text-nordic-charcoal dark:text-white hover:text-blue-600 transition-colors transform hover:-translate-y-1">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/gamentionkray"
+                    class="text-2xl text-nordic-charcoal dark:text-white hover:text-slate-500 transition-colors transform hover:-translate-y-1">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+
+            <div class="text-xs font-bold uppercase tracking-widest text-slate-400">
+                &copy; 2025 Krishna Thorat • Built with purpose.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            offset: 50,
+            once: true,
+            easing: 'ease-out-quart'
+        });
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const icon = themeToggleBtn.querySelector('i');
+
+        function applyTheme(isDark) {
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                document.documentElement.classList.remove('dark');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+
+        // Initial check
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            applyTheme(true);
+        } else {
+            applyTheme(false);
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.theme = isDark ? 'dark' : 'light';
+            applyTheme(isDark);
+        });
+    </script>
+    <script src="assets/js/template-switcher.js"></script>
+</body>
+
+</html>

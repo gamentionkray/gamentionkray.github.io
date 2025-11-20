@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishna Thorat | Full Stack AI Engineer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Outfit"', 'sans-serif'],
+                        display: ['"Space Grotesk"', 'sans-serif'],
+                    },
+                    colors: {
+                        ocean: {
+                            dark: '#020617', // Deepest abyss
+                            deep: '#0f172a',
+                            mid: '#1e293b',
+                            teal: '#0f766e',
+                            cyan: '#06b6d4',
+                            light: '#67e8f9',
+                            foam: '#ecfeff',
+                            coral: '#f43f5e',
+                            gold: '#fbbf24',
+                        }
+                    },
+                    backgroundImage: {
+                        'underwater-gradient': 'linear-gradient(to bottom, #083344 0%, #0f172a 50%, #020617 100%)',
+                        'glass': 'linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%)',
+                        'glass-hover': 'linear-gradient(145deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px rgba(6, 182, 212, 0.3)',
+                        'glow-strong': '0 0 30px rgba(103, 232, 249, 0.5)',
+                        'glass-edge': 'inset 0 0 0 1px rgba(255, 255, 255, 0.1)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                        'pulse-glow': 'pulseGlow 3s infinite',
+                        'bubble-rise': 'bubbleRise 8s linear infinite',
+                        'wave': 'wave 10s linear infinite',
+                        'marquee': 'marquee 25s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '0.6', transform: 'scale(1)' },
+                            '50%': { opacity: '1', transform: 'scale(1.05)' },
+                        },
+                        bubbleRise: {
+                            '0%': { transform: 'translateY(100vh) scale(0.5)', opacity: '0' },
+                            '50%': { opacity: '0.6' },
+                            '100%': { transform: 'translateY(-10vh) scale(1.5)', opacity: '0' },
+                        },
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Bubble Cursor */
+        .cursor-bubble {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(103, 232, 249, 0.8);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            transition: width 0.2s, height 0.2s, background-color 0.2s, transform 0.1s;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 0 10px rgba(6, 182, 212, 0.4);
+        }
+
+        .cursor-trail {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: rgba(103, 232, 249, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.15s ease-out, opacity 0.5s;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #06b6d4, #0f766e);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #67e8f9;
+        }
+
+        /* Glassmorphism Utilities */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-panel {
+            background: rgba(2, 6, 23, 0.4);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Animated Background Bubbles */
+        .bubbles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: bubbleRise 15s infinite linear;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .bubble:nth-child(1) {
+            left: 10%;
+            width: 20px;
+            height: 20px;
+            animation-duration: 8s;
+            animation-delay: 0s;
+        }
+
+        .bubble:nth-child(2) {
+            left: 20%;
+            width: 40px;
+            height: 40px;
+            animation-duration: 12s;
+            animation-delay: 2s;
+        }
+
+        .bubble:nth-child(3) {
+            left: 35%;
+            width: 15px;
+            height: 15px;
+            animation-duration: 10s;
+            animation-delay: 4s;
+        }
+
+        .bubble:nth-child(4) {
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            animation-duration: 15s;
+            animation-delay: 1s;
+        }
+
+        .bubble:nth-child(5) {
+            left: 65%;
+            width: 25px;
+            height: 25px;
+            animation-duration: 11s;
+            animation-delay: 3s;
+        }
+
+        .bubble:nth-child(6) {
+            left: 80%;
+            width: 30px;
+            height: 30px;
+            animation-duration: 13s;
+            animation-delay: 5s;
+        }
+
+        .bubble:nth-child(7) {
+            left: 90%;
+            width: 45px;
+            height: 45px;
+            animation-duration: 16s;
+            animation-delay: 2s;
+        }
+
+        /* Light Rays */
+        .light-rays {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100vh;
+            background: radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.15), transparent 60%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .water-text {
+            background: linear-gradient(to right, #ecfeff 20%, #67e8f9 40%, #ecfeff 60%, #67e8f9 80%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shine 4s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        .wave-divider {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+
+        .wave-divider svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 60px;
+        }
+
+        .wave-divider .shape-fill {
+            fill: #1e293b;
+            /* Matches ocean-mid */
+        }
+    </style>
+</head>
+
+<body class="bg-ocean-deep text-ocean-foam overflow-x-hidden font-sans relative">
+
+    <!-- Background Elements -->
+    <div class="light-rays"></div>
+    <div class="bubbles">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-bubble hidden md:block"></div>
+
+    <!-- Loader -->
+    <div id="loader"
+        class="fixed inset-0 bg-ocean-dark z-[100] flex flex-col items-center justify-center transition-transform duration-1000 ease-in-out">
+        <div class="relative w-24 h-24 mb-4">
+            <div class="absolute inset-0 border-4 border-ocean-cyan rounded-full opacity-20 animate-ping"></div>
+            <div class="absolute inset-2 border-4 border-ocean-light rounded-full opacity-40 animate-ping"
+                style="animation-delay: 0.2s"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <i class="fas fa-water text-4xl text-ocean-cyan animate-pulse"></i>
+            </div>
+        </div>
+        <h1 class="text-2xl font-display font-bold tracking-[0.2em] text-ocean-light uppercase">Submerging...</h1>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-40 px-4 py-6 transition-all duration-300">
+        <div class="max-w-6xl mx-auto">
+            <div
+                class="glass-card rounded-full px-6 py-4 flex justify-between items-center shadow-glow border border-white/10">
+                <a href="#" class="text-2xl font-display font-bold tracking-tighter text-white group">
+                    KT<span class="text-ocean-cyan group-hover:text-ocean-foam transition-colors">.</span>DEV
+                    <div class="h-1 w-0 group-hover:w-full bg-ocean-cyan transition-all duration-300 rounded-full mt-1">
+                    </div>
+                </a>
+
+                <div class="hidden md:flex items-center gap-8 font-medium text-sm uppercase tracking-wider">
+                    <a href="#about" class="hover:text-ocean-cyan transition-colors">The Diver</a>
+                    <a href="#projects" class="hover:text-ocean-cyan transition-colors">Expeditions</a>
+                    <a href="#gear" class="hover:text-ocean-cyan transition-colors">Gear</a>
+                    <a href="#log" class="hover:text-ocean-cyan transition-colors">Logbook</a>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <a href="mailto:krishnathorat007@gmail.com"
+                        class="glass-card rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wide hover:bg-ocean-cyan hover:text-ocean-dark transition-colors border border-white/20">
+                        Contact
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="relative z-10">
+
+        <!-- Hero Section: Center Focused -->
+        <section class="min-h-screen flex items-center justify-center relative px-4 pt-20">
+            <div class="text-center max-w-4xl mx-auto z-10" data-aos="fade-up" data-aos-duration="1000">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-ocean-cyan/30 text-ocean-cyan font-mono text-xs uppercase tracking-widest mb-8 animate-float">
+                    <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span> Available for Hire
+                </div>
+
+                <h1 class="text-5xl sm:text-7xl md:text-9xl font-display font-bold leading-[0.9] mb-6 tracking-tight">
+                    Krishna <span class="water-text">Thorat</span>
+                </h1>
+
+                <p class="text-xl md:text-2xl text-ocean-foam/70 font-light max-w-2xl mx-auto mb-12 leading-relaxed">
+                    Full Stack & AI Engineer building intelligent systems below the surface.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                    <a href="#projects"
+                        class="relative overflow-hidden rounded-full bg-ocean-cyan text-ocean-dark px-10 py-4 font-bold text-lg shadow-glow hover:shadow-glow-strong hover:scale-105 transition-all uppercase group w-full sm:w-auto">
+                        <span class="relative z-10">Dive In</span>
+                        <div
+                            class="absolute inset-0 bg-white/30 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500">
+                        </div>
+                    </a>
+                    <a href="#about"
+                        class="text-ocean-light hover:text-white underline decoration-ocean-cyan underline-offset-8 decoration-2 transition-colors">
+                        Explore Profile
+                    </a>
+                </div>
+            </div>
+
+            <!-- Wave Divider Bottom -->
+            <div class="absolute bottom-0 w-full leading-none">
+                <svg class="relative block w-[calc(100%+1.3px)] h-[60px]" data-name="Layer 1"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path
+                        d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                        fill="#1e293b" fill-opacity="0.4"></path>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Marquee Stream -->
+        <div class="w-full bg-ocean-mid/40 backdrop-blur-sm border-y border-white/5 overflow-hidden py-6 mb-20">
+            <div
+                class="whitespace-nowrap animate-marquee flex gap-12 text-xl font-bold font-display uppercase text-ocean-cyan/50">
+                <span class="flex items-center gap-4">JavaScript <i class="fas fa-circle text-[6px]"></i></span>
+                <span class="flex items-center gap-4">React <i class="fas fa-circle text-[6px]"></i></span>
+                <span class="flex items-center gap-4 text-ocean-light">Node.js <i
+                        class="fas fa-circle text-[6px]"></i></span>
+                <span class="flex items-center gap-4">Python <i class="fas fa-circle text-[6px]"></i></span>
+                <span class="flex items-center gap-4 text-ocean-coral">Generative AI <i
+                        class="fas fa-circle text-[6px]"></i></span>
+                <span class="flex items-center gap-4">Langchain <i class="fas fa-circle text-[6px]"></i></span>
+                <span class="flex items-center gap-4">RAG Systems <i class="fas fa-circle text-[6px]"></i></span>
+                <span class="flex items-center gap-4">AWS <i class="fas fa-circle text-[6px]"></i></span>
+                <span class="flex items-center gap-4">Azure <i class="fas fa-circle text-[6px]"></i></span>
+                <span class="flex items-center gap-4">PHP <i class="fas fa-circle text-[6px]"></i></span>
+            </div>
+        </div>
+
+        <!-- About Section (The Diver) -->
+        <section id="about" class="max-w-6xl mx-auto mb-32 px-4">
+            <div class="glass-card rounded-[3rem] p-8 md:p-12 border border-white/10 relative overflow-hidden">
+                <!-- Decorative blob -->
+                <div
+                    class="absolute top-0 right-0 w-96 h-96 bg-ocean-cyan/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none">
+                </div>
+
+                <div class="grid md:grid-cols-12 gap-12 items-center">
+                    <div class="md:col-span-5 relative order-2 md:order-1">
+                        <div class="aspect-[3/4] rounded-2xl overflow-hidden relative group">
+                            <img src="assets/img/krishna-thorat.jpg" alt="Krishna Thorat"
+                                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+                            <div class="absolute inset-0 bg-ocean-dark/20 group-hover:bg-transparent transition-colors">
+                            </div>
+
+                            <!-- Floater Stats -->
+                            <div
+                                class="absolute bottom-4 left-4 right-4 glass-panel rounded-xl p-4 flex justify-between items-center">
+                                <div>
+                                    <p class="text-xs text-ocean-cyan font-bold uppercase">Experience</p>
+                                    <p class="text-2xl font-display font-bold text-white">5+ Years</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-xs text-ocean-cyan font-bold uppercase">Location</p>
+                                    <p class="text-white font-medium text-sm"><i class="fas fa-map-marker-alt mr-1"></i>
+                                        Pune, IND</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-7 order-1 md:order-2">
+                        <h2 class="text-4xl font-display font-bold mb-6 flex items-center gap-3 text-white">
+                            <i class="fas fa-user-astronaut text-ocean-cyan"></i> The Diver
+                        </h2>
+                        <h3 class="text-2xl text-ocean-light mb-6 font-light">Merging Creative Web Development with
+                            <span class="font-bold text-ocean-coral">Agentic AI</span>.</h3>
+
+                        <p class="text-ocean-foam/70 leading-relaxed mb-6">
+                            I'm a Master of Computer Applications graduate from Vishwakarma Institute of Technology
+                            (2022). My journey isn't just about writing code; it's about architecting ecosystems where
+                            data flows like water and AI agents act with purpose.
+                        </p>
+                        <p class="text-ocean-foam/70 leading-relaxed mb-8">
+                            Currently, I'm engineering robust solutions involving LLMs, RAG pipelines, and full-stack
+                            architectures. When I'm not submerged in documentation, I'm exploring new depths in
+                            Generative AI.
+                        </p>
+
+                        <div class="flex flex-wrap gap-4">
+                            <a href="https://github.com/gamentionkray" target="_blank"
+                                class="flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 hover:bg-ocean-cyan hover:text-ocean-dark transition-all border border-white/10">
+                                <i class="fab fa-github"></i> Github
+                            </a>
+                            <a href="https://linkedin.com/in/krishnathorat" target="_blank"
+                                class="flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 hover:bg-blue-600 hover:text-white transition-all border border-white/10">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                            <a href="resume.pdf" download
+                                class="flex items-center gap-2 px-6 py-3 rounded-full bg-white/5 hover:bg-ocean-coral hover:text-white transition-all border border-white/10">
+                                <i class="fas fa-file-arrow-down"></i> Resume
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects (Expeditions) - Alternating Layout -->
+        <section id="projects" class="max-w-6xl mx-auto mb-32 px-4">
+            <h2 class="text-4xl md:text-6xl font-bold font-display uppercase mb-16 text-center text-white">
+                <span class="water-text">Recent Expeditions</span>
+            </h2>
+
+            <div class="space-y-24">
+
+                <!-- Project 1: HireSense -->
+                <div class="grid md:grid-cols-2 gap-10 items-center group" data-aos="fade-up">
+                    <div
+                        class="relative aspect-video rounded-3xl overflow-hidden shadow-glow-strong border border-white/10">
+                        <div
+                            class="absolute inset-0 bg-ocean-coral/10 group-hover:bg-transparent transition-colors z-10">
+                        </div>
+                        <!-- Placeholder for Project Image -->
+                        <div class="w-full h-full bg-ocean-mid flex items-center justify-center">
+                            <i
+                                class="fas fa-brain text-8xl text-ocean-coral opacity-50 group-hover:scale-110 transition-transform duration-700"></i>
+                        </div>
+
+                        <div class="absolute bottom-4 left-4 z-20 flex gap-2">
+                            <span
+                                class="px-3 py-1 rounded-full bg-black/50 backdrop-blur text-xs font-bold border border-white/10">Pydantic
+                                AI</span>
+                            <span
+                                class="px-3 py-1 rounded-full bg-black/50 backdrop-blur text-xs font-bold border border-white/10">FastAPI</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <span class="text-ocean-coral font-mono text-sm tracking-widest uppercase mb-2 block">Dec 2024 -
+                            Present</span>
+                        <h3
+                            class="text-4xl font-display font-bold mb-4 text-white group-hover:text-ocean-coral transition-colors">
+                            HireSense AI</h3>
+                        <p class="text-ocean-foam/70 leading-relaxed mb-6">
+                            An advanced AI-powered career guidance platform featuring multi-agent orchestration.
+                            Utilizing Pydantic AI and Gemini 2.0, it coordinates over 16 distinct AI agents to provide
+                            real-time, context-aware career advice via WebSockets.
+                        </p>
+                        <a href="#"
+                            class="inline-flex items-center gap-2 text-ocean-light font-bold hover:text-white transition-colors border-b-2 border-ocean-cyan pb-1">
+                            View Case Study <i
+                                class="fas fa-arrow-right transform -rotate-45 group-hover:rotate-0 transition-transform"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2: Intellify -->
+                <div class="grid md:grid-cols-2 gap-10 items-center group" data-aos="fade-up">
+                    <div
+                        class="md:order-2 relative aspect-video rounded-3xl overflow-hidden shadow-glow-strong border border-white/10">
+                        <div
+                            class="absolute inset-0 bg-ocean-cyan/10 group-hover:bg-transparent transition-colors z-10">
+                        </div>
+                        <div class="w-full h-full bg-ocean-mid flex items-center justify-center">
+                            <i
+                                class="fas fa-database text-8xl text-ocean-cyan opacity-50 group-hover:scale-110 transition-transform duration-700"></i>
+                        </div>
+
+                        <div class="absolute bottom-4 left-4 z-20 flex gap-2">
+                            <span
+                                class="px-3 py-1 rounded-full bg-black/50 backdrop-blur text-xs font-bold border border-white/10">PySpark</span>
+                            <span
+                                class="px-3 py-1 rounded-full bg-black/50 backdrop-blur text-xs font-bold border border-white/10">Azure</span>
+                        </div>
+                    </div>
+
+                    <div class="md:order-1 text-right md:text-left"> <!-- Text alignment handling -->
+                        <div class="flex flex-col items-end md:items-start">
+                            <span class="text-ocean-cyan font-mono text-sm tracking-widest uppercase mb-2 block">Data
+                                Platform</span>
+                            <h3
+                                class="text-4xl font-display font-bold mb-4 text-white group-hover:text-ocean-cyan transition-colors">
+                                Intellify Insights</h3>
+                            <p class="text-ocean-foam/70 leading-relaxed mb-6">
+                                A comprehensive data analytics migration platform. Facilitates the seamless transfer of
+                                SSIS packages and Power BI models between MSSQL, Teradata, and Postgres. Built with
+                                robust CI/CD pipelines on Azure.
+                            </p>
+                            <a href="#"
+                                class="inline-flex items-center gap-2 text-ocean-light font-bold hover:text-white transition-colors border-b-2 border-ocean-cyan pb-1">
+                                View Case Study <i
+                                    class="fas fa-arrow-right transform -rotate-45 group-hover:rotate-0 transition-transform"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- The Gear (Skills) -->
+        <section id="gear" class="max-w-6xl mx-auto mb-32 px-4">
+            <div class="glass-card rounded-3xl p-8 md:p-12">
+                <h2 class="text-3xl font-display font-bold mb-10 flex items-center gap-3">
+                    <i class="fas fa-tools text-ocean-gold"></i> Equipment & Gear
+                </h2>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Lane 1 -->
+                    <div class="space-y-4">
+                        <h3
+                            class="text-ocean-light font-bold uppercase text-sm tracking-wider border-b border-white/10 pb-2">
+                            Frontend & Core</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-3 py-2 bg-white/5 rounded-lg text-sm hover:bg-ocean-cyan hover:text-ocean-dark transition-colors cursor-default">JavaScript
+                                (ES6+)</span>
+                            <span
+                                class="px-3 py-2 bg-white/5 rounded-lg text-sm hover:bg-ocean-cyan hover:text-ocean-dark transition-colors cursor-default">React</span>
+                            <span
+                                class="px-3 py-2 bg-white/5 rounded-lg text-sm hover:bg-ocean-cyan hover:text-ocean-dark transition-colors cursor-default">Angular</span>
+                            <span
+                                class="px-3 py-2 bg-white/5 rounded-lg text-sm hover:bg-ocean-cyan hover:text-ocean-dark transition-colors cursor-default">Tailwind
+                                CSS</span>
+                            <span
+                                class="px-3 py-2 bg-white/5 rounded-lg text-sm hover:bg-ocean-cyan hover:text-ocean-dark transition-colors cursor-default">HTML5/CSS3</span>
+                        </div>
+                    </div>
+
+                    <!-- Lane 2 -->
+                    <div class="space-y-4">
+                        <h3
+                            class="text-ocean-light font-bold uppercase text-sm tracking-wider border-b border-white/10 pb-2">
+                            Backend & Cloud</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-3 py-2 bg-white/5 rounded-lg text-sm hover:bg-ocean-cyan hover:text-ocean-dark transition-colors cursor-default">Node.js</span>
+                            <span
+                                class="px-3 py-2 bg-white/5 rounded-lg text-sm hover:bg-ocean-cyan hover:text-ocean-dark transition-colors cursor-default">PHP</span>
+                            <span
+                                class="px-3 py-2 bg-white/5 rounded-lg text-sm hover:bg-ocean-cyan hover:text-ocean-dark transition-colors cursor-default">Python</span>
+                            <span
+                                class="px-3 py-2 bg-white/5 rounded-lg text-sm hover:bg-ocean-cyan hover:text-ocean-dark transition-colors cursor-default">PostgreSQL</span>
+                            <span
+                                class="px-3 py-2 bg-white/5 rounded-lg text-sm hover:bg-ocean-cyan hover:text-ocean-dark transition-colors cursor-default">AWS
+                                Lambda</span>
+                            <span
+                                class="px-3 py-2 bg-white/5 rounded-lg text-sm hover:bg-ocean-cyan hover:text-ocean-dark transition-colors cursor-default">Azure
+                                Functions</span>
+                        </div>
+                    </div>
+
+                    <!-- Lane 3 -->
+                    <div class="space-y-4">
+                        <h3
+                            class="text-ocean-light font-bold uppercase text-sm tracking-wider border-b border-white/10 pb-2">
+                            Artificial Intelligence</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-3 py-2 bg-ocean-coral/10 border border-ocean-coral/30 text-ocean-coral rounded-lg text-sm hover:bg-ocean-coral hover:text-white transition-colors cursor-default">Generative
+                                AI</span>
+                            <span
+                                class="px-3 py-2 bg-ocean-coral/10 border border-ocean-coral/30 text-ocean-coral rounded-lg text-sm hover:bg-ocean-coral hover:text-white transition-colors cursor-default">LangChain</span>
+                            <span
+                                class="px-3 py-2 bg-ocean-coral/10 border border-ocean-coral/30 text-ocean-coral rounded-lg text-sm hover:bg-ocean-coral hover:text-white transition-colors cursor-default">RAG
+                                Systems</span>
+                            <span
+                                class="px-3 py-2 bg-ocean-coral/10 border border-ocean-coral/30 text-ocean-coral rounded-lg text-sm hover:bg-ocean-coral hover:text-white transition-colors cursor-default">Gemini
+                                API</span>
+                            <span
+                                class="px-3 py-2 bg-ocean-coral/10 border border-ocean-coral/30 text-ocean-coral rounded-lg text-sm hover:bg-ocean-coral hover:text-white transition-colors cursor-default">Pydantic
+                                AI</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Logbook (Experience) -->
+        <section id="log" class="max-w-4xl mx-auto mb-40 px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold font-display uppercase mb-4">Dive Logbook</h2>
+                <p class="text-ocean-foam/60">Chronological mission reports.</p>
+            </div>
+
+            <div class="relative border-l-2 border-white/10 ml-6 md:ml-0 space-y-12">
+
+                <!-- Entry 1 -->
+                <div class="relative pl-8 md:pl-12" data-aos="fade-left">
+                    <div
+                        class="absolute -left-[9px] top-0 w-5 h-5 bg-ocean-dark border-4 border-ocean-coral rounded-full">
+                    </div>
+                    <div class="flex flex-col sm:flex-row justify-between items-baseline mb-2">
+                        <h3 class="text-xl font-bold text-white">Software Developer</h3>
+                        <span class="text-ocean-coral font-mono text-xs uppercase">Current Depth | Dec 2024 -
+                            Present</span>
+                    </div>
+                    <h4 class="text-ocean-light mb-4">Ergabite Tech Solutions</h4>
+                    <p class="text-ocean-foam/70 text-sm leading-relaxed">
+                        Developing features for "Intellify Migration Wizard". Engineered "In-Parking" alerting system
+                        using Azure App Functions. Led "Infovault" multi-agent AI platform using Langchain & Azure
+                        OpenAI.
+                    </p>
+                </div>
+
+                <!-- Entry 2 -->
+                <div class="relative pl-8 md:pl-12" data-aos="fade-left" data-aos-delay="100">
+                    <div
+                        class="absolute -left-[9px] top-0 w-5 h-5 bg-ocean-dark border-4 border-ocean-gold rounded-full">
+                    </div>
+                    <div class="flex flex-col sm:flex-row justify-between items-baseline mb-2">
+                        <h3 class="text-xl font-bold text-white">Senior Web Developer</h3>
+                        <span class="text-ocean-gold font-mono text-xs uppercase">Jul 2024 - Dec 2024</span>
+                    </div>
+                    <h4 class="text-ocean-light mb-4">Internship Studio</h4>
+                    <p class="text-ocean-foam/70 text-sm leading-relaxed">
+                        Spearheaded hiring portal development. Architected solutions on GCP (Vertex AI) and AWS
+                        (Lambda). Full-stack dev with React, Node.js, PHP, Flask.
+                    </p>
+                </div>
+
+                <!-- Entry 3 -->
+                <div class="relative pl-8 md:pl-12" data-aos="fade-left" data-aos-delay="200">
+                    <div
+                        class="absolute -left-[9px] top-0 w-5 h-5 bg-ocean-dark border-4 border-ocean-cyan rounded-full">
+                    </div>
+                    <div class="flex flex-col sm:flex-row justify-between items-baseline mb-2">
+                        <h3 class="text-xl font-bold text-white">System Engineer</h3>
+                        <span class="text-ocean-cyan font-mono text-xs uppercase">Aug 2022 - Jul 2024</span>
+                    </div>
+                    <h4 class="text-ocean-light mb-4">Infosys Ltd.</h4>
+                    <p class="text-ocean-foam/70 text-sm leading-relaxed">
+                        Dynamic app development with Angular, Node.js, PostgreSQL. WCAG standards, WebSockets, and
+                        WebRTC integration. Salesforce integration via Cortex framework.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative bg-ocean-dark pt-20 pb-10 overflow-hidden">
+        <!-- Wave Divider -->
+        <div class="absolute top-0 left-0 w-full overflow-hidden leading-none rotate-180">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                preserveAspectRatio="none" class="relative block w-[calc(100%+1.3px)] h-[60px] text-ocean-deep">
+                <path
+                    d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                    fill="currentColor" opacity="0.5"></path>
+            </svg>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-6 text-center relative z-10">
+            <h2
+                class="text-5xl md:text-8xl font-bold font-display uppercase mb-12 leading-none text-transparent bg-clip-text bg-gradient-to-b from-ocean-foam to-transparent opacity-50">
+                Surface <br> Together
+            </h2>
+
+            <div class="flex justify-center gap-8 mb-12">
+                <a href="https://github.com/gamentionkray"
+                    class="w-16 h-16 rounded-full glass-card flex items-center justify-center text-2xl text-ocean-foam hover:bg-ocean-cyan hover:text-ocean-dark hover:-translate-y-2 transition-all shadow-glow">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/krishnathorat"
+                    class="w-16 h-16 rounded-full glass-card flex items-center justify-center text-2xl text-ocean-foam hover:bg-blue-500 hover:text-white hover:-translate-y-2 transition-all shadow-glow">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:krishnathorat007@gmail.com"
+                    class="w-16 h-16 rounded-full glass-card flex items-center justify-center text-2xl text-ocean-foam hover:bg-ocean-coral hover:text-white hover:-translate-y-2 transition-all shadow-glow">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+
+            <div
+                class="flex flex-col md:flex-row justify-between items-center border-t border-white/10 pt-8 text-sm font-mono text-ocean-foam/50">
+                <p>&copy; 2025 Krishna Thorat. Pune, India.</p>
+                <p class="flex items-center gap-2">Designed with <i
+                        class="fas fa-heart text-ocean-coral animate-pulse"></i> & Salt Water</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            offset: 50,
+            once: true,
+            easing: 'ease-out-cubic'
+        });
+
+        // Loader Logic
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                loader.style.pointerEvents = 'none';
+            }, 1000);
+        });
+
+        // Bubble Cursor Logic
+        const cursor = document.querySelector('.cursor-bubble');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            cursor.style.left = `${posX}px`;
+            cursor.style.top = `${posY}px`;
+
+            // Create trail effect
+            createTrail(posX, posY);
+
+            // Hover detection for resizing
+            const hoveredElement = document.elementFromPoint(posX, posY);
+            if (hoveredElement && (hoveredElement.tagName === 'A' || hoveredElement.tagName === 'BUTTON' || hoveredElement.closest('a') || hoveredElement.closest('button'))) {
+                cursor.style.width = '50px';
+                cursor.style.height = '50px';
+                cursor.style.backgroundColor = 'rgba(6, 182, 212, 0.1)';
+                cursor.style.borderColor = 'rgba(255, 255, 255, 0.8)';
+            } else {
+                cursor.style.width = '20px';
+                cursor.style.height = '20px';
+                cursor.style.backgroundColor = 'transparent';
+                cursor.style.borderColor = 'rgba(103, 232, 249, 0.8)';
+            }
+        });
+
+        function createTrail(x, y) {
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            trail.style.left = `${x}px`;
+            trail.style.top = `${y}px`;
+            document.body.appendChild(trail);
+
+            setTimeout(() => {
+                trail.style.transform = 'scale(0)';
+                trail.style.opacity = '0';
+            }, 50);
+
+            setTimeout(() => {
+                trail.remove();
+            }, 300);
+        }
+    </script>
+    <script src="assets/js/template-switcher.js"></script>
+</body>
+
+</html>

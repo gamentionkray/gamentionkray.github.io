@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishna Thorat | Full Stack AI Engineer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700;900&family=Caveat:wght@600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Inter"', 'sans-serif'],
+                        display: ['"Space Grotesk"', 'sans-serif'],
+                        hand: ['"Caveat"', 'cursive'],
+                    },
+                    colors: {
+                        paper: {
+                            light: '#fdfbf7',
+                            cream: '#f3f0e6',
+                            dark: '#1a1a1a',
+                            darkcard: '#262626',
+                            blue: '#a5b4fc',
+                            pink: '#f9a8d4',
+                            yellow: '#fde047',
+                            green: '#86efac',
+                            purple: '#d8b4fe',
+                            orange: '#fdba74'
+                        }
+                    },
+                    boxShadow: {
+                        'paper': '0 10px 30px -10px rgba(0, 0, 0, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                        'paper-hover': '0 20px 40px -10px rgba(0, 0, 0, 0.2), 0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+                        'paper-floating': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+                        'inner-fold': 'inset 0 0 20px rgba(0,0,0,0.05)'
+                    },
+                    backgroundImage: {
+                        'paper-texture': "url('data:image/svg+xml,%3Csvg width=\\'100\\' height=\\'100\\' viewBox=\\'0 0 100 100\\' xmlns=\\'http://www.w3.org/2000/svg\\'%3E%3Cfilter id=\\'noise\\'%3E%3CfeTurbulence type=\\'fractalNoise\\' baseFrequency=\\'0.8\\' numOctaves=\\'4\\' stitchTiles=\\'stitch\\'/%3E%3C/filter%3E%3Crect width=\\'100%25\\' height=\\'100%25\\' filter=\\'url(%23noise)\\' opacity=\\'0.08\\'/%3E%3C/svg%3E')",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Folded Corner Effect */
+        .fold-tr {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.25rem;
+        }
+
+        .fold-tr::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            border-width: 0 40px 40px 0;
+            border-style: solid;
+            border-color: rgba(0, 0, 0, 0.1) #fff;
+            box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        html.dark .fold-tr::before {
+            border-color: rgba(255, 255, 255, 0.1) #262626;
+        }
+
+        /* Sticky Tape Effect */
+        .tape {
+            position: absolute;
+            height: 30px;
+            width: 100px;
+            background-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(2px);
+            transform: rotate(-3deg);
+            z-index: 10;
+        }
+
+        .tape::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -5px;
+            right: -5px;
+            bottom: 0;
+            background-image: radial-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+            background-size: 4px 4px;
+            opacity: 0.3;
+        }
+
+        /* Zigzag cut for footer */
+        .zigzag-top {
+            background: linear-gradient(-45deg, transparent 16px, var(--color-bg) 16px),
+                linear-gradient(45deg, transparent 16px, var(--color-bg) 16px);
+            background-repeat: repeat-x;
+            background-size: 32px 32px;
+            height: 32px;
+            width: 100%;
+            position: absolute;
+            top: -32px;
+            left: 0;
+        }
+
+        .origami-bird {
+            clip-path: polygon(0% 100%, 100% 50%, 0% 0%, 25% 50%);
+        }
+
+        /* Smooth Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f3f0e6;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 5px;
+        }
+
+        html.dark ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        html.dark ::-webkit-scrollbar-thumb {
+            background: #4b5563;
+        }
+
+        /* Floating Animation */
+        @keyframes floatPaper {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-10px) rotate(1deg);
+            }
+        }
+
+        .animate-float {
+            animation: floatPaper 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-paper-light dark:bg-paper-dark text-gray-800 dark:text-gray-100 transition-colors duration-500 relative overflow-x-hidden font-sans selection:bg-paper-blue selection:text-white">
+
+    <!-- Texture Overlay -->
+    <div
+        class="fixed inset-0 w-full h-full pointer-events-none z-0 bg-paper-texture opacity-60 mix-blend-multiply dark:mix-blend-overlay">
+    </div>
+
+    <!-- Loader as a folding paper animation -->
+    <div id="loader"
+        class="fixed inset-0 bg-paper-cream dark:bg-paper-dark z-[100] flex flex-col items-center justify-center transition-transform duration-1000 ease-in-out origin-top">
+        <div class="w-20 h-20 bg-paper-blue rotate-45 mb-8 animate-pulse shadow-paper-floating"></div>
+        <h1 class="text-4xl font-display font-bold tracking-widest text-gray-400">UNFOLDING...</h1>
+    </div>
+
+    <!-- Nav Strip -->
+    <nav class="fixed top-6 w-full z-40 px-4 pointer-events-none">
+        <div class="max-w-4xl mx-auto pointer-events-auto">
+            <div
+                class="bg-white/90 dark:bg-paper-darkcard/90 backdrop-blur-sm rounded-lg shadow-paper px-6 py-3 flex justify-between items-center transform -rotate-1 transition-transform hover:rotate-0 border border-white/50">
+                <a href="#"
+                    class="text-2xl font-display font-bold tracking-tight text-gray-800 dark:text-white relative group">
+                    <span class="relative z-10">KT<span class="text-paper-blue">.</span>DEV</span>
+                    <span
+                        class="absolute bottom-0 left-0 w-full h-2 bg-paper-yellow opacity-50 -rotate-2 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+                </a>
+
+                <div class="flex items-center gap-6">
+                    <button id="theme-toggle"
+                        class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-gray-600 dark:text-gray-200 hover:shadow-md transition-all transform hover:scale-110">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <a href="mailto:krishnathorat007@gmail.com"
+                        class="hidden md:inline-block font-hand text-xl font-bold text-gray-600 dark:text-gray-300 hover:text-paper-blue transition-colors rotate-2">
+                        Currently Employed
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-20 px-4 sm:px-6 relative z-10">
+
+        <!-- Hero Section -->
+        <header class="max-w-6xl mx-auto mb-32">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+
+                <div class="lg:col-span-7 relative" data-aos="fade-up">
+                    <!-- Decorative paper elements behind text -->
+                    <div class="absolute -top-10 -left-10 w-32 h-32 bg-paper-blue rounded-full opacity-20 blur-2xl">
+                    </div>
+
+                    <div class="inline-block relative mb-6 group">
+                        <div
+                            class="absolute inset-0 bg-paper-yellow transform rotate-2 rounded shadow-sm group-hover:rotate-3 transition-transform">
+                        </div>
+                        <div
+                            class="relative bg-white dark:bg-paper-darkcard px-4 py-2 font-bold uppercase tracking-widest text-xs border border-gray-100 dark:border-gray-700 rounded">
+                            Full Stack & AI Engineer
+                        </div>
+                    </div>
+
+                    <h1
+                        class="text-6xl sm:text-7xl md:text-8xl font-display font-bold leading-[0.9] mb-8 text-gray-900 dark:text-white relative">
+                        Krishna <br>
+                        <span class="relative inline-block">
+                            <span class="relative z-10">Thorat</span>
+                            <svg class="absolute w-full h-4 bottom-2 left-0 z-0 text-paper-pink opacity-80"
+                                viewBox="0 0 200 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2.00026 6.99996C18.4424 2.63394 76.6403 -3.27491 198.004 3.49996"
+                                    stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                            </svg>
+                        </span>
+                    </h1>
+
+                    <div class="relative pl-8 mb-10">
+                        <div class="absolute left-0 top-0 bottom-0 w-1 bg-paper-blue rounded-full opacity-50"></div>
+                        <p class="text-xl md:text-2xl font-light text-gray-600 dark:text-gray-300 leading-relaxed">
+                            Building dynamic web applications and Agentic AI systems. Specializing in
+                            <span
+                                class="relative inline-block px-1 font-medium text-gray-800 dark:text-white transform -rotate-1 hover:rotate-0 transition-transform">
+                                <span
+                                    class="absolute inset-0 bg-paper-yellow opacity-40 rounded-sm transform skew-x-3"></span>
+                                <span class="relative z-10">PHP, Node.js, React</span>
+                            </span>
+                            &
+                            <span
+                                class="relative inline-block px-1 font-medium text-gray-800 dark:text-white transform rotate-1 hover:rotate-0 transition-transform">
+                                <span
+                                    class="absolute inset-0 bg-paper-pink opacity-40 rounded-sm transform -skew-x-3"></span>
+                                <span class="relative z-10">Generative AI</span>
+                            </span>.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-6">
+                        <a href="#projects"
+                            class="relative group px-8 py-4 bg-white dark:bg-paper-darkcard text-gray-900 dark:text-white font-bold text-lg shadow-paper hover:shadow-paper-hover rounded-lg transition-all transform hover:-translate-y-1">
+                            <div class="absolute inset-0 border-b-4 border-paper-blue rounded-lg opacity-50"></div>
+                            <span class="relative flex items-center gap-2">
+                                View Projects <i class="fas fa-chevron-down text-xs mt-1"></i>
+                            </span>
+                        </a>
+                        <a href="mailto:krishnathorat007@gmail.com"
+                            class="relative group px-8 py-4 bg-paper-green/20 dark:bg-paper-green/10 text-green-800 dark:text-green-300 font-bold text-lg rounded-lg hover:bg-paper-green/30 transition-all">
+                            Contact Me
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 relative hidden lg:block animate-float" data-aos="zoom-in-left"
+                    data-aos-delay="200">
+                    <!-- Tape -->
+                    <div class="tape -top-4 left-1/2 -translate-x-1/2 z-20"></div>
+
+                    <div
+                        class="bg-white dark:bg-paper-darkcard p-3 pb-12 shadow-paper-floating transform rotate-2 transition-transform hover:rotate-0 rounded-sm">
+                        <div
+                            class="aspect-square overflow-hidden relative bg-gray-100 dark:bg-gray-800 rounded-sm filter sepia-[0.2]">
+                            <img src="assets/img/krishna-thorat.jpg" alt="Krishna Thorat"
+                                class="absolute inset-0 w-full h-full object-cover opacity-90 mix-blend-multiply dark:mix-blend-normal transition-opacity duration-500 hover:opacity-100 hover:mix-blend-normal hover:scale-105 transform">
+                            <div class="absolute inset-0 bg-paper-texture opacity-20 pointer-events-none"></div>
+                        </div>
+                        <div class="absolute bottom-4 right-6 font-hand text-3xl text-gray-500 -rotate-3">
+                            5+ Years Exp.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Marquee / Ribbon -->
+        <div class="relative w-full bg-paper-blue/80 text-white overflow-hidden py-3 mb-24 -mx-4 sm:-mx-6 md:-mx-8 shadow-lg transform -rotate-1 origin-left"
+            style="clip-path: polygon(0 0, 100% 0, 99% 50%, 100% 100%, 0 100%, 1% 50%);">
+            <div class="absolute inset-0 bg-paper-texture opacity-20"></div>
+            <div
+                class="whitespace-nowrap animate-marquee flex gap-12 text-xl font-display font-bold uppercase tracking-widest opacity-90">
+                <span>JavaScript</span> <span>React</span> <span>Node.js</span> <span>Python</span> <span>Generative
+                    AI</span>
+                <span>Langchain</span> <span>RAG Systems</span> <span>AWS</span> <span>Azure</span> <span>PHP</span>
+                <span>PostgreSQL</span> <span>JavaScript</span> <span>React</span> <span>Generative AI</span>
+            </div>
+        </div>
+
+        <!-- Skills / The Arsenal -->
+        <section class="max-w-6xl mx-auto mb-32">
+            <div class="flex items-center gap-4 mb-12">
+                <div
+                    class="w-12 h-12 bg-paper-pink/50 rounded-tr-xl rounded-bl-xl flex items-center justify-center shadow-inner">
+                    <i class="fas fa-layer-group text-paper-dark dark:text-white"></i>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-display font-bold">The Arsenal</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+                <!-- Master's Degree (Paper Card) -->
+                <div class="bg-white dark:bg-paper-darkcard p-6 shadow-paper hover:shadow-paper-hover transition-all md:col-span-2 rounded-lg relative overflow-hidden group fold-tr"
+                    data-aos="fade-up">
+                    <div
+                        class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-gray-100 to-transparent dark:from-gray-700 opacity-50 pointer-events-none">
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div
+                            class="bg-paper-blue/20 text-blue-800 dark:text-blue-200 px-3 py-1 font-semibold text-xs rounded-full border border-paper-blue/30">
+                            Master's Degree</div>
+                        <i
+                            class="fas fa-graduation-cap text-3xl text-gray-200 dark:text-gray-700 group-hover:text-paper-blue transition-colors"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-1">Master of Computer Applications</h3>
+                    <p class="text-gray-500 dark:text-gray-400 font-medium">Vishwakarma Institute of Technology, Pune
+                    </p>
+                    <p class="text-sm font-mono mt-4 text-gray-400">2020 - 2022</p>
+                </div>
+
+                <!-- Location (Sticky Note style) -->
+                <div class="bg-paper-purple/80 text-white p-6 shadow-paper flex flex-col justify-between relative transform rotate-2 hover:rotate-0 transition-transform rounded-sm"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div class="tape -top-3 left-1/2 -translate-x-1/2 opacity-50"></div>
+                    <i class="fas fa-map-marker-alt text-6xl absolute bottom-2 right-2 opacity-20 text-white"></i>
+                    <h3 class="font-hand text-xl opacity-90">Based In</h3>
+                    <p class="text-3xl font-display font-bold leading-tight mt-2">Pune,<br>India</p>
+                </div>
+
+                <!-- Github (Tag style) -->
+                <a href="https://github.com/gamentionkray" target="_blank"
+                    class="bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 p-6 shadow-paper flex flex-col justify-center items-center gap-4 group hover:-translate-y-2 transition-transform rounded-lg relative"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-3 h-3 rounded-full bg-gray-500 absolute top-4 left-1/2 -translate-x-1/2 shadow-inner">
+                    </div>
+                    <i class="fab fa-github text-5xl group-hover:scale-110 transition-transform duration-300"></i>
+                    <span class="font-bold text-lg font-mono">@gamentionkray</span>
+                </a>
+
+                <!-- Core Stack (Folded Paper) -->
+                <div class="bg-white dark:bg-paper-darkcard p-6 shadow-paper md:col-span-2 lg:col-span-2 rounded-lg relative border-l-4 border-paper-green"
+                    data-aos="fade-up">
+                    <h3 class="font-display font-bold uppercase mb-6 text-gray-400 tracking-widest text-sm">Core Stack
+                    </h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span
+                            class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 px-3 py-1.5 rounded text-sm font-medium shadow-sm hover:shadow-md transition-shadow">PHP</span>
+                        <span
+                            class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 px-3 py-1.5 rounded text-sm font-medium shadow-sm hover:shadow-md transition-shadow">Node.js</span>
+                        <span
+                            class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 px-3 py-1.5 rounded text-sm font-medium shadow-sm hover:shadow-md transition-shadow">React</span>
+                        <span
+                            class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 px-3 py-1.5 rounded text-sm font-medium shadow-sm hover:shadow-md transition-shadow">Angular</span>
+                        <span
+                            class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 px-3 py-1.5 rounded text-sm font-medium shadow-sm hover:shadow-md transition-shadow">Python</span>
+                        <span
+                            class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 px-3 py-1.5 rounded text-sm font-medium shadow-sm hover:shadow-md transition-shadow">MySQL</span>
+                        <span
+                            class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 px-3 py-1.5 rounded text-sm font-medium shadow-sm hover:shadow-md transition-shadow">PostgreSQL</span>
+                    </div>
+                </div>
+
+                <!-- AI Engineering (Folded Paper) -->
+                <div class="bg-white dark:bg-paper-darkcard p-6 shadow-paper md:col-span-2 lg:col-span-2 rounded-lg relative border-l-4 border-paper-pink"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="font-display font-bold uppercase mb-6 text-gray-400 tracking-widest text-sm">AI
+                        Engineering</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span
+                            class="bg-paper-pink/10 border border-paper-pink/20 px-3 py-1.5 rounded text-sm font-medium text-pink-800 dark:text-pink-200">Generative
+                            AI</span>
+                        <span
+                            class="bg-paper-pink/10 border border-paper-pink/20 px-3 py-1.5 rounded text-sm font-medium text-pink-800 dark:text-pink-200">Agentic
+                            AI</span>
+                        <span
+                            class="bg-paper-pink/10 border border-paper-pink/20 px-3 py-1.5 rounded text-sm font-medium text-pink-800 dark:text-pink-200">RAG</span>
+                        <span
+                            class="bg-paper-pink/10 border border-paper-pink/20 px-3 py-1.5 rounded text-sm font-medium text-pink-800 dark:text-pink-200">LangChain</span>
+                        <span
+                            class="bg-paper-pink/10 border border-paper-pink/20 px-3 py-1.5 rounded text-sm font-medium text-pink-800 dark:text-pink-200">Azure
+                            OpenAI</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- XP Log / Timeline -->
+        <section class="max-w-5xl mx-auto mb-32 relative">
+            <div class="grid md:grid-cols-12 gap-12">
+                <div class="md:col-span-4">
+                    <div class="sticky top-32 text-center md:text-left">
+                        <div class="relative inline-block">
+                            <h2 class="text-5xl font-display font-bold uppercase mb-4 leading-none relative z-10">
+                                XP <br> Log
+                            </h2>
+                            <div class="absolute -bottom-2 left-0 w-full h-3 bg-paper-yellow opacity-60 -rotate-1">
+                            </div>
+                        </div>
+                        <p class="text-lg font-hand text-gray-500 dark:text-gray-400 mt-4 rotate-1">Chronicles of code &
+                            coffee.</p>
+
+                        <a href="resume.pdf" download
+                            class="mt-8 inline-flex items-center justify-center gap-2 w-full md:w-auto px-6 py-3 bg-white dark:bg-paper-darkcard border border-gray-200 dark:border-gray-700 rounded shadow-paper hover:shadow-paper-hover transition-all group">
+                            <i class="fas fa-paperclip text-gray-400 group-hover:text-paper-blue"></i>
+                            <span class="font-medium">Download Resume</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="md:col-span-8 space-y-16 relative">
+                    <!-- The Thread line -->
+                    <div
+                        class="absolute left-4 md:-left-8 top-0 bottom-0 w-0.5 bg-gray-300 dark:bg-gray-700 border-dashed border-l-2">
+                    </div>
+
+                    <!-- Job 1 -->
+                    <div class="relative pl-12 md:pl-0" data-aos="fade-up">
+                        <!-- Pin -->
+                        <div
+                            class="absolute left-[11px] md:-left-[39px] top-8 w-4 h-4 bg-paper-orange rounded-full shadow-md z-10 border-2 border-white dark:border-paper-dark">
+                        </div>
+
+                        <div
+                            class="bg-white dark:bg-paper-darkcard p-8 rounded shadow-paper relative group hover:-translate-y-1 transition-transform duration-300">
+                            <!-- Folded corner visual using CSS gradient -->
+                            <div
+                                class="absolute top-0 right-0 w-8 h-8 bg-gradient-to-bl from-gray-200 to-white dark:from-gray-600 dark:to-paper-darkcard opacity-50">
+                            </div>
+
+                            <div
+                                class="flex flex-wrap justify-between items-baseline mb-4 pb-4 border-b border-dashed border-gray-200 dark:border-gray-700">
+                                <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">Software Developer</h3>
+                                <span
+                                    class="font-mono text-xs text-gray-500 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">Dec
+                                    2024 - Present</span>
+                            </div>
+                            <h4 class="text-lg font-bold mb-4 text-paper-blue font-display">Ergabite Tech Solutions
+                                (Intellify Client)</h4>
+                            <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+                                <li class="flex items-start gap-2"><i
+                                        class="fas fa-caret-right mt-1.5 text-paper-orange text-xs"></i> Developed
+                                    features for "Intellify Migration Wizard" (Teradata/Postgres).</li>
+                                <li class="flex items-start gap-2"><i
+                                        class="fas fa-caret-right mt-1.5 text-paper-orange text-xs"></i> Engineered
+                                    "In-Parking" alerting system using Azure App Functions.</li>
+                                <li class="flex items-start gap-2"><i
+                                        class="fas fa-caret-right mt-1.5 text-paper-orange text-xs"></i> Led "Infovault"
+                                    multi-agent AI platform using Langchain & Azure OpenAI.</li>
+                                <li class="flex items-start gap-2"><i
+                                        class="fas fa-caret-right mt-1.5 text-paper-orange text-xs"></i> CI/CD
+                                    implementation on Azure.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Job 2 -->
+                    <div class="relative pl-12 md:pl-0" data-aos="fade-up">
+                        <div
+                            class="absolute left-[11px] md:-left-[39px] top-8 w-4 h-4 bg-paper-yellow rounded-full shadow-md z-10 border-2 border-white dark:border-paper-dark">
+                        </div>
+                        <div
+                            class="bg-white dark:bg-paper-darkcard p-8 rounded shadow-paper relative hover:-translate-y-1 transition-transform duration-300">
+                            <div
+                                class="flex flex-wrap justify-between items-baseline mb-4 pb-4 border-b border-dashed border-gray-200 dark:border-gray-700">
+                                <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">Senior Web Developer
+                                </h3>
+                                <span
+                                    class="font-mono text-xs text-gray-500 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">Jul
+                                    2024 - Dec 2024</span>
+                            </div>
+                            <h4 class="text-lg font-bold mb-4 text-paper-blue font-display">Internship Studio</h4>
+                            <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+                                <li class="flex items-start gap-2"><i
+                                        class="fas fa-caret-right mt-1.5 text-paper-yellow text-xs"></i> Spearheaded
+                                    hiring portal development.</li>
+                                <li class="flex items-start gap-2"><i
+                                        class="fas fa-caret-right mt-1.5 text-paper-yellow text-xs"></i> Architected
+                                    solutions on GCP (Vertex AI) and AWS (Lambda).</li>
+                                <li class="flex items-start gap-2"><i
+                                        class="fas fa-caret-right mt-1.5 text-paper-yellow text-xs"></i> Full-stack dev
+                                    with React, Node.js, PHP, Flask.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Job 3 -->
+                    <div class="relative pl-12 md:pl-0" data-aos="fade-up">
+                        <div
+                            class="absolute left-[11px] md:-left-[39px] top-8 w-4 h-4 bg-paper-blue rounded-full shadow-md z-10 border-2 border-white dark:border-paper-dark">
+                        </div>
+                        <div
+                            class="bg-white dark:bg-paper-darkcard p-8 rounded shadow-paper relative hover:-translate-y-1 transition-transform duration-300">
+                            <div
+                                class="flex flex-wrap justify-between items-baseline mb-4 pb-4 border-b border-dashed border-gray-200 dark:border-gray-700">
+                                <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">System Engineer</h3>
+                                <span
+                                    class="font-mono text-xs text-gray-500 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">Aug
+                                    2022 - Jul 2024</span>
+                            </div>
+                            <h4 class="text-lg font-bold mb-4 text-paper-blue font-display">Infosys Ltd.</h4>
+                            <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+                                <li class="flex items-start gap-2"><i
+                                        class="fas fa-caret-right mt-1.5 text-paper-blue text-xs"></i> Dynamic app
+                                    development with Angular, Node.js, PostgreSQL.</li>
+                                <li class="flex items-start gap-2"><i
+                                        class="fas fa-caret-right mt-1.5 text-paper-blue text-xs"></i> WCAG standards,
+                                    WebSockets, and WebRTC integration.</li>
+                                <li class="flex items-start gap-2"><i
+                                        class="fas fa-caret-right mt-1.5 text-paper-blue text-xs"></i> Salesforce
+                                    integration via Cortex framework.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Selected Works -->
+        <section id="projects" class="max-w-6xl mx-auto mb-32">
+            <h2
+                class="text-4xl md:text-5xl font-display font-bold text-center mb-16 relative inline-block left-1/2 -translate-x-1/2">
+                <span class="relative z-10">Selected Works</span>
+                <span
+                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-12 bg-paper-green/30 -rotate-2 rounded-sm"></span>
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-12">
+
+                <!-- Project 1 -->
+                <article class="group" data-aos="fade-up">
+                    <div
+                        class="bg-white dark:bg-paper-darkcard rounded-lg shadow-paper hover:shadow-paper-hover transition-all duration-500 transform hover:-rotate-1 relative overflow-hidden">
+                        <!-- Top "Photo" section -->
+                        <div
+                            class="h-56 bg-paper-cream dark:bg-gray-800 relative p-4 flex items-center justify-center border-b border-gray-100 dark:border-gray-700">
+                            <!-- Photo corners -->
+                            <div class="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-gray-300"></div>
+                            <div class="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-gray-300"></div>
+                            <div class="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-gray-300"></div>
+                            <div class="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-gray-300"></div>
+
+                            <div class="text-center z-10">
+                                <i class="fas fa-brain text-6xl text-paper-purple animate-pulse"></i>
+                            </div>
+                            <div class="absolute inset-0 bg-paper-texture opacity-30"></div>
+                        </div>
+
+                        <div class="p-8">
+                            <h3
+                                class="text-2xl font-bold font-display mb-2 group-hover:text-paper-purple transition-colors">
+                                HireSense AI</h3>
+                            <p class="text-xs font-mono text-gray-400 mb-4">Dec 2024 - Present</p>
+                            <p class="mb-6 text-gray-600 dark:text-gray-300 leading-relaxed">AI-powered career guidance
+                                platform with multi-agent orchestration using Pydantic AI and Gemini 2.0.</p>
+
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span
+                                    class="text-xs font-bold text-gray-500 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-sm">Pydantic
+                                    AI</span>
+                                <span
+                                    class="text-xs font-bold text-gray-500 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-sm">FastAPI</span>
+                                <span
+                                    class="text-xs font-bold text-gray-500 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-sm">WebSockets</span>
+                            </div>
+
+                            <div
+                                class="border-t border-dashed border-gray-200 dark:border-gray-700 pt-4 flex justify-between items-center">
+                                <span class="font-bold text-sm text-gray-500"><i class="fas fa-robot mr-1"></i> 16+ AI
+                                    Agents</span>
+                                <a href="#" class="text-paper-purple font-bold hover:underline underline-offset-4">View
+                                    Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="group" data-aos="fade-up" data-aos-delay="100">
+                    <div
+                        class="bg-white dark:bg-paper-darkcard rounded-lg shadow-paper hover:shadow-paper-hover transition-all duration-500 transform hover:rotate-1 relative overflow-hidden">
+                        <div
+                            class="h-56 bg-paper-cream dark:bg-gray-800 relative p-4 flex items-center justify-center border-b border-gray-100 dark:border-gray-700">
+                            <div class="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-gray-300"></div>
+                            <div class="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-gray-300"></div>
+                            <div class="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-gray-300"></div>
+                            <div class="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-gray-300"></div>
+
+                            <div class="text-center z-10">
+                                <i class="fas fa-database text-6xl text-paper-blue"></i>
+                            </div>
+                            <div class="absolute inset-0 bg-paper-texture opacity-30"></div>
+                        </div>
+
+                        <div class="p-8">
+                            <h3
+                                class="text-2xl font-bold font-display mb-2 group-hover:text-paper-blue transition-colors">
+                                Intellify Insights</h3>
+                            <p class="text-xs font-mono text-gray-400 mb-4">Data Analytics Platform</p>
+                            <p class="mb-6 text-gray-600 dark:text-gray-300 leading-relaxed">Transfer SSIS packages and
+                                Power BI models between MSSQL, Teradata, and Postgres with PySpark job management.</p>
+
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span
+                                    class="text-xs font-bold text-gray-500 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-sm">PySpark</span>
+                                <span
+                                    class="text-xs font-bold text-gray-500 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-sm">Azure</span>
+                                <span
+                                    class="text-xs font-bold text-gray-500 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-sm">Power
+                                    BI</span>
+                            </div>
+
+                            <div
+                                class="border-t border-dashed border-gray-200 dark:border-gray-700 pt-4 flex justify-between items-center">
+                                <span class="font-bold text-sm text-gray-500"><i class="fas fa-sync-alt mr-1"></i> CI/CD
+                                    Pipeline</span>
+                                <a href="#" class="text-paper-blue font-bold hover:underline underline-offset-4">View
+                                    Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer as a folded envelope -->
+    <footer class="bg-gray-900 text-white pt-24 pb-12 relative mt-12">
+        <div class="zigzag-top" style="--color-bg: #111827;"></div>
+
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+
+            <div
+                class="bg-paper-cream dark:bg-gray-800 text-gray-900 dark:text-white p-12 shadow-paper rounded-lg transform rotate-1 max-w-2xl mx-auto mb-16 relative">
+                <div class="tape -top-4 left-1/2 -translate-x-1/2"></div>
+
+                <h2 class="text-5xl md:text-6xl font-display font-bold uppercase mb-8">
+                    Let's Work <br> <span class="text-paper-blue font-hand lowercase text-7xl">together</span>
+                </h2>
+
+                <div class="flex justify-center gap-6 mb-8">
+                    <a href="https://github.com/gamentionkray"
+                        class="w-14 h-14 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-2xl hover:bg-paper-pink hover:text-white hover:-translate-y-2 transition-all shadow-sm">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/krishnathorat"
+                        class="w-14 h-14 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-2xl hover:bg-paper-blue hover:text-white hover:-translate-y-2 transition-all shadow-sm">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="mailto:krishnathorat007@gmail.com"
+                        class="w-14 h-14 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-2xl hover:bg-paper-green hover:text-white hover:-translate-y-2 transition-all shadow-sm">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="text-sm font-mono text-gray-500">
+                <p class="mb-2">&copy; 2025 Krishna Thorat. Pune, India.</p>
+                <p>Folded with <span class="text-red-400">❤</span> & Tailwind CSS</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            offset: 50,
+            once: true
+        });
+
+        // Loader Logic
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            // Fold up effect for loader
+            setTimeout(() => {
+                loader.style.transform = 'scaleY(0)';
+            }, 500);
+        });
+
+        // Dark Mode Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const icon = themeToggleBtn.querySelector('i');
+
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.theme = 'dark';
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                localStorage.theme = 'light';
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+    </script>
+    <script src="assets/js/template-switcher.js"></script>
+</body>
+
+</html>

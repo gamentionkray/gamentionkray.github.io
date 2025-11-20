@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth selection:bg-fuchsia-500 selection:text-white">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishna Thorat | Holographic Portfolio</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syncopate:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Inter"', 'sans-serif'],
+                        display: ['"Syncopate"', 'sans-serif'],
+                    },
+                    colors: {
+                        glass: {
+                            border: 'rgba(255, 255, 255, 0.1)',
+                            surface: 'rgba(255, 255, 255, 0.03)',
+                            highlight: 'rgba(255, 255, 255, 0.08)',
+                        }
+                    },
+                    backgroundImage: {
+                        'holo-gradient': 'linear-gradient(135deg, #ff0080, #ff8c00, #40e0d0)',
+                        'silver-gradient': 'linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%)',
+                        'noise': 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' opacity=\'1\'/%3E%3C/svg%3E")',
+                    },
+                    animation: {
+                        'slow-spin': 'spin 20s linear infinite',
+                        'shimmer': 'shimmer 3s linear infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        shimmer: {
+                            '0%': { transform: 'translateX(-100%) skewX(-15deg)' },
+                            '100%': { transform: 'translateX(200%) skewX(-15deg)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --cursor-size: 20px;
+        }
+
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Background Aurora */
+        .ambient-light {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, rgba(76, 29, 149, 0.15), transparent 50%),
+                radial-gradient(circle at 100% 0%, rgba(236, 72, 153, 0.1), transparent 40%),
+                radial-gradient(circle at 0% 100%, rgba(34, 211, 238, 0.1), transparent 40%);
+            filter: blur(60px);
+        }
+
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        /* Holographic Text Effect */
+        .holo-text {
+            background: linear-gradient(to right, #fff 20%, #a5a5a5 40%, #fff 60%, #a5a5a5 80%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shine 5s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        /* Bento Grid Card */
+        .bento-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s;
+        }
+
+        .bento-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
+                    rgba(255, 255, 255, 0.06),
+                    transparent 40%);
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .bento-card:hover::before {
+            opacity: 1;
+        }
+
+        .bento-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Iridescent Border Accent */
+        .rainbow-border-bottom {
+            position: relative;
+        }
+
+        .rainbow-border-bottom::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, cyan, magenta, yellow, transparent);
+            opacity: 0.5;
+        }
+
+        /* Image Glitch/Holo Hover */
+        .holo-image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+        }
+
+        .holo-image-container img {
+            transition: all 0.5s ease;
+            filter: grayscale(100%) contrast(1.2);
+        }
+
+        .holo-image-container:hover img {
+            filter: grayscale(0%) contrast(1);
+            transform: scale(1.05);
+        }
+
+        .holo-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(125deg, rgba(255, 0, 0, 0.1), rgba(0, 255, 0, 0.1), rgba(0, 0, 255, 0.1));
+            mix-blend-mode: overlay;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 10;
+        }
+
+        .holo-image-container:hover .holo-overlay {
+            opacity: 1;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body class="antialiased" id="body">
+
+    <div class="ambient-light"></div>
+    <div class="noise-overlay"></div>
+
+    <!-- Floating Nav -->
+    <nav class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50">
+        <div
+            class="flex items-center gap-2 p-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl">
+            <a href="#"
+                class="w-10 h-10 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-black transition-all"><i
+                    class="fas fa-home"></i></a>
+            <a href="#work"
+                class="px-4 py-2 rounded-full text-sm font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-all">Work</a>
+            <a href="#about"
+                class="px-4 py-2 rounded-full text-sm font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-all">About</a>
+            <a href="mailto:krishnathorat007@gmail.com"
+                class="px-5 py-2 rounded-full bg-white text-black text-sm font-bold hover:bg-cyan-300 transition-colors">Let's
+                Talk</a>
+        </div>
+    </nav>
+
+    <main class="px-4 py-12 md:p-12 max-w-[1600px] mx-auto relative z-10">
+
+        <!-- HERO SECTION: Bento Layout -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 mb-24">
+
+            <!-- 1. Name & Title (Span 8) -->
+            <div class="md:col-span-8 bento-card p-8 md:p-12 flex flex-col justify-between min-h-[400px] group"
+                data-aos="fade-up">
+                <div class="flex justify-between items-start">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/20 bg-white/5">
+                        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                        <span class="text-xs font-mono uppercase tracking-widest text-gray-300">Available for new
+                            projects</span>
+                    </div>
+                    <i class="fas fa-bolt text-2xl text-white/20 group-hover:text-yellow-400 transition-colors"></i>
+                </div>
+
+                <div>
+                    <h1
+                        class="text-5xl md:text-7xl lg:text-8xl font-display font-bold uppercase leading-[0.85] mb-6 tracking-tighter">
+                        Krishna <br> <span class="holo-text">Thorat</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-400 max-w-lg font-light leading-relaxed">
+                        Full Stack Engineer specialized in building <span class="text-white font-medium">Agentic AI
+                            Systems</span>.
+                        Turning chaotic data into structured intelligence.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 2. Profile Image (Span 4) -->
+            <div class="md:col-span-4 bento-card p-2 h-full min-h-[400px]" data-aos="fade-up" data-aos-delay="100">
+                <div class="holo-image-container w-full h-full bg-gray-900">
+                    <div class="holo-overlay"></div>
+                    <img src="assets/img/krishna-thorat.jpg" alt="Krishna Thorat" class="w-full h-full object-cover">
+
+                    <div
+                        class="absolute bottom-4 right-4 bg-black/50 backdrop-blur-md border border-white/10 p-3 rounded-xl">
+                        <p class="text-2xl font-display font-bold text-white">5+</p>
+                        <p class="text-[10px] uppercase tracking-widest text-gray-400">Years Exp.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Tech Stack Scroller (Span 12) -->
+            <div class="md:col-span-12 bento-card py-8 flex items-center overflow-hidden rainbow-border-bottom"
+                data-aos="fade-up" data-aos-delay="200">
+                <div class="flex gap-12 animate-[shimmer_20s_linear_infinite] whitespace-nowrap pl-4">
+                    <span class="text-4xl font-display font-bold text-white/10 uppercase">React</span>
+                    <span class="text-4xl font-display font-bold text-white/30 uppercase">Node.js</span>
+                    <span class="text-4xl font-display font-bold text-white/10 uppercase">Python</span>
+                    <span class="text-4xl font-display font-bold text-white/30 uppercase">Generative AI</span>
+                    <span class="text-4xl font-display font-bold text-white/10 uppercase">LangChain</span>
+                    <span class="text-4xl font-display font-bold text-white/30 uppercase">RAG</span>
+                    <span class="text-4xl font-display font-bold text-white/10 uppercase">Azure</span>
+                    <span class="text-4xl font-display font-bold text-white/30 uppercase">AWS</span>
+                    <span class="text-4xl font-display font-bold text-white/10 uppercase">PostgreSQL</span>
+                    <!-- Duplicate for seamless loop visual -->
+                    <span class="text-4xl font-display font-bold text-white/10 uppercase">React</span>
+                    <span class="text-4xl font-display font-bold text-white/30 uppercase">Node.js</span>
+                    <span class="text-4xl font-display font-bold text-white/10 uppercase">Python</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SELECTED WORKS -->
+        <section id="work" class="mb-32">
+            <div class="flex items-end justify-between mb-12 px-2">
+                <h2 class="text-4xl md:text-6xl font-display uppercase font-bold text-white">Selected <br> Works</h2>
+                <div class="hidden md:block h-[1px] flex-grow bg-white/10 mx-8 mb-4"></div>
+                <span class="text-gray-500 font-mono text-sm mb-2">01 // 03</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- Project 1 -->
+                <div class="group cursor-pointer" data-aos="fade-up">
+                    <div class="holo-image-container aspect-[4/3] mb-6 border border-white/10 relative">
+                        <div class="holo-overlay"></div>
+                        <!-- Abstract BG for Project -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-purple-900 to-black"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i
+                                class="fas fa-brain text-8xl text-white/20 group-hover:text-purple-400 group-hover:scale-110 transition-all duration-500"></i>
+                        </div>
+                        <div
+                            class="absolute top-4 right-4 px-3 py-1 bg-black/50 backdrop-blur border border-white/10 rounded-full text-xs text-white font-mono uppercase">
+                            AI Platform</div>
+                    </div>
+                    <h3
+                        class="text-3xl font-display font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">
+                        HireSense AI</h3>
+                    <p class="text-gray-400 font-light leading-relaxed mb-4">Multi-agent orchestration system using
+                        Pydantic AI & Gemini 2.0 for intelligent career guidance.</p>
+                    <div class="flex gap-4 text-sm font-mono text-gray-500">
+                        <span>FastAPI</span> • <span>WebSockets</span> • <span>React</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="group cursor-pointer" data-aos="fade-up" data-aos-delay="100">
+                    <div class="holo-image-container aspect-[4/3] mb-6 border border-white/10 relative">
+                        <div class="holo-overlay"></div>
+                        <div class="absolute inset-0 bg-gradient-to-br from-cyan-900 to-black"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <i
+                                class="fas fa-database text-8xl text-white/20 group-hover:text-cyan-400 group-hover:scale-110 transition-all duration-500"></i>
+                        </div>
+                        <div
+                            class="absolute top-4 right-4 px-3 py-1 bg-black/50 backdrop-blur border border-white/10 rounded-full text-xs text-white font-mono uppercase">
+                            Data Analytics</div>
+                    </div>
+                    <h3
+                        class="text-3xl font-display font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                        Intellify Insights</h3>
+                    <p class="text-gray-400 font-light leading-relaxed mb-4">Enterprise data migration wizard handling
+                        SSIS packages & Power BI models across Teradata/Postgres.</p>
+                    <div class="flex gap-4 text-sm font-mono text-gray-500">
+                        <span>PySpark</span> • <span>Azure</span> • <span>Power BI</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- EXPERIENCE: Data Stream Layout -->
+        <section id="about" class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-32">
+
+            <div class="md:col-span-4">
+                <div class="sticky top-32">
+                    <h2 class="text-4xl md:text-5xl font-display uppercase font-bold mb-6">Experience <br> Log</h2>
+                    <a href="resume.pdf"
+                        class="inline-flex items-center gap-3 px-6 py-3 border border-white/20 rounded-full text-sm hover:bg-white hover:text-black transition-all group">
+                        Download Resume <i class="fas fa-arrow-down group-hover:animate-bounce"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="md:col-span-8 space-y-4">
+                <!-- Item 1 -->
+                <div class="bento-card p-8 hover:border-l-4 hover:border-l-cyan-500 transition-all"
+                    data-aos="fade-left">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Software Developer</h3>
+                            <p class="text-gray-400">Ergabite Tech Solutions (Intellify)</p>
+                        </div>
+                        <span class="text-xs font-mono border border-white/10 px-2 py-1 rounded text-cyan-400">2024 -
+                            Present</span>
+                    </div>
+                    <p class="text-gray-400 font-light text-sm leading-relaxed">
+                        Leading development on "Infovault", a multi-agent AI platform. Engineering complex migration
+                        tools and real-time alerting systems on Azure.
+                    </p>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="bento-card p-8 hover:border-l-4 hover:border-l-purple-500 transition-all"
+                    data-aos="fade-left" data-aos-delay="100">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Senior Web Developer</h3>
+                            <p class="text-gray-400">Internship Studio</p>
+                        </div>
+                        <span
+                            class="text-xs font-mono border border-white/10 px-2 py-1 rounded text-purple-400">2024</span>
+                    </div>
+                    <p class="text-gray-400 font-light text-sm leading-relaxed">
+                        Architected hiring portals and cloud solutions using GCP Vertex AI and AWS Lambda. Full stack
+                        implementation with React and Flask.
+                    </p>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="bento-card p-8 hover:border-l-4 hover:border-l-pink-500 transition-all" data-aos="fade-left"
+                    data-aos-delay="200">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">System Engineer</h3>
+                            <p class="text-gray-400">Infosys Ltd.</p>
+                        </div>
+                        <span class="text-xs font-mono border border-white/10 px-2 py-1 rounded text-pink-400">2022 -
+                            2024</span>
+                    </div>
+                    <p class="text-gray-400 font-light text-sm leading-relaxed">
+                        Developed enterprise applications with Angular & Node.js. Specialized in WCAG accessibility
+                        standards and real-time WebSocket integrations.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="bento-card p-12 md:p-24 text-center relative overflow-hidden">
+            <!-- Spectrum Background -->
+            <div class="absolute inset-0 bg-gradient-to-t from-purple-900/20 via-transparent to-transparent"></div>
+
+            <div class="relative z-10">
+                <h2 class="text-4xl md:text-8xl font-display font-bold uppercase mb-8 tracking-tight">
+                    Let's Build <br> <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">The
+                        Future</span>
+                </h2>
+
+                <div class="flex justify-center gap-6 mb-12">
+                    <a href="#"
+                        class="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all text-xl"><i
+                            class="fab fa-github"></i></a>
+                    <a href="#"
+                        class="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-[#0077b5] hover:border-transparent transition-all text-xl"><i
+                            class="fab fa-linkedin"></i></a>
+                    <a href="mailto:krishnathorat007@gmail.com"
+                        class="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-green-500 hover:border-transparent transition-all text-xl"><i
+                            class="fas fa-envelope"></i></a>
+                </div>
+
+                <p class="text-gray-500 font-mono text-xs uppercase tracking-widest">Designed in Pune, India © 2025</p>
+            </div>
+        </footer>
+
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Init AOS
+        AOS.init({
+            duration: 1000,
+            offset: 50,
+            once: true,
+            easing: 'ease-out-expo'
+        });
+
+        // Spotlight Effect Script
+        const cards = document.querySelectorAll(".bento-card");
+
+        document.getElementById("body").onmousemove = e => {
+            for (const card of cards) {
+                const rect = card.getBoundingClientRect(),
+                    x = e.clientX - rect.left,
+                    y = e.clientY - rect.top;
+
+                card.style.setProperty("--mouse-x", `${x}px`);
+                card.style.setProperty("--mouse-y", `${y}px`);
+            }
+        }
+    </script>
+    <script src="assets/js/template-switcher.js"></script>
+</body>
+
+</html>
