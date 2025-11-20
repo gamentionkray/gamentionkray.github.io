@@ -1,847 +1,756 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KRISHNA_THORAT.EXE | CYBERPUNK PORTFOLIO</title>
+    <title>Krishna Thorat | Full Stack AI Engineer</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Share Tech Mono"', 'monospace'],
+                        display: ['"Orbitron"', 'sans-serif'],
+                    },
+                    colors: {
+                        cyber: {
+                            black: '#050505',
+                            dark: '#0a0a0a',
+                            gray: '#1a1a1a',
+                            cyan: '#00f3ff',
+                            pink: '#ff003c',
+                            yellow: '#fcee0a',
+                            green: '#00ff41'
+                        }
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #1a1a1a 1px, transparent 1px), linear-gradient(to bottom, #1a1a1a 1px, transparent 1px)",
+                    },
+                    boxShadow: {
+                        'neon-cyan': '0 0 10px rgba(0, 243, 255, 0.5), 0 0 20px rgba(0, 243, 255, 0.3)',
+                        'neon-pink': '0 0 10px rgba(255, 0, 60, 0.5), 0 0 20px rgba(255, 0, 60, 0.3)',
+                    },
+                    animation: {
+                        'marquee': 'marquee 20s linear infinite',
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'scan': 'scan 4s linear infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        },
+                        scan: {
+                            '0%': { transform: 'translateY(-100%)' },
+                            '100%': { transform: 'translateY(100%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --neon-cyan: #00ffff;
-            --neon-pink: #ff00ff;
-            --neon-yellow: #ffff00;
-            --neon-green: #00ff00;
-            --neon-blue: #0080ff;
-            --neon-purple: #bf00ff;
-            --dark-bg: #0a0a0f;
-            --dark-surface: #14141f;
-            --dark-border: #1f1f2e;
-            --text-primary: #e0e0ff;
-            --text-secondary: #8080b0;
-        }
-
         body {
-            font-family: 'Rajdhani', sans-serif;
-            background: var(--dark-bg);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
+            background-color: #050505;
+            cursor: none;
         }
 
-        /* Animated Grid Background */
-        .grid-background {
+        /* Scanlines Overlay */
+        .scanlines {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image:
-                linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridMove 20s linear infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        @keyframes gridMove {
-            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
-            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
-        }
-
-        /* Scanline Effect */
-        .scanline {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                transparent 50%,
-                rgba(0, 255, 255, 0.02) 50%
-            );
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.2));
             background-size: 100% 4px;
-            animation: scanline 8s linear infinite;
+            z-index: 40;
             pointer-events: none;
-            z-index: 999;
         }
 
-        @keyframes scanline {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(100%); }
+        /* Custom Cursor */
+        .cursor-reticle {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00f3ff;
+            transform: translate(-50%, -50%) rotate(45deg);
+            pointer-events: none;
+            z-index: 9999;
+            transition: width 0.2s, height 0.2s;
+            mix-blend-mode: difference;
         }
 
-        /* Glitch Effect */
-        .glitch {
+        .cursor-dot {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 4px;
+            background-color: #ff003c;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Angled Corners (Cyberpunk Shape) */
+        .clip-cyber {
+            clip-path: polygon(0 0,
+                    100% 0,
+                    100% calc(100% - 20px),
+                    calc(100% - 20px) 100%,
+                    0 100%);
+        }
+
+        .clip-cyber-inv {
+            clip-path: polygon(20px 0,
+                    100% 0,
+                    100% 100%,
+                    0 100%,
+                    0 20px);
+        }
+
+        /* Glitch Text Effect */
+        .glitch-text {
             position: relative;
-            animation: glitch-anim 3s infinite;
+        }
+
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #050505;
+        }
+
+        .glitch-text::before {
+            left: 2px;
+            text-shadow: -1px 0 #ff003c;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        .glitch-text::after {
+            left: -2px;
+            text-shadow: -1px 0 #00f3ff;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
         }
 
         @keyframes glitch-anim {
-            0%, 100% { transform: translate(0); }
-            33% { transform: translate(-2px, 2px); }
-            66% { transform: translate(2px, -2px); }
-        }
-
-        /* Neon Glow Text */
-        .neon-text {
-            text-shadow:
-                0 0 10px var(--neon-cyan),
-                0 0 20px var(--neon-cyan),
-                0 0 30px var(--neon-cyan),
-                0 0 40px var(--neon-cyan);
-            animation: neonPulse 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes neonPulse {
-            from { text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan); }
-            to { text-shadow: 0 0 20px var(--neon-cyan), 0 0 40px var(--neon-cyan), 0 0 60px var(--neon-cyan); }
-        }
-
-        /* Container */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 40px 24px;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Header */
-        header {
-            margin-bottom: 80px;
-            padding: 60px 0;
-            position: relative;
-        }
-
-        .terminal-header {
-            background: rgba(20, 20, 31, 0.8);
-            border: 2px solid var(--neon-cyan);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
-            padding: 30px;
-            position: relative;
-            backdrop-filter: blur(10px);
-        }
-
-        .terminal-bar {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--dark-border);
-        }
-
-        .terminal-button {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--neon-pink);
-            box-shadow: 0 0 10px var(--neon-pink);
-        }
-
-        .terminal-button:nth-child(2) { background: var(--neon-yellow); box-shadow: 0 0 10px var(--neon-yellow); }
-        .terminal-button:nth-child(3) { background: var(--neon-green); box-shadow: 0 0 10px var(--neon-green); }
-
-        .status-line {
-            font-family: 'Share Tech Mono', monospace;
-            color: var(--neon-green);
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        .typing-effect::after {
-            content: '|';
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(36px, 8vw, 80px);
-            font-weight: 900;
-            color: var(--neon-cyan);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 20px;
-            line-height: 1.1;
-        }
-
-        .subtitle {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 18px;
-            color: var(--neon-pink);
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-        }
-
-        .bio {
-            font-size: 18px;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 30px;
-            max-width: 800px;
-        }
-
-        /* Nav Links */
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .cyber-button {
-            position: relative;
-            padding: 12px 30px;
-            background: transparent;
-            border: 2px solid var(--neon-cyan);
-            color: var(--neon-cyan);
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 14px;
-            letter-spacing: 0.1em;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-        }
-
-        .cyber-button:hover {
-            background: var(--neon-cyan);
-            color: var(--dark-bg);
-            box-shadow: 0 0 30px var(--neon-cyan);
-            transform: translateY(-2px);
-        }
-
-        .cyber-button i {
-            font-size: 16px;
-        }
-
-        /* Section Headers */
-        .section-header {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(32px, 5vw, 48px);
-            font-weight: 700;
-            color: var(--neon-pink);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 50px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-header::before {
-            content: '> ';
-            color: var(--neon-cyan);
-        }
-
-        .section-header::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, var(--neon-pink) 0%, transparent 100%);
-            box-shadow: 0 0 10px var(--neon-pink);
-        }
-
-        section {
-            margin-bottom: 100px;
-        }
-
-        /* Cards */
-        .cyber-card {
-            background: rgba(20, 20, 31, 0.6);
-            border: 2px solid var(--dark-border);
-            padding: 30px;
-            margin-bottom: 30px;
-            position: relative;
-            backdrop-filter: blur(10px);
-            clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
-            transition: all 0.3s ease;
-        }
-
-        .cyber-card:hover {
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
-            transform: translateX(10px);
-        }
-
-        .cyber-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 20px;
-            height: 20px;
-            background: var(--neon-pink);
-            clip-path: polygon(0 0, 100% 0, 100% 100%);
-            box-shadow: 0 0 10px var(--neon-pink);
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 20px;
-            gap: 20px;
-        }
-
-        .job-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--neon-cyan);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .company {
-            font-size: 18px;
-            color: var(--neon-pink);
-            margin-bottom: 8px;
-        }
-
-        .date-badge {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 12px;
-            color: var(--neon-green);
-            background: rgba(0, 255, 0, 0.1);
-            border: 1px solid var(--neon-green);
-            padding: 6px 12px;
-            white-space: nowrap;
-            clip-path: polygon(5px 0, 100% 0, calc(100% - 5px) 100%, 0 100%);
-        }
-
-        ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        ul li {
-            font-size: 16px;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-            padding-left: 25px;
-            position: relative;
-            line-height: 1.6;
-        }
-
-        ul li::before {
-            content: '▸';
-            position: absolute;
-            left: 0;
-            color: var(--neon-cyan);
-            font-size: 18px;
-        }
-
-        /* Skills/Tags */
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 20px;
-        }
-
-        .tag {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 12px;
-            font-weight: 500;
-            color: var(--neon-yellow);
-            background: rgba(255, 255, 0, 0.05);
-            border: 1px solid var(--neon-yellow);
-            padding: 6px 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            transition: all 0.3s ease;
-            cursor: default;
-        }
-
-        .tag:hover {
-            background: rgba(255, 255, 0, 0.15);
-            box-shadow: 0 0 15px rgba(255, 255, 0, 0.4);
-            transform: translateY(-2px);
-        }
-
-        /* Divider */
-        .divider {
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
-            margin: 80px 0;
-            box-shadow: 0 0 10px var(--neon-cyan);
-        }
-
-        /* Stats Display */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .stat-box {
-            background: rgba(20, 20, 31, 0.8);
-            border: 2px solid var(--neon-green);
-            padding: 30px;
-            text-align: center;
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-            transition: all 0.3s ease;
-        }
-
-        .stat-box:hover {
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
-            transform: scale(1.05);
-        }
-
-        .stat-number {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 48px;
-            font-weight: 900;
-            color: var(--neon-green);
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .stat-label {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 12px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        /* Projects Grid */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 30px;
-        }
-
-        .project-card {
-            background: rgba(20, 20, 31, 0.8);
-            border: 2px solid var(--dark-border);
-            overflow: hidden;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover {
-            border-color: var(--neon-pink);
-            box-shadow: 0 0 40px rgba(255, 0, 255, 0.3);
-        }
-
-        .project-header {
-            background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2));
-            padding: 40px 30px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-icon {
-            font-size: 64px;
-            color: var(--neon-cyan);
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 20px var(--neon-cyan));
-        }
-
-        .project-body {
-            padding: 30px;
-        }
-
-        .project-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--neon-pink);
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .project-category {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 12px;
-            color: var(--neon-yellow);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-        }
-
-        .project-description {
-            font-size: 16px;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 20px;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 60px 0 40px;
-            border-top: 2px solid var(--dark-border);
-            margin-top: 100px;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .social-icon {
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: transparent;
-            border: 2px solid var(--neon-cyan);
-            color: var(--neon-cyan);
-            font-size: 24px;
-            transition: all 0.3s ease;
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-        }
-
-        .social-icon:hover {
-            background: var(--neon-cyan);
-            color: var(--dark-bg);
-            box-shadow: 0 0 30px var(--neon-cyan);
-            transform: scale(1.1);
-        }
-
-        .copyright {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px 16px;
+            0% {
+                clip: rect(32px, 9999px, 18px, 0);
             }
 
-            h1 {
-                font-size: 36px;
+            20% {
+                clip: rect(87px, 9999px, 96px, 0);
             }
 
-            .section-header {
-                font-size: 28px;
+            40% {
+                clip: rect(5px, 9999px, 65px, 0);
             }
 
-            .projects-grid {
-                grid-template-columns: 1fr;
+            60% {
+                clip: rect(23px, 9999px, 4px, 0);
             }
 
-            .card-header {
-                flex-direction: column;
-                gap: 10px;
+            80% {
+                clip: rect(76px, 9999px, 11px, 0);
             }
 
-            .date-badge {
-                align-self: flex-start;
-            }
-
-            .nav-links {
-                flex-direction: column;
-            }
-
-            .cyber-button {
-                width: 100%;
-                justify-content: center;
+            100% {
+                clip: rect(45px, 9999px, 78px, 0);
             }
         }
 
-        /* Custom Scrollbar */
+        @keyframes glitch-anim2 {
+            0% {
+                clip: rect(12px, 9999px, 88px, 0);
+            }
+
+            20% {
+                clip: rect(56px, 9999px, 12px, 0);
+            }
+
+            40% {
+                clip: rect(34px, 9999px, 55px, 0);
+            }
+
+            60% {
+                clip: rect(2px, 9999px, 99px, 0);
+            }
+
+            80% {
+                clip: rect(65px, 9999px, 4px, 0);
+            }
+
+            100% {
+                clip: rect(23px, 9999px, 56px, 0);
+            }
+        }
+
+        /* Hologram Image Filter */
+        .hologram {
+            filter: grayscale(100%) sepia(100%) hue-rotate(130deg) saturation(200%) brightness(0.8) contrast(1.2);
+            transition: 0.3s;
+        }
+
+        .hologram:hover {
+            filter: none;
+        }
+
+        /* Scrollbar */
         ::-webkit-scrollbar {
-            width: 12px;
+            width: 8px;
         }
 
         ::-webkit-scrollbar-track {
-            background: var(--dark-bg);
-            border-left: 1px solid var(--dark-border);
+            background: #050505;
+            border-left: 1px solid #1a1a1a;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: var(--neon-cyan);
-            box-shadow: 0 0 10px var(--neon-cyan);
+            background: #333;
+            border: 1px solid #00f3ff;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--neon-pink);
-            box-shadow: 0 0 15px var(--neon-pink);
+            background: #00f3ff;
+        }
+
+        /* Selection */
+        ::selection {
+            background: #ff003c;
+            color: #fff;
         }
     </style>
 </head>
-<body>
-    <!-- Animated Background -->
-    <div class="grid-background"></div>
-    <div class="scanline"></div>
 
-    <div class="container">
-        <!-- Header -->
-        <header>
-            <div class="terminal-header">
-                <div class="terminal-bar">
-                    <div class="terminal-button"></div>
-                    <div class="terminal-button"></div>
-                    <div class="terminal-button"></div>
+<body class="bg-cyber-black text-gray-300 transition-colors duration-300 relative overflow-x-hidden font-sans">
+
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-reticle hidden md:block"></div>
+    <div class="scanlines"></div>
+
+    <!-- Loader -->
+    <div id="loader"
+        class="fixed inset-0 bg-cyber-black z-[100] flex flex-col items-center justify-center border-b-2 border-cyber-cyan transition-transform duration-700 ease-in-out">
+        <h1 class="text-6xl font-display font-bold uppercase tracking-widest text-cyber-cyan glitch-text"
+            data-text="LOADING...">LOADING...</h1>
+        <div class="w-64 h-2 bg-gray-800 mt-4 overflow-hidden">
+            <div class="h-full bg-cyber-pink w-full animate-[marquee_1s_linear_infinite]"></div>
+        </div>
+        <p class="mt-2 text-cyber-green font-mono text-sm">INITIALIZING SYSTEM...</p>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 px-4 py-4 bg-cyber-black/90 backdrop-blur-sm border-b border-cyber-cyan/30">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-display font-bold tracking-widest text-white group">
+                KT<span class="text-cyber-pink group-hover:text-cyber-cyan transition-colors">_</span>DEV
+                <span class="block h-0.5 w-0 group-hover:w-full bg-cyber-cyan transition-all duration-300"></span>
+            </a>
+
+            <div class="flex items-center gap-6">
+                <a href="mailto:krishnathorat007@gmail.com"
+                    class="hidden md:flex items-center gap-2 font-bold uppercase tracking-widest text-xs text-cyber-green border border-cyber-green/50 px-3 py-1 bg-cyber-green/10 hover:bg-cyber-green hover:text-black transition-all">
+                    <span class="w-2 h-2 bg-cyber-green rounded-full animate-pulse"></span>
+                    STATUS: ONLINE / EMPLOYED
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-20 px-4 sm:px-6 bg-grid-pattern bg-[size:40px_40px] relative">
+        <!-- Hero Overlay Gradient -->
+        <div
+            class="absolute inset-0 bg-gradient-to-b from-transparent via-cyber-black/80 to-cyber-black pointer-events-none">
+        </div>
+
+        <header class="max-w-7xl mx-auto mb-24 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-8 items-center">
+
+                <div class="lg:col-span-8" data-aos="fade-right">
+                    <div
+                        class="inline-flex items-center gap-2 text-cyber-cyan border border-cyber-cyan/30 px-4 py-1 font-mono text-sm mb-6 bg-cyber-cyan/5 clip-cyber-inv">
+                        <i class="fas fa-terminal text-xs"></i>
+                        <span>SYSTEM.USER.ROLE: FULL_STACK_AI_ENGINEER</span>
+                    </div>
+
+                    <h1 class="text-5xl sm:text-7xl md:text-8xl font-display font-black uppercase leading-[0.9] mb-8 tracking-tighter text-white glitch-text"
+                        data-text="KRISHNA THORAT">
+                        Krishna <br>
+                        <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-cyan via-white to-cyber-pink">Thorat</span>
+                    </h1>
+
+                    <p
+                        class="text-lg md:text-xl font-medium max-w-2xl mb-10 leading-relaxed text-gray-400 border-l-2 border-cyber-pink pl-6 font-sans">
+                        // Building dynamic web applications and <span class="text-cyber-pink">Agentic AI</span>
+                        systems.<br>
+                        // Protocol Specialization: <span class="text-cyber-cyan">PHP, Node.js, React</span> & <span
+                            class="text-cyber-green">Generative AI</span>.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#projects"
+                            class="clip-cyber bg-cyber-cyan text-black px-8 py-4 font-display font-bold text-lg hover:bg-white hover:text-cyber-cyan transition-all uppercase relative overflow-hidden group">
+                            <span
+                                class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
+                            View_Projects
+                        </a>
+                        <a href="mailto:krishnathorat007@gmail.com"
+                            class="clip-cyber border border-cyber-pink text-cyber-pink px-8 py-4 font-display font-bold text-lg hover:bg-cyber-pink hover:text-black transition-all uppercase hover:shadow-neon-pink">
+                            Contact_Me
+                        </a>
+                    </div>
                 </div>
-                <div class="status-line typing-effect">> INITIALIZING SYSTEM... WELCOME_USER</div>
 
-                <!-- Profile Image -->
-                <div style="width: 200px; height: 200px; margin: 0 auto 32px; position: relative; clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);">
-                    <div style="position: absolute; inset: 0; border: 2px solid var(--neon-cyan); box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), inset 0 0 20px rgba(0, 255, 255, 0.1);"></div>
-                    <img src="assets/img/krishna-thorat.jpg" alt="Krishna Thorat" style="width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.2) brightness(0.9);">
-                    <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1)); pointer-events: none;"></div>
-                </div>
+                <div class="lg:col-span-4 relative hidden lg:block" data-aos="fade-left" data-aos-delay="200">
+                    <div class="aspect-square relative group">
+                        <!-- Decorative Borders -->
+                        <div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-cyber-cyan"></div>
+                        <div class="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-cyber-cyan"></div>
+                        <div class="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-cyber-cyan"></div>
+                        <div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-cyber-cyan"></div>
 
-                <h1 class="glitch neon-text">KRISHNA_THORAT</h1>
-                <p class="subtitle">FULL STACK AI ENGINEER // CYBERNETIC ARCHITECT</p>
-                <p class="bio">
-                    Advanced full-stack developer specializing in neural network implementations and cloud infrastructure.
-                    Currently architecting multi-agent AI systems at <span style="color: var(--neon-cyan);">ERGABITE_TECH_SOLUTIONS</span>.
-                    Location: <span style="color: var(--neon-pink);">PUNE_INDIA_SECTOR_18</span>
-                </p>
-                <div class="nav-links">
-                    <a href="mailto:krishnathorat007@gmail.com" class="cyber-button">
-                        <i class="fas fa-envelope"></i>
-                        CONTACT
-                    </a>
-                    <a href="https://github.com/gamentionkray" target="_blank" class="cyber-button">
-                        <i class="fab fa-github"></i>
-                        GITHUB
-                    </a>
-                    <a href="https://linkedin.com/in/krishnathorat" target="_blank" class="cyber-button">
-                        <i class="fab fa-linkedin"></i>
-                        LINKEDIN
-                    </a>
+                        <img src="assets/img/krishna-thorat.jpg" alt="Krishna Thorat"
+                            class="w-full h-full object-cover hologram clip-cyber">
+
+                        <!-- Scanner Line -->
+                        <div
+                            class="absolute inset-0 bg-gradient-to-b from-transparent via-cyber-cyan/20 to-transparent h-[20%] animate-scan pointer-events-none opacity-50">
+                        </div>
+
+                        <div
+                            class="absolute -bottom-6 -right-6 text-right z-10 bg-cyber-black border border-cyber-gray p-4 shadow-neon-pink">
+                            <h3 class="text-4xl font-black font-display text-cyber-pink">5+</h3>
+                            <p class="font-bold text-xs text-cyber-cyan tracking-widest">YEARS_EXP</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </header>
 
-        <!-- Stats -->
-        <section>
-            <div class="stats-grid">
-                <div class="stat-box">
-                    <span class="stat-number">5+</span>
-                    <span class="stat-label">Years Active</span>
+        <!-- Tech Marquee -->
+        <div
+            class="w-full bg-cyber-black border-y border-cyber-cyan/50 overflow-hidden py-3 mb-24 -mx-4 sm:-mx-6 transform rotate-1 relative">
+            <div class="absolute inset-0 bg-cyber-cyan/5 pointer-events-none"></div>
+            <div
+                class="whitespace-nowrap animate-marquee flex gap-8 text-xl font-display font-bold uppercase text-cyber-cyan/80">
+                <span>JavaScript <span class="text-cyber-pink">::</span></span>
+                <span>React <span class="text-cyber-pink">::</span></span>
+                <span>Node.js <span class="text-cyber-pink">::</span></span>
+                <span>Python <span class="text-cyber-pink">::</span></span>
+                <span>Generative AI <span class="text-cyber-pink">::</span></span>
+                <span>Langchain <span class="text-cyber-pink">::</span></span>
+                <span>RAG Systems <span class="text-cyber-pink">::</span></span>
+                <span>AWS <span class="text-cyber-pink">::</span></span>
+                <span>Azure <span class="text-cyber-pink">::</span></span>
+                <span>PHP <span class="text-cyber-pink">::</span></span>
+                <span>PostgreSQL <span class="text-cyber-pink">::</span></span>
+                <span>JavaScript <span class="text-cyber-pink">::</span></span>
+                <span>React <span class="text-cyber-pink">::</span></span>
+                <span>Generative AI <span class="text-cyber-pink">::</span></span>
+            </div>
+        </div>
+
+        <!-- Skills / Arsenal -->
+        <section class="max-w-7xl mx-auto mb-32 relative z-10">
+            <h2 class="text-4xl md:text-6xl font-black font-display uppercase mb-12 flex items-center gap-4 text-white">
+                <span class="text-cyber-pink text-2xl animate-pulse">///</span> THE_ARSENAL
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+                <div class="bg-cyber-gray/50 border border-cyber-cyan/30 p-6 clip-cyber relative hover:bg-cyber-cyan/10 transition-all md:col-span-2 group"
+                    data-aos="fade-up">
+                    <div class="absolute top-0 right-0 p-2 opacity-30 group-hover:opacity-100 transition-opacity">
+                        <i class="fas fa-microchip text-cyber-cyan"></i>
+                    </div>
+                    <div class="flex justify-between items-start mb-4">
+                        <div
+                            class="bg-cyber-cyan/20 text-cyber-cyan px-3 py-1 font-bold border border-cyber-cyan text-xs tracking-widest">
+                            EDUCATION_MODULE</div>
+                    </div>
+                    <h3
+                        class="text-2xl font-display font-bold mb-1 text-white group-hover:text-cyber-cyan transition-colors">
+                        Master of Computer Applications</h3>
+                    <p class="text-gray-400 font-mono">Vishwakarma Institute of Technology, Pune</p>
+                    <p class="text-sm font-mono mt-2 text-cyber-pink">[ 2020 - 2022 ]</p>
                 </div>
-                <div class="stat-box">
-                    <span class="stat-number">3</span>
-                    <span class="stat-label">Organizations</span>
+
+                <div class="bg-cyber-gray/50 border border-cyber-pink/30 p-6 clip-cyber flex flex-col justify-between group overflow-hidden relative hover:border-cyber-pink transition-colors"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <i
+                        class="fas fa-map-marker-alt text-8xl absolute -bottom-4 -right-4 text-cyber-pink opacity-10 group-hover:opacity-20 group-hover:rotate-12 transition-all"></i>
+                    <h3 class="font-bold uppercase text-cyber-pink text-xs tracking-widest">CURRENT_LOCATION</h3>
+                    <p class="text-3xl font-display font-bold text-white leading-tight mt-2">PUNE,<br>INDIA</p>
                 </div>
-                <div class="stat-box">
-                    <span class="stat-number">16+</span>
-                    <span class="stat-label">AI Agents Built</span>
+
+                <a href="https://github.com/gamentionkray" target="_blank"
+                    class="bg-cyber-gray/50 border border-white/20 p-6 clip-cyber flex flex-col justify-center items-center gap-4 group hover:bg-white hover:text-black transition-all"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <i class="fab fa-github text-6xl group-hover:scale-110 transition-transform"></i>
+                    <span class="font-bold font-mono text-lg group-hover:font-display">@gamentionkray</span>
+                </a>
+
+                <div class="bg-cyber-black border border-cyber-green/50 p-6 clip-cyber md:col-span-2 lg:col-span-2 relative overflow-hidden"
+                    data-aos="fade-up">
+                    <div class="absolute inset-0 bg-cyber-green/5"></div>
+                    <h3
+                        class="font-bold uppercase mb-4 text-cyber-green tracking-widest border-b border-cyber-green/30 inline-block pb-1">
+                        CORE_STACK</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="bg-cyber-green/10 text-cyber-green border border-cyber-green px-3 py-1 font-mono text-sm hover:bg-cyber-green hover:text-black transition-colors cursor-default">PHP</span>
+                        <span
+                            class="bg-cyber-green/10 text-cyber-green border border-cyber-green px-3 py-1 font-mono text-sm hover:bg-cyber-green hover:text-black transition-colors cursor-default">Node.js</span>
+                        <span
+                            class="bg-cyber-green/10 text-cyber-green border border-cyber-green px-3 py-1 font-mono text-sm hover:bg-cyber-green hover:text-black transition-colors cursor-default">React</span>
+                        <span
+                            class="bg-cyber-green/10 text-cyber-green border border-cyber-green px-3 py-1 font-mono text-sm hover:bg-cyber-green hover:text-black transition-colors cursor-default">Angular</span>
+                        <span
+                            class="bg-cyber-green/10 text-cyber-green border border-cyber-green px-3 py-1 font-mono text-sm hover:bg-cyber-green hover:text-black transition-colors cursor-default">Python</span>
+                        <span
+                            class="bg-cyber-green/10 text-cyber-green border border-cyber-green px-3 py-1 font-mono text-sm hover:bg-cyber-green hover:text-black transition-colors cursor-default">MySQL</span>
+                        <span
+                            class="bg-cyber-green/10 text-cyber-green border border-cyber-green px-3 py-1 font-mono text-sm hover:bg-cyber-green hover:text-black transition-colors cursor-default">PostgreSQL</span>
+                    </div>
                 </div>
-                <div class="stat-box">
-                    <span class="stat-number">100%</span>
-                    <span class="stat-label">Uptime Ready</span>
+
+                <div class="bg-cyber-black border border-cyber-pink/50 p-6 clip-cyber md:col-span-2 lg:col-span-2 relative overflow-hidden"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute inset-0 bg-cyber-pink/5"></div>
+                    <h3
+                        class="font-bold uppercase mb-4 text-cyber-pink tracking-widest border-b border-cyber-pink/30 inline-block pb-1">
+                        AI_ENGINEERING</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="bg-cyber-pink/10 text-cyber-pink border border-cyber-pink px-3 py-1 font-mono text-sm hover:bg-cyber-pink hover:text-black transition-colors cursor-default">Generative
+                            AI</span>
+                        <span
+                            class="bg-cyber-pink/10 text-cyber-pink border border-cyber-pink px-3 py-1 font-mono text-sm hover:bg-cyber-pink hover:text-black transition-colors cursor-default">Agentic
+                            AI</span>
+                        <span
+                            class="bg-cyber-pink/10 text-cyber-pink border border-cyber-pink px-3 py-1 font-mono text-sm hover:bg-cyber-pink hover:text-black transition-colors cursor-default">RAG</span>
+                        <span
+                            class="bg-cyber-pink/10 text-cyber-pink border border-cyber-pink px-3 py-1 font-mono text-sm hover:bg-cyber-pink hover:text-black transition-colors cursor-default">LangChain</span>
+                        <span
+                            class="bg-cyber-pink/10 text-cyber-pink border border-cyber-pink px-3 py-1 font-mono text-sm hover:bg-cyber-pink hover:text-black transition-colors cursor-default">Azure
+                            OpenAI</span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Experience -->
-        <section>
-            <h2 class="section-header">Work_Experience</h2>
+        <!-- XP Log -->
+        <section class="max-w-7xl mx-auto mb-32 relative z-10">
+            <div class="grid md:grid-cols-12 gap-12">
+                <div class="md:col-span-4">
+                    <div class="sticky top-32">
+                        <h2 class="text-5xl font-black font-display uppercase mb-6 leading-none text-white glitch-text"
+                            data-text="XP_LOG">
+                            XP <br> LOG
+                        </h2>
+                        <p class="text-lg font-mono text-gray-500 mb-8">// A chronological record of system
+                            contributions.</p>
 
-            <div class="cyber-card">
-                <div class="card-header">
-                    <div>
-                        <div class="job-title">Software Developer</div>
-                        <div class="company">Ergabite Tech Solutions</div>
+                        <a href="resume.pdf" download
+                            class="w-full clip-cyber bg-cyber-gray hover:bg-cyber-cyan hover:text-black border border-cyber-cyan/50 text-cyber-cyan px-6 py-3 font-bold transition-all flex items-center justify-center gap-2 group shadow-neon-cyan">
+                            <i class="fas fa-download group-hover:animate-bounce"></i> DOWNLOAD_DATA_PACK
+                        </a>
                     </div>
-                    <div class="date-badge">DEC.2024 — PRESENT</div>
                 </div>
-                <ul>
-                    <li>Engineered migration wizard for Intellify handling Teradata/Postgres database transfers with zero data loss</li>
-                    <li>Constructed real-time alerting infrastructure using Azure App Functions for parking management systems</li>
-                    <li>Led development of Infovault multi-agent AI platform utilizing LangChain and Azure OpenAI architecture</li>
-                </ul>
-            </div>
 
-            <div class="cyber-card">
-                <div class="card-header">
-                    <div>
-                        <div class="job-title">Senior Web Developer</div>
-                        <div class="company">Internship Studio</div>
+                <div class="md:col-span-8 space-y-12 relative">
+                    <!-- Timeline Line -->
+                    <div
+                        class="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-cyber-cyan via-cyber-pink to-transparent md:left-[-24px] hidden md:block shadow-[0_0_10px_#00f3ff]">
                     </div>
-                    <div class="date-badge">JUL.2024 — DEC.2024</div>
-                </div>
-                <ul>
-                    <li>Spearheaded end-to-end hiring portal development from conceptual design to production deployment</li>
-                    <li>Architected scalable cloud solutions leveraging GCP Vertex AI and AWS Lambda serverless infrastructure</li>
-                    <li>Full-stack development utilizing React, Node.js, PHP, and Flask framework ecosystems</li>
-                </ul>
-            </div>
 
-            <div class="cyber-card">
-                <div class="card-header">
-                    <div>
-                        <div class="job-title">System Engineer</div>
-                        <div class="company">Infosys Ltd.</div>
+                    <div class="relative group" data-aos="fade-left">
+                        <div
+                            class="hidden md:block absolute left-[-30px] top-6 w-3 h-3 bg-cyber-black border-2 border-cyber-cyan rounded-full z-10 shadow-neon-cyan group-hover:bg-cyber-cyan transition-colors">
+                        </div>
+                        <div
+                            class="bg-cyber-gray/40 border border-cyber-cyan/30 p-8 clip-cyber backdrop-blur-sm hover:border-cyber-cyan hover:bg-cyber-cyan/10 transition-all">
+                            <div class="flex flex-wrap justify-between items-baseline mb-2">
+                                <h3 class="text-2xl font-bold font-display text-white">Software Developer</h3>
+                                <span
+                                    class="bg-cyber-cyan/20 text-cyber-cyan border border-cyber-cyan px-2 py-0.5 text-xs font-bold uppercase font-mono">Dec
+                                    2024 - Present</span>
+                            </div>
+                            <h4 class="text-lg font-bold mb-4 text-cyber-pink font-mono">Ergabite Tech Solutions
+                                (Intellify Client)</h4>
+                            <ul class="space-y-2 text-sm md:text-base text-gray-300 font-mono">
+                                <li class="flex items-start gap-2"><span class="text-cyber-cyan">></span> Developed
+                                    features for "Intellify Migration Wizard" (Teradata/Postgres).</li>
+                                <li class="flex items-start gap-2"><span class="text-cyber-cyan">></span> Engineered
+                                    "In-Parking" alerting system using Azure App Functions.</li>
+                                <li class="flex items-start gap-2"><span class="text-cyber-cyan">></span> Led
+                                    "Infovault" multi-agent AI platform using Langchain & Azure OpenAI.</li>
+                                <li class="flex items-start gap-2"><span class="text-cyber-cyan">></span> CI/CD
+                                    implementation on Azure.</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="date-badge">AUG.2022 — JUL.2024</div>
+
+                    <div class="relative group" data-aos="fade-left">
+                        <div
+                            class="hidden md:block absolute left-[-30px] top-6 w-3 h-3 bg-cyber-black border-2 border-cyber-yellow rounded-full z-10 shadow-[0_0_10px_#fcee0a] group-hover:bg-cyber-yellow transition-colors">
+                        </div>
+                        <div
+                            class="bg-cyber-gray/40 border border-cyber-yellow/30 p-8 clip-cyber backdrop-blur-sm hover:border-cyber-yellow hover:bg-cyber-yellow/10 transition-all">
+                            <div class="flex flex-wrap justify-between items-baseline mb-2">
+                                <h3 class="text-2xl font-bold font-display text-white">Senior Web Developer</h3>
+                                <span
+                                    class="bg-cyber-yellow/20 text-cyber-yellow border border-cyber-yellow px-2 py-0.5 text-xs font-bold uppercase font-mono">Jul
+                                    2024 - Dec 2024</span>
+                            </div>
+                            <h4 class="text-lg font-bold mb-4 text-cyber-pink font-mono">Internship Studio</h4>
+                            <ul class="space-y-2 text-sm md:text-base text-gray-300 font-mono">
+                                <li class="flex items-start gap-2"><span class="text-cyber-yellow">></span> Spearheaded
+                                    hiring portal development.</li>
+                                <li class="flex items-start gap-2"><span class="text-cyber-yellow">></span> Architected
+                                    solutions on GCP (Vertex AI) and AWS (Lambda).</li>
+                                <li class="flex items-start gap-2"><span class="text-cyber-yellow">></span> Full-stack
+                                    dev with React, Node.js, PHP, Flask.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="relative group" data-aos="fade-left">
+                        <div
+                            class="hidden md:block absolute left-[-30px] top-6 w-3 h-3 bg-cyber-black border-2 border-cyber-pink rounded-full z-10 shadow-neon-pink group-hover:bg-cyber-pink transition-colors">
+                        </div>
+                        <div
+                            class="bg-cyber-gray/40 border border-cyber-pink/30 p-8 clip-cyber backdrop-blur-sm hover:border-cyber-pink hover:bg-cyber-pink/10 transition-all">
+                            <div class="flex flex-wrap justify-between items-baseline mb-2">
+                                <h3 class="text-2xl font-bold font-display text-white">System Engineer</h3>
+                                <span
+                                    class="bg-cyber-pink/20 text-cyber-pink border border-cyber-pink px-2 py-0.5 text-xs font-bold uppercase font-mono">Aug
+                                    2022 - Jul 2024</span>
+                            </div>
+                            <h4 class="text-lg font-bold mb-4 text-cyber-cyan font-mono">Infosys Ltd.</h4>
+                            <ul class="space-y-2 text-sm md:text-base text-gray-300 font-mono">
+                                <li class="flex items-start gap-2"><span class="text-cyber-pink">></span> Dynamic app
+                                    development with Angular, Node.js, PostgreSQL.</li>
+                                <li class="flex items-start gap-2"><span class="text-cyber-pink">></span> WCAG
+                                    standards, WebSockets, and WebRTC integration.</li>
+                                <li class="flex items-start gap-2"><span class="text-cyber-pink">></span> Salesforce
+                                    integration via Cortex framework.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <ul>
-                    <li>Developed enterprise-grade applications using Angular, Node.js, and PostgreSQL stack</li>
-                    <li>Implemented WCAG accessibility protocols and WebSocket real-time communication systems</li>
-                    <li>Integrated Salesforce CRM through Cortex framework for seamless data synchronization</li>
-                </ul>
             </div>
         </section>
-
-        <div class="divider"></div>
 
         <!-- Projects -->
-        <section>
-            <h2 class="section-header">Featured_Projects</h2>
+        <section id="projects" class="max-w-7xl mx-auto mb-32 relative z-10">
+            <h2 class="text-4xl md:text-6xl font-black font-display uppercase mb-16 text-center text-white">
+                <span class="inline-block border-b-4 border-cyber-cyan pb-2">SELECTED_WORKS</span>
+            </h2>
 
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-header">
-                        <i class="fas fa-brain project-icon"></i>
+            <div class="grid md:grid-cols-2 gap-10">
+
+                <article class="group relative" data-aos="zoom-in">
+                    <div
+                        class="absolute -inset-1 bg-gradient-to-r from-cyber-pink to-cyber-cyan rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200">
                     </div>
-                    <div class="project-body">
-                        <div class="project-title">HireSense AI</div>
-                        <div class="project-category">[ AI_PLATFORM // NEURAL_ORCHESTRATION ]</div>
-                        <p class="project-description">
-                            Multi-agent career guidance system powered by Pydantic AI and Gemini 2.0 Flash.
-                            Features 16+ specialized neural agents providing personalized career analysis,
-                            resume optimization algorithms, and interview simulation protocols via WebSocket streams.
-                        </p>
-                        <div class="tags">
-                            <span class="tag">Pydantic AI</span>
-                            <span class="tag">Gemini 2.0</span>
-                            <span class="tag">FastAPI</span>
-                            <span class="tag">WebSockets</span>
-                            <span class="tag">Python</span>
+                    <div
+                        class="relative bg-cyber-black border border-gray-700 flex flex-col h-full clip-cyber overflow-hidden">
+                        <div
+                            class="h-48 bg-cyber-gray relative flex items-center justify-center overflow-hidden border-b border-gray-700">
+                            <div
+                                class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiMyMjIiLz48L3N2Zz4=')] opacity-20">
+                            </div>
+                            <i class="fas fa-brain text-6xl text-cyber-pink animate-pulse"></i>
+                            <div
+                                class="absolute bottom-0 w-full h-1 bg-gradient-to-r from-transparent via-cyber-pink to-transparent">
+                            </div>
+                        </div>
+                        <div class="p-6 flex-grow">
+                            <h3
+                                class="text-2xl font-black font-display mb-2 text-white group-hover:text-cyber-pink transition-colors">
+                                HireSense AI</h3>
+                            <p class="text-xs font-mono mb-4 text-cyber-cyan">STATUS: ACTIVE [Dec 2024 - Present]</p>
+                            <p class="mb-6 text-gray-400 font-sans">AI-powered career guidance platform with multi-agent
+                                orchestration using Pydantic AI and Gemini 2.0.</p>
+
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span
+                                    class="text-xs font-bold bg-cyber-gray text-gray-300 px-2 py-1 border border-gray-600 font-mono">Pydantic
+                                    AI</span>
+                                <span
+                                    class="text-xs font-bold bg-cyber-gray text-gray-300 px-2 py-1 border border-gray-600 font-mono">FastAPI</span>
+                                <span
+                                    class="text-xs font-bold bg-cyber-gray text-gray-300 px-2 py-1 border border-gray-600 font-mono">WebSockets</span>
+                            </div>
+                        </div>
+                        <div class="p-4 border-t border-gray-800 bg-cyber-gray/30 flex justify-between items-center">
+                            <span class="font-bold text-sm font-mono text-cyber-green"><i class="fas fa-robot"></i> 16+
+                                AI Agents</span>
+                            <a href="#"
+                                class="text-cyber-cyan font-bold font-display text-sm hover:text-white tracking-wider">ACCESS_TERMINAL
+                                <i class="fas fa-chevron-right text-xs"></i></a>
                         </div>
                     </div>
-                </div>
+                </article>
 
-                <div class="project-card">
-                    <div class="project-header">
-                        <i class="fas fa-database project-icon"></i>
+                <article class="group relative" data-aos="zoom-in" data-aos-delay="100">
+                    <div
+                        class="absolute -inset-1 bg-gradient-to-r from-cyber-cyan to-blue-600 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200">
                     </div>
-                    <div class="project-body">
-                        <div class="project-title">Intellify Insights</div>
-                        <div class="project-category">[ DATA_ANALYTICS // ETL_PIPELINE ]</div>
-                        <p class="project-description">
-                            Enterprise-grade ETL platform enabling seamless transfer of SSIS packages and Power BI models
-                            across MSSQL, Teradata, and Postgres ecosystems. Features PySpark distributed processing
-                            for large-scale data operations and automated model conversion protocols.
-                        </p>
-                        <div class="tags">
-                            <span class="tag">PySpark</span>
-                            <span class="tag">Azure</span>
-                            <span class="tag">Power BI</span>
-                            <span class="tag">Python</span>
-                            <span class="tag">Teradata</span>
+                    <div
+                        class="relative bg-cyber-black border border-gray-700 flex flex-col h-full clip-cyber overflow-hidden">
+                        <div
+                            class="h-48 bg-cyber-gray relative flex items-center justify-center overflow-hidden border-b border-gray-700">
+                            <div
+                                class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTAgNDBMMTAgMEgyMEwzMCA0MEgwWiIgZmlsbD0iIzIyMiIgZmlsbC1vcGFjaXR5PSIwLjIiLz48L3N2Zz4=')] opacity-20">
+                            </div>
+                            <i class="fas fa-database text-6xl text-cyber-cyan"></i>
+                            <div
+                                class="absolute bottom-0 w-full h-1 bg-gradient-to-r from-transparent via-cyber-cyan to-transparent">
+                            </div>
+                        </div>
+                        <div class="p-6 flex-grow">
+                            <h3
+                                class="text-2xl font-black font-display mb-2 text-white group-hover:text-cyber-cyan transition-colors">
+                                Intellify Insights</h3>
+                            <p class="text-xs font-mono mb-4 text-cyber-cyan">TYPE: DATA_ANALYTICS</p>
+                            <p class="mb-6 text-gray-400 font-sans">Transfer SSIS packages and Power BI models between
+                                MSSQL, Teradata, and Postgres with PySpark job management.</p>
+
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span
+                                    class="text-xs font-bold bg-cyber-gray text-gray-300 px-2 py-1 border border-gray-600 font-mono">PySpark</span>
+                                <span
+                                    class="text-xs font-bold bg-cyber-gray text-gray-300 px-2 py-1 border border-gray-600 font-mono">Azure</span>
+                                <span
+                                    class="text-xs font-bold bg-cyber-gray text-gray-300 px-2 py-1 border border-gray-600 font-mono">Power
+                                    BI</span>
+                            </div>
+                        </div>
+                        <div class="p-4 border-t border-gray-800 bg-cyber-gray/30 flex justify-between items-center">
+                            <span class="font-bold text-sm font-mono text-cyber-yellow"><i class="fas fa-sync"></i>
+                                CI/CD Pipeline</span>
+                            <a href="#"
+                                class="text-cyber-cyan font-bold font-display text-sm hover:text-white tracking-wider">ACCESS_TERMINAL
+                                <i class="fas fa-chevron-right text-xs"></i></a>
                         </div>
                     </div>
-                </div>
+                </article>
+
             </div>
         </section>
+    </main>
 
-        <div class="divider"></div>
+    <footer class="bg-cyber-black text-white py-20 border-t border-cyber-cyan relative overflow-hidden">
+        <!-- Grid Footer Background -->
+        <div class="absolute inset-0 bg-grid-pattern bg-[size:20px_20px] opacity-20"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-cyber-cyan/10 to-transparent pointer-events-none"></div>
 
-        <!-- Skills -->
-        <section>
-            <h2 class="section-header">Tech_Arsenal</h2>
+        <div class="max-w-7xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-5xl md:text-8xl font-black font-display uppercase mb-12 leading-none glitch-text"
+                data-text="LET'S CONNECT">
+                Let's Work <br> <span class="text-cyber-cyan">Together</span>
+            </h2>
 
-            <div class="cyber-card">
-                <div class="job-title" style="margin-bottom: 25px;">Core Systems</div>
-                <div class="tags">
-                    <span class="tag">PHP</span>
-                    <span class="tag">Node.js</span>
-                    <span class="tag">React</span>
-                    <span class="tag">Angular</span>
-                    <span class="tag">Python</span>
-                    <span class="tag">TypeScript</span>
-                    <span class="tag">PostgreSQL</span>
-                    <span class="tag">MySQL</span>
-                    <span class="tag">MongoDB</span>
-                </div>
-            </div>
-
-            <div class="cyber-card">
-                <div class="job-title" style="margin-bottom: 25px;">AI & Neural Networks</div>
-                <div class="tags">
-                    <span class="tag">Generative AI</span>
-                    <span class="tag">LangChain</span>
-                    <span class="tag">RAG Systems</span>
-                    <span class="tag">Azure OpenAI</span>
-                    <span class="tag">Pydantic AI</span>
-                    <span class="tag">Gemini 2.0</span>
-                </div>
-            </div>
-
-            <div class="cyber-card">
-                <div class="job-title" style="margin-bottom: 25px;">Cloud Infrastructure</div>
-                <div class="tags">
-                    <span class="tag">AWS</span>
-                    <span class="tag">Azure</span>
-                    <span class="tag">GCP</span>
-                    <span class="tag">Docker</span>
-                    <span class="tag">Kubernetes</span>
-                    <span class="tag">Serverless</span>
-                </div>
-            </div>
-        </section>
-
-        <div class="divider"></div>
-
-        <!-- Education -->
-        <section>
-            <h2 class="section-header">Education_Protocol</h2>
-
-            <div class="cyber-card">
-                <div class="job-title">Master of Computer Applications</div>
-                <div class="company">Vishwakarma Institute of Technology</div>
-                <div class="date-badge" style="margin-top: 15px;">2020 — 2022 // PUNE_SECTOR</div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer>
-            <div class="social-links">
-                <a href="https://github.com/gamentionkray" target="_blank" class="social-icon">
+            <div class="flex justify-center gap-8 mb-12">
+                <a href="https://github.com/gamentionkray"
+                    class="w-16 h-16 clip-cyber bg-cyber-gray text-white border border-cyber-cyan flex items-center justify-center text-2xl hover:bg-cyber-pink hover:border-cyber-pink hover:shadow-neon-pink transition-all">
                     <i class="fab fa-github"></i>
                 </a>
-                <a href="https://linkedin.com/in/krishnathorat" target="_blank" class="social-icon">
+                <a href="https://linkedin.com/in/krishnathorat"
+                    class="w-16 h-16 clip-cyber bg-cyber-gray text-white border border-cyber-cyan flex items-center justify-center text-2xl hover:bg-cyber-cyan hover:text-black hover:shadow-neon-cyan transition-all">
                     <i class="fab fa-linkedin"></i>
                 </a>
-                <a href="mailto:krishnathorat007@gmail.com" class="social-icon">
+                <a href="mailto:krishnathorat007@gmail.com"
+                    class="w-16 h-16 clip-cyber bg-cyber-gray text-white border border-cyber-cyan flex items-center justify-center text-2xl hover:bg-cyber-green hover:text-black transition-all">
                     <i class="fas fa-envelope"></i>
                 </a>
             </div>
-            <p class="copyright">© 2025 KRISHNA_THORAT.EXE // ALL_SYSTEMS_OPERATIONAL // CONNECTED_TO_GRID</p>
-        </footer>
-    </div>
 
+            <div
+                class="flex flex-col md:flex-row justify-between items-center border-t border-gray-800 pt-8 text-sm font-mono text-gray-500">
+                <p>&copy; 2025 Krishna Thorat. Pune, IN. <span class="text-cyber-green">SYS.VER.2.0</span></p>
+                <p>Designed with <span class="text-cyber-pink">CODE</span> & Cyberpunk Aesthetics</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            offset: 50,
+            once: true,
+            easing: 'ease-in-out-quad'
+        });
+
+        // Loader Logic
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.style.transform = 'translateY(-100%)';
+            }, 1000); // Slight delay for dramatic effect
+        });
+
+        // Custom Cursor Logic (Reticle Style)
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorReticle = document.querySelector('.cursor-reticle');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            // Dot follows immediately
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            // Reticle follows with delay via CSS transition
+            cursorReticle.style.left = `${posX}px`;
+            cursorReticle.style.top = `${posY}px`;
+
+            // Hover effect detection
+            const hoveredElement = document.elementFromPoint(posX, posY);
+            if (hoveredElement && (hoveredElement.tagName === 'A' || hoveredElement.tagName === 'BUTTON' || hoveredElement.closest('a'))) {
+                cursorReticle.style.width = '40px';
+                cursorReticle.style.height = '40px';
+                cursorReticle.style.borderColor = '#ff003c';
+                cursorReticle.style.transform = 'translate(-50%, -50%) rotate(0deg)';
+            } else {
+                cursorReticle.style.width = '20px';
+                cursorReticle.style.height = '20px';
+                cursorReticle.style.borderColor = '#00f3ff';
+                cursorReticle.style.transform = 'translate(-50%, -50%) rotate(45deg)';
+            }
+        });
+    </script>
     <script src="assets/js/template-switcher.js"></script>
 </body>
+
 </html>
