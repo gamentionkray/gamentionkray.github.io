@@ -759,6 +759,96 @@
                     justify-content: center;
                     color: #F5F5DC;
                 `
+            },
+            terminal: {
+                button: `
+                    position: fixed;
+                    bottom: 30px;
+                    right: 30px;
+                    width: 60px;
+                    height: 60px;
+                    background: #000000;
+                    border: 2px solid #00ff00;
+                    cursor: pointer;
+                    z-index: 9998;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 24px;
+                    color: #00ff00;
+                    font-family: 'Courier New', monospace;
+                    box-shadow: 4px 4px 0px #003300;
+                    transition: all 0.1s steps(2);
+                `,
+                buttonHover: `
+                    transform: translate(2px, 2px);
+                    box-shadow: 2px 2px 0px #003300;
+                    background: #001100;
+                `,
+                modal: `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: #000000;
+                    border: 2px solid #00ff00;
+                    padding: 40px;
+                    z-index: 9999;
+                    max-width: 500px;
+                    width: 90%;
+                    box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+                `,
+                overlay: `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 20, 0, 0.9);
+                    z-index: 9998;
+                    background-image: linear-gradient(rgba(0, 255, 0, 0.1) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0, 255, 0, 0.1) 1px, transparent 1px);
+                    background-size: 20px 20px;
+                `,
+                title: `
+                    font-family: 'Courier New', monospace;
+                    font-size: 28px;
+                    font-weight: bold;
+                    margin-bottom: 30px;
+                    color: #00ff00;
+                    text-transform: uppercase;
+                    text-shadow: 0 0 5px #00ff00;
+                `,
+                templateButton: `
+                    display: block;
+                    width: 100%;
+                    padding: 15px;
+                    margin-bottom: 10px;
+                    background: #000000;
+                    border: 1px solid #00ff00;
+                    font-family: 'Courier New', monospace;
+                    font-size: 16px;
+                    cursor: pointer;
+                    transition: all 0.2s;
+                    text-align: left;
+                    color: #00ff00;
+                `,
+                closeButton: `
+                    position: absolute;
+                    top: 15px;
+                    right: 15px;
+                    width: 30px;
+                    height: 30px;
+                    background: #000000;
+                    border: 1px solid #00ff00;
+                    cursor: pointer;
+                    font-size: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #00ff00;
+                    font-family: monospace;
+                `
             }
         };
 
@@ -783,6 +873,13 @@
                     button.style[prop.trim()] = value.trim();
                 }
             });
+
+            // Additional hover logic for specific themes
+            if (currentTemplate === 'terminal') {
+                button.style.background = '#00ff00';
+                button.style.color = '#000000';
+                button.style.boxShadow = 'none';
+            }
         });
 
         button.addEventListener('mouseleave', function() {
@@ -853,6 +950,11 @@
                     btn.style.color = '#F5F5DC';
                     btn.style.borderColor = '#654321';
                     btn.style.boxShadow = '3px 3px 0 rgba(0,0,0,0.2)';
+                } else if (currentTemplate === 'terminal') {
+                    btn.style.background = '#00ff00';
+                    btn.style.color = '#000000';
+                    btn.style.fontWeight = 'bold';
+                    btn.innerHTML = '> ' + template.name;
                 }
             }
 
@@ -883,6 +985,9 @@
                     btn.style.background = '#D2B48C';
                     btn.style.transform = 'translate(2px, 2px)';
                     btn.style.boxShadow = '2px 2px 0 rgba(0,0,0,0.1)';
+                } else if (currentTemplate === 'terminal') {
+                    btn.style.background = '#003300';
+                    btn.style.borderLeft = '10px solid #00ff00';
                 }
             });
 
@@ -914,6 +1019,11 @@
                         btn.style.color = '#F5F5DC';
                         btn.style.borderColor = '#654321';
                         btn.style.boxShadow = '3px 3px 0 rgba(0,0,0,0.2)';
+                    } else if (currentTemplate === 'terminal') {
+                        btn.style.background = '#00ff00';
+                        btn.style.color = '#000000';
+                        btn.style.fontWeight = 'bold';
+                        btn.innerHTML = '> ' + template.name;
                     }
                 }
             });
