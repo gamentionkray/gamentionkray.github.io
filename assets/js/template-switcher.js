@@ -13,45 +13,58 @@
 
     // --- 1. Configuration & State ---
 
-    let templates = [
-        { name: 'Minimal', file: 'index.html', desc: 'Less is more. Clean lines and whitespace.', palette: ['#000000', '#FFFFFF', '#E0E0E0'] },
-        { name: 'Neubrutalism', file: 'neubrutalism.html', desc: 'Bold typography, high contrast, hard shadows.', palette: ['#FFE800', '#121212', '#FFFFFF'] },
-        { name: 'Maximalist', file: 'maximalist.html', desc: 'Chaos, energy, and sensory overload.', palette: ['#CCFF00', '#B026FF', '#00F0FF'] },
-        { name: 'Skeuomorphic', file: 'skeuomorphic.html', desc: 'Real-world textures, depth, and tactility.', palette: ['#3a7bd5', '#2c3e50', '#ecf0f1'] },
-        { name: 'Aero', file: 'aero.html', desc: 'Glassmorphism, blur, and glossy surfaces.', palette: ['#00d2ff', 'rgba(255,255,255,0.5)', '#3a7bd5'] },
-        { name: 'Swiss', file: 'swiss.html', desc: 'Grid systems, asymmetry, and Helvetica.', palette: ['#FF3000', '#000000', '#FFFFFF'] },
-        { name: 'Cyberpunk', file: 'cyberpunk.html', desc: 'High tech, low life. Neon and glitches.', palette: ['#00ffff', '#ff00ff', '#14141f'] },
-        { name: 'Retro', file: 'retro.html', desc: 'Nostalgic warmth, beige tones, and serifs.', palette: ['#D2691E', '#F5F5DC', '#654321'] },
-        { name: 'Terminal', file: 'terminal.html', desc: 'Command line interface. Pure data.', palette: ['#00ff00', '#000000', '#003300'] },
-        { name: 'Vaporwave', file: 'vaporwave.html', desc: 'Retro-futuristic aesthetics with neon colors.', palette: ['#ff2a6d', '#05d9e8', '#7700a6'] },
-        { name: 'Art Deco', file: 'artdeco.html', desc: 'Elegant 1920s luxury and geometric patterns.', palette: ['#D4AF37', '#050505', '#F9F1D0'] },
-        { name: 'Holographic', file: 'holographic.html', desc: 'Futuristic glass morphism and iridescence.', palette: ['#ff0080', '#40e0d0', '#ffffff'] },
-        { name: 'Pixel Art', file: 'pixelart.html', desc: '8-bit retro gaming nostalgia.', palette: ['#4aff4d', '#ff4a4a', '#ffee00'] },
-        { name: 'Chalkboard', file: 'chalkboard.html', desc: 'Hand-drawn chalk on blackboard aesthetic.', palette: ['#ffffff', '#2c2c2c', '#ffeb3b'] },
-        { name: 'Claymorphism', file: 'claymorphism.html', desc: 'Soft 3D clay-like UI elements.', palette: ['#ff6b6b', '#4ecdc4', '#f7fff7'] },
-        { name: 'Corporate', file: 'corporate.html', desc: 'Professional business aesthetic.', palette: ['#1e3a8a', '#ffffff', '#f3f4f6'] },
-        { name: 'Industrial', file: 'industrial.html', desc: 'Raw materials and utilitarian design.', palette: ['#ff6b35', '#004e89', '#1a1a1d'] },
-        { name: 'Isometric', file: 'isometric.html', desc: '3D isometric perspective design.', palette: ['#6c5ce7', '#fd79a8', '#fdcb6e'] },
-        { name: 'Newspaper', file: 'newspaper.html', desc: 'Classic print journalism layout.', palette: ['#000000', '#ffffff', '#d4d4d4'] },
-        { name: 'Ukiyo-e', file: 'ukiyoe.html', desc: 'Japanese woodblock print aesthetics.', palette: ['#d32f2f', '#1976d2', '#fbc02d'] },
-        { name: 'Scientific', file: 'scientific.html', desc: 'Academic research paper styling.', palette: ['#1565c0', '#ffffff', '#e0e0e0'] },
-        { name: 'Dashboard', file: 'dashboard.html', desc: 'Data visualization and metrics.', palette: ['#00bcd4', '#ff5722', '#ffffff'] },
-        { name: 'Bento Box', file: 'bentobox.html', desc: 'Japanese grid-based card layout.', palette: ['#ff6b6b', '#4ecdc4', '#ffffff'] },
-        { name: 'Risograph', file: 'risograph.html', desc: 'Vintage print texture and color.', palette: ['#ff6b6b', '#feca57', '#48dbfb'] },
-        { name: 'Origami', file: 'origami.html', desc: 'Folded paper geometric design.', palette: ['#e91e63', '#00bcd4', '#ffffff'] },
-        { name: 'Bauhaus', file: 'bauhaus.html', desc: 'Geometric modernist German design.', palette: ['#ff0000', '#ffeb00', '#0066cc'] },
-        { name: 'Film Grain', file: 'filmgrain.html', desc: 'Vintage analog photography feel.', palette: ['#f5f5dc', '#8b4513', '#2c2c2c'] },
-        { name: 'Minecraft', file: 'minecraft.html', desc: 'Blocky voxel game aesthetic.', palette: ['#8bc34a', '#795548', '#00bcd4'] },
-        { name: 'RPG', file: 'rpg.html', desc: 'Fantasy role-playing game interface.', palette: ['#d4af37', '#8b0000', '#2c1810'] },
-        { name: 'Desert', file: 'desert.html', desc: 'Warm sandy dunes and earthy tones.', palette: ['#f4a460', '#deb887', '#8b4513'] },
-        { name: 'Nordic', file: 'nordic.html', desc: 'Scandinavian minimalism and nature.', palette: ['#2e5266', '#d6e4e5', '#497174'] },
-        { name: 'Dota 2', file: 'dota2.html', desc: 'Epic MOBA game fantasy theme.', palette: ['#c41e3a', '#00758f', '#1a1a1a'] },
-        { name: 'Underwater', file: 'underwater.html', desc: 'Deep ocean aquatic atmosphere.', palette: ['#006994', '#00d4ff', '#002b49'] },
-        { name: 'Cosmic', file: 'cosmic.html', desc: 'Outer space and galaxies.', palette: ['#6a0dad', '#00ffff', '#0a0a0a'] },
-        { name: 'Neon Noir', file: 'neonnoir.html', desc: 'Dark cyberpunk crime aesthetics.', palette: ['#ff006e', '#8338ec', '#0a0a0a'] },
-        { name: 'Dieselpunk', file: 'dieselpunk.html', desc: 'Retro-futuristic diesel-powered tech.', palette: ['#8b4513', '#ff8c00', '#2f4f4f'] },
-        { name: 'Weathered', file: 'weathered.html', desc: 'Aged and distressed vintage look.', palette: ['#a0826d', '#7a6a5a', '#f5f5dc'] }
-    ];
+    // Device Detection
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+
+    let templates;
+
+    if (isMobile) {
+        // Mobile-only view
+        templates = [
+            { name: 'Mobile App', file: 'mobile.html', desc: 'Optimized app-like interface for touch devices.', palette: ['#ffffff', '#000000', '#3b82f6'] }
+        ];
+    } else {
+        // Desktop views (Exclude Mobile)
+        templates = [
+            { name: 'Minimal', file: 'index.html', desc: 'Less is more. Clean lines and whitespace.', palette: ['#000000', '#FFFFFF', '#E0E0E0'] },
+            { name: 'Neubrutalism', file: 'neubrutalism.html', desc: 'Bold typography, high contrast, hard shadows.', palette: ['#FFE800', '#121212', '#FFFFFF'] },
+            { name: 'Maximalist', file: 'maximalist.html', desc: 'Chaos, energy, and sensory overload.', palette: ['#CCFF00', '#B026FF', '#00F0FF'] },
+            { name: 'Skeuomorphic', file: 'skeuomorphic.html', desc: 'Real-world textures, depth, and tactility.', palette: ['#3a7bd5', '#2c3e50', '#ecf0f1'] },
+            { name: 'Aero', file: 'aero.html', desc: 'Glassmorphism, blur, and glossy surfaces.', palette: ['#00d2ff', 'rgba(255,255,255,0.5)', '#3a7bd5'] },
+            { name: 'Swiss', file: 'swiss.html', desc: 'Grid systems, asymmetry, and Helvetica.', palette: ['#FF3000', '#000000', '#FFFFFF'] },
+            { name: 'Cyberpunk', file: 'cyberpunk.html', desc: 'High tech, low life. Neon and glitches.', palette: ['#00ffff', '#ff00ff', '#14141f'] },
+            { name: 'Retro', file: 'retro.html', desc: 'Nostalgic warmth, beige tones, and serifs.', palette: ['#D2691E', '#F5F5DC', '#654321'] },
+            { name: 'Terminal', file: 'terminal.html', desc: 'Command line interface. Pure data.', palette: ['#00ff00', '#000000', '#003300'] },
+            { name: 'Vaporwave', file: 'vaporwave.html', desc: 'Retro-futuristic aesthetics with neon colors.', palette: ['#ff2a6d', '#05d9e8', '#7700a6'] },
+            { name: 'Art Deco', file: 'artdeco.html', desc: 'Elegant 1920s luxury and geometric patterns.', palette: ['#D4AF37', '#050505', '#F9F1D0'] },
+            { name: 'Holographic', file: 'holographic.html', desc: 'Futuristic glass morphism and iridescence.', palette: ['#ff0080', '#40e0d0', '#ffffff'] },
+            { name: 'Pixel Art', file: 'pixelart.html', desc: '8-bit retro gaming nostalgia.', palette: ['#4aff4d', '#ff4a4a', '#ffee00'] },
+            { name: 'Chalkboard', file: 'chalkboard.html', desc: 'Hand-drawn chalk on blackboard aesthetic.', palette: ['#ffffff', '#2c2c2c', '#ffeb3b'] },
+            { name: 'Claymorphism', file: 'claymorphism.html', desc: 'Soft 3D clay-like UI elements.', palette: ['#ff6b6b', '#4ecdc4', '#f7fff7'] },
+            { name: 'Corporate', file: 'corporate.html', desc: 'Professional business aesthetic.', palette: ['#1e3a8a', '#ffffff', '#f3f4f6'] },
+            { name: 'Industrial', file: 'industrial.html', desc: 'Raw materials and utilitarian design.', palette: ['#ff6b35', '#004e89', '#1a1a1d'] },
+            { name: 'Isometric', file: 'isometric.html', desc: '3D isometric perspective design.', palette: ['#6c5ce7', '#fd79a8', '#fdcb6e'] },
+            { name: 'Newspaper', file: 'newspaper.html', desc: 'Classic print journalism layout.', palette: ['#000000', '#ffffff', '#d4d4d4'] },
+            { name: 'Ukiyo-e', file: 'ukiyoe.html', desc: 'Japanese woodblock print aesthetics.', palette: ['#d32f2f', '#1976d2', '#fbc02d'] },
+            { name: 'Scientific', file: 'scientific.html', desc: 'Academic research paper styling.', palette: ['#1565c0', '#ffffff', '#e0e0e0'] },
+            { name: 'Dashboard', file: 'dashboard.html', desc: 'Data visualization and metrics.', palette: ['#00bcd4', '#ff5722', '#ffffff'] },
+            { name: 'Bento Box', file: 'bentobox.html', desc: 'Japanese grid-based card layout.', palette: ['#ff6b6b', '#4ecdc4', '#ffffff'] },
+            { name: 'Risograph', file: 'risograph.html', desc: 'Vintage print texture and color.', palette: ['#ff6b6b', '#feca57', '#48dbfb'] },
+            { name: 'Origami', file: 'origami.html', desc: 'Folded paper geometric design.', palette: ['#e91e63', '#00bcd4', '#ffffff'] },
+            { name: 'Bauhaus', file: 'bauhaus.html', desc: 'Geometric modernist German design.', palette: ['#ff0000', '#ffeb00', '#0066cc'] },
+            { name: 'Film Grain', file: 'filmgrain.html', desc: 'Vintage analog photography feel.', palette: ['#f5f5dc', '#8b4513', '#2c2c2c'] },
+            { name: 'Minecraft', file: 'minecraft.html', desc: 'Blocky voxel game aesthetic.', palette: ['#8bc34a', '#795548', '#00bcd4'] },
+            { name: 'RPG', file: 'rpg.html', desc: 'Fantasy role-playing game interface.', palette: ['#d4af37', '#8b0000', '#2c1810'] },
+            { name: 'Desert', file: 'desert.html', desc: 'Warm sandy dunes and earthy tones.', palette: ['#f4a460', '#deb887', '#8b4513'] },
+            { name: 'Nordic', file: 'nordic.html', desc: 'Scandinavian minimalism and nature.', palette: ['#2e5266', '#d6e4e5', '#497174'] },
+            { name: 'Dota 2', file: 'dota2.html', desc: 'Epic MOBA game fantasy theme.', palette: ['#c41e3a', '#00758f', '#1a1a1a'] },
+            { name: 'Underwater', file: 'underwater.html', desc: 'Deep ocean aquatic atmosphere.', palette: ['#006994', '#00d4ff', '#002b49'] },
+            { name: 'Cosmic', file: 'cosmic.html', desc: 'Outer space and galaxies.', palette: ['#6a0dad', '#00ffff', '#0a0a0a'] },
+            { name: 'Neon Noir', file: 'neonnoir.html', desc: 'Dark cyberpunk crime aesthetics.', palette: ['#ff006e', '#8338ec', '#0a0a0a'] },
+            { name: 'Dieselpunk', file: 'dieselpunk.html', desc: 'Retro-futuristic diesel-powered tech.', palette: ['#8b4513', '#ff8c00', '#2f4f4f'] },
+            { name: 'Weathered', file: 'weathered.html', desc: 'Aged and distressed vintage look.', palette: ['#a0826d', '#7a6a5a', '#f5f5dc'] }
+        ];
+    }
 
     // Konami Code Sequence: Up, Up, Down, Down, Left, Right, Left, Right, B, A
     const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
@@ -153,6 +166,13 @@
         `;
 
         const themeSpecifics = {
+            'mobile app': `
+                #ts-btn { background: #fff; color: #000; border: 1px solid #eee; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+                #ts-modal { background: #fff; border-radius: 12px; }
+                #ts-info { background: #f5f5f5; }
+                .ts-opt { background: #fff; border: 1px solid #eee; border-radius: 8px; }
+                .ts-opt:hover { border-color: #3b82f6; }
+            `,
             minimal: `
                 #ts-btn { background: #fff; color: #000; border: 1px solid #eee; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
                 #ts-modal { background: #fff; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
