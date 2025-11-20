@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishna Thorat | Full Stack AI Engineer</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Inter"', 'Helvetica', 'Arial', 'sans-serif'],
+                    },
+                    colors: {
+                        swiss: {
+                            red: '#FF3000', /* Slightly more vibrant Swiss Red */
+                            black: '#000000',
+                            white: '#FFFFFF',
+                            offwhite: '#F2F2F2',
+                        }
+                    },
+                    spacing: {
+                        'grid-gap': '20px',
+                    },
+                    borderWidth: {
+                        '1': '1px',
+                        '3': '3px',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #F2F2F2; /* Classic Swiss gray background for paper feel */
+        }
+        
+        /* The Swiss Grid Overlay - for visual debugging or effect */
+        .swiss-layout {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1rem;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Typographic Adjustments */
+        h1, h2, h3, h4, h5, h6 {
+            letter-spacing: -0.04em;
+            line-height: 0.9;
+        }
+
+        .text-justify-swiss {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        /* Marquee */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            background: #000;
+            color: #fff;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Removing scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F2F2F2; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #000; 
+        }
+        
+        .hover-underline-animation {
+            position: relative;
+        }
+        .hover-underline-animation::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #FF3000;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+        .hover-underline-animation:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+    </style>
+</head>
+<body class="text-swiss-black font-sans selection:bg-swiss-red selection:text-white">
+
+    <!-- Navigation: Top Bar, strictly aligned -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-[#F2F2F2] border-b border-black">
+        <div class="swiss-layout h-16 flex items-center">
+            <div class="col-span-3 font-bold text-lg tracking-tighter flex items-center gap-2">
+                <div class="w-4 h-4 bg-swiss-red"></div>
+                KT.DEV
+            </div>
+            <div class="col-span-9 flex justify-end gap-8 text-sm font-bold uppercase tracking-wide">
+                <a href="#projects" class="hover:text-swiss-red transition-colors hidden md:block">Works</a>
+                <a href="#experience" class="hover:text-swiss-red transition-colors hidden md:block">Log</a>
+                <a href="mailto:krishnathorat007@gmail.com" class="hover:text-swiss-red transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Wrapper -->
+    <main class="pt-16">
+
+        <!-- HERO SECTION: Asymmetrical Grid -->
+        <section class="min-h-screen border-b border-black bg-[#F2F2F2] relative overflow-hidden">
+            <div class="swiss-layout h-full pt-12 md:pt-24 pb-12">
+                
+                <!-- Left Column: Typography -->
+                <div class="col-span-12 md:col-span-8 flex flex-col justify-between h-full min-h-[60vh]" data-aos="fade-right">
+                    <div>
+                        <p class="text-sm font-bold uppercase tracking-widest mb-4 text-swiss-red flex items-center gap-2">
+                            <span class="w-8 h-[2px] bg-swiss-red"></span>
+                            Full Stack AI Engineer
+                        </p>
+                        <h1 class="text-[15vw] md:text-[10rem] font-black uppercase leading-[0.75] tracking-tighter mb-8 break-words">
+                            Krishna<br>Thorat<span class="text-swiss-red">.</span>
+                        </h1>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-8 max-w-xl border-t border-black pt-6 mt-auto">
+                        <div>
+                            <h3 class="text-xs font-bold uppercase mb-2 text-gray-500">Discipline</h3>
+                            <p class="text-lg font-medium leading-tight">Engineering robust web systems & Agentic AI solutions.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xs font-bold uppercase mb-2 text-gray-500">Location</h3>
+                            <p class="text-lg font-medium leading-tight">Pune, India<br>[18.52° N, 73.85° E]</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Image/Visual -->
+                <div class="col-span-12 md:col-span-4 relative border-l border-black pl-0 md:pl-8 mt-8 md:mt-0 flex flex-col" data-aos="fade-left" data-aos-delay="200">
+                    <div class="flex-grow relative w-full h-[400px] md:h-auto bg-gray-300">
+                        <img src="assets/img/krishna-thorat.jpg" alt="Portrait" class="absolute inset-0 w-full h-full object-cover grayscale contrast-125 mix-blend-multiply">
+                        <div class="absolute top-4 right-4 w-24 h-24 bg-swiss-red text-white p-2 flex items-end justify-end">
+                            <span class="text-4xl font-black leading-none">5+</span>
+                            <span class="text-[10px] font-bold uppercase mb-1 ml-1">Yrs</span>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-black mt-4">
+                         <p class="text-xs font-mono uppercase text-right">System Architecture / Generative AI / Frontend</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- MARQUEE: Functional Separator -->
+        <div class="border-b border-black py-6 bg-swiss-black text-swiss-white">
+            <div class="marquee-container">
+                <div class="marquee-content text-4xl md:text-6xl font-black uppercase tracking-tighter">
+                    JavaScript — React — Node.js — Python — Generative AI — Langchain — RAG Systems — AWS — Azure — PHP — PostgreSQL — JavaScript — React — Node.js — Python — Generative AI — Langchain —
+                </div>
+            </div>
+        </div>
+
+        <!-- ARSENAL (SKILLS): Grid List Format -->
+        <section class="swiss-layout py-24 border-b border-black">
+            <div class="col-span-12 md:col-span-3">
+                <h2 class="text-2xl font-bold uppercase tracking-tighter mb-4 flex items-center gap-2">
+                    <span class="text-swiss-red text-sm">01</span> Arsenal
+                </h2>
+            </div>
+            
+            <div class="col-span-12 md:col-span-9 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
+                
+                <!-- Education Block -->
+                <div class="border-t border-black pt-4" data-aos="fade-up">
+                    <i class="fas fa-graduation-cap text-xl mb-4 text-swiss-red"></i>
+                    <h3 class="text-3xl font-bold leading-none mb-2">Master of<br>Computer Applications</h3>
+                    <p class="text-sm font-mono mt-4 text-gray-600">Vishwakarma Institute of Technology, Pune</p>
+                    <p class="text-sm font-mono text-gray-600">2020 — 2022</p>
+                </div>
+
+                <!-- Social Block -->
+                <a href="https://github.com/gamentionkray" class="border-t border-black pt-4 group cursor-pointer block" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fab fa-github text-xl mb-4 group-hover:text-swiss-red transition-colors"></i>
+                    <h3 class="text-3xl font-bold leading-none mb-2 group-hover:underline decoration-swiss-red underline-offset-4">Github<br>@gamentionkray</h3>
+                    <p class="text-sm font-mono mt-4 text-gray-600 group-hover:text-black">Open Source Contributions</p>
+                    <i class="fas fa-arrow-right opacity-0 group-hover:opacity-100 transition-opacity mt-2"></i>
+                </a>
+
+                <!-- Core Stack -->
+                <div class="border-t border-black pt-4" data-aos="fade-up">
+                    <h4 class="text-xs font-bold uppercase mb-4 text-gray-500">Core Stack</h4>
+                    <ul class="space-y-2 text-lg font-bold uppercase tracking-tight">
+                        <li class="flex justify-between border-b border-gray-300 pb-1">PHP <span>///</span></li>
+                        <li class="flex justify-between border-b border-gray-300 pb-1">Node.js <span>///</span></li>
+                        <li class="flex justify-between border-b border-gray-300 pb-1">React <span>///</span></li>
+                        <li class="flex justify-between border-b border-gray-300 pb-1">Angular <span>///</span></li>
+                        <li class="flex justify-between border-b border-gray-300 pb-1">Python <span>///</span></li>
+                    </ul>
+                </div>
+
+                <!-- AI Stack -->
+                <div class="border-t border-black pt-4" data-aos="fade-up" data-aos-delay="100">
+                    <h4 class="text-xs font-bold uppercase mb-4 text-gray-500">AI Engineering</h4>
+                    <ul class="space-y-2 text-lg font-bold uppercase tracking-tight">
+                        <li class="flex justify-between border-b border-gray-300 pb-1">Generative AI <span>///</span></li>
+                        <li class="flex justify-between border-b border-gray-300 pb-1">Agentic AI <span>///</span></li>
+                        <li class="flex justify-between border-b border-gray-300 pb-1">RAG Systems <span>///</span></li>
+                        <li class="flex justify-between border-b border-gray-300 pb-1">LangChain <span>///</span></li>
+                        <li class="flex justify-between border-b border-gray-300 pb-1">Azure OpenAI <span>///</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- XP LOG: Table Structure -->
+        <section id="experience" class="border-b border-black bg-white">
+            <div class="swiss-layout py-24">
+                <div class="col-span-12 md:col-span-3">
+                    <div class="sticky top-24">
+                        <h2 class="text-2xl font-bold uppercase tracking-tighter mb-4 flex items-center gap-2">
+                            <span class="text-swiss-red text-sm">02</span> XP Log
+                        </h2>
+                        <a href="resume.pdf" download class="text-sm font-bold uppercase hover:bg-swiss-red hover:text-white inline-block px-4 py-2 border border-black transition-colors mt-4">
+                            Download Resume
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-span-12 md:col-span-9">
+                    
+                    <!-- Job 1 -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 border-t border-black py-12 group hover:bg-gray-50 transition-colors" data-aos="fade-up">
+                        <div class="md:col-span-3 font-mono text-sm text-gray-500 pt-1">
+                            Dec 2024 — Present
+                        </div>
+                        <div class="md:col-span-9">
+                            <h3 class="text-4xl font-black uppercase leading-[0.85] mb-2 group-hover:text-swiss-red transition-colors">Software Developer</h3>
+                            <p class="text-sm font-bold uppercase mb-6">Ergabite Tech Solutions (Intellify Client)</p>
+                            <div class="grid md:grid-cols-2 gap-6 text-sm leading-relaxed">
+                                <p>Developed features for "Intellify Migration Wizard" (Teradata/Postgres) and engineered "In-Parking" alerting system using Azure App Functions.</p>
+                                <p>Led "Infovault" multi-agent AI platform using Langchain & Azure OpenAI. CI/CD implementation on Azure.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Job 2 -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 border-t border-black py-12 group hover:bg-gray-50 transition-colors" data-aos="fade-up">
+                        <div class="md:col-span-3 font-mono text-sm text-gray-500 pt-1">
+                            Jul 2024 — Dec 2024
+                        </div>
+                        <div class="md:col-span-9">
+                            <h3 class="text-4xl font-black uppercase leading-[0.85] mb-2 group-hover:text-swiss-red transition-colors">Senior Web Developer</h3>
+                            <p class="text-sm font-bold uppercase mb-6">Internship Studio</p>
+                            <div class="grid md:grid-cols-2 gap-6 text-sm leading-relaxed">
+                                <p>Spearheaded hiring portal development and architected solutions on GCP (Vertex AI) and AWS (Lambda).</p>
+                                <p>Full-stack development utilizing React, Node.js, PHP, and Flask frameworks.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Job 3 -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 border-t border-black py-12 group hover:bg-gray-50 transition-colors" data-aos="fade-up">
+                        <div class="md:col-span-3 font-mono text-sm text-gray-500 pt-1">
+                            Aug 2022 — Jul 2024
+                        </div>
+                        <div class="md:col-span-9">
+                            <h3 class="text-4xl font-black uppercase leading-[0.85] mb-2 group-hover:text-swiss-red transition-colors">System Engineer</h3>
+                            <p class="text-sm font-bold uppercase mb-6">Infosys Ltd.</p>
+                            <div class="grid md:grid-cols-2 gap-6 text-sm leading-relaxed">
+                                <p>Dynamic app development with Angular, Node.js, PostgreSQL. Implemented WCAG standards and WebSockets.</p>
+                                <p>Managed Salesforce integration via Cortex framework and optimized real-time communication using WebRTC.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SELECTED WORKS: Modular Grid -->
+        <section id="projects" class="swiss-layout py-24">
+            <div class="col-span-12">
+                 <h2 class="text-[8vw] font-black uppercase leading-none mb-12 border-b border-black pb-4 text-right">
+                    Selected<br>Works
+                </h2>
+            </div>
+
+            <!-- Project 1 -->
+            <div class="col-span-12 md:col-span-6 border-r md:border-black pr-0 md:pr-8 mb-12 md:mb-0" data-aos="fade-up">
+                <div class="aspect-square bg-black w-full mb-6 relative group overflow-hidden">
+                    <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23333\' fill-opacity=\'0.4\' fill-rule=\'evenodd\'%3E%3Cpath d=\'M0 40L40 0H20L0 20M40 40V20L20 40\'/%3E%3C/g%3E%3C/svg%3E')] opacity-50"></div>
+                    <div class="absolute inset-0 flex flex-col justify-center items-center text-white p-8">
+                        <i class="fas fa-brain text-8xl mb-4 group-hover:scale-110 transition-transform duration-500 text-swiss-red mix-blend-screen"></i>
+                    </div>
+                    <div class="absolute top-0 left-0 bg-swiss-red text-white px-3 py-1 text-sm font-bold">CASE 01</div>
+                </div>
+                <h3 class="text-4xl font-bold uppercase leading-none mb-2">HireSense AI</h3>
+                <p class="text-sm font-mono text-gray-500 mb-4">Pydantic AI / FastAPI / WebSockets</p>
+                <p class="text-base leading-relaxed max-w-md text-justify-swiss">
+                    AI-powered career guidance platform with multi-agent orchestration using Pydantic AI and Gemini 2.0.
+                </p>
+                <a href="#" class="inline-block mt-6 text-sm font-bold uppercase hover-underline-animation">Read Case Study <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="col-span-12 md:col-span-6 pl-0 md:pl-8 pt-12 md:pt-32" data-aos="fade-up" data-aos-delay="100">
+                 <div class="aspect-square bg-[#0033CC] w-full mb-6 relative group overflow-hidden">
+                    <div class="absolute inset-0 flex flex-col justify-center items-center text-white p-8">
+                        <i class="fas fa-database text-8xl mb-4 group-hover:scale-110 transition-transform duration-500 text-white mix-blend-soft-light"></i>
+                    </div>
+                    <div class="absolute top-0 left-0 bg-black text-white px-3 py-1 text-sm font-bold">CASE 02</div>
+                </div>
+                <h3 class="text-4xl font-bold uppercase leading-none mb-2">Intellify Insights</h3>
+                <p class="text-sm font-mono text-gray-500 mb-4">PySpark / Azure / Power BI</p>
+                <p class="text-base leading-relaxed max-w-md text-justify-swiss">
+                    Data Analytics Platform. Transfer SSIS packages and Power BI models between MSSQL, Teradata, and Postgres with PySpark job management.
+                </p>
+                 <a href="#" class="inline-block mt-6 text-sm font-bold uppercase hover-underline-animation">Read Case Study <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+            </div>
+
+        </section>
+
+        <!-- FOOTER: Massive Typography -->
+        <footer class="bg-swiss-black text-swiss-white pt-24 pb-12">
+            <div class="swiss-layout">
+                <div class="col-span-12 border-b border-white/20 pb-12 mb-12">
+                    <h2 class="text-[12vw] font-black uppercase leading-[0.8] tracking-tighter text-center md:text-left">
+                        Let's Work<br>Together<span class="text-swiss-red">.</span>
+                    </h2>
+                </div>
+                
+                <div class="col-span-12 md:col-span-6">
+                    <p class="text-sm text-gray-400 uppercase tracking-widest mb-4">Connect</p>
+                    <div class="flex flex-col items-start gap-4 text-2xl font-bold uppercase">
+                        <a href="mailto:krishnathorat007@gmail.com" class="hover:text-swiss-red transition-colors">Email <i class="fas fa-arrow-right -rotate-45 text-sm ml-2"></i></a>
+                        <a href="https://linkedin.com/in/krishnathorat" class="hover:text-swiss-red transition-colors">LinkedIn <i class="fas fa-arrow-right -rotate-45 text-sm ml-2"></i></a>
+                        <a href="https://github.com/gamentionkray" class="hover:text-swiss-red transition-colors">GitHub <i class="fas fa-arrow-right -rotate-45 text-sm ml-2"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-span-12 md:col-span-6 flex flex-col justify-end items-start md:items-end mt-12 md:mt-0">
+                    <p class="text-sm font-mono text-gray-500 text-right">
+                        &copy; 2025 Krishna Thorat.<br>
+                        Designed with strict International Style.<br>
+                        Pune, India.
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            offset: 30,
+            once: true,
+            easing: 'cubic-bezier(0.25, 1, 0.5, 1)'
+        });
+    </script>
+    <script src="assets/js/template-switcher.js"></script>
+</body>
+</html>
