@@ -6,6 +6,7 @@
  * 3. Keyboard Shortcuts (Ctrl+K, Esc)
  * 4. Dynamic Meta/Titles
  * 5. Hidden Konami Code Unlockable
+ * 6. Device-based Auto-Redirection
  */
 
 (function () {
@@ -16,10 +17,29 @@
     // Device Detection
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
 
+    // Current Page Detection
+    const path = window.location.pathname;
+    // Handle root path (empty filename) or index.html
+    const filename = path.substring(path.lastIndexOf('/') + 1);
+    const basePath = path.substring(0, path.lastIndexOf('/') + 1);
+
+    // --- Redirection Logic ---
+    // 1. If Mobile User is NOT on mobile.html -> Redirect to mobile.html
+    if (isMobile && filename !== 'mobile.html') {
+        window.location.href = basePath + 'mobile.html';
+        return; // Stop script execution to allow redirect
+    }
+
+    // 2. If Desktop User IS on mobile.html -> Redirect to index.html
+    else if (!isMobile && filename === 'mobile.html') {
+        window.location.href = basePath + 'index.html';
+        return; // Stop script execution to allow redirect
+    }
+
     let templates;
 
     if (isMobile) {
-        // Mobile-only view
+        // Mobile-only view (Limit switcher options)
         templates = [
             { name: 'Mobile App', file: 'mobile.html', desc: 'Optimized app-like interface for touch devices.', palette: ['#ffffff', '#000000', '#3b82f6'] }
         ];
