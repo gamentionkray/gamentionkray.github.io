@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishna Thorat - Vintage Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Special+Elite&family=Abril+Fatface&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --burnt-orange: #D2691E;
+            --mustard: #D4A017;
+            --olive: #708238;
+            --brown: #654321;
+            --cream: #F5F5DC;
+            --tan: #D2B48C;
+            --rust: #B7410E;
+            --sage: #9CAF88;
+            --vintage-black: #2C2416;
+        }
+
+        body {
+            font-family: 'Courier Prime', 'Courier New', monospace;
+            background: var(--cream);
+            color: var(--vintage-black);
+            line-height: 1.8;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Paper Texture Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" /></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.03"/></svg>');
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 32px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Vintage Stamp Header */
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+            padding: 60px 40px;
+            background: linear-gradient(135deg, var(--tan) 0%, var(--cream) 100%);
+            border: 8px double var(--brown);
+            box-shadow:
+                inset 0 0 0 4px var(--cream),
+                0 8px 20px rgba(0,0,0,0.15);
+            position: relative;
+        }
+
+        /* Corner Ornaments */
+        header::before,
+        header::after {
+            content: '❋';
+            position: absolute;
+            font-size: 32px;
+            color: var(--burnt-orange);
+            opacity: 0.6;
+        }
+
+        header::before {
+            top: 20px;
+            left: 20px;
+        }
+
+        header::after {
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .vintage-stamp {
+            display: inline-block;
+            background: var(--burnt-orange);
+            color: var(--cream);
+            font-family: 'Special Elite', cursive;
+            font-size: 12px;
+            padding: 8px 16px;
+            border: 2px dashed var(--cream);
+            border-radius: 4px;
+            transform: rotate(-3deg);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        h1 {
+            font-family: 'Abril Fatface', cursive;
+            font-size: clamp(48px, 8vw, 72px);
+            color: var(--brown);
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: var(--rust);
+            font-style: italic;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .subtitle::before,
+        .subtitle::after {
+            content: '•';
+            margin: 0 12px;
+            color: var(--burnt-orange);
+        }
+
+        .bio {
+            font-size: 16px;
+            line-height: 1.9;
+            color: var(--vintage-black);
+            max-width: 600px;
+            margin: 0 auto 30px;
+            text-align: left;
+            padding: 0 20px;
+        }
+
+        /* Typewriter Links */
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .retro-link {
+            font-family: 'Special Elite', cursive;
+            font-size: 13px;
+            color: var(--vintage-black);
+            text-decoration: none;
+            background: var(--cream);
+            padding: 10px 20px;
+            border: 2px solid var(--brown);
+            border-radius: 0;
+            box-shadow: 4px 4px 0 var(--brown);
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .retro-link:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--brown);
+            background: var(--tan);
+        }
+
+        /* Section Headers */
+        section {
+            margin-bottom: 80px;
+        }
+
+        .section-header {
+            font-family: 'Abril Fatface', cursive;
+            font-size: 42px;
+            color: var(--burnt-orange);
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--burnt-orange), transparent);
+        }
+
+        /* Polaroid Cards */
+        .polaroid-card {
+            background: white;
+            padding: 20px 20px 60px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1), 0 8px 16px rgba(0,0,0,0.1);
+            transform: rotate(-1deg);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .polaroid-card:nth-child(even) {
+            transform: rotate(1deg);
+        }
+
+        .polaroid-card:hover {
+            transform: rotate(0deg) translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15), 0 16px 32px rgba(0,0,0,0.15);
+        }
+
+        .polaroid-content {
+            background: var(--cream);
+            padding: 24px;
+            border: 1px solid var(--tan);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .job-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--brown);
+            margin-bottom: 6px;
+        }
+
+        .company {
+            font-family: 'Courier Prime', monospace;
+            font-size: 16px;
+            color: var(--rust);
+            font-weight: 700;
+        }
+
+        .date-tag {
+            font-family: 'Special Elite', cursive;
+            font-size: 11px;
+            background: var(--mustard);
+            color: var(--vintage-black);
+            padding: 6px 12px;
+            border: 1px dashed var(--brown);
+            white-space: nowrap;
+            letter-spacing: 1px;
+        }
+
+        /* Handwritten Notes */
+        .polaroid-note {
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+            right: 20px;
+            font-family: 'Courier Prime', monospace;
+            font-size: 13px;
+            color: var(--brown);
+            text-align: center;
+            font-style: italic;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            font-size: 15px;
+            color: var(--vintage-black);
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
+            line-height: 1.7;
+        }
+
+        ul li::before {
+            content: '▪';
+            position: absolute;
+            left: 0;
+            color: var(--burnt-orange);
+            font-size: 20px;
+        }
+
+        /* Vintage Tags */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tag {
+            font-family: 'Special Elite', cursive;
+            font-size: 11px;
+            background: var(--olive);
+            color: var(--cream);
+            padding: 6px 12px;
+            border: 1px solid var(--brown);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+        }
+
+        /* Project Cards - Postcard Style */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .postcard {
+            background: linear-gradient(135deg, #fff 0%, var(--cream) 100%);
+            border: 12px solid white;
+            box-shadow:
+                0 0 0 2px var(--brown),
+                0 8px 20px rgba(0,0,0,0.15);
+            padding: 30px;
+            position: relative;
+        }
+
+        .postcard::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border: 3px solid var(--rust);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+
+        .postcard::after {
+            content: 'AIRMAIL';
+            position: absolute;
+            top: 28px;
+            right: 28px;
+            font-family: 'Special Elite', cursive;
+            font-size: 9px;
+            color: var(--rust);
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .project-icon {
+            font-size: 48px;
+            color: var(--burnt-orange);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .project-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--brown);
+            margin-bottom: 8px;
+        }
+
+        .project-category {
+            font-family: 'Special Elite', cursive;
+            font-size: 11px;
+            color: var(--rust);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .project-description {
+            font-size: 15px;
+            color: var(--vintage-black);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* Dividers */
+        .ornamental-divider {
+            text-align: center;
+            margin: 60px 0;
+            font-size: 24px;
+            color: var(--burnt-orange);
+            opacity: 0.5;
+        }
+
+        /* Stats */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .stat-box {
+            background: var(--tan);
+            border: 4px double var(--brown);
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-family: 'Abril Fatface', cursive;
+            font-size: 48px;
+            color: var(--burnt-orange);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-family: 'Special Elite', cursive;
+            font-size: 12px;
+            color: var(--vintage-black);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 20px 40px;
+            border-top: 3px double var(--brown);
+            margin-top: 80px;
+        }
+
+        .footer-ornament {
+            font-size: 32px;
+            color: var(--burnt-orange);
+            margin-bottom: 20px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--cream);
+            border: 2px solid var(--brown);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--brown);
+            font-size: 20px;
+            transition: all 0.3s;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+        }
+
+        .social-icon:hover {
+            background: var(--burnt-orange);
+            color: var(--cream);
+            transform: translateY(-3px);
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.15);
+        }
+
+        .copyright {
+            font-family: 'Special Elite', cursive;
+            font-size: 12px;
+            color: var(--vintage-black);
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            header {
+                padding: 40px 24px;
+            }
+
+            h1 {
+                font-size: 42px;
+            }
+
+            .section-header {
+                font-size: 32px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-header {
+                flex-direction: column;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .retro-link {
+                width: 100%;
+                max-width: 250px;
+                text-align: center;
+            }
+        }
+
+        /* Vintage Film Grain Animation */
+        @keyframes grain {
+            0%, 100% { opacity: 0.03; }
+            50% { opacity: 0.05; }
+        }
+
+        body::before {
+            animation: grain 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="vintage-stamp">EST. 2022 • PUNE, INDIA</div>
+            <h1>Krishna Thorat</h1>
+            <p class="subtitle">Full Stack AI Engineer</p>
+            <p class="bio">
+                Seasoned craftsman in the art of digital construction and artificial intelligence systems.
+                Specialized in architecting elegant solutions that bridge the traditional and the modern.
+                Currently plying my trade at Ergabite Tech Solutions, where I build multi-agent platforms
+                with the precision of a master artisan.
+            </p>
+            <div class="contact-links">
+                <a href="mailto:krishnathorat007@gmail.com" class="retro-link">
+                    <i class="fas fa-envelope"></i> Correspondence
+                </a>
+                <a href="https://github.com/gamentionkray" target="_blank" class="retro-link">
+                    <i class="fab fa-github"></i> Portfolio
+                </a>
+                <a href="https://linkedin.com/in/krishnathorat" target="_blank" class="retro-link">
+                    <i class="fab fa-linkedin"></i> Professional
+                </a>
+            </div>
+        </header>
+
+        <!-- Stats -->
+        <section>
+            <div class="stats-row">
+                <div class="stat-box">
+                    <span class="stat-number">5+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">3</span>
+                    <span class="stat-label">Organizations</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">16+</span>
+                    <span class="stat-label">AI Agents</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">100</span>
+                    <span class="stat-label">Projects Delivered</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section>
+            <h2 class="section-header">Professional Journey</h2>
+
+            <div class="polaroid-card">
+                <div class="polaroid-content">
+                    <div class="card-header">
+                        <div>
+                            <div class="job-title">Software Developer</div>
+                            <div class="company">Ergabite Tech Solutions</div>
+                        </div>
+                        <div class="date-tag">DEC 2024 - PRESENT</div>
+                    </div>
+                    <ul>
+                        <li>Engineered the Intellify Migration Wizard, orchestrating seamless transitions between Teradata and Postgres database ecosystems</li>
+                        <li>Constructed real-time alerting infrastructure utilizing Azure App Functions for parking management systems</li>
+                        <li>Led the development of Infovault, a sophisticated multi-agent AI platform powered by LangChain and Azure OpenAI</li>
+                    </ul>
+                </div>
+                <div class="polaroid-note">Current Position • Building Tomorrow's Solutions</div>
+            </div>
+
+            <div class="polaroid-card">
+                <div class="polaroid-content">
+                    <div class="card-header">
+                        <div>
+                            <div class="job-title">Senior Web Developer</div>
+                            <div class="company">Internship Studio</div>
+                        </div>
+                        <div class="date-tag">JUL 2024 - DEC 2024</div>
+                    </div>
+                    <ul>
+                        <li>Spearheaded the complete lifecycle of hiring portal development from initial concept to production deployment</li>
+                        <li>Architected cloud solutions leveraging GCP Vertex AI and AWS Lambda for scalable operations</li>
+                        <li>Mastered full-stack development across React, Node.js, PHP, and Flask frameworks</li>
+                    </ul>
+                </div>
+                <div class="polaroid-note">Six Months of Innovation</div>
+            </div>
+
+            <div class="polaroid-card">
+                <div class="polaroid-content">
+                    <div class="card-header">
+                        <div>
+                            <div class="job-title">System Engineer</div>
+                            <div class="company">Infosys Ltd.</div>
+                        </div>
+                        <div class="date-tag">AUG 2022 - JUL 2024</div>
+                    </div>
+                    <ul>
+                        <li>Crafted enterprise-grade applications utilizing Angular, Node.js, and PostgreSQL</li>
+                        <li>Implemented WCAG accessibility standards and real-time communication via WebSockets</li>
+                        <li>Integrated Salesforce CRM through Cortex framework for seamless data synchronization</li>
+                    </ul>
+                </div>
+                <div class="polaroid-note">Foundation Years • Learning the Craft</div>
+            </div>
+        </section>
+
+        <div class="ornamental-divider">❋ ❋ ❋</div>
+
+        <!-- Projects -->
+        <section>
+            <h2 class="section-header">Featured Works</h2>
+
+            <div class="projects-grid">
+                <div class="postcard">
+                    <i class="fas fa-brain project-icon"></i>
+                    <div class="project-title">HireSense AI</div>
+                    <div class="project-category">Artificial Intelligence Platform</div>
+                    <p class="project-description">
+                        A sophisticated multi-agent career guidance system powered by Pydantic AI and Gemini 2.0 Flash.
+                        Features sixteen specialized agents providing personalized counseling, resume optimization,
+                        and interview preparation through real-time WebSocket communication channels.
+                    </p>
+                    <div class="tags">
+                        <span class="tag">Pydantic AI</span>
+                        <span class="tag">Gemini 2.0</span>
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">WebSockets</span>
+                        <span class="tag">Python</span>
+                    </div>
+                </div>
+
+                <div class="postcard">
+                    <i class="fas fa-database project-icon"></i>
+                    <div class="project-title">Intellify Insights</div>
+                    <div class="project-category">Data Analytics Platform</div>
+                    <p class="project-description">
+                        Enterprise-grade ETL platform enabling seamless transfer of SSIS packages and Power BI models
+                        across MSSQL, Teradata, and Postgres ecosystems. Features PySpark distributed processing
+                        for large-scale operations and automated model conversion.
+                    </p>
+                    <div class="tags">
+                        <span class="tag">PySpark</span>
+                        <span class="tag">Azure</span>
+                        <span class="tag">Power BI</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">ETL</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="ornamental-divider">❋ ❋ ❋</div>
+
+        <!-- Skills -->
+        <section>
+            <h2 class="section-header">Technical Arsenal</h2>
+
+            <div class="polaroid-card">
+                <div class="polaroid-content">
+                    <div class="job-title" style="margin-bottom: 20px;">Programming Languages & Frameworks</div>
+                    <div class="tags">
+                        <span class="tag">PHP</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">React</span>
+                        <span class="tag">Angular</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">TypeScript</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Flask</span>
+                        <span class="tag">FastAPI</span>
+                    </div>
+                </div>
+                <div class="polaroid-note">Core Competencies</div>
+            </div>
+
+            <div class="polaroid-card">
+                <div class="polaroid-content">
+                    <div class="job-title" style="margin-bottom: 20px;">Artificial Intelligence & Data</div>
+                    <div class="tags">
+                        <span class="tag">Generative AI</span>
+                        <span class="tag">LangChain</span>
+                        <span class="tag">RAG Systems</span>
+                        <span class="tag">Azure OpenAI</span>
+                        <span class="tag">Pydantic AI</span>
+                        <span class="tag">PySpark</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">MySQL</span>
+                    </div>
+                </div>
+                <div class="polaroid-note">Modern Innovations</div>
+            </div>
+
+            <div class="polaroid-card">
+                <div class="polaroid-content">
+                    <div class="job-title" style="margin-bottom: 20px;">Cloud & Infrastructure</div>
+                    <div class="tags">
+                        <span class="tag">AWS</span>
+                        <span class="tag">Azure</span>
+                        <span class="tag">GCP</span>
+                        <span class="tag">Docker</span>
+                        <span class="tag">Kubernetes</span>
+                        <span class="tag">Serverless</span>
+                    </div>
+                </div>
+                <div class="polaroid-note">Cloud Mastery</div>
+            </div>
+        </section>
+
+        <div class="ornamental-divider">❋ ❋ ❋</div>
+
+        <!-- Education -->
+        <section>
+            <h2 class="section-header">Academic Credentials</h2>
+
+            <div class="polaroid-card">
+                <div class="polaroid-content">
+                    <div class="job-title">Master of Computer Applications</div>
+                    <div class="company">Vishwakarma Institute of Technology</div>
+                    <div class="date-tag" style="margin-top: 12px; display: inline-block;">2020 - 2022</div>
+                    <p style="margin-top: 16px; font-size: 15px; line-height: 1.7;">
+                        Comprehensive graduate program focusing on advanced computing concepts,
+                        software engineering principles, and emerging technologies.
+                        Based in Pune, India.
+                    </p>
+                </div>
+                <div class="polaroid-note">Master's Degree • Computer Science</div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-ornament">❋</div>
+            <div class="social-icons">
+                <a href="https://github.com/gamentionkray" target="_blank" class="social-icon">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/krishnathorat" target="_blank" class="social-icon">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:krishnathorat007@gmail.com" class="social-icon">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+            <p class="copyright">© MCMXXV (2025) Krishna Thorat • Handcrafted with Care • All Rights Reserved</p>
+        </footer>
+    </div>
+
+    <script src="assets/js/template-switcher.js"></script>
+</body>
+</html>
