@@ -1,12 +1,11 @@
 /**
- * Advanced Theme Switcher - V2 Ultimate
+ * Advanced Theme Switcher - V3 Categorized
  * Features:
  * 1. Draggable HUD Button with Edge Snapping
  * 2. Live Iframe Previews
- * 3. Keyboard Shortcuts (Ctrl+K, Esc)
+ * 3. Category-based Navigation
  * 4. Dynamic Meta/Titles
- * 5. Hidden Konami Code Unlockable
- * 6. Device-based Auto-Redirection
+ * 5. Device-based Auto-Redirection
  */
 
 (function () {
@@ -37,58 +36,88 @@
     }
 
     let templates;
+    let categories;
 
     if (isMobile) {
         // Mobile-only view (Limit switcher options)
         templates = [
-            { name: 'Mobile App', file: 'mobile.html', desc: 'Optimized app-like interface for touch devices.', palette: ['#ffffff', '#000000', '#3b82f6'] }
+            { name: 'Mobile App', file: 'mobile.html', desc: 'Optimized app-like interface for touch devices.', palette: ['#ffffff', '#000000', '#3b82f6'], category: 'Mobile' }
+        ];
+        categories = [
+            { id: 'Mobile', name: 'Mobile', icon: '📱', desc: 'Touch-optimized design' }
         ];
     } else {
-        // Desktop views (Exclude Mobile)
+        // Desktop views (Exclude Mobile) - Now organized by category
         templates = [
-            { name: 'Minimal', file: 'index.html', desc: 'Less is more. Clean lines and whitespace.', palette: ['#000000', '#FFFFFF', '#E0E0E0'] },
-            { name: 'Neubrutalism', file: 'neubrutalism.html', desc: 'Bold typography, high contrast, hard shadows.', palette: ['#FFE800', '#121212', '#FFFFFF'] },
-            { name: 'Maximalist', file: 'maximalist.html', desc: 'Chaos, energy, and sensory overload.', palette: ['#CCFF00', '#B026FF', '#00F0FF'] },
-            { name: 'Skeuomorphic', file: 'skeuomorphic.html', desc: 'Real-world textures, depth, and tactility.', palette: ['#3a7bd5', '#2c3e50', '#ecf0f1'] },
-            { name: 'Aero', file: 'aero.html', desc: 'Glassmorphism, blur, and glossy surfaces.', palette: ['#00d2ff', 'rgba(255,255,255,0.5)', '#3a7bd5'] },
-            { name: 'Swiss', file: 'swiss.html', desc: 'Grid systems, asymmetry, and Helvetica.', palette: ['#FF3000', '#000000', '#FFFFFF'] },
-            { name: 'Cyberpunk', file: 'cyberpunk.html', desc: 'High tech, low life. Neon and glitches.', palette: ['#00ffff', '#ff00ff', '#14141f'] },
-            { name: 'Retro', file: 'retro.html', desc: 'Nostalgic warmth, beige tones, and serifs.', palette: ['#D2691E', '#F5F5DC', '#654321'] },
-            { name: 'Terminal', file: 'terminal.html', desc: 'Command line interface. Pure data.', palette: ['#00ff00', '#000000', '#003300'] },
-            { name: 'Vaporwave', file: 'vaporwave.html', desc: 'Retro-futuristic aesthetics with neon colors.', palette: ['#ff2a6d', '#05d9e8', '#7700a6'] },
-            { name: 'Art Deco', file: 'artdeco.html', desc: 'Elegant 1920s luxury and geometric patterns.', palette: ['#D4AF37', '#050505', '#F9F1D0'] },
-            { name: 'Holographic', file: 'holographic.html', desc: 'Futuristic glass morphism and iridescence.', palette: ['#ff0080', '#40e0d0', '#ffffff'] },
-            { name: 'Pixel Art', file: 'pixelart.html', desc: '8-bit retro gaming nostalgia.', palette: ['#4aff4d', '#ff4a4a', '#ffee00'] },
-            { name: 'Chalkboard', file: 'chalkboard.html', desc: 'Hand-drawn chalk on blackboard aesthetic.', palette: ['#ffffff', '#2c2c2c', '#ffeb3b'] },
-            { name: 'Claymorphism', file: 'claymorphism.html', desc: 'Soft 3D clay-like UI elements.', palette: ['#ff6b6b', '#4ecdc4', '#f7fff7'] },
-            { name: 'Corporate', file: 'corporate.html', desc: 'Professional business aesthetic.', palette: ['#1e3a8a', '#ffffff', '#f3f4f6'] },
-            { name: 'Industrial', file: 'industrial.html', desc: 'Raw materials and utilitarian design.', palette: ['#ff6b35', '#004e89', '#1a1a1d'] },
-            { name: 'Isometric', file: 'isometric.html', desc: '3D isometric perspective design.', palette: ['#6c5ce7', '#fd79a8', '#fdcb6e'] },
-            { name: 'Newspaper', file: 'newspaper.html', desc: 'Classic print journalism layout.', palette: ['#000000', '#ffffff', '#d4d4d4'] },
-            { name: 'Ukiyo-e', file: 'ukiyoe.html', desc: 'Japanese woodblock print aesthetics.', palette: ['#d32f2f', '#1976d2', '#fbc02d'] },
-            { name: 'Scientific', file: 'scientific.html', desc: 'Academic research paper styling.', palette: ['#1565c0', '#ffffff', '#e0e0e0'] },
-            { name: 'Dashboard', file: 'dashboard.html', desc: 'Data visualization and metrics.', palette: ['#00bcd4', '#ff5722', '#ffffff'] },
-            { name: 'Bento Box', file: 'bentobox.html', desc: 'Japanese grid-based card layout.', palette: ['#ff6b6b', '#4ecdc4', '#ffffff'] },
-            { name: 'Risograph', file: 'risograph.html', desc: 'Vintage print texture and color.', palette: ['#ff6b6b', '#feca57', '#48dbfb'] },
-            { name: 'Origami', file: 'origami.html', desc: 'Folded paper geometric design.', palette: ['#e91e63', '#00bcd4', '#ffffff'] },
-            { name: 'Bauhaus', file: 'bauhaus.html', desc: 'Geometric modernist German design.', palette: ['#ff0000', '#ffeb00', '#0066cc'] },
-            { name: 'Film Grain', file: 'filmgrain.html', desc: 'Vintage analog photography feel.', palette: ['#f5f5dc', '#8b4513', '#2c2c2c'] },
-            { name: 'Minecraft', file: 'minecraft.html', desc: 'Blocky voxel game aesthetic.', palette: ['#8bc34a', '#795548', '#00bcd4'] },
-            { name: 'RPG', file: 'rpg.html', desc: 'Fantasy role-playing game interface.', palette: ['#d4af37', '#8b0000', '#2c1810'] },
-            { name: 'Desert', file: 'desert.html', desc: 'Warm sandy dunes and earthy tones.', palette: ['#f4a460', '#deb887', '#8b4513'] },
-            { name: 'Nordic', file: 'nordic.html', desc: 'Scandinavian minimalism and nature.', palette: ['#2e5266', '#d6e4e5', '#497174'] },
-            { name: 'Dota 2', file: 'dota2.html', desc: 'Epic MOBA game fantasy theme.', palette: ['#c41e3a', '#00758f', '#1a1a1a'] },
-            { name: 'Underwater', file: 'underwater.html', desc: 'Deep ocean aquatic atmosphere.', palette: ['#006994', '#00d4ff', '#002b49'] },
-            { name: 'Cosmic', file: 'cosmic.html', desc: 'Outer space and galaxies.', palette: ['#6a0dad', '#00ffff', '#0a0a0a'] },
-            { name: 'Neon Noir', file: 'neonnoir.html', desc: 'Dark cyberpunk crime aesthetics.', palette: ['#ff006e', '#8338ec', '#0a0a0a'] },
-            { name: 'Dieselpunk', file: 'dieselpunk.html', desc: 'Retro-futuristic diesel-powered tech.', palette: ['#8b4513', '#ff8c00', '#2f4f4f'] },
-            { name: 'Weathered', file: 'weathered.html', desc: 'Aged and distressed vintage look.', palette: ['#a0826d', '#7a6a5a', '#f5f5dc'] }
+            // Modern & Minimal
+            { name: 'Minimal', file: 'index.html', desc: 'Less is more. Clean lines and whitespace.', palette: ['#000000', '#FFFFFF', '#E0E0E0'], category: 'Modern' },
+            { name: 'Swiss', file: 'swiss.html', desc: 'Grid systems, asymmetry, and Helvetica.', palette: ['#FF3000', '#000000', '#FFFFFF'], category: 'Modern' },
+            { name: 'Corporate', file: 'corporate.html', desc: 'Professional business aesthetic.', palette: ['#1e3a8a', '#ffffff', '#f3f4f6'], category: 'Modern' },
+            { name: 'Scientific', file: 'scientific.html', desc: 'Academic research paper styling.', palette: ['#1565c0', '#ffffff', '#e0e0e0'], category: 'Modern' },
+            { name: 'Dashboard', file: 'dashboard.html', desc: 'Data visualization and metrics.', palette: ['#00bcd4', '#ff5722', '#ffffff'], category: 'Modern' },
+            { name: 'Bento Box', file: 'bentobox.html', desc: 'Japanese grid-based card layout.', palette: ['#ff6b6b', '#4ecdc4', '#ffffff'], category: 'Modern' },
+            { name: 'Nordic', file: 'nordic.html', desc: 'Scandinavian minimalism and nature.', palette: ['#2e5266', '#d6e4e5', '#497174'], category: 'Modern' },
+            { name: 'Newspaper', file: 'newspaper.html', desc: 'Classic print journalism layout.', palette: ['#000000', '#ffffff', '#d4d4d4'], category: 'Modern' },
+
+            // Bold & Expressive
+            { name: 'Neubrutalism', file: 'neubrutalism.html', desc: 'Bold typography, high contrast, hard shadows.', palette: ['#FFE800', '#121212', '#FFFFFF'], category: 'Bold' },
+            { name: 'Maximalist', file: 'maximalist.html', desc: 'Chaos, energy, and sensory overload.', palette: ['#CCFF00', '#B026FF', '#00F0FF'], category: 'Bold' },
+            { name: 'Bauhaus', file: 'bauhaus.html', desc: 'Geometric modernist German design.', palette: ['#ff0000', '#ffeb00', '#0066cc'], category: 'Bold' },
+            { name: 'Industrial', file: 'industrial.html', desc: 'Raw materials and utilitarian design.', palette: ['#ff6b35', '#004e89', '#1a1a1d'], category: 'Bold' },
+
+            // 3D & Depth
+            { name: 'Skeuomorphic', file: 'skeuomorphic.html', desc: 'Real-world textures, depth, and tactility.', palette: ['#3a7bd5', '#2c3e50', '#ecf0f1'], category: '3D' },
+            { name: 'Claymorphism', file: 'claymorphism.html', desc: 'Soft 3D clay-like UI elements.', palette: ['#ff6b6b', '#4ecdc4', '#f7fff7'], category: '3D' },
+            { name: 'Isometric', file: 'isometric.html', desc: '3D isometric perspective design.', palette: ['#6c5ce7', '#fd79a8', '#fdcb6e'], category: '3D' },
+            { name: 'Origami', file: 'origami.html', desc: 'Folded paper geometric design.', palette: ['#e91e63', '#00bcd4', '#ffffff'], category: '3D' },
+
+            // Glass & Transparent
+            { name: 'Aero', file: 'aero.html', desc: 'Glassmorphism, blur, and glossy surfaces.', palette: ['#00d2ff', 'rgba(255,255,255,0.5)', '#3a7bd5'], category: 'Glass' },
+            { name: 'Holographic', file: 'holographic.html', desc: 'Futuristic glass morphism and iridescence.', palette: ['#ff0080', '#40e0d0', '#ffffff'], category: 'Glass' },
+
+            // Tech & Futuristic
+            { name: 'Cyberpunk', file: 'cyberpunk.html', desc: 'High tech, low life. Neon and glitches.', palette: ['#00ffff', '#ff00ff', '#14141f'], category: 'Tech' },
+            { name: 'Terminal', file: 'terminal.html', desc: 'Command line interface. Pure data.', palette: ['#00ff00', '#000000', '#003300'], category: 'Tech' },
+            { name: 'Neon Noir', file: 'neonnoir.html', desc: 'Dark cyberpunk crime aesthetics.', palette: ['#ff006e', '#8338ec', '#0a0a0a'], category: 'Tech' },
+            { name: 'Cosmic', file: 'cosmic.html', desc: 'Outer space and galaxies.', palette: ['#6a0dad', '#00ffff', '#0a0a0a'], category: 'Tech' },
+
+            // Retro & Vintage
+            { name: 'Retro', file: 'retro.html', desc: 'Nostalgic warmth, beige tones, and serifs.', palette: ['#D2691E', '#F5F5DC', '#654321'], category: 'Retro' },
+            { name: 'Vaporwave', file: 'vaporwave.html', desc: 'Retro-futuristic aesthetics with neon colors.', palette: ['#ff2a6d', '#05d9e8', '#7700a6'], category: 'Retro' },
+            { name: 'Art Deco', file: 'artdeco.html', desc: 'Elegant 1920s luxury and geometric patterns.', palette: ['#D4AF37', '#050505', '#F9F1D0'], category: 'Retro' },
+            { name: 'Film Grain', file: 'filmgrain.html', desc: 'Vintage analog photography feel.', palette: ['#f5f5dc', '#8b4513', '#2c2c2c'], category: 'Retro' },
+            { name: 'Risograph', file: 'risograph.html', desc: 'Vintage print texture and color.', palette: ['#ff6b6b', '#feca57', '#48dbfb'], category: 'Retro' },
+            { name: 'Weathered', file: 'weathered.html', desc: 'Aged and distressed vintage look.', palette: ['#a0826d', '#7a6a5a', '#f5f5dc'], category: 'Retro' },
+            { name: 'Dieselpunk', file: 'dieselpunk.html', desc: 'Retro-futuristic diesel-powered tech.', palette: ['#8b4513', '#ff8c00', '#2f4f4f'], category: 'Retro' },
+
+            // Gaming
+            { name: 'Pixel Art', file: 'pixelart.html', desc: '8-bit retro gaming nostalgia.', palette: ['#4aff4d', '#ff4a4a', '#ffee00'], category: 'Gaming' },
+            { name: 'Minecraft', file: 'minecraft.html', desc: 'Blocky voxel game aesthetic.', palette: ['#8bc34a', '#795548', '#00bcd4'], category: 'Gaming' },
+            { name: 'RPG', file: 'rpg.html', desc: 'Fantasy role-playing game interface.', palette: ['#d4af37', '#8b0000', '#2c1810'], category: 'Gaming' },
+            { name: 'Dota 2', file: 'dota2.html', desc: 'Epic MOBA game fantasy theme.', palette: ['#c41e3a', '#00758f', '#1a1a1a'], category: 'Gaming' },
+
+            // Artistic
+            { name: 'Chalkboard', file: 'chalkboard.html', desc: 'Hand-drawn chalk on blackboard aesthetic.', palette: ['#ffffff', '#2c2c2c', '#ffeb3b'], category: 'Artistic' },
+            { name: 'Ukiyo-e', file: 'ukiyoe.html', desc: 'Japanese woodblock print aesthetics.', palette: ['#d32f2f', '#1976d2', '#fbc02d'], category: 'Artistic' },
+
+            // Nature & Thematic
+            { name: 'Desert', file: 'desert.html', desc: 'Warm sandy dunes and earthy tones.', palette: ['#f4a460', '#deb887', '#8b4513'], category: 'Nature' },
+            { name: 'Underwater', file: 'underwater.html', desc: 'Deep ocean aquatic atmosphere.', palette: ['#006994', '#00d4ff', '#002b49'], category: 'Nature' }
+        ];
+
+        categories = [
+            { id: 'Modern', name: 'Modern & Minimal', icon: '✨', desc: 'Clean, professional designs' },
+            { id: 'Bold', name: 'Bold & Expressive', icon: '💥', desc: 'High-impact aesthetics' },
+            { id: '3D', name: '3D & Depth', icon: '🎨', desc: 'Dimensional interfaces' },
+            { id: 'Glass', name: 'Glass & Transparent', icon: '💎', desc: 'Blur and glassmorphism' },
+            { id: 'Tech', name: 'Tech & Futuristic', icon: '🚀', desc: 'Sci-fi and cyberpunk' },
+            { id: 'Retro', name: 'Retro & Vintage', icon: '📼', desc: 'Nostalgic throwbacks' },
+            { id: 'Gaming', name: 'Gaming', icon: '🎮', desc: 'Game-inspired themes' },
+            { id: 'Artistic', name: 'Artistic', icon: '🖼️', desc: 'Creative expressions' },
+            { id: 'Nature', name: 'Nature & Thematic', icon: '🌿', desc: 'Environmental themes' }
         ];
     }
 
-    // Konami Code Sequence: Up, Up, Down, Down, Left, Right, Left, Right, B, A
-    const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-    let konamiIndex = 0;
 
     function getCurrentTemplate() {
         const path = window.location.pathname;
@@ -101,6 +130,9 @@
 
     // Drag state to prevent clicking when dragging
     let isDragging = false;
+
+    // Category state
+    let selectedCategory = null;
 
     // --- 2. CSS Generator ---
 
@@ -129,19 +161,27 @@
             /* Modal Container */
             #ts-modal {
                 position: fixed; top: 50%; left: 50%; transform: translate(-50%, -45%) scale(0.95);
-                width: 90%; max-width: 900px; height: 80vh;
-                display: grid; grid-template-columns: 1.5fr 2fr; /* More space for preview */
+                width: 90%; max-width: 1000px; height: 85vh;
+                display: grid; grid-template-columns: 200px 1fr 1.5fr; /* Categories | Templates | Preview */
                 opacity: 0; visibility: hidden; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
                 z-index: 10003; overflow: hidden;
             }
             #ts-modal.active { transform: translate(-50%, -50%) scale(1); opacity: 1; visibility: visible; }
-            
+
+            @media (max-width: 1024px) {
+                #ts-modal { grid-template-columns: 160px 1fr 1fr; }
+            }
+
             @media (max-width: 800px) {
                 #ts-modal { grid-template-columns: 1fr; }
-                #ts-info { display: none !important; }
+                #ts-categories, #ts-info { display: none !important; }
             }
 
             /* Sections */
+            #ts-categories {
+                padding: 20px 10px; display: flex; flex-direction: column; gap: 8px;
+                overflow-y: auto; border-right: 1px solid rgba(0,0,0,0.1);
+            }
             #ts-grid { padding: 30px; display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px; overflow-y: auto; align-content: start; }
             #ts-info { padding: 40px; display: flex; flex-direction: column; justify-content: flex-start; position: relative; overflow: hidden; }
             
@@ -150,6 +190,16 @@
             .ts-info-header { margin-bottom: 20px; }
             .ts-info-title { font-size: 32px; font-weight: 900; margin-bottom: 5px; line-height: 1; }
             .ts-info-desc { font-size: 14px; opacity: 0.8; line-height: 1.4; }
+
+            /* Category Buttons */
+            .ts-category {
+                padding: 12px; border: none; cursor: pointer; text-align: left;
+                display: flex; flex-direction: column; gap: 3px;
+                transition: all 0.2s; border-radius: 6px; font-size: 13px;
+            }
+            .ts-category-icon { font-size: 18px; }
+            .ts-category-name { font-weight: 600; line-height: 1.2; }
+            .ts-category-count { font-size: 10px; opacity: 0.6; }
             
             /* Preview Iframe Wrapper */
             .ts-preview-box {
@@ -177,12 +227,6 @@
                 display: flex; align-items: center; justify-content: center; z-index: 10;
             }
             
-            /* Shortcut Hint */
-            .ts-hint {
-                position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
-                font-size: 12px; opacity: 0.5; pointer-events: none;
-                background: rgba(0,0,0,0.1); padding: 4px 8px; border-radius: 4px;
-            }
         `;
 
         const themeSpecifics = {
@@ -196,14 +240,22 @@
             minimal: `
                 #ts-btn { background: #fff; color: #000; border: 1px solid #eee; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
                 #ts-modal { background: #fff; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
+                #ts-categories { background: #fafafa; }
                 #ts-info { background: #f9f9f9; border-left: 1px solid #eee; }
+                .ts-category { background: transparent; color: #666; }
+                .ts-category:hover { background: #f0f0f0; color: #000; }
+                .ts-category.active { background: #000; color: #fff; }
                 .ts-opt { background: #fff; border: 1px solid #eee; border-radius: 6px; }
                 .ts-opt:hover { border-color: #000; transform: translateY(-2px); }
             `,
             neubrutalism: `
                 #ts-btn { background: #FFE800; color: #121212; border: 3px solid #121212; box-shadow: 4px 4px 0 #121212; border-radius: 0; }
                 #ts-modal { background: #fff; border: 4px solid #121212; box-shadow: 12px 12px 0 #121212; border-radius: 0; }
+                #ts-categories { background: #f5f5f5; border-right: 4px solid #121212; }
                 #ts-info { background: #FFE800; border-left: 4px solid #121212; }
+                .ts-category { background: #fff; border: 2px solid #121212; border-radius: 0; margin-bottom: 4px; }
+                .ts-category:hover { background: #f0f0f0; }
+                .ts-category.active { background: #FFE800; box-shadow: 2px 2px 0 #121212; }
                 .ts-opt { background: #fff; border: 3px solid #121212; box-shadow: 4px 4px 0 #eee; border-radius: 0; }
                 .ts-opt:hover { box-shadow: 2px 2px 0 #121212; transform: translate(2px, 2px); background: #f0f0f0; }
                 .ts-title { text-transform: uppercase; font-weight: 900; }
@@ -228,7 +280,11 @@
             aero: `
                 #ts-btn { background: rgba(255,255,255,0.4); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.6); box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); color: #fff; }
                 #ts-modal { background: rgba(255, 255, 255, 0.25); box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.18); }
+                #ts-categories { background: rgba(255,255,255,0.15); border-right: 1px solid rgba(255,255,255,0.2); }
                 #ts-info { background: rgba(0, 210, 255, 0.1); border-left: 1px solid rgba(255,255,255,0.2); color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+                .ts-category { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.2); color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
+                .ts-category:hover { background: rgba(255,255,255,0.35); }
+                .ts-category.active { background: rgba(0,210,255,0.4); box-shadow: 0 0 15px rgba(0,210,255,0.3); }
                 .ts-opt { background: rgba(255, 255, 255, 0.4); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 12px; color: #1a1a1a; }
                 .ts-opt:hover { background: rgba(255, 255, 255, 0.7); box-shadow: 0 0 15px rgba(255,255,255,0.5); }
             `,
@@ -244,7 +300,11 @@
             cyberpunk: `
                 #ts-btn { background: rgba(10,10,10,0.9); border: 2px solid #00ffff; color: #00ffff; box-shadow: 0 0 10px #00ffff; }
                 #ts-modal { background: rgba(5, 5, 10, 0.95); border: 1px solid #00ffff; box-shadow: 0 0 30px rgba(0,255,255,0.2); border-radius: 4px; }
+                #ts-categories { background: rgba(0,0,0,0.5); border-right: 1px solid #00ffff; }
                 #ts-info { background: linear-gradient(180deg, rgba(0,255,255,0.1) 0%, transparent 100%); border-left: 1px solid #00ffff; color: #eee; }
+                .ts-category { background: rgba(255,255,255,0.05); color: #eee; border-left: 2px solid #333; }
+                .ts-category:hover { background: rgba(0,255,255,0.1); border-left-color: #00ffff; }
+                .ts-category.active { background: rgba(0,255,255,0.2); border-left: 3px solid #00ffff; color: #00ffff; }
                 .ts-opt { background: rgba(255, 255, 255, 0.05); border-left: 2px solid #333; color: #eee; }
                 .ts-opt:hover { border-left: 4px solid #ff00ff; background: rgba(255, 0, 255, 0.1); color: #ff00ff; }
                 .ts-title { color: #00ffff; text-transform: uppercase; text-shadow: 0 0 5px #00ffff; }
@@ -596,7 +656,7 @@
         const btn = document.createElement('div');
         btn.id = 'ts-btn';
         btn.innerHTML = currentTheme === 'terminal' ? '' : '🎨';
-        btn.title = 'Change Theme (Ctrl+K)';
+        btn.title = 'Change Theme';
         // Only toggle if not dragging
         btn.onclick = () => { if (!isDragging) toggleModal(); };
 
@@ -618,20 +678,24 @@
         closeBtn.onclick = closeModal;
         modal.appendChild(closeBtn);
 
-        // Grid (Left)
+        // Categories Panel (Left)
+        const categoriesPanel = document.createElement('div');
+        categoriesPanel.id = 'ts-categories';
+
+        // Templates Grid (Center)
         const grid = document.createElement('div');
         grid.id = 'ts-grid';
 
         const title = document.createElement('div');
         title.className = 'ts-title';
-        title.textContent = 'Select Interface';
+        title.textContent = 'Select a Category';
         grid.appendChild(title);
 
         // Info Panel (Right)
         const info = document.createElement('div');
         info.id = 'ts-info';
 
-        // Feature 2: Live Preview Updater
+        // Live Preview Updater
         const updateInfo = (template) => {
             info.innerHTML = `
                 <div class="ts-info-header">
@@ -644,42 +708,102 @@
             `;
         };
 
-        // Options Loop
-        templates.forEach(t => {
-            const opt = document.createElement('button');
-            opt.className = 'ts-opt';
+        // Function to render templates for a category
+        const renderTemplates = (categoryId) => {
+            // Clear grid
+            grid.innerHTML = '';
 
-            const name = document.createElement('span');
-            name.className = 'ts-opt-name';
-            name.textContent = t.name;
+            const category = categories.find(c => c.id === categoryId);
+            const categoryTemplates = templates.filter(t => t.category === categoryId);
 
-            const status = document.createElement('span');
-            status.className = 'ts-opt-status';
-            status.textContent = currentTheme === t.name.toLowerCase() ? 'Active' : 'Switch';
+            // Title
+            const titleEl = document.createElement('div');
+            titleEl.className = 'ts-title';
+            titleEl.textContent = category.name;
+            grid.appendChild(titleEl);
 
-            opt.appendChild(name);
-            opt.appendChild(status);
+            // Render templates
+            categoryTemplates.forEach(t => {
+                const opt = document.createElement('button');
+                opt.className = 'ts-opt';
 
-            opt.onclick = () => switchTheme(t);
-            opt.onmouseenter = () => updateInfo(t);
+                const name = document.createElement('span');
+                name.className = 'ts-opt-name';
+                name.textContent = t.name;
 
-            if (currentTheme === t.name.toLowerCase()) {
-                // Simple highlighting for active
-                opt.style.borderLeft = '4px solid currentColor';
-                updateInfo(t); // Set initial info
-                // Run title update immediately
-                updateMeta(t.name.toLowerCase());
+                const status = document.createElement('span');
+                status.className = 'ts-opt-status';
+                status.textContent = currentTheme === t.name.toLowerCase() ? 'Active' : 'Switch';
+
+                opt.appendChild(name);
+                opt.appendChild(status);
+
+                opt.onclick = () => switchTheme(t);
+                opt.onmouseenter = () => updateInfo(t);
+
+                if (currentTheme === t.name.toLowerCase()) {
+                    opt.style.borderLeft = '4px solid currentColor';
+                    updateInfo(t);
+                    updateMeta(t.name.toLowerCase());
+                }
+
+                grid.appendChild(opt);
+            });
+        };
+
+        // Render category buttons
+        categories.forEach(cat => {
+            const catCount = templates.filter(t => t.category === cat.id).length;
+
+            const catBtn = document.createElement('button');
+            catBtn.className = 'ts-category';
+            catBtn.dataset.category = cat.id;
+
+            const icon = document.createElement('div');
+            icon.className = 'ts-category-icon';
+            icon.textContent = cat.icon;
+
+            const name = document.createElement('div');
+            name.className = 'ts-category-name';
+            name.textContent = cat.name;
+
+            const count = document.createElement('div');
+            count.className = 'ts-category-count';
+            count.textContent = `${catCount} theme${catCount !== 1 ? 's' : ''}`;
+
+            catBtn.appendChild(icon);
+            catBtn.appendChild(name);
+            catBtn.appendChild(count);
+
+            catBtn.onclick = () => {
+                // Update active state
+                document.querySelectorAll('.ts-category').forEach(c => c.classList.remove('active'));
+                catBtn.classList.add('active');
+
+                // Render templates
+                selectedCategory = cat.id;
+                renderTemplates(cat.id);
+            };
+
+            categoriesPanel.appendChild(catBtn);
+
+            // Auto-select first category or category containing current theme
+            if (!selectedCategory) {
+                const currentTemplate = templates.find(t => t.name.toLowerCase() === currentTheme);
+                if (currentTemplate && currentTemplate.category === cat.id) {
+                    selectedCategory = cat.id;
+                    catBtn.classList.add('active');
+                    renderTemplates(cat.id);
+                } else if (cat.id === categories[0].id) {
+                    selectedCategory = cat.id;
+                    catBtn.classList.add('active');
+                    renderTemplates(cat.id);
+                }
             }
-
-            grid.appendChild(opt);
         });
 
-        // Feature 3: Keyboard Hint
-        const hint = document.createElement('div');
-        hint.className = 'ts-hint';
-        hint.textContent = 'Press Ctrl + K to toggle';
-        modal.appendChild(hint);
 
+        modal.appendChild(categoriesPanel);
         modal.appendChild(grid);
         modal.appendChild(info);
         root.appendChild(btn);
@@ -718,33 +842,6 @@
         window.location.href = basePath + template.file;
     }
 
-    // Feature 3 & 5: Global Key Listeners (Shortcuts + Konami)
-    document.addEventListener('keydown', (e) => {
-        // Shortcuts
-        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-            e.preventDefault();
-            toggleModal();
-        }
-        if (e.key === 'Escape') closeModal();
-
-        // Konami Code
-        if (e.key === konamiCode[konamiIndex]) {
-            konamiIndex++;
-            if (konamiIndex === konamiCode.length) {
-                alert('SYSTEM BREAK // SECRET THEME UNLOCKED');
-                templates.push({
-                    name: 'The Matrix',
-                    file: 'matrix.html',
-                    desc: 'The answer is out there, Neo.',
-                    palette: ['#00FF00', '#000', '#0D0']
-                });
-                createUI(); // Re-render to show new option
-                konamiIndex = 0;
-            }
-        } else {
-            konamiIndex = 0;
-        }
-    });
 
     // --- 6. Init ---
     if (document.readyState === 'loading') {
