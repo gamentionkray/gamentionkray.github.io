@@ -1,0 +1,41 @@
+{
+  "name": "Krishna Thorat",
+  "role": "Full Stack Developer & AI Engineer",
+  "location": "Pune, India",
+  "email": "krishnathorat007@gmail.com",
+  "github": "https://github.com/gamentionkray",
+  "linkedin": "https://linkedin.com/in/krishnathorat",
+  "summary": "I build production web applications, SaaS platforms and AI systems—from the database and API to the interface and deployment.",
+  "about": "Full Stack Developer with 5+ years of experience across React, Angular, Node.js, Python and TypeScript. My work spans enterprise software, real-time collaboration, multi-agent systems and cloud infrastructure.",
+  "skills": {
+    "Languages": ["JavaScript", "TypeScript", "Python", "PHP", "Java", "Go"],
+    "Frontend": ["React", "React Native", "Angular", "Next.js", "Lit", "Tailwind CSS", "Framer Motion"],
+    "Backend": ["Node.js", "Express.js", "NestJS", "FastAPI", "Flask", "Fastify", "Laravel"],
+    "Data": ["PostgreSQL", "MySQL", "MongoDB", "MSSQL", "Teradata", "Redis", "Drizzle ORM"],
+    "Cloud & DevOps": ["Microsoft Azure", "GCP", "AWS", "Docker", "Kubernetes", "CI/CD"],
+    "AI & ML": ["Generative AI", "Agentic AI", "RAG", "LangChain", "Pydantic AI", "Azure OpenAI", "Google Gemini", "Vertex AI"],
+    "Real-time & integration": ["WebSockets", "WebRTC", "Git", "REST APIs", "Salesforce", "PySpark", "LiveKit"]
+  },
+  "experience": [
+    {"company":"Prescient Technologies Pvt. Ltd.","role":"Sr. System Developer","dates":"2025 – Present","context":"Client: Bigtincan · Content Hub Platform","points":["Developing features for the Content Hub sales enablement platform.","Leading the migration from JavaScript to TypeScript, reviewing PRs and resolving production issues.","Built TalentScan at a hackathon: 16+ specialized AI agents with real-time progress tracking."],"stack":["TypeScript","React","Node.js","Python","FastAPI","Pydantic AI"]},
+    {"company":"Ergobite Tech Solutions Pvt. Ltd.","role":"Software Developer","dates":"Dec 2024 – 2025","context":"Client: Intellify Solutions","points":["Led Infovault, a multi-agent knowledge platform with video processing, RAG search and Microsoft OAuth.","Built the Intellify Migration Wizard for Teradata and PostgreSQL, including SSIS and Power BI processing with PySpark.","Engineered In-Parking alerts with Azure Functions and PostgreSQL; set up UAT and production CI/CD."],"stack":["Python","React","LangChain","Azure OpenAI","PostgreSQL","PySpark"]},
+    {"company":"Internship Studio","role":"Senior Web Developer","dates":"Jul 2024 – Dec 2024","context":"Hiring, assessment and mobile products","points":["Developed an AI hiring platform with résumé parsing and candidate matching.","Built the iStudio Android and iOS app with React Native, Razorpay and Cashfree.","Delivered an online exam platform and real-time notifications, using GCP and AWS services."],"stack":["React","React Native","Expo","Node.js","PHP","Flask","GCP","AWS"]},
+    {"company":"Infosys Ltd.","role":"System Engineer","dates":"Aug 2022 – Jul 2024","context":"Product: Infosys Cortex","points":["Developed enterprise applications with Angular, Node.js and PostgreSQL.","Integrated Salesforce, WebSockets and WebRTC.","Implemented WCAG accessibility and Keycloak authentication; worked with Kubernetes deployments."],"stack":["Angular","Node.js","PostgreSQL","WebRTC","Keycloak","Kubernetes"]},
+    {"company":"Internship Studio","role":"Web Developer","dates":"Sep 2020 – Aug 2022","context":"Web platforms and payments","points":["Migrated a legacy WordPress website to React and PHP.","Integrated Razorpay, Instamojo and PhonePe payment gateways.","Developed REST APIs and optimized database queries."],"stack":["PHP","React","MySQL","WordPress","REST APIs"]}
+  ],
+  "projects": [
+    {"id":"cue","name":"Cue","subtitle":"AI Mock Interviewer","category":"AI systems","description":"A real-time AI-powered video interview simulator with LiveKit video streaming and a Python FastAPI backend.","detail":"Practice speaking in an interview, with an interface built around a live conversation.","stack":["Python","FastAPI","LiveKit","React"],"url":"https://hire.rest"},
+    {"id":"nexus","name":"NexusLMS","subtitle":"AI-native learning platform","category":"AI systems","description":"A learning platform with a Claude-powered RAG tutor, eight question types, multi-tenant row-level security and custom JWT authentication.","detail":"110+ database tables and 38 API modules support course delivery, assessments and AI tutoring.","stack":["Next.js","NestJS","PostgreSQL","Drizzle ORM","Docker"]},
+    {"id":"ems","name":"EMS","subtitle":"Employee management system","category":"Web platforms","description":"Multi-tenant HR software for Indian companies: payroll, shift-based attendance, leave management and OKR performance reviews.","detail":"Payroll covers PF, ESI, professional tax and TDS.","stack":["Lit","Fastify","PostgreSQL","Drizzle ORM","Docker"]},
+    {"id":"pulse","name":"Pulse","subtitle":"Real-time collaboration SDK","category":"Developer tools","description":"A framework-agnostic, self-hosted SDK with drop-in web components for comment threads, live cursors, presence and reactions.","detail":"Adds collaboration to an existing interface through reusable web components.","stack":["Lit","Fastify","WebSocket","Redis","PostgreSQL"]},
+    {"id":"mailcraft","name":"MailCraft","subtitle":"Email template builder","category":"Developer tools","description":"A collaborative email builder with Monaco editing, Inky/SCSS compilation, multi-device previews and a Gemini AI assistant.","detail":"Includes two-factor authentication and team collaboration.","stack":["React","Node.js","Monaco Editor","Inky","SCSS"]},
+    {"id":"sftp","name":"Browser SFTP","subtitle":"Web file manager","category":"Developer tools","description":"Manage remote server files in the browser, with real-time transfer progress through Socket.IO.","detail":"A browser interface for remote file operations.","stack":["Node.js","Express","Socket.IO"]},
+    {"id":"talentscan","name":"TalentScan","subtitle":"Multi-agent career intelligence","category":"AI systems","description":"A hackathon AI platform with 16+ specialized agents built using Pydantic AI and Google Gemini, with real-time progress tracking.","detail":"Created at Prescient Technologies; exposes 15+ API endpoints.","stack":["Python","FastAPI","Pydantic AI","React","WebSocket"]}
+  ],
+  "education":[
+    {"degree":"Master of Computer Applications (MCA)","school":"Vishwakarma Institute of Technology, Pune","dates":"Oct 2020 – Aug 2022","score":"CGPA 8.75"},
+    {"degree":"B.Sc. Computer Science","school":"Loknete Ramdas Patil Dhumal A.S.C. College, Rahuri · Savitribai Phule Pune University","dates":"Apr 2017 – Jun 2020","score":"73.68%"}
+  ],
+  "certifications":["Generative AI Landscape — Infosys","IBM Cloud Essentials — IBM","Angular: Developing Single Page Applications — Infosys","Advanced Python Concepts — Infosys","React: The Complete Guide with React Hook Redux — Udemy","TypeScript Programming for Web Development — Infosys","The Complete Web Development Course — Udemy","SQL and Relational Databases 101 — Cognitive Class"],
+  "source":"User-supplied krishna-thorat-resume.pdf, received 2026-10-12. Cue product name and URL confirmed in conversation."
+}
