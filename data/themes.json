@@ -3,7 +3,7 @@
     "slug": "index",
     "name": "Minimal",
     "category": "Modern",
-    "description": "An open introduction and a spacious project index.",
+    "description": "A spare typographic project accordion with a distraction-free focus mode.",
     "bg": "#f7f7f2",
     "fg": "#202822",
     "accent": "#326348",
@@ -11,13 +11,14 @@
     "layout": "intro",
     "projects": "list",
     "file": "index.html",
-    "new": false
+    "new": false,
+    "interaction": "A spare typographic project accordion with a distraction-free focus mode."
   },
   {
     "slug": "swiss",
     "name": "Swiss",
     "category": "Modern",
-    "description": "An asymmetric typographic grid with a project register.",
+    "description": "An asymmetric Swiss poster and ruled work register; reveal its layout grid.",
     "bg": "#f5f3eb",
     "fg": "#20201d",
     "accent": "#b52816",
@@ -25,13 +26,14 @@
     "layout": "swiss",
     "projects": "register",
     "file": "swiss.html",
-    "new": false
+    "new": false,
+    "interaction": "An asymmetric Swiss poster and ruled work register; reveal its layout grid."
   },
   {
     "slug": "corporate",
     "name": "Corporate",
     "category": "Modern",
-    "description": "A professional profile beside a capability and work overview.",
+    "description": "A professional capability selector with filtered product case studies.",
     "bg": "#f5f7fb",
     "fg": "#142b45",
     "accent": "#19598e",
@@ -39,13 +41,14 @@
     "layout": "corporate",
     "projects": "features",
     "file": "corporate.html",
-    "new": false
+    "new": false,
+    "interaction": "A professional capability selector with filtered product case studies."
   },
   {
     "slug": "scientific",
     "name": "Scientific",
     "category": "Modern",
-    "description": "A research-paper abstract, methods and project references.",
+    "description": "A typeset research paper with margin navigation and annotation mode.",
     "bg": "#fbfaf7",
     "fg": "#242828",
     "accent": "#285875",
@@ -53,13 +56,14 @@
     "layout": "paper",
     "projects": "references",
     "file": "scientific.html",
-    "new": false
+    "new": false,
+    "interaction": "A typeset research paper with margin navigation and annotation mode."
   },
   {
     "slug": "dashboard",
     "name": "Dashboard",
     "category": "Modern",
-    "description": "A persistent navigation rail and an overview workspace.",
+    "description": "A portfolio application workspace with project records and compact view.",
     "bg": "#eef2f4",
     "fg": "#18333d",
     "accent": "#11616d",
@@ -67,13 +71,14 @@
     "layout": "dashboard",
     "projects": "board",
     "file": "dashboard.html",
-    "new": false
+    "new": false,
+    "interaction": "A portfolio application workspace with project records and compact view."
   },
   {
     "slug": "bentobox",
     "name": "Bento Box",
     "category": "Modern",
-    "description": "A mosaic of identity, current work and selected products.",
+    "description": "A living mosaic of projects, profile and Pune time; shuffle the tiles.",
     "bg": "#f4f0e8",
     "fg": "#292d30",
     "accent": "#945021",
@@ -81,13 +86,14 @@
     "layout": "bento",
     "projects": "mosaic",
     "file": "bentobox.html",
-    "new": false
+    "new": false,
+    "interaction": "A living mosaic of projects, profile and Pune time; shuffle the tiles."
   },
   {
     "slug": "nordic",
     "name": "Nordic",
     "category": "Modern",
-    "description": "A quiet portrait-led journal with paired project stories.",
+    "description": "A portrait-led journal with long-form project stories and evening light.",
     "bg": "#edf0e9",
     "fg": "#293e35",
     "accent": "#486538",
@@ -95,13 +101,14 @@
     "layout": "nordic",
     "projects": "pairs",
     "file": "nordic.html",
-    "new": false
+    "new": false,
+    "interaction": "A portrait-led journal with long-form project stories and evening light."
   },
   {
     "slug": "newspaper",
     "name": "Newspaper",
     "category": "Modern",
-    "description": "A masthead, lead story and multi-column feature section.",
+    "description": "An editorial front page, headline dispatches and switchable editions.",
     "bg": "#f1ebdc",
     "fg": "#292820",
     "accent": "#8b3723",
@@ -109,13 +116,14 @@
     "layout": "newspaper",
     "projects": "columns",
     "file": "newspaper.html",
-    "new": false
+    "new": false,
+    "interaction": "An editorial front page, headline dispatches and switchable editions."
   },
   {
     "slug": "neubrutalism",
     "name": "Neubrutalism",
     "category": "Bold",
-    "description": "An oversized poster, hard edges and staggered project panels.",
+    "description": "A bold poster and movable project stickers; drag or use arrow keys.",
     "bg": "#f5e84e",
     "fg": "#17191c",
     "accent": "#483082",
@@ -123,13 +131,14 @@
     "layout": "poster",
     "projects": "stagger",
     "file": "neubrutalism.html",
-    "new": false
+    "new": false,
+    "interaction": "A bold poster and movable project stickers; drag or use arrow keys."
   },
   {
     "slug": "maximalist",
     "name": "Maximalist",
     "category": "Bold",
-    "description": "Overlapping typographic panels and a high-energy work wall.",
+    "description": "An overlapping colour collage and a button to remix the entire wall.",
     "bg": "#231942",
     "fg": "#fff6e3",
     "accent": "#c7f179",
@@ -137,13 +146,14 @@
     "layout": "maximal",
     "projects": "wall",
     "file": "maximalist.html",
-    "new": false
+    "new": false,
+    "interaction": "An overlapping colour collage and a button to remix the entire wall."
   },
   {
     "slug": "bauhaus",
     "name": "Bauhaus",
     "category": "Bold",
-    "description": "A geometric title grid balanced by modular project blocks.",
+    "description": "A geometric composition and modular catalogue; recompose the shapes.",
     "bg": "#f1ead8",
     "fg": "#172530",
     "accent": "#ab2d23",
@@ -151,13 +161,14 @@
     "layout": "bauhaus",
     "projects": "modules",
     "file": "bauhaus.html",
-    "new": false
+    "new": false,
+    "interaction": "A geometric composition and modular catalogue; recompose the shapes."
   },
   {
     "slug": "industrial",
     "name": "Industrial",
     "category": "Bold",
-    "description": "A specification plate and dense numbered project register.",
+    "description": "An engineering specification desk with project inspection and document scaling.",
     "bg": "#e7e5de",
     "fg": "#262a28",
     "accent": "#8c3c10",
@@ -165,13 +176,14 @@
     "layout": "industrial",
     "projects": "register",
     "file": "industrial.html",
-    "new": false
+    "new": false,
+    "interaction": "An engineering specification desk with project inspection and document scaling."
   },
   {
     "slug": "skeuomorphic",
     "name": "Skeuomorphic",
     "category": "Dimensional",
-    "description": "A desktop workspace with a document, folders and a contact strip.",
+    "description": "A tactile desktop with movable windows, project folders and career documents.",
     "bg": "#d6c7af",
     "fg": "#2b2824",
     "accent": "#6f4227",
@@ -179,13 +191,14 @@
     "layout": "desktop",
     "projects": "folders",
     "file": "skeuomorphic.html",
-    "new": false
+    "new": false,
+    "interaction": "A tactile desktop with movable windows, project folders and career documents."
   },
   {
     "slug": "claymorphism",
     "name": "Claymorphism",
     "category": "Dimensional",
-    "description": "A tactile profile island with rounded, alternating work blocks.",
+    "description": "Soft sculpted project objects that squish when pressed; change their softness.",
     "bg": "#f6ecea",
     "fg": "#432c39",
     "accent": "#8a325c",
@@ -193,13 +206,14 @@
     "layout": "clay",
     "projects": "islands",
     "file": "claymorphism.html",
-    "new": false
+    "new": false,
+    "interaction": "Soft sculpted project objects that squish when pressed; change their softness."
   },
   {
     "slug": "isometric",
     "name": "Isometric",
     "category": "Dimensional",
-    "description": "An architectural step layout with staggered project levels.",
+    "description": "An isometric project city; select buildings to explore what is inside.",
     "bg": "#ecebfb",
     "fg": "#302858",
     "accent": "#59439a",
@@ -207,13 +221,14 @@
     "layout": "isometric",
     "projects": "steps",
     "file": "isometric.html",
-    "new": false
+    "new": false,
+    "interaction": "An isometric project city; select buildings to explore what is inside."
   },
   {
     "slug": "origami",
     "name": "Origami",
     "category": "Dimensional",
-    "description": "A folded opening spread and alternating paper project leaves.",
+    "description": "A folded cover and project leaves that unfold into implementation details.",
     "bg": "#f8eee5",
     "fg": "#393330",
     "accent": "#a33535",
@@ -221,13 +236,14 @@
     "layout": "fold",
     "projects": "leaves",
     "file": "origami.html",
-    "new": false
+    "new": false,
+    "interaction": "A folded cover and project leaves that unfold into implementation details."
   },
   {
     "slug": "aero",
     "name": "Aero",
     "category": "Glass",
-    "description": "A translucent workspace with a navigation dock and window panes.",
+    "description": "A glass desktop with movable windows, a start menu and taskbar.",
     "bg": "#dceef4",
     "fg": "#123c50",
     "accent": "#165678",
@@ -235,13 +251,14 @@
     "layout": "aero",
     "projects": "windows",
     "file": "aero.html",
-    "new": false
+    "new": false,
+    "interaction": "A glass desktop with movable windows, a start menu and taskbar."
   },
   {
     "slug": "holographic",
     "name": "Holographic",
     "category": "Glass",
-    "description": "A split-spectrum identity panel with a wide project gallery.",
+    "description": "A spectrum identity ticket, adjustable foil light and horizontal gallery.",
     "bg": "#e9f3f2",
     "fg": "#263643",
     "accent": "#694074",
@@ -249,13 +266,14 @@
     "layout": "hologram",
     "projects": "gallery",
     "file": "holographic.html",
-    "new": false
+    "new": false,
+    "interaction": "A spectrum identity ticket, adjustable foil light and horizontal gallery."
   },
   {
     "slug": "cyberpunk",
     "name": "Cyberpunk",
     "category": "Technology",
-    "description": "A broadcast console with a side rail and technical project dossiers.",
+    "description": "A project-channel console with switchable signal colours and technical records.",
     "bg": "#101b22",
     "fg": "#ddf8f1",
     "accent": "#8ee8cb",
@@ -263,13 +281,14 @@
     "layout": "cyber",
     "projects": "dossiers",
     "file": "cyberpunk.html",
-    "new": false
+    "new": false,
+    "interaction": "A project-channel console with switchable signal colours and technical records."
   },
   {
     "slug": "terminal",
     "name": "Terminal",
     "category": "Technology",
-    "description": "An interactive command prompt and navigable text outputs.",
+    "description": "A working local shell: list projects, read files and explore with commands.",
     "bg": "#101d17",
     "fg": "#c8e7cb",
     "accent": "#a8db70",
@@ -277,13 +296,14 @@
     "layout": "terminal",
     "projects": "output",
     "file": "terminal.html",
-    "new": false
+    "new": false,
+    "interaction": "A working local shell: list projects, read files and explore with commands."
   },
   {
     "slug": "neonnoir",
     "name": "Neon Noir",
     "category": "Technology",
-    "description": "A cinematic split-screen with a vertical case index.",
+    "description": "A cinematic identity frame and selectable case files; switch the lights.",
     "bg": "#201923",
     "fg": "#f7e4eb",
     "accent": "#f4a9c9",
@@ -291,13 +311,14 @@
     "layout": "noir",
     "projects": "cases",
     "file": "neonnoir.html",
-    "new": false
+    "new": false,
+    "interaction": "A cinematic identity frame and selectable case files; switch the lights."
   },
   {
     "slug": "cosmic",
     "name": "Cosmic",
     "category": "Technology",
-    "description": "An orbital project navigator around the developer profile.",
+    "description": "An orbital project map with selectable planets and constellation mode.",
     "bg": "#161b32",
     "fg": "#e7ebfa",
     "accent": "#b9bafa",
@@ -305,13 +326,14 @@
     "layout": "cosmic",
     "projects": "orbit",
     "file": "cosmic.html",
-    "new": false
+    "new": false,
+    "interaction": "An orbital project map with selectable planets and constellation mode."
   },
   {
     "slug": "retro",
     "name": "Retro",
     "category": "Vintage",
-    "description": "A warm magazine cover and a project catalogue.",
+    "description": "An analog record sleeve and project track list, with a rotating vinyl.",
     "bg": "#f4e5c5",
     "fg": "#513725",
     "accent": "#985127",
@@ -319,13 +341,14 @@
     "layout": "retro",
     "projects": "catalogue",
     "file": "retro.html",
-    "new": false
+    "new": false,
+    "interaction": "An analog record sleeve and project track list, with a rotating vinyl."
   },
   {
     "slug": "vaporwave",
     "name": "Vaporwave",
     "category": "Vintage",
-    "description": "A retro computer desktop with stacked application windows.",
+    "description": "A retro computer desktop with movable apps and optional CRT scanlines.",
     "bg": "#211b40",
     "fg": "#f4e8ff",
     "accent": "#8be3e7",
@@ -333,13 +356,14 @@
     "layout": "vapor",
     "projects": "windows",
     "file": "vaporwave.html",
-    "new": false
+    "new": false,
+    "interaction": "A retro computer desktop with movable apps and optional CRT scanlines."
   },
   {
     "slug": "artdeco",
     "name": "Art Deco",
     "category": "Vintage",
-    "description": "A symmetrical title plaque and carefully ruled project programme.",
+    "description": "A symmetrical theatre programme with expandable project programmes.",
     "bg": "#192927",
     "fg": "#f4ead0",
     "accent": "#e1c183",
@@ -347,13 +371,14 @@
     "layout": "deco",
     "projects": "programme",
     "file": "artdeco.html",
-    "new": false
+    "new": false,
+    "interaction": "A symmetrical theatre programme with expandable project programmes."
   },
   {
     "slug": "filmgrain",
     "name": "Film Grain",
     "category": "Vintage",
-    "description": "A photographic contact sheet followed by captioned work frames.",
+    "description": "A photographic contact sheet; select an exposure or develop its negative.",
     "bg": "#eae4d7",
     "fg": "#2e2b27",
     "accent": "#76513c",
@@ -361,13 +386,14 @@
     "layout": "film",
     "projects": "frames",
     "file": "filmgrain.html",
-    "new": false
+    "new": false,
+    "interaction": "A photographic contact sheet; select an exposure or develop its negative."
   },
   {
     "slug": "risograph",
     "name": "Risograph",
     "category": "Vintage",
-    "description": "A two-ink zine cover and offset editorial project spreads.",
+    "description": "A two-ink project zine with an interactive cyan overprint.",
     "bg": "#f7eadb",
     "fg": "#422941",
     "accent": "#9c3654",
@@ -375,13 +401,14 @@
     "layout": "riso",
     "projects": "spreads",
     "file": "risograph.html",
-    "new": false
+    "new": false,
+    "interaction": "A two-ink project zine with an interactive cyan overprint."
   },
   {
     "slug": "weathered",
     "name": "Weathered",
     "category": "Vintage",
-    "description": "A field journal with margin notes and project entries.",
+    "description": "A field notebook with a visit stamp and notes saved on your device.",
     "bg": "#e7dcc6",
     "fg": "#473c2e",
     "accent": "#755431",
@@ -389,13 +416,14 @@
     "layout": "journal",
     "projects": "entries",
     "file": "weathered.html",
-    "new": false
+    "new": false,
+    "interaction": "A field notebook with a visit stamp and notes saved on your device."
   },
   {
     "slug": "dieselpunk",
     "name": "Dieselpunk",
     "category": "Vintage",
-    "description": "An engineering control desk and serial-numbered work panels.",
+    "description": "A mechanical control desk with an engine switch and animated gauge.",
     "bg": "#282a25",
     "fg": "#ece3c8",
     "accent": "#e2b176",
@@ -403,13 +431,14 @@
     "layout": "diesel",
     "projects": "panels",
     "file": "dieselpunk.html",
-    "new": false
+    "new": false,
+    "interaction": "A mechanical control desk with an engine switch and animated gauge."
   },
   {
     "slug": "pixelart",
     "name": "Pixel Art",
     "category": "Gaming",
-    "description": "A pixel-edged profile screen with a keyboard-friendly project menu.",
+    "description": "A playable project-signal collection arena with keyboard and touch controls.",
     "bg": "#16253a",
     "fg": "#e4f4eb",
     "accent": "#b2e875",
@@ -417,13 +446,14 @@
     "layout": "pixel",
     "projects": "menu",
     "file": "pixelart.html",
-    "new": false
+    "new": false,
+    "interaction": "A playable project-signal collection arena with keyboard and touch controls."
   },
   {
     "slug": "minecraft",
     "name": "Minecraft",
     "category": "Gaming",
-    "description": "A block-built profile and an inventory of real projects.",
+    "description": "An editable block terrain, material hotbar and selectable project inventory.",
     "bg": "#eef0d9",
     "fg": "#26391e",
     "accent": "#446b2b",
@@ -431,13 +461,14 @@
     "layout": "blocks",
     "projects": "inventory",
     "file": "minecraft.html",
-    "new": false
+    "new": false,
+    "interaction": "An editable block terrain, material hotbar and selectable project inventory."
   },
   {
     "slug": "rpg",
     "name": "RPG",
     "category": "Gaming",
-    "description": "A character sheet, skill inventory and expandable quest journal.",
+    "description": "A character sheet and quest journal with saved exploration progress.",
     "bg": "#eee3c8",
     "fg": "#403329",
     "accent": "#805030",
@@ -445,13 +476,14 @@
     "layout": "character",
     "projects": "quests",
     "file": "rpg.html",
-    "new": false
+    "new": false,
+    "interaction": "A character sheet and quest journal with saved exploration progress."
   },
   {
     "slug": "dota2",
     "name": "Dota 2",
     "category": "Gaming",
-    "description": "A hero-selection panel and a roster of project abilities.",
+    "description": "A hero chamber and project ability bar with Q/W/E/R keyboard shortcuts.",
     "bg": "#1e2628",
     "fg": "#e4e7dd",
     "accent": "#e6b778",
@@ -459,13 +491,14 @@
     "layout": "hero",
     "projects": "abilities",
     "file": "dota2.html",
-    "new": false
+    "new": false,
+    "interaction": "A hero chamber and project ability bar with Q/W/E/R keyboard shortcuts."
   },
   {
     "slug": "chalkboard",
     "name": "Chalkboard",
     "category": "Artistic",
-    "description": "A lesson board with a syllabus and working project notes.",
+    "description": "A workshop blackboard with a drawable chalk canvas and eraser.",
     "bg": "#17392f",
     "fg": "#edf0d6",
     "accent": "#ebd695",
@@ -473,13 +506,14 @@
     "layout": "chalk",
     "projects": "notes",
     "file": "chalkboard.html",
-    "new": false
+    "new": false,
+    "interaction": "A workshop blackboard with a drawable chalk canvas and eraser."
   },
   {
     "slug": "ukiyoe",
     "name": "Ukiyo-e",
     "category": "Artistic",
-    "description": "A vertical title column, portrait and unfolding editorial panels.",
+    "description": "A vertical title and horizontally unfolding project scroll with optional wind.",
     "bg": "#efe5d1",
     "fg": "#263e49",
     "accent": "#a0342a",
@@ -487,13 +521,14 @@
     "layout": "ukiyo",
     "projects": "scrolls",
     "file": "ukiyoe.html",
-    "new": false
+    "new": false,
+    "interaction": "A vertical title and horizontally unfolding project scroll with optional wind."
   },
   {
     "slug": "desert",
     "name": "Desert",
     "category": "Nature",
-    "description": "A broad quiet opening and horizontally ruled project horizons.",
+    "description": "An open desert horizon with a sun slider that changes the time of day.",
     "bg": "#f2e4cc",
     "fg": "#59402e",
     "accent": "#85512c",
@@ -501,13 +536,14 @@
     "layout": "desert",
     "projects": "horizons",
     "file": "desert.html",
-    "new": false
+    "new": false,
+    "interaction": "An open desert horizon with a sun slider that changes the time of day."
   },
   {
     "slug": "underwater",
     "name": "Underwater",
     "category": "Nature",
-    "description": "A depth-indexed project expedition with anchored navigation.",
+    "description": "A depth-indexed expedition with a slider to highlight each project stop.",
     "bg": "#102f3c",
     "fg": "#d6eff0",
     "accent": "#88d7d7",
@@ -515,13 +551,14 @@
     "layout": "ocean",
     "projects": "depths",
     "file": "underwater.html",
-    "new": false
+    "new": false,
+    "interaction": "A depth-indexed expedition with a slider to highlight each project stop."
   },
   {
     "slug": "mobile",
     "name": "Mobile App",
     "category": "Modern",
-    "description": "A compact profile with persistent bottom navigation.",
+    "description": "A phone-style portfolio feed with bottom tabs and downloadable contact card.",
     "bg": "#f6f4f0",
     "fg": "#202b37",
     "accent": "#345b8c",
@@ -529,13 +566,14 @@
     "layout": "mobile",
     "projects": "feed",
     "file": "mobile.html",
-    "new": false
+    "new": false,
+    "interaction": "A phone-style portfolio feed with bottom tabs and downloadable contact card."
   },
   {
     "slug": "blueprint",
     "name": "Blueprint",
     "category": "New",
-    "description": "An engineering drawing sheet with project specifications.",
+    "description": "A gridded engineering drawing and implementation sheets with adjustable zoom.",
     "bg": "#15364c",
     "fg": "#e2f1f5",
     "accent": "#a7d8ee",
@@ -543,13 +581,14 @@
     "layout": "blueprint",
     "projects": "specs",
     "file": "blueprint.html",
-    "new": true
+    "new": true,
+    "interaction": "A gridded engineering drawing and implementation sheets with adjustable zoom."
   },
   {
     "slug": "kanban",
     "name": "Kanban",
     "category": "New",
-    "description": "A product board grouped by AI, platforms and developer tools.",
+    "description": "A movable project board with drag-and-drop and accessible move controls.",
     "bg": "#f0f0e9",
     "fg": "#283831",
     "accent": "#3a634e",
@@ -557,13 +596,14 @@
     "layout": "kanban",
     "projects": "kanban",
     "file": "kanban.html",
-    "new": true
+    "new": true,
+    "interaction": "A movable project board with drag-and-drop and accessible move controls."
   },
   {
     "slug": "library",
     "name": "Library",
     "category": "New",
-    "description": "A typographic catalogue of projects with expandable records.",
+    "description": "A searchable shelf of project books that open into catalogue records.",
     "bg": "#efe9dc",
     "fg": "#43382f",
     "accent": "#8b4535",
@@ -571,13 +611,14 @@
     "layout": "library",
     "projects": "books",
     "file": "library.html",
-    "new": true
+    "new": true,
+    "interaction": "A searchable shelf of project books that open into catalogue records."
   },
   {
     "slug": "dossier",
     "name": "Dossier",
     "category": "New",
-    "description": "A professional case file with a profile sheet and project exhibits.",
+    "description": "A tabbed public case file with project exhibits and decorative redactions.",
     "bg": "#e7e9df",
     "fg": "#2b3d36",
     "accent": "#536443",
@@ -585,13 +626,14 @@
     "layout": "dossier",
     "projects": "exhibits",
     "file": "dossier.html",
-    "new": true
+    "new": true,
+    "interaction": "A tabbed public case file with project exhibits and decorative redactions."
   },
   {
     "slug": "studio",
     "name": "Studio",
     "category": "New",
-    "description": "A portrait-led studio index and large alternating project titles.",
+    "description": "A large typographic work index with cycling project spotlights.",
     "bg": "#f1f1ec",
     "fg": "#292825",
     "accent": "#675135",
@@ -599,13 +641,14 @@
     "layout": "studio",
     "projects": "studio",
     "file": "studio.html",
-    "new": true
+    "new": true,
+    "interaction": "A large typographic work index with cycling project spotlights."
   },
   {
     "slug": "atlas",
     "name": "Atlas",
     "category": "New",
-    "description": "A career route map followed by project destinations.",
+    "description": "An interactive career route map and a catalogue of project destinations.",
     "bg": "#ece9dc",
     "fg": "#2b4444",
     "accent": "#336563",
@@ -613,6 +656,7 @@
     "layout": "atlas",
     "projects": "destinations",
     "file": "atlas.html",
-    "new": true
+    "new": true,
+    "interaction": "An interactive career route map and a catalogue of project destinations."
   }
 ]

@@ -1,0 +1,1530 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-12T09:53:41.640472+00:00",
+  "title": "Design System: Krishna Thorat Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "index-accent": {
+        "role": "primary",
+        "displayName": "Minimal accent",
+        "tonalRamp": [
+          "oklch(15% 0.0699 157.89)",
+          "oklch(26% 0.0699 157.89)",
+          "oklch(38% 0.0699 157.89)",
+          "oklch(49% 0.0699 157.89)",
+          "oklch(61% 0.0699 157.89)",
+          "oklch(72% 0.0699 157.89)",
+          "oklch(84% 0.0699 157.89)",
+          "oklch(95% 0.0699 157.89)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "swiss-accent": {
+        "role": "primary",
+        "displayName": "Swiss accent",
+        "tonalRamp": [
+          "oklch(15% 0.1798 30.92)",
+          "oklch(26% 0.1798 30.92)",
+          "oklch(38% 0.1798 30.92)",
+          "oklch(49% 0.1798 30.92)",
+          "oklch(61% 0.1798 30.92)",
+          "oklch(72% 0.1798 30.92)",
+          "oklch(84% 0.1798 30.92)",
+          "oklch(95% 0.1798 30.92)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "corporate-accent": {
+        "role": "primary",
+        "displayName": "Corporate accent",
+        "tonalRamp": [
+          "oklch(15% 0.1071 248.25)",
+          "oklch(26% 0.1071 248.25)",
+          "oklch(38% 0.1071 248.25)",
+          "oklch(49% 0.1071 248.25)",
+          "oklch(61% 0.1071 248.25)",
+          "oklch(72% 0.1071 248.25)",
+          "oklch(84% 0.1071 248.25)",
+          "oklch(95% 0.1071 248.25)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "scientific-accent": {
+        "role": "primary",
+        "displayName": "Scientific accent",
+        "tonalRamp": [
+          "oklch(15% 0.0706 237.85)",
+          "oklch(26% 0.0706 237.85)",
+          "oklch(38% 0.0706 237.85)",
+          "oklch(49% 0.0706 237.85)",
+          "oklch(61% 0.0706 237.85)",
+          "oklch(72% 0.0706 237.85)",
+          "oklch(84% 0.0706 237.85)",
+          "oklch(95% 0.0706 237.85)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "dashboard-accent": {
+        "role": "primary",
+        "displayName": "Dashboard accent",
+        "tonalRamp": [
+          "oklch(15% 0.0735 210.44)",
+          "oklch(26% 0.0735 210.44)",
+          "oklch(38% 0.0735 210.44)",
+          "oklch(49% 0.0735 210.44)",
+          "oklch(61% 0.0735 210.44)",
+          "oklch(72% 0.0735 210.44)",
+          "oklch(84% 0.0735 210.44)",
+          "oklch(95% 0.0735 210.44)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "bentobox-accent": {
+        "role": "primary",
+        "displayName": "Bento Box accent",
+        "tonalRamp": [
+          "oklch(15% 0.1088 51.94)",
+          "oklch(26% 0.1088 51.94)",
+          "oklch(38% 0.1088 51.94)",
+          "oklch(49% 0.1088 51.94)",
+          "oklch(61% 0.1088 51.94)",
+          "oklch(72% 0.1088 51.94)",
+          "oklch(84% 0.1088 51.94)",
+          "oklch(95% 0.1088 51.94)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "nordic-accent": {
+        "role": "primary",
+        "displayName": "Nordic accent",
+        "tonalRamp": [
+          "oklch(15% 0.0768 135.18)",
+          "oklch(26% 0.0768 135.18)",
+          "oklch(38% 0.0768 135.18)",
+          "oklch(49% 0.0768 135.18)",
+          "oklch(61% 0.0768 135.18)",
+          "oklch(72% 0.0768 135.18)",
+          "oklch(84% 0.0768 135.18)",
+          "oklch(95% 0.0768 135.18)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "newspaper-accent": {
+        "role": "primary",
+        "displayName": "Newspaper accent",
+        "tonalRamp": [
+          "oklch(15% 0.1195 34.71)",
+          "oklch(26% 0.1195 34.71)",
+          "oklch(38% 0.1195 34.71)",
+          "oklch(49% 0.1195 34.71)",
+          "oklch(61% 0.1195 34.71)",
+          "oklch(72% 0.1195 34.71)",
+          "oklch(84% 0.1195 34.71)",
+          "oklch(95% 0.1195 34.71)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "neubrutalism-accent": {
+        "role": "primary",
+        "displayName": "Neubrutalism accent",
+        "tonalRamp": [
+          "oklch(15% 0.1317 292.60)",
+          "oklch(26% 0.1317 292.60)",
+          "oklch(38% 0.1317 292.60)",
+          "oklch(49% 0.1317 292.60)",
+          "oklch(61% 0.1317 292.60)",
+          "oklch(72% 0.1317 292.60)",
+          "oklch(84% 0.1317 292.60)",
+          "oklch(95% 0.1317 292.60)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "maximalist-accent": {
+        "role": "primary",
+        "displayName": "Maximalist accent",
+        "tonalRamp": [
+          "oklch(15% 0.1548 125.31)",
+          "oklch(26% 0.1548 125.31)",
+          "oklch(38% 0.1548 125.31)",
+          "oklch(49% 0.1548 125.31)",
+          "oklch(61% 0.1548 125.31)",
+          "oklch(72% 0.1548 125.31)",
+          "oklch(84% 0.1548 125.31)",
+          "oklch(95% 0.1548 125.31)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "bauhaus-accent": {
+        "role": "primary",
+        "displayName": "Bauhaus accent",
+        "tonalRamp": [
+          "oklch(15% 0.1642 28.98)",
+          "oklch(26% 0.1642 28.98)",
+          "oklch(38% 0.1642 28.98)",
+          "oklch(49% 0.1642 28.98)",
+          "oklch(61% 0.1642 28.98)",
+          "oklch(72% 0.1642 28.98)",
+          "oklch(84% 0.1642 28.98)",
+          "oklch(95% 0.1642 28.98)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "industrial-accent": {
+        "role": "primary",
+        "displayName": "Industrial accent",
+        "tonalRamp": [
+          "oklch(15% 0.1212 44.77)",
+          "oklch(26% 0.1212 44.77)",
+          "oklch(38% 0.1212 44.77)",
+          "oklch(49% 0.1212 44.77)",
+          "oklch(61% 0.1212 44.77)",
+          "oklch(72% 0.1212 44.77)",
+          "oklch(84% 0.1212 44.77)",
+          "oklch(95% 0.1212 44.77)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "skeuomorphic-accent": {
+        "role": "primary",
+        "displayName": "Skeuomorphic accent",
+        "tonalRamp": [
+          "oklch(15% 0.0743 50.64)",
+          "oklch(26% 0.0743 50.64)",
+          "oklch(38% 0.0743 50.64)",
+          "oklch(49% 0.0743 50.64)",
+          "oklch(61% 0.0743 50.64)",
+          "oklch(72% 0.0743 50.64)",
+          "oklch(84% 0.0743 50.64)",
+          "oklch(95% 0.0743 50.64)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "claymorphism-accent": {
+        "role": "primary",
+        "displayName": "Claymorphism accent",
+        "tonalRamp": [
+          "oklch(15% 0.1280 353.74)",
+          "oklch(26% 0.1280 353.74)",
+          "oklch(38% 0.1280 353.74)",
+          "oklch(49% 0.1280 353.74)",
+          "oklch(61% 0.1280 353.74)",
+          "oklch(72% 0.1280 353.74)",
+          "oklch(84% 0.1280 353.74)",
+          "oklch(95% 0.1280 353.74)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "isometric-accent": {
+        "role": "primary",
+        "displayName": "Isometric accent",
+        "tonalRamp": [
+          "oklch(15% 0.1363 291.66)",
+          "oklch(26% 0.1363 291.66)",
+          "oklch(38% 0.1363 291.66)",
+          "oklch(49% 0.1363 291.66)",
+          "oklch(61% 0.1363 291.66)",
+          "oklch(72% 0.1363 291.66)",
+          "oklch(84% 0.1363 291.66)",
+          "oklch(95% 0.1363 291.66)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "origami-accent": {
+        "role": "primary",
+        "displayName": "Origami accent",
+        "tonalRamp": [
+          "oklch(15% 0.1454 24.22)",
+          "oklch(26% 0.1454 24.22)",
+          "oklch(38% 0.1454 24.22)",
+          "oklch(49% 0.1454 24.22)",
+          "oklch(61% 0.1454 24.22)",
+          "oklch(72% 0.1454 24.22)",
+          "oklch(84% 0.1454 24.22)",
+          "oklch(95% 0.1454 24.22)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "aero-accent": {
+        "role": "primary",
+        "displayName": "Aero accent",
+        "tonalRamp": [
+          "oklch(15% 0.0837 237.21)",
+          "oklch(26% 0.0837 237.21)",
+          "oklch(38% 0.0837 237.21)",
+          "oklch(49% 0.0837 237.21)",
+          "oklch(61% 0.0837 237.21)",
+          "oklch(72% 0.0837 237.21)",
+          "oklch(84% 0.0837 237.21)",
+          "oklch(95% 0.0837 237.21)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "holographic-accent": {
+        "role": "primary",
+        "displayName": "Holographic accent",
+        "tonalRamp": [
+          "oklch(15% 0.0955 318.93)",
+          "oklch(26% 0.0955 318.93)",
+          "oklch(38% 0.0955 318.93)",
+          "oklch(49% 0.0955 318.93)",
+          "oklch(61% 0.0955 318.93)",
+          "oklch(72% 0.0955 318.93)",
+          "oklch(84% 0.0955 318.93)",
+          "oklch(95% 0.0955 318.93)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "cyberpunk-accent": {
+        "role": "primary",
+        "displayName": "Cyberpunk accent",
+        "tonalRamp": [
+          "oklch(15% 0.0964 171.38)",
+          "oklch(26% 0.0964 171.38)",
+          "oklch(38% 0.0964 171.38)",
+          "oklch(49% 0.0964 171.38)",
+          "oklch(61% 0.0964 171.38)",
+          "oklch(72% 0.0964 171.38)",
+          "oklch(84% 0.0964 171.38)",
+          "oklch(95% 0.0964 171.38)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "terminal-accent": {
+        "role": "primary",
+        "displayName": "Terminal accent",
+        "tonalRamp": [
+          "oklch(15% 0.1472 130.05)",
+          "oklch(26% 0.1472 130.05)",
+          "oklch(38% 0.1472 130.05)",
+          "oklch(49% 0.1472 130.05)",
+          "oklch(61% 0.1472 130.05)",
+          "oklch(72% 0.1472 130.05)",
+          "oklch(84% 0.1472 130.05)",
+          "oklch(95% 0.1472 130.05)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "neonnoir-accent": {
+        "role": "primary",
+        "displayName": "Neon Noir accent",
+        "tonalRamp": [
+          "oklch(15% 0.0964 352.20)",
+          "oklch(26% 0.0964 352.20)",
+          "oklch(38% 0.0964 352.20)",
+          "oklch(49% 0.0964 352.20)",
+          "oklch(61% 0.0964 352.20)",
+          "oklch(72% 0.0964 352.20)",
+          "oklch(84% 0.0964 352.20)",
+          "oklch(95% 0.0964 352.20)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "cosmic-accent": {
+        "role": "primary",
+        "displayName": "Cosmic accent",
+        "tonalRamp": [
+          "oklch(15% 0.0899 283.51)",
+          "oklch(26% 0.0899 283.51)",
+          "oklch(38% 0.0899 283.51)",
+          "oklch(49% 0.0899 283.51)",
+          "oklch(61% 0.0899 283.51)",
+          "oklch(72% 0.0899 283.51)",
+          "oklch(84% 0.0899 283.51)",
+          "oklch(95% 0.0899 283.51)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "retro-accent": {
+        "role": "primary",
+        "displayName": "Retro accent",
+        "tonalRamp": [
+          "oklch(15% 0.1097 48.90)",
+          "oklch(26% 0.1097 48.90)",
+          "oklch(38% 0.1097 48.90)",
+          "oklch(49% 0.1097 48.90)",
+          "oklch(61% 0.1097 48.90)",
+          "oklch(72% 0.1097 48.90)",
+          "oklch(84% 0.1097 48.90)",
+          "oklch(95% 0.1097 48.90)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "vaporwave-accent": {
+        "role": "primary",
+        "displayName": "Vaporwave accent",
+        "tonalRamp": [
+          "oklch(15% 0.0850 199.43)",
+          "oklch(26% 0.0850 199.43)",
+          "oklch(38% 0.0850 199.43)",
+          "oklch(49% 0.0850 199.43)",
+          "oklch(61% 0.0850 199.43)",
+          "oklch(72% 0.0850 199.43)",
+          "oklch(84% 0.0850 199.43)",
+          "oklch(95% 0.0850 199.43)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "artdeco-accent": {
+        "role": "primary",
+        "displayName": "Art Deco accent",
+        "tonalRamp": [
+          "oklch(15% 0.0876 83.36)",
+          "oklch(26% 0.0876 83.36)",
+          "oklch(38% 0.0876 83.36)",
+          "oklch(49% 0.0876 83.36)",
+          "oklch(61% 0.0876 83.36)",
+          "oklch(72% 0.0876 83.36)",
+          "oklch(84% 0.0876 83.36)",
+          "oklch(95% 0.0876 83.36)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "filmgrain-accent": {
+        "role": "primary",
+        "displayName": "Film Grain accent",
+        "tonalRamp": [
+          "oklch(15% 0.0594 50.39)",
+          "oklch(26% 0.0594 50.39)",
+          "oklch(38% 0.0594 50.39)",
+          "oklch(49% 0.0594 50.39)",
+          "oklch(61% 0.0594 50.39)",
+          "oklch(72% 0.0594 50.39)",
+          "oklch(84% 0.0594 50.39)",
+          "oklch(95% 0.0594 50.39)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "risograph-accent": {
+        "role": "primary",
+        "displayName": "Risograph accent",
+        "tonalRamp": [
+          "oklch(15% 0.1376 5.72)",
+          "oklch(26% 0.1376 5.72)",
+          "oklch(38% 0.1376 5.72)",
+          "oklch(49% 0.1376 5.72)",
+          "oklch(61% 0.1376 5.72)",
+          "oklch(72% 0.1376 5.72)",
+          "oklch(84% 0.1376 5.72)",
+          "oklch(95% 0.1376 5.72)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "weathered-accent": {
+        "role": "primary",
+        "displayName": "Weathered accent",
+        "tonalRamp": [
+          "oklch(15% 0.0666 66.65)",
+          "oklch(26% 0.0666 66.65)",
+          "oklch(38% 0.0666 66.65)",
+          "oklch(49% 0.0666 66.65)",
+          "oklch(61% 0.0666 66.65)",
+          "oklch(72% 0.0666 66.65)",
+          "oklch(84% 0.0666 66.65)",
+          "oklch(95% 0.0666 66.65)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "dieselpunk-accent": {
+        "role": "primary",
+        "displayName": "Dieselpunk accent",
+        "tonalRamp": [
+          "oklch(15% 0.0950 70.93)",
+          "oklch(26% 0.0950 70.93)",
+          "oklch(38% 0.0950 70.93)",
+          "oklch(49% 0.0950 70.93)",
+          "oklch(61% 0.0950 70.93)",
+          "oklch(72% 0.0950 70.93)",
+          "oklch(84% 0.0950 70.93)",
+          "oklch(95% 0.0950 70.93)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "pixelart-accent": {
+        "role": "primary",
+        "displayName": "Pixel Art accent",
+        "tonalRamp": [
+          "oklch(15% 0.1557 129.86)",
+          "oklch(26% 0.1557 129.86)",
+          "oklch(38% 0.1557 129.86)",
+          "oklch(49% 0.1557 129.86)",
+          "oklch(61% 0.1557 129.86)",
+          "oklch(72% 0.1557 129.86)",
+          "oklch(84% 0.1557 129.86)",
+          "oklch(95% 0.1557 129.86)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "minecraft-accent": {
+        "role": "primary",
+        "displayName": "Minecraft accent",
+        "tonalRamp": [
+          "oklch(15% 0.1031 134.83)",
+          "oklch(26% 0.1031 134.83)",
+          "oklch(38% 0.1031 134.83)",
+          "oklch(49% 0.1031 134.83)",
+          "oklch(61% 0.1031 134.83)",
+          "oklch(72% 0.1031 134.83)",
+          "oklch(84% 0.1031 134.83)",
+          "oklch(95% 0.1031 134.83)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "rpg-accent": {
+        "role": "primary",
+        "displayName": "RPG accent",
+        "tonalRamp": [
+          "oklch(15% 0.0794 53.38)",
+          "oklch(26% 0.0794 53.38)",
+          "oklch(38% 0.0794 53.38)",
+          "oklch(49% 0.0794 53.38)",
+          "oklch(61% 0.0794 53.38)",
+          "oklch(72% 0.0794 53.38)",
+          "oklch(84% 0.0794 53.38)",
+          "oklch(95% 0.0794 53.38)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "dota2-accent": {
+        "role": "primary",
+        "displayName": "Dota 2 accent",
+        "tonalRamp": [
+          "oklch(15% 0.0970 73.86)",
+          "oklch(26% 0.0970 73.86)",
+          "oklch(38% 0.0970 73.86)",
+          "oklch(49% 0.0970 73.86)",
+          "oklch(61% 0.0970 73.86)",
+          "oklch(72% 0.0970 73.86)",
+          "oklch(84% 0.0970 73.86)",
+          "oklch(95% 0.0970 73.86)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "chalkboard-accent": {
+        "role": "primary",
+        "displayName": "Chalkboard accent",
+        "tonalRamp": [
+          "oklch(15% 0.0862 92.26)",
+          "oklch(26% 0.0862 92.26)",
+          "oklch(38% 0.0862 92.26)",
+          "oklch(49% 0.0862 92.26)",
+          "oklch(61% 0.0862 92.26)",
+          "oklch(72% 0.0862 92.26)",
+          "oklch(84% 0.0862 92.26)",
+          "oklch(95% 0.0862 92.26)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "ukiyoe-accent": {
+        "role": "primary",
+        "displayName": "Ukiyo-e accent",
+        "tonalRamp": [
+          "oklch(15% 0.1449 28.83)",
+          "oklch(26% 0.1449 28.83)",
+          "oklch(38% 0.1449 28.83)",
+          "oklch(49% 0.1449 28.83)",
+          "oklch(61% 0.1449 28.83)",
+          "oklch(72% 0.1449 28.83)",
+          "oklch(84% 0.1449 28.83)",
+          "oklch(95% 0.1449 28.83)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "desert-accent": {
+        "role": "primary",
+        "displayName": "Desert accent",
+        "tonalRamp": [
+          "oklch(15% 0.0867 54.51)",
+          "oklch(26% 0.0867 54.51)",
+          "oklch(38% 0.0867 54.51)",
+          "oklch(49% 0.0867 54.51)",
+          "oklch(61% 0.0867 54.51)",
+          "oklch(72% 0.0867 54.51)",
+          "oklch(84% 0.0867 54.51)",
+          "oklch(95% 0.0867 54.51)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "underwater-accent": {
+        "role": "primary",
+        "displayName": "Underwater accent",
+        "tonalRamp": [
+          "oklch(15% 0.0777 195.75)",
+          "oklch(26% 0.0777 195.75)",
+          "oklch(38% 0.0777 195.75)",
+          "oklch(49% 0.0777 195.75)",
+          "oklch(61% 0.0777 195.75)",
+          "oklch(72% 0.0777 195.75)",
+          "oklch(84% 0.0777 195.75)",
+          "oklch(95% 0.0777 195.75)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "mobile-accent": {
+        "role": "primary",
+        "displayName": "Mobile App accent",
+        "tonalRamp": [
+          "oklch(15% 0.0917 254.97)",
+          "oklch(26% 0.0917 254.97)",
+          "oklch(38% 0.0917 254.97)",
+          "oklch(49% 0.0917 254.97)",
+          "oklch(61% 0.0917 254.97)",
+          "oklch(72% 0.0917 254.97)",
+          "oklch(84% 0.0917 254.97)",
+          "oklch(95% 0.0917 254.97)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "blueprint-accent": {
+        "role": "primary",
+        "displayName": "Blueprint accent",
+        "tonalRamp": [
+          "oklch(15% 0.0593 227.21)",
+          "oklch(26% 0.0593 227.21)",
+          "oklch(38% 0.0593 227.21)",
+          "oklch(49% 0.0593 227.21)",
+          "oklch(61% 0.0593 227.21)",
+          "oklch(72% 0.0593 227.21)",
+          "oklch(84% 0.0593 227.21)",
+          "oklch(95% 0.0593 227.21)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "kanban-accent": {
+        "role": "primary",
+        "displayName": "Kanban accent",
+        "tonalRamp": [
+          "oklch(15% 0.0580 160.66)",
+          "oklch(26% 0.0580 160.66)",
+          "oklch(38% 0.0580 160.66)",
+          "oklch(49% 0.0580 160.66)",
+          "oklch(61% 0.0580 160.66)",
+          "oklch(72% 0.0580 160.66)",
+          "oklch(84% 0.0580 160.66)",
+          "oklch(95% 0.0580 160.66)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "library-accent": {
+        "role": "primary",
+        "displayName": "Library accent",
+        "tonalRamp": [
+          "oklch(15% 0.0992 34.06)",
+          "oklch(26% 0.0992 34.06)",
+          "oklch(38% 0.0992 34.06)",
+          "oklch(49% 0.0992 34.06)",
+          "oklch(61% 0.0992 34.06)",
+          "oklch(72% 0.0992 34.06)",
+          "oklch(84% 0.0992 34.06)",
+          "oklch(95% 0.0992 34.06)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "dossier-accent": {
+        "role": "primary",
+        "displayName": "Dossier accent",
+        "tonalRamp": [
+          "oklch(15% 0.0548 130.39)",
+          "oklch(26% 0.0548 130.39)",
+          "oklch(38% 0.0548 130.39)",
+          "oklch(49% 0.0548 130.39)",
+          "oklch(61% 0.0548 130.39)",
+          "oklch(72% 0.0548 130.39)",
+          "oklch(84% 0.0548 130.39)",
+          "oklch(95% 0.0548 130.39)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "studio-accent": {
+        "role": "primary",
+        "displayName": "Studio accent",
+        "tonalRamp": [
+          "oklch(15% 0.0511 72.65)",
+          "oklch(26% 0.0511 72.65)",
+          "oklch(38% 0.0511 72.65)",
+          "oklch(49% 0.0511 72.65)",
+          "oklch(61% 0.0511 72.65)",
+          "oklch(72% 0.0511 72.65)",
+          "oklch(84% 0.0511 72.65)",
+          "oklch(95% 0.0511 72.65)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      },
+      "atlas-accent": {
+        "role": "primary",
+        "displayName": "Atlas accent",
+        "tonalRamp": [
+          "oklch(15% 0.0542 192.07)",
+          "oklch(26% 0.0542 192.07)",
+          "oklch(38% 0.0542 192.07)",
+          "oklch(49% 0.0542 192.07)",
+          "oklch(61% 0.0542 192.07)",
+          "oklch(72% 0.0542 192.07)",
+          "oklch(84% 0.0542 192.07)",
+          "oklch(95% 0.0542 192.07)"
+        ],
+        "rampSource": "Synthesized preview ramp; catalogue hex remains normative."
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "World display",
+        "purpose": "Catalogue-selected display family; theme selectors own scale."
+      }
+    },
+    "shadows": [
+      {
+        "name": "picker-launch",
+        "value": "0 5px 22px #0003",
+        "purpose": "Persistent isolated launcher."
+      },
+      {
+        "name": "picker-drawer",
+        "value": "-12px 0 40px #0002",
+        "purpose": "Modal drawer edge."
+      },
+      {
+        "name": "sticker",
+        "value": "8px 8px 0 #17191c",
+        "purpose": "Neubrutalism project stickers."
+      },
+      {
+        "name": "desktop-window",
+        "value": "5px 12px 24px #0002",
+        "purpose": "Movable desktop surfaces."
+      },
+      {
+        "name": "clay-object",
+        "value": "10px 16px 25px #8a325c15,inset -7px -7px 16px #8a325c15,inset 8px 8px 18px #fff8",
+        "purpose": "Sculpted project objects."
+      }
+    ],
+    "motion": [
+      {
+        "name": "world-control",
+        "value": "background .16s,transform .2s cubic-bezier(.16,1,.3,1)",
+        "purpose": "World button responses."
+      },
+      {
+        "name": "reader-reveal",
+        "value": ".35s cubic-bezier(.16,1,.3,1)",
+        "purpose": "Selected project reader."
+      },
+      {
+        "name": "unfold",
+        "value": ".45s cubic-bezier(.16,1,.3,1)",
+        "purpose": "Origami leaf disclosure."
+      },
+      {
+        "name": "picker-enter",
+        "value": ".2s ease-out",
+        "purpose": "Drawer enters only with no reduced-motion preference."
+      },
+      {
+        "name": "vinyl-spin",
+        "value": "25s linear infinite",
+        "purpose": "Retro decorative vinyl; disabled with reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "world-medium",
+        "value": "1050px"
+      },
+      {
+        "name": "world-phone",
+        "value": "700px"
+      },
+      {
+        "name": "picker-compact",
+        "value": "480px"
+      }
+    ],
+    "sources": {
+      "facts": "data/profile.json",
+      "paletteAndCatalogue": "data/themes.json",
+      "composition": "scripts/worlds.mjs",
+      "generation": "scripts/build.mjs",
+      "styles": "assets/css/worlds.css",
+      "behaviour": "assets/js/worlds.js",
+      "picker": "assets/js/template-switcher.js",
+      "previews": "assets/previews/<slug>.webp",
+      "contract": ".impeccable/theme-worlds-contract.md"
+    },
+    "worldSystems": [
+      {
+        "slug": "index",
+        "route": "index.html",
+        "name": "Minimal",
+        "composition": "A spare typographic project accordion with a distraction-free focus mode.",
+        "catalogueLayout": "intro",
+        "catalogueProjects": "list",
+        "paletteRefs": {
+          "paper": "colors.index-paper",
+          "ink": "colors.index-ink",
+          "accent": "colors.index-accent"
+        },
+        "fontFamilyToken": "typography.display",
+        "recordsAndBehaviour": "Ruled career, toolkit disclosures and learning beside the project accordion; focus mode hides supporting records."
+      },
+      {
+        "slug": "swiss",
+        "route": "swiss.html",
+        "name": "Swiss",
+        "composition": "An asymmetric Swiss poster and ruled work register; reveal its layout grid.",
+        "catalogueLayout": "swiss",
+        "catalogueProjects": "register",
+        "paletteRefs": {
+          "paper": "colors.swiss-paper",
+          "ink": "colors.swiss-ink",
+          "accent": "colors.swiss-accent"
+        },
+        "fontFamilyToken": "typography.display",
+        "recordsAndBehaviour": "Career ledger with date column and ruled toolkit/learning; optional visible poster grid."
+      },
+      {
+        "slug": "corporate",
+        "route": "corporate.html",
+        "name": "Corporate",
+        "composition": "A professional capability selector with filtered product case studies.",
+        "catalogueLayout": "corporate",
+        "catalogueProjects": "features",
+        "paletteRefs": {
+          "paper": "colors.corporate-paper",
+          "ink": "colors.corporate-ink",
+          "accent": "colors.corporate-accent"
+        },
+        "fontFamilyToken": "typography.display",
+        "recordsAndBehaviour": "Executive career rules and supporting toolkit/learning; capability filters hide unmatched case studies."
+      },
+      {
+        "slug": "scientific",
+        "route": "scientific.html",
+        "name": "Scientific",
+        "composition": "A typeset research paper with margin navigation and annotation mode.",
+        "catalogueLayout": "paper",
+        "catalogueProjects": "references",
+        "paletteRefs": {
+          "paper": "colors.scientific-paper",
+          "ink": "colors.scientific-ink",
+          "accent": "colors.scientific-accent"
+        },
+        "fontFamilyToken": "typography.paper-body",
+        "recordsAndBehaviour": "Career citations, numbered paper sections and margin navigation; optional margin annotations."
+      },
+      {
+        "slug": "dashboard",
+        "route": "dashboard.html",
+        "name": "Dashboard",
+        "composition": "A portfolio application workspace with project records and compact view.",
+        "catalogueLayout": "dashboard",
+        "catalogueProjects": "board",
+        "paletteRefs": {
+          "paper": "colors.dashboard-paper",
+          "ink": "colors.dashboard-ink",
+          "accent": "colors.dashboard-accent"
+        },
+        "fontFamilyToken": "typography.display",
+        "recordsAndBehaviour": "Career and project workspace beside the toolkit/learning panel; compact mode removes project detail copy."
+      },
+      {
+        "slug": "bentobox",
+        "route": "bentobox.html",
+        "name": "Bento Box",
+        "composition": "A living mosaic of projects, profile and Pune time; shuffle the tiles.",
+        "catalogueLayout": "bento",
+        "catalogueProjects": "mosaic",
+        "paletteRefs": {
+          "paper": "colors.bentobox-paper",
+          "ink": "colors.bentobox-ink",
+          "accent": "colors.bentobox-accent"
+        },
+        "fontFamilyToken": "typography.display",
+        "recordsAndBehaviour": "Supporting career/toolkit/learning below the mosaic; project tiles shuffle and clock shows live Pune time."
+      },
+      {
+        "slug": "nordic",
+        "route": "nordic.html",
+        "name": "Nordic",
+        "composition": "A portrait-led journal with long-form project stories and evening light.",
+        "catalogueLayout": "nordic",
+        "catalogueProjects": "pairs",
+        "paletteRefs": {
+          "paper": "colors.nordic-paper",
+          "ink": "colors.nordic-ink",
+          "accent": "colors.nordic-accent"
+        },
+        "fontFamilyToken": "typography.paper-body",
+        "recordsAndBehaviour": "Single-column journal records capped at 850px; evening mode switches the reading palette."
+      },
+      {
+        "slug": "newspaper",
+        "route": "newspaper.html",
+        "name": "Newspaper",
+        "composition": "An editorial front page, headline dispatches and switchable editions.",
+        "catalogueLayout": "newspaper",
+        "catalogueProjects": "columns",
+        "paletteRefs": {
+          "paper": "colors.newspaper-paper",
+          "ink": "colors.newspaper-ink",
+          "accent": "colors.newspaper-accent"
+        },
+        "fontFamilyToken": "typography.paper-body",
+        "recordsAndBehaviour": "Three-column editorial records with career spanning two columns; edition switch changes paper and masthead."
+      },
+      {
+        "slug": "neubrutalism",
+        "route": "neubrutalism.html",
+        "name": "Neubrutalism",
+        "composition": "A bold poster and movable project stickers; drag or use arrow keys.",
+        "catalogueLayout": "poster",
+        "catalogueProjects": "stagger",
+        "paletteRefs": {
+          "paper": "colors.neubrutalism-paper",
+          "ink": "colors.neubrutalism-ink",
+          "accent": "colors.neubrutalism-accent"
+        },
+        "fontFamilyToken": "typography.display",
+        "recordsAndBehaviour": "Hard bordered career records and lifted toolkit/learning stickers; pointer and arrow-key sticker movement."
+      },
+      {
+        "slug": "maximalist",
+        "route": "maximalist.html",
+        "name": "Maximalist",
+        "composition": "An overlapping colour collage and a button to remix the entire wall.",
+        "catalogueLayout": "maximal",
+        "catalogueProjects": "wall",
+        "paletteRefs": {
+          "paper": "colors.maximalist-paper",
+          "ink": "colors.maximalist-ink",
+          "accent": "colors.maximalist-accent"
+        },
+        "fontFamilyToken": "typography.display",
+        "recordsAndBehaviour": "Inverted lime record wall below an overlapping collage; remix changes colour and composition."
+      },
+      {
+        "slug": "bauhaus",
+        "route": "bauhaus.html",
+        "name": "Bauhaus",
+        "composition": "A geometric composition and modular catalogue; recompose the shapes.",
+        "catalogueLayout": "bauhaus",
+        "catalogueProjects": "modules",
+        "paletteRefs": {
+          "paper": "colors.bauhaus-paper",
+          "ink": "colors.bauhaus-ink",
+          "accent": "colors.bauhaus-accent"
+        },
+        "fontFamilyToken": "typography.display",
+        "recordsAndBehaviour": "Career grid, yellow toolkit and blue learning modules; recompose moves geometric poster shapes."
+      },
+      {
+        "slug": "industrial",
+        "route": "industrial.html",
+        "name": "Industrial",
+        "composition": "An engineering specification desk with project inspection and document scaling.",
+        "catalogueLayout": "industrial",
+        "catalogueProjects": "register",
+        "paletteRefs": {
+          "paper": "colors.industrial-paper",
+          "ink": "colors.industrial-ink",
+          "accent": "colors.industrial-accent"
+        },
+        "fontFamilyToken": "typography.shell-body",
+        "recordsAndBehaviour": "Heavy ruled specification records and scaled project workbench; native document-scale slider."
+      },
+      {
+        "slug": "skeuomorphic",
+        "route": "skeuomorphic.html",
+        "name": "Skeuomorphic",
+        "composition": "A tactile desktop with movable windows, project folders and career documents.",
+        "catalogueLayout": "desktop",
+        "catalogueProjects": "folders",
+        "paletteRefs": {
+          "paper": "colors.skeuomorphic-paper",
+          "ink": "colors.skeuomorphic-ink",
+          "accent": "colors.skeuomorphic-accent"
+        },
+        "fontFamilyToken": "typography.display",
+        "recordsAndBehaviour": "Career document window plus material toolkit/learning sheets; movable windows and folder shortcuts."
+      },
+      {
+        "slug": "claymorphism",
+        "route": "claymorphism.html",
+        "name": "Claymorphism",
+        "composition": "Soft sculpted project objects that squish when pressed; change their softness.",
+        "catalogueLayout": "clay",
+        "catalogueProjects": "islands",
+        "paletteRefs": {
+          "paper": "colors.claymorphism-paper",
+          "ink": "colors.claymorphism-ink",
+          "accent": "colors.claymorphism-accent"
+        },
+        "fontFamilyToken": "typography.display",
+        "recordsAndBehaviour": "Rounded sculpted records and project objects; softness changes corners and pointer presses squish objects."
+      },
+      {
+        "slug": "isometric",
+        "route": "isometric.html",
+        "name": "Isometric",
+        "composition": "An isometric project city; select buildings to explore what is inside.",
+        "catalogueLayout": "isometric",
+        "catalogueProjects": "steps",
+        "paletteRefs": {
+          "paper": "colors.isometric-paper",
+          "ink": "colors.isometric-ink",
+          "accent": "colors.isometric-accent"
+        },
+        "fontFamilyToken": "typography.display",
+        "recordsAndBehaviour": "Career records below the selectable project city; skewed toolkit surface echoes building geometry."
+      },
+      {
+        "slug": "origami",
+        "route": "origami.html",
+        "name": "Origami",
+        "composition": "A folded cover and project leaves that unfold into implementation details.",
+        "catalogueLayout": "fold",
+        "catalogueProjects": "leaves",
+        "paletteRefs": {
+          "paper": "colors.origami-paper",
+          "ink": "colors.origami-ink",
+          "accent": "colors.origami-accent"
+        },
+        "fontFamilyToken": "typography.paper-body",
+        "recordsAndBehaviour": "Career, tools and learning each occupy their own native unfolding book leaf."
+      },
+      {
+        "slug": "aero",
+        "route": "aero.html",
+        "name": "Aero",
+        "composition": "A glass desktop with movable windows, a start menu and taskbar.",
+        "catalogueLayout": "aero",
+        "catalogueProjects": "windows",
+        "paletteRefs": {
+          "paper": "colors.aero-paper",
+          "ink": "colors.aero-ink",
+          "accent": "colors.aero-accent"
+        },
+        "fontFamilyToken": "typography.display",
+        "recordsAndBehaviour": "Career/toolkit/learning below a glass workspace and taskbar; movable windows and Start disclosure."
+      },
+      {
+        "slug": "holographic",
+        "route": "holographic.html",
+        "name": "Holographic",
+        "composition": "A spectrum identity ticket, adjustable foil light and horizontal gallery.",
+        "catalogueLayout": "hologram",
+        "catalogueProjects": "gallery",
+        "paletteRefs": {
+          "paper": "colors.holographic-paper",
+          "ink": "colors.holographic-ink",
+          "accent": "colors.holographic-accent"
+        },
+        "fontFamilyToken": "typography.display",
+        "recordsAndBehaviour": "Full-width career and paired supporting records; foil-angle range adjusts the spectrum ticket."
+      },
+      {
+        "slug": "cyberpunk",
+        "route": "cyberpunk.html",
+        "name": "Cyberpunk",
+        "composition": "A project-channel console with switchable signal colours and technical records.",
+        "catalogueLayout": "cyber",
+        "catalogueProjects": "dossiers",
+        "paletteRefs": {
+          "paper": "colors.cyberpunk-paper",
+          "ink": "colors.cyberpunk-ink",
+          "accent": "colors.cyberpunk-accent"
+        },
+        "fontFamilyToken": "typography.shell-body",
+        "recordsAndBehaviour": "Toolkit chip bank, career transmissions and learning in console order; retune cycles three signals."
+      },
+      {
+        "slug": "terminal",
+        "route": "terminal.html",
+        "name": "Terminal",
+        "composition": "A working local shell: list projects, read files and explore with commands.",
+        "catalogueLayout": "terminal",
+        "catalogueProjects": "output",
+        "paletteRefs": {
+          "paper": "colors.terminal-paper",
+          "ink": "colors.terminal-ink",
+          "accent": "colors.terminal-accent"
+        },
+        "fontFamilyToken": "typography.shell-body",
+        "recordsAndBehaviour": "Readable file disclosures with prompt-prefixed career entries; local shell reads actual profile/project facts."
+      },
+      {
+        "slug": "neonnoir",
+        "route": "neonnoir.html",
+        "name": "Neon Noir",
+        "composition": "A cinematic identity frame and selectable case files; switch the lights.",
+        "catalogueLayout": "noir",
+        "catalogueProjects": "cases",
+        "paletteRefs": {
+          "paper": "colors.neonnoir-paper",
+          "ink": "colors.neonnoir-ink",
+          "accent": "colors.neonnoir-accent"
+        },
+        "fontFamilyToken": "typography.display",
+        "recordsAndBehaviour": "Single-column ruled case records below project-case selector; lights switch the cinematic palette."
+      },
+      {
+        "slug": "cosmic",
+        "route": "cosmic.html",
+        "name": "Cosmic",
+        "composition": "An orbital project map with selectable planets and constellation mode.",
+        "catalogueLayout": "cosmic",
+        "catalogueProjects": "orbit",
+        "paletteRefs": {
+          "paper": "colors.cosmic-paper",
+          "ink": "colors.cosmic-ink",
+          "accent": "colors.cosmic-accent"
+        },
+        "fontFamilyToken": "typography.display",
+        "recordsAndBehaviour": "Career mission-log panels below planetary project navigation; constellation toggle reveals connections."
+      },
+      {
+        "slug": "retro",
+        "route": "retro.html",
+        "name": "Retro",
+        "composition": "An analog record sleeve and project track list, with a rotating vinyl.",
+        "catalogueLayout": "retro",
+        "catalogueProjects": "catalogue",
+        "paletteRefs": {
+          "paper": "colors.retro-paper",
+          "ink": "colors.retro-ink",
+          "accent": "colors.retro-accent"
+        },
+        "fontFamilyToken": "typography.paper-body",
+        "recordsAndBehaviour": "Single-column liner notes with double-rule jobs; project track buttons read records beside rotating vinyl."
+      },
+      {
+        "slug": "vaporwave",
+        "route": "vaporwave.html",
+        "name": "Vaporwave",
+        "composition": "A retro computer desktop with movable apps and optional CRT scanlines.",
+        "catalogueLayout": "vapor",
+        "catalogueProjects": "windows",
+        "paletteRefs": {
+          "paper": "colors.vaporwave-paper",
+          "ink": "colors.vaporwave-ink",
+          "accent": "colors.vaporwave-accent"
+        },
+        "fontFamilyToken": "typography.shell-body",
+        "recordsAndBehaviour": "Career/toolkit/learning below movable retro apps; optional CRT scanlines."
+      },
+      {
+        "slug": "artdeco",
+        "route": "artdeco.html",
+        "name": "Art Deco",
+        "composition": "A symmetrical theatre programme with expandable project programmes.",
+        "catalogueLayout": "deco",
+        "catalogueProjects": "programme",
+        "paletteRefs": {
+          "paper": "colors.artdeco-paper",
+          "ink": "colors.artdeco-ink",
+          "accent": "colors.artdeco-accent"
+        },
+        "fontFamilyToken": "typography.paper-body",
+        "recordsAndBehaviour": "Centered framed career programme with left-aligned detail lists; native project programme disclosures."
+      },
+      {
+        "slug": "filmgrain",
+        "route": "filmgrain.html",
+        "name": "Film Grain",
+        "composition": "A photographic contact sheet; select an exposure or develop its negative.",
+        "catalogueLayout": "film",
+        "catalogueProjects": "frames",
+        "paletteRefs": {
+          "paper": "colors.filmgrain-paper",
+          "ink": "colors.filmgrain-ink",
+          "accent": "colors.filmgrain-accent"
+        },
+        "fontFamilyToken": "typography.paper-body",
+        "recordsAndBehaviour": "Single-column production notes capped at 950px; exposure buttons select real projects and negatives invert prints."
+      },
+      {
+        "slug": "risograph",
+        "route": "risograph.html",
+        "name": "Risograph",
+        "composition": "A two-ink project zine with an interactive cyan overprint.",
+        "catalogueLayout": "riso",
+        "catalogueProjects": "spreads",
+        "paletteRefs": {
+          "paper": "colors.risograph-paper",
+          "ink": "colors.risograph-ink",
+          "accent": "colors.risograph-accent"
+        },
+        "fontFamilyToken": "typography.display",
+        "recordsAndBehaviour": "Cyan supporting record spread below two-ink project zine; overprint changes ink layering."
+      },
+      {
+        "slug": "weathered",
+        "route": "weathered.html",
+        "name": "Weathered",
+        "composition": "A field notebook with a visit stamp and notes saved on your device.",
+        "catalogueLayout": "journal",
+        "catalogueProjects": "entries",
+        "paletteRefs": {
+          "paper": "colors.weathered-paper",
+          "ink": "colors.weathered-ink",
+          "accent": "colors.weathered-accent"
+        },
+        "fontFamilyToken": "typography.paper-body",
+        "recordsAndBehaviour": "Field career and supporting records inside the notebook column; visit stamp and locally saved margin notes."
+      },
+      {
+        "slug": "dieselpunk",
+        "route": "dieselpunk.html",
+        "name": "Dieselpunk",
+        "composition": "A mechanical control desk with an engine switch and animated gauge.",
+        "catalogueLayout": "diesel",
+        "catalogueProjects": "panels",
+        "paletteRefs": {
+          "paper": "colors.dieselpunk-paper",
+          "ink": "colors.dieselpunk-ink",
+          "accent": "colors.dieselpunk-accent"
+        },
+        "fontFamilyToken": "typography.shell-body",
+        "recordsAndBehaviour": "Toolkit switch bank beside project panels, followed by maintenance career log and learning; engine gauge switch."
+      },
+      {
+        "slug": "pixelart",
+        "route": "pixelart.html",
+        "name": "Pixel Art",
+        "composition": "A playable project-signal collection arena with keyboard and touch controls.",
+        "catalogueLayout": "pixel",
+        "catalogueProjects": "menu",
+        "paletteRefs": {
+          "paper": "colors.pixelart-paper",
+          "ink": "colors.pixelart-ink",
+          "accent": "colors.pixelart-accent"
+        },
+        "fontFamilyToken": "typography.shell-body",
+        "recordsAndBehaviour": "Double-bordered save-file records beneath a collection arena; arrow keys, touch buttons and signal buttons explore projects."
+      },
+      {
+        "slug": "minecraft",
+        "route": "minecraft.html",
+        "name": "Minecraft",
+        "composition": "An editable block terrain, material hotbar and selectable project inventory.",
+        "catalogueLayout": "blocks",
+        "catalogueProjects": "inventory",
+        "paletteRefs": {
+          "paper": "colors.minecraft-paper",
+          "ink": "colors.minecraft-ink",
+          "accent": "colors.minecraft-accent"
+        },
+        "fontFamilyToken": "typography.shell-body",
+        "recordsAndBehaviour": "Block record panels beneath editable terrain and inventory; terrain cells are buttons, material hotbar and reset."
+      },
+      {
+        "slug": "rpg",
+        "route": "rpg.html",
+        "name": "RPG",
+        "composition": "A character sheet and quest journal with saved exploration progress.",
+        "catalogueLayout": "character",
+        "catalogueProjects": "quests",
+        "paletteRefs": {
+          "paper": "colors.rpg-paper",
+          "ink": "colors.rpg-ink",
+          "accent": "colors.rpg-accent"
+        },
+        "fontFamilyToken": "typography.paper-body",
+        "recordsAndBehaviour": "Career chronicle follows quest journal and toolkit/learning inventory; explored quest progress saves locally."
+      },
+      {
+        "slug": "dota2",
+        "route": "dota2.html",
+        "name": "Dota 2",
+        "composition": "A hero chamber and project ability bar with Q/W/E/R keyboard shortcuts.",
+        "catalogueLayout": "hero",
+        "catalogueProjects": "abilities",
+        "paletteRefs": {
+          "paper": "colors.dota2-paper",
+          "ink": "colors.dota2-ink",
+          "accent": "colors.dota2-accent"
+        },
+        "fontFamilyToken": "typography.paper-body",
+        "recordsAndBehaviour": "Career hero history, toolkit ability tree and learning; project ability buttons and Q/W/E/R/D/F/G shortcuts."
+      },
+      {
+        "slug": "chalkboard",
+        "route": "chalkboard.html",
+        "name": "Chalkboard",
+        "composition": "A workshop blackboard with a drawable chalk canvas and eraser.",
+        "catalogueLayout": "chalk",
+        "catalogueProjects": "notes",
+        "paletteRefs": {
+          "paper": "colors.chalkboard-paper",
+          "ink": "colors.chalkboard-ink",
+          "accent": "colors.chalkboard-accent"
+        },
+        "fontFamilyToken": "typography.paper-body",
+        "recordsAndBehaviour": "Dashed classroom records beside project syllabus; optional pointer drawing, chalk colours and erase."
+      },
+      {
+        "slug": "ukiyoe",
+        "route": "ukiyoe.html",
+        "name": "Ukiyo-e",
+        "composition": "A vertical title and horizontally unfolding project scroll with optional wind.",
+        "catalogueLayout": "ukiyo",
+        "catalogueProjects": "scrolls",
+        "paletteRefs": {
+          "paper": "colors.ukiyoe-paper",
+          "ink": "colors.ukiyoe-ink",
+          "accent": "colors.ukiyoe-accent"
+        },
+        "fontFamilyToken": "typography.paper-body",
+        "recordsAndBehaviour": "Single-column scroll records with right-ruled career entries capped at 800px; wind toggles scroll motion."
+      },
+      {
+        "slug": "desert",
+        "route": "desert.html",
+        "name": "Desert",
+        "composition": "An open desert horizon with a sun slider that changes the time of day.",
+        "catalogueLayout": "desert",
+        "catalogueProjects": "horizons",
+        "paletteRefs": {
+          "paper": "colors.desert-paper",
+          "ink": "colors.desert-ink",
+          "accent": "colors.desert-accent"
+        },
+        "fontFamilyToken": "typography.paper-body",
+        "recordsAndBehaviour": "Single-column travelogue capped at 900px with generous career spacing; time-of-day range changes sky and sun."
+      },
+      {
+        "slug": "underwater",
+        "route": "underwater.html",
+        "name": "Underwater",
+        "composition": "A depth-indexed expedition with a slider to highlight each project stop.",
+        "catalogueLayout": "ocean",
+        "catalogueProjects": "depths",
+        "paletteRefs": {
+          "paper": "colors.underwater-paper",
+          "ink": "colors.underwater-ink",
+          "accent": "colors.underwater-accent"
+        },
+        "fontFamilyToken": "typography.display",
+        "recordsAndBehaviour": "Dive-log record panel below vertical project expedition; depth range highlights an exploration stop."
+      },
+      {
+        "slug": "mobile",
+        "route": "mobile.html",
+        "name": "Mobile App",
+        "composition": "A phone-style portfolio feed with bottom tabs and downloadable contact card.",
+        "catalogueLayout": "mobile",
+        "catalogueProjects": "feed",
+        "paletteRefs": {
+          "paper": "colors.mobile-paper",
+          "ink": "colors.mobile-ink",
+          "accent": "colors.mobile-accent"
+        },
+        "fontFamilyToken": "typography.display",
+        "recordsAndBehaviour": "Career/toolkit/learning within app feed and bottom tabs; native downloaded contact card."
+      },
+      {
+        "slug": "blueprint",
+        "route": "blueprint.html",
+        "name": "Blueprint",
+        "composition": "A gridded engineering drawing and implementation sheets with adjustable zoom.",
+        "catalogueLayout": "blueprint",
+        "catalogueProjects": "specs",
+        "paletteRefs": {
+          "paper": "colors.blueprint-paper",
+          "ink": "colors.blueprint-ink",
+          "accent": "colors.blueprint-accent"
+        },
+        "fontFamilyToken": "typography.shell-body",
+        "recordsAndBehaviour": "Bordered drawing records after implementation sheets; native drawing zoom adjusts stack diagram."
+      },
+      {
+        "slug": "kanban",
+        "route": "kanban.html",
+        "name": "Kanban",
+        "composition": "A movable project board with drag-and-drop and accessible move controls.",
+        "catalogueLayout": "kanban",
+        "catalogueProjects": "kanban",
+        "paletteRefs": {
+          "paper": "colors.kanban-paper",
+          "ink": "colors.kanban-ink",
+          "accent": "colors.kanban-accent"
+        },
+        "fontFamilyToken": "typography.display",
+        "recordsAndBehaviour": "Three-column supporting record grid, career spans two columns; drag cards or use labelled Move to select, reset board."
+      },
+      {
+        "slug": "library",
+        "route": "library.html",
+        "name": "Library",
+        "composition": "A searchable shelf of project books that open into catalogue records.",
+        "catalogueLayout": "library",
+        "catalogueProjects": "books",
+        "paletteRefs": {
+          "paper": "colors.library-paper",
+          "ink": "colors.library-ink",
+          "accent": "colors.library-accent"
+        },
+        "fontFamilyToken": "typography.paper-body",
+        "recordsAndBehaviour": "Paper author-record panel below searchable book disclosures; search title, technology and category."
+      },
+      {
+        "slug": "dossier",
+        "route": "dossier.html",
+        "name": "Dossier",
+        "composition": "A tabbed public case file with project exhibits and decorative redactions.",
+        "catalogueLayout": "dossier",
+        "catalogueProjects": "exhibits",
+        "paletteRefs": {
+          "paper": "colors.dossier-paper",
+          "ink": "colors.dossier-ink",
+          "accent": "colors.dossier-accent"
+        },
+        "fontFamilyToken": "typography.shell-body",
+        "recordsAndBehaviour": "Career and supporting records within case-page column and tab margin; decorative annotation redactions leave facts readable."
+      },
+      {
+        "slug": "studio",
+        "route": "studio.html",
+        "name": "Studio",
+        "composition": "A large typographic work index with cycling project spotlights.",
+        "catalogueLayout": "studio",
+        "catalogueProjects": "studio",
+        "paletteRefs": {
+          "paper": "colors.studio-paper",
+          "ink": "colors.studio-ink",
+          "accent": "colors.studio-accent"
+        },
+        "fontFamilyToken": "typography.display",
+        "recordsAndBehaviour": "Single-column studio records capped at 1000px with dated career columns; spotlight cycles actual project rows."
+      },
+      {
+        "slug": "atlas",
+        "route": "atlas.html",
+        "name": "Atlas",
+        "composition": "An interactive career route map and a catalogue of project destinations.",
+        "catalogueLayout": "atlas",
+        "catalogueProjects": "destinations",
+        "paletteRefs": {
+          "paper": "colors.atlas-paper",
+          "ink": "colors.atlas-ink",
+          "accent": "colors.atlas-accent"
+        },
+        "fontFamilyToken": "typography.paper-body",
+        "recordsAndBehaviour": "Dashed career route history below project destinations; career-stop buttons render actual job details."
+      }
+    ],
+    "accessibility": {
+      "focus": "3px accent outline / 4px offset; isolated picker uses #1c6841 / 3px offset",
+      "reducedMotion": "Disable CSS animations/transitions and smooth scrolling; JavaScript scroll uses instant.",
+      "noJavaScript": "Static portfolio facts, résumé, anchors, theme directory and native disclosures remain readable. Enhanced controls require JavaScript.",
+      "pointerOnly": "Optional chalk freehand sketch; contains no portfolio facts."
+    },
+    "state": {
+      "localStorage": [
+        "portfolio-theme",
+        "kt-quests",
+        "kt-field-note"
+      ],
+      "pageOnly": [
+        "terrain",
+        "game collection",
+        "board placement",
+        "window movement",
+        "drawing",
+        "cosmetic toggles"
+      ],
+      "network": "No transmission of exploration state, notes or shell commands."
+    },
+    "approvalStatus": "Code-led record of user-pinned named worlds and fully immersive preference; no screenshot or visual comp approval claimed."
+  },
+  "components": [
+    {
+      "name": "Project selector",
+      "kind": "button",
+      "refersTo": "button-default",
+      "description": "Native project control; active world tokens bind through the page root.",
+      "html": "<button class=\"ds-button\" type=\"button\" aria-pressed=\"false\">Cue</button>",
+      "css": ".ds-button{font:17px/1.3 Sans,Arial,sans-serif;background:var(--wash,#eceee6);color:var(--fg,#202822);border:1px solid var(--line,#b9bdb8);padding:.6rem 1rem;min-height:44px;cursor:pointer}.ds-button:hover{background:color-mix(in srgb,var(--accent,#326348) 17%,var(--bg,#f7f7f2))}.ds-button:focus-visible{outline:3px solid var(--accent,#326348);outline-offset:4px}.ds-button[aria-pressed=true]{background:var(--fg,#202822);color:var(--bg,#f7f7f2)}"
+    },
+    {
+      "name": "Selected project",
+      "kind": "button",
+      "refersTo": "button-selected",
+      "description": "Pressed project selector state.",
+      "html": "<button class=\"ds-button\" type=\"button\" aria-pressed=\"true\">Cue</button>",
+      "css": ".ds-button{font:17px/1.3 Sans,Arial,sans-serif;background:var(--wash,#eceee6);color:var(--fg,#202822);border:1px solid var(--line,#b9bdb8);padding:.6rem 1rem;min-height:44px;cursor:pointer}.ds-button:hover{background:color-mix(in srgb,var(--accent,#326348) 17%,var(--bg,#f7f7f2))}.ds-button:focus-visible{outline:3px solid var(--accent,#326348);outline-offset:4px}.ds-button[aria-pressed=true]{background:var(--fg,#202822);color:var(--bg,#f7f7f2)}"
+    },
+    {
+      "name": "Catalogue search",
+      "kind": "input",
+      "refersTo": "input-default",
+      "description": "Labelled search for the Library world.",
+      "html": "<label class=\"ds-label\">Search the catalogue<input class=\"ds-input\" type=\"search\" placeholder=\"Title, technology, category…\"></label>",
+      "css": ".ds-label{display:block;font:17px/1.6 Sans,Arial,sans-serif}.ds-input{display:block;font:inherit;background:var(--bg,#f7f7f2);color:var(--fg,#202822);border:1px solid var(--line,#b9bdb8);padding:.6rem;max-width:100%;caret-color:var(--accent,#326348)}.ds-input:focus-visible{outline:3px solid var(--accent,#326348);outline-offset:4px}"
+    },
+    {
+      "name": "Technology stack",
+      "kind": "chip",
+      "description": "Shared factual text atom; surrounding materials belong to the world.",
+      "html": "<ul class=\"ds-stack\"><li>Python</li><li>FastAPI</li><li>React</li></ul>",
+      "css": ".ds-stack{display:flex;flex-wrap:wrap;gap:.35rem .7rem;padding:0;list-style:none;font: .8rem/1.6 Sans,Arial,sans-serif;margin:1rem 0}.ds-stack li{border-bottom:1px solid var(--line,#b9bdb8);padding:.15rem 0}"
+    },
+    {
+      "name": "Folded record",
+      "kind": "card",
+      "description": "Origami native disclosure; keyboard and no-JavaScript compatible.",
+      "html": "<details class=\"ds-leaf\"><summary>Career folds</summary><div>Career records remain available through native disclosure.</div></details>",
+      "css": ".ds-leaf{border-bottom:1px solid var(--line,#b9bdb8);background:var(--wash,#eceee6);margin-bottom:1rem}.ds-leaf summary{font:2.5rem/1.05 Serif,Georgia,serif;padding:2rem;cursor:pointer}.ds-leaf summary:focus-visible{outline:3px solid var(--accent,#326348);outline-offset:4px}.ds-leaf>div{font:17px/1.6 Sans,Arial,sans-serif;padding:0 3rem 2rem;margin:0;border-top:1px solid var(--line,#b9bdb8)}"
+    },
+    {
+      "name": "World navigation",
+      "kind": "nav",
+      "description": "Baseline semantic section links before world overrides.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Portfolio navigation\"><a href=\"#projects\">Work</a><a href=\"#experience\">Career</a><a href=\"#skills\">Toolkit</a><a href=\"#contact\">Contact</a></nav>",
+      "css": ".ds-nav{display:flex;flex-wrap:wrap;align-items:center;gap:1.5rem;padding:1rem 3vw;min-height:64px;border-bottom:1px solid var(--line,#b9bdb8)}.ds-nav a{font:.85rem/1.6 Sans,Arial,sans-serif;color:var(--fg,#202822);text-underline-offset:.25em}.ds-nav a:focus-visible{outline:3px solid var(--accent,#326348);outline-offset:4px}"
+    },
+    {
+      "name": "Picker category",
+      "kind": "button",
+      "refersTo": "picker-filter",
+      "description": "Fixed palette control isolated from every world.",
+      "html": "<button class=\"ds-filter\" aria-pressed=\"false\">Gaming</button>",
+      "css": ".ds-filter{font:13px/1.3 Arial,sans-serif;white-space:nowrap;border:1px solid #a5b0a4;border-radius:20px;padding:9px 12px;background:#f8f9f5;color:#202822;min-height:36px;cursor:pointer}.ds-filter:hover{border-color:#294d38}.ds-filter[aria-pressed=true]{color:#fff;background:#294d38;border-color:#294d38}.ds-filter:focus-visible{outline:3px solid #1c6841;outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Forty-four worlds, one factual portfolio",
+    "overview": "The 44 existing named themes are the user-pinned visual directions. The confirmed experience preference is fully immersive; the implementation is code-led. This document records implemented decisions, not a user-approved screenshot or visual comp. “Forty-four worlds, one factual portfolio” is an implementation descriptor, not a separately approved brand metaphor.\n\nEach world owns its whole page: opening composition, project browsing, lower career/toolkit/learning grammar, navigation and functional interaction. Shared profile text and small data-rendering helpers provide consistency of facts without imposing a shared hero or content flow. The isolated picker remains a stable way to travel between worlds.",
+    "keyCharacteristics": [
+      "Forty-four independent page compositions and theme-specific behaviours.",
+      "Shared factual résumé content, portrait and downloadable PDF.",
+      "Self-hosted Sans, Serif and Mono type families.",
+      "Readable responsive layouts, native disclosures and an isolated screenshot picker."
+    ],
+    "rules": [
+      {
+        "name": "The Picker Isolation Rule",
+        "body": "Page colours must not enter the picker’s Shadow DOM palette.",
+        "section": "colors"
+      },
+      {
+        "name": "The Whole World Rule",
+        "body": "Opening, project browsing, lower records and navigation must all speak the selected world’s grammar.",
+        "section": "layout"
+      }
+    ],
+    "dos": [
+      "Do maintain theme palettes and catalogue metadata in data/themes.json.",
+      "Do maintain complete world structures in scripts/worlds.mjs, visual rules in assets/css/worlds.css and behaviour in assets/js/worlds.js.",
+      "Do preserve theme URLs, résumé download, portrait, full no-JavaScript facts and the themes.html directory.",
+      "Do retain keyboard equivalents, visible focus, labelled controls and reduced-motion support.",
+      "Do regenerate actual page screenshot previews after visual changes."
+    ],
+    "donts": [
+      "Don’t restore the superseded shared opening or force all lower records into one visual template.",
+      "Don’t recolor the isolated picker through page CSS.",
+      "Don’t represent exploration depth, ability keys or collection progress as real performance metrics.",
+      "Don’t send field notes, quest exploration or shell commands to a service.",
+      "Don’t claim a user approved a screenshot, comp or qualitative brand metaphor."
+    ]
+  }
+}
